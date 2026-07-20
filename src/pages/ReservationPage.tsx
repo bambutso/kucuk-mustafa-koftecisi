@@ -1,6 +1,6 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { Armchair, Check, Copy, Phone } from "lucide-react";
-import { images, restaurant } from "../data/restaurant";
+import { igImages, restaurant } from "../data/restaurant";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
@@ -87,7 +87,7 @@ export default function ReservationPage() {
         eyebrow="Rezervasyon"
         title="Masanız közün karşısında ayrılsın"
         lead="Rezervasyonlar telefonla alınır — bir arama, otuz saniye. Aşağıdaki küçük plan, telefonda söyleyeceklerinizi hazırlamanız için."
-        image={images.salonInterior}
+        image={igImages.masaDetay}
       />
 
       <div className="bg-charcoal py-16 md:py-24">

@@ -9,7 +9,7 @@
  * ─────────────────────────────────────────────────────────────────────────
  */
 import type { MenuCategory } from "../types/menu";
-import { images } from "./restaurant";
+import { igImages, images } from "./restaurant";
 
 export const MENU_NOTE =
   "Bu menü örnek olarak hazırlanmıştır. Ürün içerikleri ve fiyatlar işletme tarafından güncellenecektir.";
@@ -59,6 +59,8 @@ export const menu: MenuCategory[] = [
         description:
           "Tezgâhtan alıp parkta yemenin adresi. Piyazlık soğan ve isteğe göre acı sosla, yarım ekmek arası.",
         price: 240,
+        image: igImages.kofteTabak,
+        imageAlt: "Ekmek üstünde köfte, söğüş garnitürüyle",
         tags: ["cok-tercih"],
         spice: 1,
       },
@@ -152,6 +154,16 @@ export const menu: MenuCategory[] = [
         description: "Yerli beyaz peynir, söğüş domates ve salatalıkla.",
         price: 160,
         tags: ["yoresel"],
+      },
+      {
+        id: "guvec-kasarli-mantar",
+        name: "Güveçte Kaşarlı Mantar",
+        description:
+          "Toprak güveçte, üzeri kaşarla örtülüp közde kızartılır. Ocaktan geldiği gibi, fokurdarken servis edilir.",
+        price: 240,
+        image: igImages.guvecMantar,
+        imageAlt: "Güveçte kaşarlı mantar, üzeri kızarmış halde",
+        tags: ["yeni"],
       },
       {
         id: "kozde-biber-aci-sos",

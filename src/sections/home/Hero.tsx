@@ -8,7 +8,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { ChevronDown, Phone } from "lucide-react";
-import { images, restaurant } from "../../data/restaurant";
+import { igImages, restaurant } from "../../data/restaurant";
 import { buttonVariants } from "../../components/ui/Button";
 import { Stamp } from "../../components/ui/Stamp";
 import { cn } from "../../utils/cn";
@@ -44,23 +44,23 @@ export function Hero() {
       className="relative flex min-h-svh items-center justify-center overflow-hidden bg-coal"
       aria-label="Karşılama"
     >
-      {/* Arka plan: karanlıkta yanan köz — yavaş açılış + scroll parallax */}
+      {/* Arka plan: işletmenin kendi köfte karesi — yavaş açılış + scroll parallax */}
       <motion.div
         aria-hidden
         className="absolute inset-0"
         style={reduceMotion ? undefined : { y: bgY }}
       >
         <motion.img
-          src={images.heroFire}
+          src={igImages.kofteTabak}
           alt=""
-          className="h-full w-full scale-105 object-cover object-[38%_center] md:object-center"
+          className="h-full w-full scale-105 object-cover object-[center_55%]"
           initial={reduceMotion ? undefined : { scale: 1.14, opacity: 0.6 }}
           animate={reduceMotion ? undefined : { scale: 1.05, opacity: 1 }}
           transition={{ duration: 2.6, ease: "easeOut" }}
         />
-        {/* Közün etrafını saran karanlık — metin okunurluğu */}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-coal/55 to-coal/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(20,17,16,0.75)_100%)]" />
+        {/* Metin okunurluğu için karartma katmanları */}
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-coal/70 to-coal/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(20,17,16,0.82)_100%)]" />
       </motion.div>
 
       <motion.div
