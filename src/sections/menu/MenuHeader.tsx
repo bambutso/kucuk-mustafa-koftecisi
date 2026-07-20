@@ -1,4 +1,4 @@
-import { images } from "../../data/restaurant";
+import { igImages } from "../../data/restaurant";
 import { MENU_NOTE } from "../../data/menu";
 import { Container } from "../../components/ui/Container";
 import { Reveal } from "../../components/ui/Reveal";
@@ -6,12 +6,12 @@ import { Reveal } from "../../components/ui/Reveal";
 export function MenuHeader() {
   return (
     <header className="relative overflow-hidden bg-coal pb-14 pt-32 md:pb-20 md:pt-44">
-      {/* Fon: gerçek köfte tabağı, iyice karartılmış */}
+      {/* Fon: lamba ışığında logo işlemeli menü föyü (işletme arşivi) */}
       <div aria-hidden className="absolute inset-0">
         <img
-          src={images.koftePlate}
+          src={igImages.menuFoyu}
           alt=""
-          className="h-full w-full object-cover opacity-25"
+          className="h-full w-full object-cover object-[center_35%] opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/80 to-coal/50" />
       </div>

@@ -2,7 +2,7 @@
  * Galeri içeriği. Gerçek işletme fotoğrafları ile paleti tamamlayan
  * temsilî atmosfer kareleri (Unsplash) bir arada; temsilî olanlar işaretlidir.
  */
-import { images } from "./restaurant";
+import { igImages, images } from "./restaurant";
 
 export type GalleryCategoryId = "mekan" | "koz" | "sofra";
 
@@ -31,6 +31,78 @@ function unsplash(id: string, w = 1400): string {
 }
 
 export const galleryItems: GalleryItem[] = [
+  {
+    id: "ig-kofte",
+    src: igImages.kofteTabak,
+    alt: "Ekmek üstünde iki iri köfte; salatalık, domates ve közlenmiş biberle",
+    caption: "Ekmek üstü köfte — bugünün tabağı",
+    category: "sofra",
+    authentic: true,
+  },
+  {
+    id: "ig-salon-bordo",
+    src: igImages.salonBordo,
+    alt: "Yenilenen salon: bordo kadife koltuklar, ahşap lambri duvarlar",
+    caption: "Yenilenen salonumuz",
+    category: "mekan",
+    authentic: true,
+  },
+  {
+    id: "ig-guvec",
+    src: igImages.guvecMantar,
+    alt: "Güveçte kaşarlı mantar, üzeri kızarmış",
+    caption: "Güveçte kaşarlı mantar — yeni ürün",
+    category: "sofra",
+    authentic: true,
+  },
+  {
+    id: "ig-menu-foyu",
+    src: igImages.menuFoyu,
+    alt: "Logo işlemeli menü föyü, pirinç lamba ışığında",
+    caption: "Menü föyümüz, lamba ışığında",
+    category: "mekan",
+    authentic: true,
+  },
+  {
+    id: "ig-organizasyon",
+    src: igImages.organizasyon,
+    alt: "Organizasyon için kurulmuş uzun masa, pencere kenarı",
+    caption: "Toplu yemekler için kurulan sofra",
+    category: "mekan",
+    authentic: true,
+  },
+  {
+    id: "ig-masa-detay",
+    src: igImages.masaDetay,
+    alt: "Logo baskılı kırmızı runner ile masa kurulumu",
+    caption: "Masa, misafirini bekler",
+    category: "mekan",
+    authentic: true,
+  },
+  {
+    id: "ig-salon-ici",
+    src: igImages.salonIci,
+    alt: "Salonun gündelik hali; duvarda Küçük Mustafa Köftecisi yazısı",
+    caption: "Bir öğle vakti, salondan",
+    category: "mekan",
+    authentic: true,
+  },
+  {
+    id: "ig-gece",
+    src: igImages.geceAtmosfer,
+    alt: "Loş salonda mum ışığı ve kadehler",
+    caption: "Gece, salon sakinleşince",
+    category: "mekan",
+    authentic: true,
+  },
+  {
+    id: "ig-lamba",
+    src: igImages.lamba,
+    alt: "Pirinç masa lambasının sıcak ışığı",
+    caption: "Masadaki pirinç lamba",
+    category: "mekan",
+    authentic: true,
+  },
   {
     id: "cephe",
     src: images.storefront,
@@ -85,22 +157,6 @@ export const galleryItems: GalleryItem[] = [
     alt: "Şişler, közlenmiş biber ve patlıcanla kurulmuş sofra",
     caption: "Közlenmiş sebze, sofranın harcı",
     category: "sofra",
-    authentic: false,
-  },
-  {
-    id: "et",
-    src: unsplash("photo-1558030006-450675393462"),
-    alt: "Ahşap kesme tahtasında dilimlenmiş ızgara et",
-    caption: "Et, dinlendirilmeden kesilmez",
-    category: "sofra",
-    authentic: false,
-  },
-  {
-    id: "salon",
-    src: unsplash("photo-1514933651103-005eec06c04b", 1600),
-    alt: "Sıcak ahşap dokulu, loş salon",
-    caption: "Ahşap masa, loş ışık, uzun sohbet",
-    category: "mekan",
     authentic: false,
   },
   {

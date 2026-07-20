@@ -10,7 +10,7 @@ import {
   Store,
   Wine,
 } from "lucide-react";
-import { images, placePage, restaurant } from "../data/restaurant";
+import { igImages, images, placePage, restaurant } from "../data/restaurant";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
@@ -81,14 +81,14 @@ export default function PlacePage() {
           <Reveal delay={0.12}>
             <figure className="archive-frame -rotate-1">
               <ImageWithFallback
-                src={images.storefront}
-                alt="Dükkânın cephesi ve dışarıdaki masalar"
-                fallbackLabel="Dükkân cephesi"
+                src={igImages.salonBordo}
+                alt="Yenilenen salon: bordo kadife koltuklar, ahşap lambri duvarlar"
+                fallbackLabel="Yenilenen salon"
                 loading="lazy"
                 className="aspect-[3/2] w-full object-cover"
               />
               <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                Şevket Dingiloğlu Parkı karşısı
+                Yenilenen salonumuz
               </figcaption>
             </figure>
           </Reveal>
@@ -126,8 +126,46 @@ export default function PlacePage() {
         </Container>
       </div>
 
-      {/* Hizmetler */}
+      {/* Özel organizasyon & toplu yemek */}
       <div className="bg-charcoal py-20 md:py-28">
+        <Container className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Organizasyon"
+              title={placePage.organizasyon.title}
+              lead={placePage.organizasyon.text}
+            />
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Link to="/rezervasyon" className={buttonVariants({})}>
+                Rezervasyon Yap
+              </Link>
+              <a
+                href={restaurant.phone.href}
+                className={cn(buttonVariants({ variant: "outline" }))}
+              >
+                {restaurant.phone.display}
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <figure className="archive-frame rotate-1">
+              <ImageWithFallback
+                src={igImages.organizasyon}
+                alt="Toplu yemek için kurulmuş uzun masa, pencere kenarında"
+                fallbackLabel="Organizasyon masası"
+                loading="lazy"
+                className="aspect-[3/2] w-full object-cover"
+              />
+              <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
+                Toplu yemek için kurulan sofra
+              </figcaption>
+            </figure>
+          </Reveal>
+        </Container>
+      </div>
+
+      {/* Hizmetler */}
+      <div className="bg-coal py-20 md:py-28">
         <Container>
           <Reveal>
             <SectionHeading
@@ -161,7 +199,7 @@ export default function PlacePage() {
       </div>
 
       {/* Pratik bilgi + CTA */}
-      <div className="bg-coal py-20 md:py-24">
+      <div className="bg-charcoal py-20 md:py-24">
         <Container className="flex flex-col items-center gap-8 text-center">
           <Reveal>
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-cream/70">

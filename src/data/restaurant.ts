@@ -39,6 +39,71 @@ export const images = {
   salonInterior: unsplash("photo-1514933651103-005eec06c04b", 1600),
 } as const;
 
+/**
+ * İşletmenin kendi Instagram arşivinden indirilen kareler (@kucukmustafakoftecisi1939).
+ * CDN linkleri kısa ömürlü olduğundan siteye yerel kopyaları gömülüdür.
+ */
+function local(file: string): string {
+  return `${import.meta.env.BASE_URL}gallery/${file}`;
+}
+
+export const igImages = {
+  /** Ekmek üstünde iki iri köfte, söğüş garnitürüyle — güncel sunum */
+  kofteTabak: local("ig-kofte-tabak.jpg"),
+  /** Güveçte kaşarlı mantar — yeni ürün */
+  guvecMantar: local("ig-guvec-mantar.jpg"),
+  /** Logo işlemeli menü föyü, loş lamba ışığında */
+  menuFoyu: local("ig-menu-foyu.jpg"),
+  /** Yenilenen salon: bordo kadife koltuklar, ahşap lambri */
+  salonBordo: local("ig-salon-bordo.jpg"),
+  /** Salon, kırmızı perde ve tuğla dokusu */
+  salonPerde: local("ig-salon-perde.jpg"),
+  /** Toplu yemek / organizasyon için kurulmuş uzun masa */
+  organizasyon: local("ig-organizasyon.jpg"),
+  /** Logo baskılı runner ile masa kurulumu detayı */
+  masaDetay: local("ig-masa-detay.jpg"),
+  /** Salonun gündelik hali, misafirlerle */
+  salonIci: local("ig-salon-ici.jpg"),
+  /** Gece atmosferi: mum ışığı ve kadehler */
+  geceAtmosfer: local("ig-gece-atmosfer.jpg"),
+  /** Pirinç masa lambası detayı */
+  lamba: local("ig-lamba.jpg"),
+} as const;
+
+/** Ana sayfadaki Instagram şeridi — gerçek gönderi linkleriyle */
+export const instagramStrip = [
+  {
+    image: igImages.kofteTabak,
+    alt: "Ekmek üstünde iki köfte, söğüş garnitürüyle",
+    href: "https://www.instagram.com/p/DRZtqsNjNKU/",
+  },
+  {
+    image: igImages.salonBordo,
+    alt: "Yenilenen salon: bordo kadife koltuklar",
+    href: "https://www.instagram.com/p/DWTp66hDGqO/",
+  },
+  {
+    image: igImages.guvecMantar,
+    alt: "Güveçte kaşarlı mantar",
+    href: "https://www.instagram.com/p/DRNXw44jCUm/",
+  },
+  {
+    image: igImages.menuFoyu,
+    alt: "Logo işlemeli menü föyü",
+    href: "https://www.instagram.com/p/DRckSt-DDFe/",
+  },
+  {
+    image: igImages.masaDetay,
+    alt: "Masa kurulumu detayı",
+    href: "https://www.instagram.com/p/DV3UPrVDKjO/",
+  },
+  {
+    image: igImages.salonIci,
+    alt: "Salonun gündelik hali",
+    href: "https://www.instagram.com/p/DI1c5cOMYoJ/",
+  },
+] as const;
+
 export const restaurant = {
   name: "Küçük Mustafa Köftecisi",
   city: "Kırklareli",
@@ -225,6 +290,10 @@ export const placePage = {
   ocak: {
     title: "Ocak",
     text: "Salonun kalbi arkadaki ocaktır. Meşe kömürü küllenip kor bağlayana kadar beklenir; alev görmüş köfte bu tezgâhtan çıkmaz. Közün başındaki maşa, günde yüzlerce kez ama hep aynı sabırla döner.",
+  },
+  organizasyon: {
+    title: "Özel Organizasyon & Toplu Yemek",
+    text: "Seminer, eğitim, aile yemeği ya da kalabalık kutlamalar için salonumuz masa düzeniyle hazırlanır. Toplu yemek ve özel organizasyonlar için önceden rezervasyon yaptırmanız yeterli.",
   },
   services: [
     {
