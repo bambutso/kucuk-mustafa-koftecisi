@@ -35,6 +35,8 @@ export const images = {
   lambSkewer: unsplash("photo-1603360946369-dc9bb6258143", 1200),
   /** Şiş ve közlenmiş sebze sofrası (Unsplash) */
   skewerSpread: unsplash("photo-1555939594-58d7cb561ad1", 1200),
+  /** Sıcak ahşap dokulu salon atmosferi (Unsplash) */
+  salonInterior: unsplash("photo-1514933651103-005eec06c04b", 1600),
 } as const;
 
 export const restaurant = {
@@ -165,3 +167,85 @@ export const sampleReviews = [
 
 export const reviewsDisclaimer =
   "Puan, yorum sayısı ve sıralama TripAdvisor verisidir; yorum kartları temsilî örneklerdir.";
+
+/** Hikayemiz sayfası — genişletilmiş anlatı */
+export const storyPage = {
+  lead: "Bu hikâye bir dükkândan büyük. Bir adamın lakabından, bir şehrin damak hafızasından ve seksen yılı aşkındır sönmeyen bir közden yapılma.",
+  chapters: [
+    {
+      id: "1935",
+      year: "1935",
+      title: "Arasta Çarşısı'nın önünde bir araba",
+      paragraphs: [
+        "Mustafa Akkul'un boyu kısaydı. Kırklareli çarşısında herkes ona \"Küçük Mustafa\" derdi; o da bu ismi bir kusur gibi değil, bir imza gibi taşıdı.",
+        "1935'te Arasta Çarşısı'nın önüne küçük bir seyyar araba koydu. Sermayesi bir maşa, bir ızgara ve doğru tartan bir teraziydi. Sabah pazara inen esnaf, akşam evine dönen memur; herkes o arabanın önünde bir kez olsun durdu.",
+        "Köfte o yıllarda da vardı elbette. Ama Kırklareli, köftenin bir ustanın elinde nasıl başka bir şeye dönüştüğünü Küçük Mustafa'nın arabasında öğrendi.",
+      ],
+    },
+    {
+      id: "1939",
+      year: "1939",
+      title: "Önü bakkal, arkası köfteci",
+      paragraphs: [
+        "1939, Kırklareli'nin kurtuluşunun 15. yılıydı. Şehir bayram yerindeyken Küçük Mustafa da kendi bayramını yaşadı: Şevket Dingiloğlu Parkı'nın karşısında, kendi çatısı olan bir dükkân.",
+        "Dükkân iki yüzlüydü: Ön tarafta bakkal tezgâhı — ekmek, peynir, zeytin. Arka tarafta ise köz. Kapıdan ekmek almaya giren, arkadan gelen kokuya dayanamaz, bir porsiyon köfteyle çıkardı.",
+        "O gün asılan tabela bugün hâlâ aynı yerde duruyor: Karacaibrahim Mahallesi, Kasaplar Arası. Adres hiç değişmedi; değişmesin diye de kimse kapıyı başka semte taşımayı aklından geçirmedi.",
+      ],
+    },
+    {
+      id: "kusaklar",
+      year: "Kuşaklar",
+      title: "Ustadan çırağa: Kayacanlar",
+      paragraphs: [
+        "Bir dükkânı açmak hünerse, onu devretmek daha büyük hünerdir. Küçük Mustafa'nın ocağı, çıraklarına kaldı: önce İbrahim Kayacan, sonra Necdet Kayacan, sonra Cüneyt Kayacan.",
+        "Her biri kendi devrinin zorluklarından geçti; kıtlık yılları, göç yılları, çarşının değişen çehresi. Değişmeyen tek şey tezgâhın arkasındaki ölçüydü: az baharat, çok et, sabırlı kor.",
+        "Kırklareli'nde bir söz vardır; tarif dükkânın değil, ocağın malıdır denir. Ocak kimdeyse tarif ondadır — ve bu ocak hiç sönmedi.",
+      ],
+    },
+    {
+      id: "bugun",
+      year: "Bugün",
+      title: "Közün başında: Ergin Kalınoğlu",
+      paragraphs: [
+        "Bugün közün karşısında Ergin Kalınoğlu duruyor. Sabah dokuzda kepenk açılıyor, gece üçte son çay ocaktan iniyor; haftanın yedi günü.",
+        "Deden kalma usul aynı: Dana etine coğrafi işaretli Kıvırcık kuzusu, kuru soğan, bayat ekmek. Meşe kömürü küllenip kor bağlamadan tek köfte ızgaraya konmuyor.",
+        "Ve hâlâ, her gün, kapıdan girip \"Babamla gelirdik buraya\" diyen biri oluyor. Bu cümle, seksen yılı aşkın emeğin tek gerçek ödülü.",
+      ],
+    },
+  ],
+} as const;
+
+/** Mekân sayfası içeriği */
+export const placePage = {
+  lead: "Şevket Dingiloğlu Parkı'nın karşısında, Kasaplar Arası'nda; önü bir zamanlar bakkal, arkası hep köfteci olan dükkân.",
+  salon: {
+    title: "Salon",
+    text: "On altı masa, yetmiş beş sandalye. Ne büyük bir salon, ne gösterişli bir dekor — formika değil ahşap, poster değil hatıra. Masalar birbirine yakındır; çünkü burada yan masayla muhabbet, mönünün gayriresmî parçasıdır.",
+  },
+  ocak: {
+    title: "Ocak",
+    text: "Salonun kalbi arkadaki ocaktır. Meşe kömürü küllenip kor bağlayana kadar beklenir; alev görmüş köfte bu tezgâhtan çıkmaz. Közün başındaki maşa, günde yüzlerce kez ama hep aynı sabırla döner.",
+  },
+  services: [
+    {
+      id: "yerinde",
+      title: "Yerinde Servis",
+      text: "Haftanın 7 günü 09:00–03:00. Öğle esnafı, akşam aileler, gece vardiyadan çıkanlar; salon hiç boş kalmaz.",
+    },
+    {
+      id: "paket",
+      title: "Paket Servis",
+      text: "Telefonla sipariş verin, közden indiği gibi kapınıza gelsin: 0288 212 76 12.",
+    },
+    {
+      id: "gelal",
+      title: "Gel Al",
+      text: "Tezgâhtan teslim. Köfte ekmek sarılır, park karşıda — gerisi size kalmış.",
+    },
+    {
+      id: "alkollu",
+      title: "Alkollü Servis",
+      text: "Salonda rakı ve yerli bira servisi yapılır. Közde köfteyle rakı, Trakya'nın eski âdetidir.",
+    },
+  ],
+} as const;

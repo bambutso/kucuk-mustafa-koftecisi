@@ -11,6 +11,16 @@ import { restaurant } from "../../data/restaurant";
 import { Container } from "../ui/Container";
 import { Stamp } from "../ui/Stamp";
 
+const FOOTER_LINKS = [
+  { to: "/", label: "Ana Sayfa" },
+  { to: "/hikayemiz", label: "Hikayemiz" },
+  { to: "/mekan", label: "Mekân" },
+  { to: "/menu", label: "Menü" },
+  { to: "/galeri", label: "Galeri" },
+  { to: "/iletisim", label: "İletişim" },
+  { to: "/rezervasyon", label: "Rezervasyon" },
+] as const;
+
 function ColumnTitle({ children }: { children: string }) {
   return <h3 className="eyebrow mb-5">{children}</h3>;
 }
@@ -122,23 +132,51 @@ export function Footer() {
               ))}
             </ul>
             <Link
-              to="/menu"
+              to="/rezervasyon"
               className="mt-6 inline-block font-sans text-sm font-semibold text-copper transition-colors hover:text-ember"
             >
-              Menüyü İncele →
+              Rezervasyon →
             </Link>
           </div>
         </div>
       </Container>
+
+      {/* Sayfa bağlantıları */}
+      <div className="border-t border-cream/10 py-5">
+        <Container>
+          <nav
+            aria-label="Alt gezinme"
+            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+          >
+            {FOOTER_LINKS.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="font-sans text-xs text-cream/50 transition-colors hover:text-ember"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </Container>
+      </div>
 
       <div className="border-t border-cream/10 py-5">
         <Container className="flex flex-col items-center justify-between gap-2 text-xs text-cream/40 sm:flex-row">
           <p>
             © {year} {restaurant.name} — {restaurant.city}
           </p>
-          <p className="font-display text-sm italic text-cream/50">
-            1939'dan beri, aynı közde.
-          </p>
+          <div className="flex items-center gap-5">
+            <p className="font-display text-sm italic text-cream/50">
+              1939'dan beri, aynı közde.
+            </p>
+            <Link
+              to="/yonetim"
+              className="text-[0.65rem] uppercase tracking-[0.15em] text-cream/25 transition-colors hover:text-cream/60"
+            >
+              Yönetim
+            </Link>
+          </div>
         </Container>
       </div>
     </footer>

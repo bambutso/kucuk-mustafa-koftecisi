@@ -1,6 +1,7 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { menu } from "../../data/menu";
+import { useMenu } from "../../store/menuStore";
 import { images } from "../../data/restaurant";
 import { Container } from "../../components/ui/Container";
 import { SectionHeading } from "../../components/ui/SectionHeading";
@@ -8,14 +9,20 @@ import { Reveal } from "../../components/ui/Reveal";
 import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
 import { formatPrice } from "../../utils/format";
 
-/** Menü verisinden şef önerilerini toplar — ürün bilgisi tek kaynaktan gelir. */
-const signatureItems = menu.flatMap((category) =>
-  category.items
-    .filter((item) => item.tags?.includes("sef-onerisi"))
-    .map((item) => ({ ...item, category: category.title })),
-);
-
 export function Signature() {
+  const { categories } = useMenu();
+
+  /** Menü verisinden şef önerileri — ürün bilgisi tek kaynaktan gelir. */
+  const signatureItems = useMemo(
+    () =>
+      categories.flatMap((category) =>
+        category.items
+          .filter((item) => item.tags?.includes("sef-onerisi"))
+          .map((item) => ({ ...item, category: category.title })),
+      ),
+    [categories],
+  );
+
   return (
     <section className="bg-coal py-24 md:py-32" aria-label="İmza ürünler">
       <Container>

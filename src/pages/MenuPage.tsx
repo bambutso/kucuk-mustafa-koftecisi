@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { menu } from "../data/menu";
+import { useMenu } from "../store/menuStore";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { useMediaQuery } from "../hooks/useMediaQuery";
@@ -11,12 +11,16 @@ import { MenuNote } from "../sections/menu/MenuNote";
 import { Container } from "../components/ui/Container";
 import { Button } from "../components/ui/Button";
 
-const categoryIds = menu.map((category) => category.id);
-
 export default function MenuPage() {
   usePageMeta(
     "Menü — Küçük Mustafa Köftecisi | Kırklareli",
     "Kırklareli köftesi, ızgaralar, çorbalar, yöresel lezzetler ve tatlılar. Meşe kömürünün korunda, 1939'dan beri.",
+  );
+
+  const { categories } = useMenu();
+  const categoryIds = useMemo(
+    () => categories.map((category) => category.id),
+    [categories],
   );
 
   const [query, setQuery] = useState("");
@@ -30,14 +34,14 @@ export default function MenuPage() {
   const results = useMemo(() => {
     const q = query.trim().toLocaleLowerCase("tr");
     if (!q) return [];
-    return menu.flatMap((category) =>
+    return categories.flatMap((category) =>
       category.items.filter(
         (item) =>
           item.name.toLocaleLowerCase("tr").includes(q) ||
           item.description.toLocaleLowerCase("tr").includes(q),
       ),
     );
-  }, [query]);
+  }, [query, categories]);
 
   const selectCategory = (id: string) => {
     setOpenIds((prev) => new Set(prev).add(id));
@@ -68,7 +72,7 @@ export default function MenuPage() {
     <>
       <MenuHeader />
       <MenuFilterBar
-        categories={menu}
+        categories={categories}
         activeId={activeId}
         onSelectCategory={selectCategory}
         query={query}
@@ -109,7 +113,7 @@ export default function MenuPage() {
           )
         ) : (
           <div>
-            {menu.map((category) => (
+            {categories.map((category) => (
               <CategorySection
                 key={category.id}
                 category={category}

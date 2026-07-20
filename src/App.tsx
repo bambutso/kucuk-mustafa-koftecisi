@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -8,6 +8,12 @@ import { Layout } from "./components/layout/Layout";
 import HomePage from "./pages/HomePage";
 
 const MenuPage = lazy(() => import("./pages/MenuPage"));
+const StoryPage = lazy(() => import("./pages/StoryPage"));
+const PlacePage = lazy(() => import("./pages/PlacePage"));
+const GalleryPage = lazy(() => import("./pages/GalleryPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const ReservationPage = lazy(() => import("./pages/ReservationPage"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
 
 function PageFallback() {
   return (
@@ -22,19 +28,22 @@ function PageFallback() {
   );
 }
 
+function lazyRoute(element: ReactNode) {
+  return <Suspense fallback={<PageFallback />}>{element}</Suspense>;
+}
+
 const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       { path: "/", element: <HomePage /> },
-      {
-        path: "/menu",
-        element: (
-          <Suspense fallback={<PageFallback />}>
-            <MenuPage />
-          </Suspense>
-        ),
-      },
+      { path: "/menu", element: lazyRoute(<MenuPage />) },
+      { path: "/hikayemiz", element: lazyRoute(<StoryPage />) },
+      { path: "/mekan", element: lazyRoute(<PlacePage />) },
+      { path: "/galeri", element: lazyRoute(<GalleryPage />) },
+      { path: "/iletisim", element: lazyRoute(<ContactPage />) },
+      { path: "/rezervasyon", element: lazyRoute(<ReservationPage />) },
+      { path: "/yonetim", element: lazyRoute(<AdminPage />) },
       { path: "*", element: <Navigate to="/" replace /> },
     ],
   },
