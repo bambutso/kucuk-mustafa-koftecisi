@@ -1,4 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import type { MenuItem } from "../types/menu";
 import { useMenu } from "../store/menuStore";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { useScrollSpy } from "../hooks/useScrollSpy";
@@ -8,6 +11,7 @@ import { MenuFilterBar } from "../sections/menu/MenuFilterBar";
 import { CategorySection } from "../sections/menu/CategorySection";
 import { MenuCard } from "../sections/menu/MenuCard";
 import { MenuNote } from "../sections/menu/MenuNote";
+import { Model3DViewer } from "../sections/menu/Model3DViewer";
 import { Container } from "../components/ui/Container";
 import { Button } from "../components/ui/Button";
 
@@ -30,6 +34,28 @@ export default function MenuPage() {
   );
   const activeId = useScrollSpy(categoryIds);
   const searching = query.trim().length > 0;
+
+  /* 3D/AR görünümü: ?model3d=<urun-id> ile doğrudan da açılabilir (QR akışı) */
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [view3DItem, setView3DItem] = useState<MenuItem | null>(null);
+
+  useEffect(() => {
+    const wanted = searchParams.get("model3d");
+    if (!wanted) return;
+    const found = categories
+      .flatMap((category) => category.items)
+      .find((item) => item.id === wanted && item.model3d);
+    if (found) setView3DItem(found);
+  }, [searchParams, categories]);
+
+  const close3D = () => {
+    setView3DItem(null);
+    if (searchParams.has("model3d")) {
+      const next = new URLSearchParams(searchParams);
+      next.delete("model3d");
+      setSearchParams(next, { replace: true });
+    }
+  };
 
   const results = useMemo(() => {
     const q = query.trim().toLocaleLowerCase("tr");
@@ -88,7 +114,7 @@ export default function MenuPage() {
               </p>
               <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {results.map((item) => (
-                  <MenuCard key={item.id} item={item} />
+                  <MenuCard key={item.id} item={item} onView3D={setView3DItem} />
                 ))}
               </div>
             </>
@@ -120,6 +146,7 @@ export default function MenuPage() {
                 collapsible={!isDesktop}
                 open={openIds.has(category.id)}
                 onToggle={() => toggleCategory(category.id)}
+                onView3D={setView3DItem}
               />
             ))}
           </div>
@@ -127,6 +154,10 @@ export default function MenuPage() {
 
         <MenuNote />
       </Container>
+
+      <AnimatePresence>
+        {view3DItem && <Model3DViewer item={view3DItem} onClose={close3D} />}
+      </AnimatePresence>
     </>
   );
 }

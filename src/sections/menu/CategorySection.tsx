@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import type { MenuCategory } from "../../types/menu";
+import type { MenuCategory, MenuItem } from "../../types/menu";
 import { MenuCard } from "./MenuCard";
 import { cn } from "../../utils/cn";
 
@@ -10,6 +10,7 @@ interface CategorySectionProps {
   collapsible: boolean;
   open: boolean;
   onToggle: () => void;
+  onView3D?: (item: MenuItem) => void;
 }
 
 export function CategorySection({
@@ -17,6 +18,7 @@ export function CategorySection({
   collapsible,
   open,
   onToggle,
+  onView3D,
 }: CategorySectionProps) {
   const reduceMotion = useReducedMotion();
   const expanded = !collapsible || open;
@@ -85,7 +87,7 @@ export function CategorySection({
           >
             <div className="grid gap-5 pt-8 sm:grid-cols-2 xl:grid-cols-3">
               {category.items.map((item) => (
-                <MenuCard key={item.id} item={item} />
+                <MenuCard key={item.id} item={item} onView3D={onView3D} />
               ))}
             </div>
           </motion.div>

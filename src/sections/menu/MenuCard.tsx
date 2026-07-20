@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { ChefHat, Flame, MapPin, Sparkles } from "lucide-react";
+import { Box, ChefHat, Flame, MapPin, Sparkles } from "lucide-react";
 import type { ItemTag, MenuItem } from "../../types/menu";
 import { Badge, type BadgeProps } from "../../components/ui/Badge";
 import { SpiceIndicator } from "../../components/ui/SpiceIndicator";
@@ -21,7 +21,13 @@ const TAG_META: Record<
   yoresel: { label: "Yöresel", variant: "earth", Icon: MapPin },
 };
 
-export function MenuCard({ item }: { item: MenuItem }) {
+interface MenuCardProps {
+  item: MenuItem;
+  /** Ürünün 3D/AR görünümünü açar (model3d tanımlı ürünlerde buton çıkar) */
+  onView3D?: (item: MenuItem) => void;
+}
+
+export function MenuCard({ item, onView3D }: MenuCardProps) {
   const hasMeta =
     (item.tags && item.tags.length > 0) || item.spice !== undefined;
 
@@ -78,6 +84,17 @@ export function MenuCard({ item }: { item: MenuItem }) {
             })}
             {item.spice !== undefined && <SpiceIndicator level={item.spice} />}
           </div>
+        )}
+
+        {item.model3d && onView3D && (
+          <button
+            type="button"
+            onClick={() => onView3D(item)}
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 border border-copper/50 bg-coal/40 px-4 py-2.5 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-copper transition-all duration-300 hover:border-ember hover:text-ember hover:shadow-[0_0_20px_rgba(217,119,47,0.25)]"
+          >
+            <Box aria-hidden className="h-4 w-4" />
+            3D Gör · Masanıza Koyun
+          </button>
         )}
       </div>
     </article>

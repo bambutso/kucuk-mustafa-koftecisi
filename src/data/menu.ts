@@ -30,6 +30,12 @@ export const menu: MenuCategory[] = [
         image: images.koftePlate,
         imageAlt: "Sekiz adet köfte; közlenmiş biber, domates ve piyazlık soğanla",
         tags: ["sef-onerisi", "cok-tercih"],
+        model3d: {
+          glb: `${import.meta.env.BASE_URL}models/kofte.glb`,
+          usdz: `${import.meta.env.BASE_URL}models/kofte.usdz`,
+          poster: images.koftePlate,
+          alt: "Tabakta sekiz adet ızgara köfte, garnitürüyle — 3D model",
+        },
       },
       {
         id: "bir-bucuk-porsiyon",
