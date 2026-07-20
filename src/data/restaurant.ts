@@ -1,0 +1,167 @@
+/**
+ * İşletmeye ait tüm gerçek bilgiler tek kaynaktan yönetilir.
+ * Kaynaklar: işletme künyesi, kirklarelikoftesi.com, TripAdvisor.
+ */
+
+export const CART_YEAR = 1935;
+export const FOUNDING_YEAR = 1939;
+
+/** Dükkânın yaşı — site yıllar geçse de doğru kalsın diye dinamik. */
+export function shopAge(): number {
+  return new Date().getFullYear() - FOUNDING_YEAR;
+}
+
+/** Wix CDN'deki gerçek işletme fotoğrafları için boyutlandırılmış URL üretir. */
+function wixPhoto(id: string, w = 1200, h = 800): string {
+  return `https://static.wixstatic.com/media/1d5e1c_${id}~mv2.jpg/v1/fill/w_${w},h_${h},al_c,q_85/kucuk-mustafa-koftecisi.jpg`;
+}
+
+function unsplash(id: string, w = 1600): string {
+  return `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
+}
+
+export const images = {
+  /** Karanlıkta yanan ateş — hero atmosferi (Unsplash) */
+  heroFire: unsplash("photo-1475738972911-5b44ce984c42", 2000),
+  /** Gerçek fotoğraf: 8 köftelik porsiyon, közlenmiş biber ve piyazıyla */
+  koftePlate: wixPhoto("e862a722eaef4dacb3e88864c27efbd1"),
+  /** Gerçek fotoğraf: 1939 tabelalı dükkân cephesi */
+  storefront: wixPhoto("cc20b1bff6874f1eb4740fb21c07dd2b"),
+  /** Gerçek fotoğraf: usta, köz başında */
+  ustaGrill: wixPhoto("d55687df66b840fb8657152e7b0fbc56"),
+  /** Dökme tavada ızgara — koyu atmosfer (Unsplash) */
+  grillPlate: unsplash("photo-1594041680534-e8c8cdebd659", 1200),
+  /** Piyazlık soğanla şiş tabağı (Unsplash) */
+  lambSkewer: unsplash("photo-1603360946369-dc9bb6258143", 1200),
+  /** Şiş ve közlenmiş sebze sofrası (Unsplash) */
+  skewerSpread: unsplash("photo-1555939594-58d7cb561ad1", 1200),
+} as const;
+
+export const restaurant = {
+  name: "Küçük Mustafa Köftecisi",
+  city: "Kırklareli",
+  slogan: "1939'dan günümüze yaşayan efsane",
+  phone: {
+    display: "0288 212 76 12",
+    href: "tel:+902882127612",
+  },
+  address: {
+    lines: [
+      "Karacaibrahim Mahallesi",
+      "Şükrü Naili Geçidi No:1, Kasaplar Arası",
+      "Merkez / Kırklareli",
+    ],
+    landmark: "Şevket Dingiloğlu Parkı karşısı",
+    directionsUrl:
+      "https://www.google.com/maps/dir/?api=1&destination=K%C3%BC%C3%A7%C3%BCk+Mustafa+K%C3%B6ftecisi+K%C4%B1rklareli",
+    embedUrl:
+      "https://maps.google.com/maps?q=K%C3%BC%C3%A7%C3%BCk+Mustafa+K%C3%B6ftecisi+K%C4%B1rklareli&z=16&ie=UTF8&output=embed",
+  },
+  hours: {
+    days: "Haftanın 7 günü",
+    open: "09:00",
+    close: "03:00",
+  },
+  capacity: {
+    tables: 16,
+    seats: 75,
+  },
+  services: ["Yerinde Servis", "Paket Servis", "Gel Al", "Alkollü Servis"],
+  socials: {
+    instagram: "https://www.instagram.com/kucukmustafakoftecisi1939/",
+    tripadvisor:
+      "https://www.tripadvisor.com.tr/Restaurant_Review-g3252637-d10962098-Reviews-Kucuk_Mustafa_Koftecisi-Kirklareli_Kirklareli_Province.html",
+  },
+  /** TripAdvisor'dan alınan gerçek veriler */
+  rating: {
+    score: 4.4,
+    outOf: 5,
+    count: 56,
+    rank: 1,
+    totalInCity: 87,
+    award: "Travellers' Choice",
+    source: "TripAdvisor",
+  },
+} as const;
+
+/** Ana sayfa — marka özeti */
+export const manifesto = {
+  eyebrow: "Kırklareli Köftesi",
+  title: "Tarif 1939'dan beri aynı; değiştirmeyi hiç düşünmedik.",
+  text: "Dana etine Kırklareli'nin coğrafi işaretli Kıvırcık kuzusu katılır; kuru soğan ve bayat ekmekle yoğrulur, meşe kömürünün korunda mühürlenir. Baharat azdır — damakta kalan et olsun diye. Yanında piyazlık soğan, közlenmiş yeşil biber ve ev yapımı acı sos: sofra kurulmuştur.",
+} as const;
+
+/** Ana sayfa — hikâye bölümü */
+export const story = {
+  pullQuote: "Babamın beni ilk götürdüğü köfteci.",
+  chapters: [
+    {
+      year: "1935",
+      title: "Arasta Çarşısı'nın önünde bir araba",
+      text: "Mustafa Akkul'un boyu kısaydı; herkes ona \"Küçük Mustafa\" derdi. 1935'te Arasta Çarşısı'nın önüne küçük bir seyyar araba koydu. Sermayesi azdı ama terazisi doğru, közü sabırlıydı. Kırklareli, köfteyle onun elinden tanıştı.",
+    },
+    {
+      year: "1939",
+      title: "Önü bakkal, arkası köfteci",
+      text: "Kırklareli'nin kurtuluşunun 15. yılında Küçük Mustafa da kendi çatısına kavuştu: Şevket Dingiloğlu Parkı'nın karşısında bir dükkân. Ön tarafta bakkal tezgâhı, arkada köz. Kapıdan ekmek almaya giren, köfte kokusuyla çıkardı.",
+    },
+    {
+      year: "Bugün",
+      title: "Ustadan çırağa, dört kuşak",
+      text: "Ocağın başı hiç boş kalmadı: İbrahim Kayacan, Necdet Kayacan, Cüneyt Kayacan… Bugün közün karşısında Ergin Kalınoğlu duruyor. İsimler değişti; köftenin harcı, közün ateşi, kapıdan girene verilen selam değişmedi.",
+    },
+  ],
+} as const;
+
+/** Ana sayfa — "Neden farklı?" kartları */
+export const features = [
+  {
+    id: "et",
+    kicker: "Et",
+    title: "Coğrafi işaretli Kıvırcık",
+    text: "Dana etinin yanına Kırklareli'nin coğrafi işaretli Kıvırcık kuzu eti katılır. Harcın sırrı oranda; ölçüsü seksen yılı aşkın el terazisi.",
+  },
+  {
+    id: "harc",
+    kicker: "Harç",
+    title: "Az baharat, çok et",
+    text: "Kuru soğan, bayat ekmek, tuz. Baharat etin önüne geçmesin diye kapıda bekletilir; damakta kalan köfte değil, et olur.",
+  },
+  {
+    id: "ates",
+    kicker: "Ateş",
+    title: "Meşe kömürünün koru",
+    text: "Alev değil, kor. Meşe kömürü küllenip kor bağlayınca köfte ızgaraya gelir; dışı mühürlenir, içi sulu kalır.",
+  },
+  {
+    id: "sunum",
+    kicker: "Sunum",
+    title: "Değişmeyen tabak",
+    text: "Piyazlık kuru soğan, közlenmiş yeşil biber, ev yapımı acı sos. 250 gramlık porsiyonda sekiz köfte — 1939'dan beri böyle.",
+  },
+] as const;
+
+/**
+ * Yorum kartları temsilîdir; gerçek müşteri yorumu değildir.
+ * Puan, yorum sayısı ve sıralama ise TripAdvisor'ın gerçek verisidir.
+ */
+export const sampleReviews = [
+  {
+    quote:
+      "Köfte tam kıvamında; közün kokusu tabağa kadar geliyor. Servis hızlı, esnaf güler yüzlü.",
+    context: "Lezzet ve servis üzerine",
+  },
+  {
+    quote:
+      "Kırklareli'ye yolu düşen buraya uğramadan dönmesin. Piyazı ve ev yapımı acı sosu başka yerde yok.",
+    context: "Yöresellik üzerine",
+  },
+  {
+    quote:
+      "Çocukluğumun tadı aynen duruyor. Bir zamanlar babamla gelirdim; şimdi oğlumla geliyorum.",
+    context: "Hatıralar üzerine",
+  },
+] as const;
+
+export const reviewsDisclaimer =
+  "Puan, yorum sayısı ve sıralama TripAdvisor verisidir; yorum kartları temsilî örneklerdir.";
