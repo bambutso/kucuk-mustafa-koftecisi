@@ -47,7 +47,10 @@ const router = createBrowserRouter([
       { path: "*", element: <Navigate to="/" replace /> },
     ],
   },
-]);
+], {
+  // GitHub Pages altyolunda (base) da doğru çalışsın
+  basename: import.meta.env.BASE_URL.replace(/\/$/, ""),
+});
 
 export default function App() {
   return <RouterProvider router={router} />;
