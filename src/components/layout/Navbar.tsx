@@ -77,7 +77,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
       role="dialog"
       aria-modal="true"
       aria-label="Gezinme menüsü"
-      className="fixed inset-0 z-[60] flex flex-col bg-coal/[0.98] backdrop-blur-md"
+      className="fixed inset-0 z-[60] flex flex-col bg-coal/[0.98] pt-[env(safe-area-inset-top)] backdrop-blur-md"
       initial={reduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={reduceMotion ? undefined : { opacity: 0 }}
@@ -123,7 +123,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
         ))}
       </nav>
 
-      <div className="px-8 pb-10">
+      <div className="px-8 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
         <Link
           to="/rezervasyon"
           onClick={onClose}
@@ -172,7 +172,7 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] transition-all duration-500",
           scrolled
             ? "border-b border-cream/10 bg-coal/90 backdrop-blur-md"
             : "border-b border-transparent bg-transparent",

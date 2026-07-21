@@ -53,6 +53,8 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
+    /* Safari üst/alt çubukları ve lastik-bant kaydırma alanı siteyle aynı zeminde kalsın */
+    background-color: var(--color-coal);
   }
 
   @media (prefers-reduced-motion: reduce) {
