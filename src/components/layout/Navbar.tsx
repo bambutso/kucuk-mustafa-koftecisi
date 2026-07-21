@@ -172,16 +172,16 @@ export function Navbar() {
 
   return (
     <>
-      {/* iOS 26 Safari, üst kenara değen fixed eleman görünce içeriği adres
-          çubuğunun arkasına uzatmayı bırakıp düz renk panele düşüyor. Bu yüzden
-          sayfa başındayken çubuk absolute'tur (sayfayla kayar, örneklenmez);
-          ancak görünümden çıktıktan sonra fixed olarak geri süzülür. Görsel
-          zemin/blur da absolute alt katmandadır (örneklemeye girmez). */}
+      {/* iOS 26 Safari, üst kenara tutturulmuş (fixed) eleman ekrandayken içeriği
+          adres çubuğunun arkasına uzatmayı bırakıp düz renk panele düşüyor —
+          WebKit kısıtı, çözümü yok. Bu yüzden mobilde çubuk hep absolute'tur
+          (sayfayla kayar, cam akışı bozulmaz); yalnızca lg+ ekranlarda kaydırma
+          sonrası fixed olarak geri süzülür. Zemin/blur absolute alt katmandadır. */}
       <header
         className={cn(
           "inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]",
           scrolled
-            ? "fixed motion-safe:animate-[nav-drop_0.45s_ease]"
+            ? "absolute lg:fixed lg:motion-safe:animate-[nav-drop_0.45s_ease]"
             : "absolute",
         )}
       >
