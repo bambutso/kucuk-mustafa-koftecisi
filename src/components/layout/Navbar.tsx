@@ -77,7 +77,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
       role="dialog"
       aria-modal="true"
       aria-label="Gezinme menüsü"
-      className="fixed inset-0 z-[60] flex flex-col bg-coal/[0.98] pt-[env(safe-area-inset-top)] backdrop-blur-md"
+      className="fixed inset-0 z-[60] flex flex-col bg-coal pt-[env(safe-area-inset-top)]"
       initial={reduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={reduceMotion ? undefined : { opacity: 0 }}
@@ -170,15 +170,20 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] transition-all duration-500",
-          scrolled
-            ? "border-b border-cream/10 bg-coal/90 backdrop-blur-md"
-            : "border-b border-transparent bg-transparent",
-        )}
-      >
-        <Container className="flex h-16 items-center justify-between md:h-20">
+      {/* iOS 26 Safari üst çubuk rengini sabit elemanın arka planından örnekler;
+          bu yüzden header görsel özellik taşımaz — zemin/blur absolute alt katmanda
+          (absolute çocuklar örneklemeye girmez, Safari body'nin koyu rengine düşer). */}
+      <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+        <div
+          aria-hidden
+          className={cn(
+            "absolute inset-0 border-b transition-all duration-500",
+            scrolled
+              ? "border-cream/10 bg-coal/90 backdrop-blur-md"
+              : "border-transparent bg-transparent",
+          )}
+        />
+        <Container className="relative flex h-16 items-center justify-between md:h-20">
           <Brand />
 
           {/* Masaüstü */}

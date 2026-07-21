@@ -9,7 +9,7 @@ import { Stamp } from "../../components/ui/Stamp";
  * DEMO girişi: PIN istemci tarafında kontrol edilir ve yalnızca bu oturumda
  * geçerlidir. Gerçek yayında sunucu taraflı kimlik doğrulama şarttır.
  */
-const DEMO_PIN = "1939";
+const DEMO_PIN = "0216";
 
 export function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
   const [pin, setPin] = useState("");
@@ -38,7 +38,7 @@ export function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-7 text-left">
-            <Labelled label="PIN" hint="Demo PIN: 1939">
+            <Labelled label="PIN">
               {(id) => (
                 <Input
                   id={id}
