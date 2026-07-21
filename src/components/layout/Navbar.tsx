@@ -158,7 +158,9 @@ export function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    // Eşik, çubuğun tamamen görünümden çıktığı nokta: absolute → fixed geçişi
+    // ekranda zıplama yaratmasın diye.
+    const onScroll = () => setScrolled(window.scrollY > 96);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -170,10 +172,19 @@ export function Navbar() {
 
   return (
     <>
-      {/* iOS 26 Safari üst çubuk rengini sabit elemanın arka planından örnekler;
-          bu yüzden header görsel özellik taşımaz — zemin/blur absolute alt katmanda
-          (absolute çocuklar örneklemeye girmez, Safari body'nin koyu rengine düşer). */}
-      <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+      {/* iOS 26 Safari, üst kenara değen fixed eleman görünce içeriği adres
+          çubuğunun arkasına uzatmayı bırakıp düz renk panele düşüyor. Bu yüzden
+          sayfa başındayken çubuk absolute'tur (sayfayla kayar, örneklenmez);
+          ancak görünümden çıktıktan sonra fixed olarak geri süzülür. Görsel
+          zemin/blur da absolute alt katmandadır (örneklemeye girmez). */}
+      <header
+        className={cn(
+          "inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]",
+          scrolled
+            ? "fixed motion-safe:animate-[nav-drop_0.45s_ease]"
+            : "absolute",
+        )}
+      >
         <div
           aria-hidden
           className={cn(
