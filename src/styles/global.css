@@ -152,8 +152,11 @@
   }
 
   /* Çok hafif film greni — tüm sayfanın üstünde sabit doku */
+  /* iOS 26 Safari üst/alt çubuk rengini viewport kenarındaki fixed elemanlardan
+     örnekler (pointer-events:none bile olsa) — bu yüzden gren katmanı fixed değil,
+     tüm sayfayı saran göreli kapsayıcı içinde absolute durur. */
   .grain-overlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 60;
     pointer-events: none;
