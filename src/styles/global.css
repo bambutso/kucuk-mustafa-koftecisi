@@ -63,13 +63,15 @@
     }
   }
 
+  /* body'ye overflow verilmez: iOS Safari'de belge kaydırıcısını bozup
+     içeriğin adres çubuğu altından akmasını engelliyor. Yatay taşma koruması
+     Layout'taki sarmalayıcıda overflow-x:clip ile sağlanır. */
   body {
     background-color: var(--color-charcoal);
     color: var(--color-cream);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
   }
 
   ::selection {
