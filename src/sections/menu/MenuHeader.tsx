@@ -1,9 +1,11 @@
-import { igImages } from "../../data/restaurant";
-import { MENU_NOTE } from "../../data/menu";
+import { igImages, restaurant } from "../../data/restaurant";
+import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { Reveal } from "../../components/ui/Reveal";
 
 export function MenuHeader() {
+  const content = useContent();
+  const ui = content.ui.menuPage;
   return (
     <header className="relative overflow-hidden bg-coal pb-14 pt-32 md:pb-20 md:pt-44">
       {/* Fon: lamba ışığında logo işlemeli menü föyü (işletme arşivi) */}
@@ -18,16 +20,16 @@ export function MenuHeader() {
 
       <Container className="relative z-10">
         <Reveal>
-          <p className="eyebrow">Küçük Mustafa Köftecisi</p>
+          <p className="eyebrow">{restaurant.name}</p>
           <h1 className="mt-4 font-display text-5xl font-semibold leading-none text-cream md:text-7xl">
-            Menü
+            {ui.heading}
           </h1>
           <div className="kor-line kor-line--live mt-7 w-32" />
           <p className="mt-7 max-w-lg font-display text-xl italic text-cream/75">
-            Közden gelen ne varsa; çorbasından tatlısına, Trakya usulü.
+            {ui.tagline}
           </p>
           <p className="mt-4 max-w-lg text-xs leading-relaxed text-cream/45">
-            {MENU_NOTE}
+            {content.menuNote}
           </p>
         </Reveal>
       </Container>

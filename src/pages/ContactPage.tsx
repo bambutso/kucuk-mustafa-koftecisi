@@ -6,6 +6,7 @@ import {
   Phone,
 } from "lucide-react";
 import { images, restaurant } from "../data/restaurant";
+import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
@@ -14,17 +15,16 @@ import { buttonVariants } from "../components/ui/Button";
 import { cn } from "../utils/cn";
 
 export default function ContactPage() {
-  usePageMeta(
-    "İletişim — Küçük Mustafa Köftecisi | 0288 212 76 12",
-    "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, Kırklareli. Haftanın 7 günü 09:00–03:00. Telefon: 0288 212 76 12.",
-  );
+  const content = useContent();
+  const ui = content.ui.contact;
+  usePageMeta(ui.docTitle, ui.docDesc);
 
   return (
     <>
       <PageHeader
-        eyebrow="İletişim"
-        title="Bir telefon kadar yakınız"
-        lead="Rezervasyon, paket servis ve sorularınız için bizi arayın; telefonun başında hep biri var."
+        eyebrow={ui.eyebrow}
+        title={ui.title}
+        lead={ui.lead}
         image={images.storefront}
       />
 
@@ -34,29 +34,27 @@ export default function ContactPage() {
           <div className="flex flex-col gap-5">
             <Reveal>
               <div className="border border-earth/30 bg-coffee p-7">
-                <p className="eyebrow">Telefon</p>
+                <p className="eyebrow">{ui.phoneTitle}</p>
                 <a
                   href={restaurant.phone.href}
                   className="mt-3 block font-display text-4xl font-semibold text-cream transition-colors hover:text-ember"
                 >
                   {restaurant.phone.display}
                 </a>
-                <p className="mt-2 text-sm text-cream/55">
-                  Rezervasyon ve paket siparişleri telefonla alınır.
-                </p>
+                <p className="mt-2 text-sm text-cream/55">{ui.phoneNote}</p>
                 <a
                   href={restaurant.phone.href}
                   className={cn(buttonVariants({ size: "sm" }), "mt-5")}
                 >
                   <Phone aria-hidden className="h-3.5 w-3.5" />
-                  Hemen Ara
+                  {content.ui.common.callNow}
                 </a>
               </div>
             </Reveal>
 
             <Reveal delay={0.08}>
               <div className="border border-earth/30 bg-coffee p-7">
-                <p className="eyebrow">Adres</p>
+                <p className="eyebrow">{ui.addressTitle}</p>
                 <address className="mt-3 text-sm not-italic leading-relaxed text-cream/70">
                   {restaurant.address.lines.map((line) => (
                     <span key={line} className="block">
@@ -77,31 +75,28 @@ export default function ContactPage() {
                   )}
                 >
                   <Navigation aria-hidden className="h-3.5 w-3.5" />
-                  Yol Tarifi Al
+                  {content.ui.common.directions}
                 </a>
               </div>
             </Reveal>
 
             <Reveal delay={0.16}>
               <div className="border border-earth/30 bg-coffee p-7">
-                <p className="eyebrow">Çalışma Saatleri</p>
+                <p className="eyebrow">{ui.hoursTitle}</p>
                 <p className="mt-3 flex items-center gap-2.5 text-sm text-cream/70">
                   <Clock aria-hidden className="h-4 w-4 text-copper" />
-                  {restaurant.hours.days},{" "}
+                  {content.hoursDays},{" "}
                   <strong className="font-semibold text-cream">
                     {restaurant.hours.open} – {restaurant.hours.close}
                   </strong>
                 </p>
-                <p className="mt-2 text-xs text-cream/45">
-                  Gece yarısından sonra da ocak açık; çorba kazanı sabaha kadar
-                  iner.
-                </p>
+                <p className="mt-2 text-xs text-cream/45">{ui.hoursNote}</p>
               </div>
             </Reveal>
 
             <Reveal delay={0.24}>
               <div className="border border-earth/30 bg-coffee p-7">
-                <p className="eyebrow">Sosyal</p>
+                <p className="eyebrow">{ui.socialTitle}</p>
                 <div className="mt-3 flex flex-col gap-2.5">
                   <a
                     href={restaurant.socials.instagram}
@@ -119,7 +114,7 @@ export default function ContactPage() {
                     className="inline-flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-ember"
                   >
                     TripAdvisor — {restaurant.rating.score}/5 ·{" "}
-                    {restaurant.rating.count} yorum
+                    {restaurant.rating.count} {ui.reviewsWord}
                     <ExternalLink aria-hidden className="h-3.5 w-3.5" />
                   </a>
                 </div>
@@ -130,7 +125,7 @@ export default function ContactPage() {
           {/* Harita */}
           <Reveal delay={0.1} className="archive-frame min-h-[420px] lg:min-h-full">
             <iframe
-              title="Harita: Küçük Mustafa Köftecisi konumu"
+              title={ui.mapTitle}
               src={restaurant.address.embedUrl}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -143,8 +138,7 @@ export default function ContactPage() {
         <Container className="mt-10">
           <p className="flex items-start gap-2.5 text-xs leading-relaxed text-cream/40">
             <MapPin aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-            Kasaplar Arası, çarşı içindedir; araçla gelenler için en yakın
-            park alanı Şevket Dingiloğlu Parkı çevresidir.
+            {ui.parkingNote}
           </p>
         </Container>
       </div>

@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { useMenu } from "../../store/menuStore";
+import { useLocalizedMenu } from "../../i18n/useLocalizedMenu";
+import { useContent } from "../../i18n";
 import { images } from "../../data/restaurant";
 import { Container } from "../../components/ui/Container";
 import { SectionHeading } from "../../components/ui/SectionHeading";
@@ -10,7 +11,8 @@ import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
 import { formatPrice } from "../../utils/format";
 
 export function Signature() {
-  const { categories } = useMenu();
+  const { categories } = useLocalizedMenu();
+  const ui = useContent().ui.signature;
 
   /** Menü verisinden şef önerileri — ürün bilgisi tek kaynaktan gelir. */
   const signatureItems = useMemo(
@@ -24,13 +26,13 @@ export function Signature() {
   );
 
   return (
-    <section className="bg-coal py-24 md:py-32" aria-label="İmza ürünler">
+    <section className="bg-coal py-24 md:py-32" aria-label={ui.eyebrow}>
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="İmza Ürünler"
-            title="Ocaktan çıkanların en bilinenleri"
-            lead="Fiyatlar örnek menüdendir; güncel liste için işletmeye danışın."
+            eyebrow={ui.eyebrow}
+            title={ui.title}
+            lead={ui.lead}
           />
         </Reveal>
 
@@ -49,7 +51,7 @@ export function Signature() {
               className="absolute inset-0 bg-gradient-to-t from-coal/85 via-transparent to-transparent"
             />
             <p className="absolute bottom-5 left-6 font-display text-xl italic text-cream">
-              250 gram, 8 köfte — 1939'dan beri aynı tabak.
+              {ui.imageCaption}
             </p>
           </Reveal>
 
@@ -82,7 +84,7 @@ export function Signature() {
                 to="/menu"
                 className="group inline-flex items-center gap-2 font-sans text-sm font-semibold text-ember transition-colors hover:text-copper"
               >
-                Menünün tamamını gör
+                {ui.seeAll}
                 <ArrowRight
                   aria-hidden
                   className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"

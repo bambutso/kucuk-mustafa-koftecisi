@@ -1,6 +1,7 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { Armchair, Check, Copy, Phone } from "lucide-react";
 import { igImages, restaurant } from "../data/restaurant";
+import { useContent, useLang } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
@@ -20,29 +21,11 @@ const TIME_SLOTS: string[] = (() => {
   return slots;
 })();
 
-const STEPS = [
-  {
-    no: "1",
-    title: "Bizi arayın",
-    text: `${restaurant.phone.display} — telefonun başında hep biri var.`,
-  },
-  {
-    no: "2",
-    title: "Gün, saat, kişi sayısı",
-    text: "Söylemeniz yeterli; kalabalık gruplar için bir gün önceden aramanızı öneririz.",
-  },
-  {
-    no: "3",
-    title: "Masanız hazır",
-    text: "Geldiğinizde adınızı söyleyin; közün en güzel gören masalarından biri sizindir.",
-  },
-];
-
 export default function ReservationPage() {
-  usePageMeta(
-    "Rezervasyon — Küçük Mustafa Köftecisi | 0288 212 76 12",
-    "Masanızı telefonla ayırtın: 0288 212 76 12. Haftanın 7 günü 09:00–03:00, 16 masa 75 sandalye.",
-  );
+  const content = useContent();
+  const { locale } = useLang();
+  const ui = content.ui.reservation;
+  usePageMeta(ui.docTitle, ui.docDesc);
 
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
@@ -56,12 +39,11 @@ export default function ReservationPage() {
   const summary = useMemo(() => {
     if (!date) return "";
     const formattedDate = new Date(`${date}T12:00:00`).toLocaleDateString(
-      "tr-TR",
+      locale,
       { weekday: "long", day: "numeric", month: "long" },
     );
-    const who = name.trim() ? `${name.trim()} adına` : "Adıma";
-    return `${who} rezervasyon: ${formattedDate}, saat ${time}, ${guests} kişi.`;
-  }, [name, date, time, guests]);
+    return ui.summary(name.trim(), formattedDate, time, guests);
+  }, [name, date, time, guests, locale, ui]);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -84,9 +66,9 @@ export default function ReservationPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Rezervasyon"
-        title="Masanız közün karşısında ayrılsın"
-        lead="Rezervasyonlar telefonla alınır — bir arama, otuz saniye. Aşağıdaki küçük plan, telefonda söyleyeceklerinizi hazırlamanız için."
+        eyebrow={ui.eyebrow}
+        title={ui.title}
+        lead={ui.lead}
         image={igImages.masaDetay}
       />
 
@@ -96,7 +78,7 @@ export default function ReservationPage() {
           <div>
             <Reveal>
               <ol className="space-y-8">
-                {STEPS.map((step) => (
+                {ui.steps.map((step) => (
                   <li key={step.no} className="flex gap-5">
                     <span
                       aria-hidden
@@ -127,8 +109,11 @@ export default function ReservationPage() {
               </a>
               <p className="mt-4 flex items-center gap-2 text-xs text-cream/45">
                 <Armchair aria-hidden className="h-3.5 w-3.5" />
-                {restaurant.capacity.tables} masa · {restaurant.capacity.seats}{" "}
-                sandalye — {restaurant.hours.days},{" "}
+                {ui.capacityLine(
+                  restaurant.capacity.tables,
+                  restaurant.capacity.seats,
+                  content.hoursDays,
+                )}
                 {restaurant.hours.open} – {restaurant.hours.close}
               </p>
             </Reveal>
@@ -140,28 +125,28 @@ export default function ReservationPage() {
               onSubmit={handleSubmit}
               className="border border-earth/30 bg-coffee p-7 sm:p-9"
             >
-              <p className="eyebrow">Arama Öncesi Küçük Plan</p>
+              <p className="eyebrow">{ui.planTitle}</p>
               <p className="mt-3 text-sm leading-relaxed text-cream/60">
-                Doldurun, özeti telefonda okuyun ya da kopyalayın.
+                {ui.planText}
                 <strong className="font-semibold text-cream/80">
                   {" "}
-                  Rezervasyon yalnızca telefonla kesinleşir.
+                  {ui.planStrong}
                 </strong>
               </p>
 
               <div className="mt-7 grid gap-5 sm:grid-cols-2">
-                <Labelled label="Ad Soyad" className="sm:col-span-2">
+                <Labelled label={ui.nameLabel} className="sm:col-span-2">
                   {(id) => (
                     <Input
                       id={id}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Adınız"
+                      placeholder={ui.namePlaceholder}
                       autoComplete="name"
                     />
                   )}
                 </Labelled>
-                <Labelled label="Tarih">
+                <Labelled label={ui.dateLabel}>
                   {(id) => (
                     <Input
                       id={id}
@@ -173,7 +158,7 @@ export default function ReservationPage() {
                     />
                   )}
                 </Labelled>
-                <Labelled label="Saat">
+                <Labelled label={ui.timeLabel}>
                   {(id) => (
                     <Select
                       id={id}
@@ -188,7 +173,7 @@ export default function ReservationPage() {
                     </Select>
                   )}
                 </Labelled>
-                <Labelled label="Kişi Sayısı" className="sm:col-span-2">
+                <Labelled label={ui.guestsLabel} className="sm:col-span-2">
                   {(id) => (
                     <Select
                       id={id}
@@ -197,17 +182,17 @@ export default function ReservationPage() {
                     >
                       {["1", "2", "3", "4", "5", "6", "7", "8"].map((n) => (
                         <option key={n} value={n}>
-                          {n} kişi
+                          {ui.guestsOption(n)}
                         </option>
                       ))}
-                      <option value="8+">8'den kalabalık</option>
+                      <option value="8+">{ui.guestsMany}</option>
                     </Select>
                   )}
                 </Labelled>
               </div>
 
               <Button type="submit" className="mt-7 w-full">
-                Özeti Hazırla
+                {ui.submit}
               </Button>
 
               {submitted && summary && (
@@ -224,7 +209,7 @@ export default function ReservationPage() {
                       className={buttonVariants({ size: "sm" })}
                     >
                       <Phone aria-hidden className="h-3.5 w-3.5" />
-                      Ara ve İlet
+                      {ui.callAndTell}
                     </a>
                     <Button
                       type="button"
@@ -235,12 +220,12 @@ export default function ReservationPage() {
                       {copied ? (
                         <>
                           <Check aria-hidden className="h-3.5 w-3.5" />
-                          Kopyalandı
+                          {ui.copied}
                         </>
                       ) : (
                         <>
                           <Copy aria-hidden className="h-3.5 w-3.5" />
-                          Özeti Kopyala
+                          {ui.copy}
                         </>
                       )}
                     </Button>
@@ -250,7 +235,7 @@ export default function ReservationPage() {
 
               {submitted && !date && (
                 <p role="alert" className="mt-4 text-sm text-ember">
-                  Özet için bir tarih seçin.
+                  {ui.pickDate}
                 </p>
               )}
             </form>

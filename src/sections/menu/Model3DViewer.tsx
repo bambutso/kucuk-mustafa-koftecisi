@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Camera, Smartphone, X } from "lucide-react";
 import type { MenuItem } from "../../types/menu";
+import { useContent } from "../../i18n";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { cn } from "../../utils/cn";
 
@@ -18,6 +19,8 @@ interface Model3DViewerProps {
 }
 
 export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
+  const content = useContent();
+  const ui = content.ui.menuPage;
   const reduceMotion = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
   const qrRef = useRef<HTMLCanvasElement>(null);
@@ -63,7 +66,7 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
     <motion.div
       role="dialog"
       aria-modal="true"
-      aria-label={`${item.name} — 3D görünüm`}
+      aria-label={`${item.name} — ${ui.m3dEyebrow}`}
       className="fixed inset-0 z-[70] flex items-center justify-center bg-coal/[0.97] p-4 backdrop-blur-sm sm:p-8"
       initial={reduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -78,7 +81,7 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
         {/* Başlık */}
         <div className="flex items-center justify-between border-b border-earth/30 px-5 py-4">
           <div>
-            <p className="eyebrow text-[0.6rem]">3D Görünüm</p>
+            <p className="eyebrow text-[0.6rem]">{ui.m3dEyebrow}</p>
             <h2 className="mt-1 font-display text-2xl font-semibold text-cream">
               {item.name}
             </h2>
@@ -87,7 +90,7 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
             ref={closeRef}
             type="button"
             onClick={onClose}
-            aria-label="Kapat"
+            aria-label={content.ui.common.close}
             className="p-2 text-cream/60 transition-colors hover:text-ember"
           >
             <X className="h-6 w-6" />
@@ -127,7 +130,7 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
                 className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-[2px] bg-ember px-5 py-3 font-sans text-sm font-semibold text-coal shadow-[0_0_28px_rgba(217,119,47,0.5)] transition-transform active:scale-95"
               >
                 <Camera aria-hidden className="h-4 w-4" />
-                Kamerayla Masanıza Koyun
+                {ui.m3dArButton}
               </button>
             </model-viewer>
           ) : (
@@ -144,7 +147,7 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
                 />
               )}
               <p className="font-display text-lg italic text-cream/60">
-                3D model hazırlanıyor…
+                {ui.m3dPreparing}
               </p>
               <div className="kor-line kor-line--live w-28" />
             </div>
@@ -160,24 +163,17 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
         >
           <p className="flex items-start gap-2.5 text-xs leading-relaxed text-cream/55">
             <Smartphone aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
-            <span>
-              Modeli sürükleyerek döndürebilirsiniz.{" "}
-              <strong className="font-semibold text-cream/80">
-                Telefonda
-              </strong>{" "}
-              “Kamerayla Masanıza Koyun”a dokunun; köfte tabağı gerçek boyutuyla
-              masanızın üzerinde belirir.
-            </span>
+            <span>{ui.m3dHint}</span>
           </p>
           {isDesktop && (
             <div className="flex shrink-0 items-center gap-3">
               <canvas
                 ref={qrRef}
                 className="h-24 w-24 border border-copper/40"
-                aria-label="Telefonda açmak için QR kod"
+                aria-label={ui.m3dQrAria}
               />
               <p className="max-w-32 text-[0.65rem] leading-snug text-cream/45">
-                Telefonunuzla okutun, AR'ı masanızda deneyin.
+                {ui.m3dQrHint}
               </p>
             </div>
           )}

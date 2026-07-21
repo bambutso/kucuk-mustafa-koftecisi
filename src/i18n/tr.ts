@@ -1,0 +1,267 @@
+/**
+ * Türkçe — kaynak içerik. Uzun metinler data/ altındaki özgün dosyalardan gelir;
+ * burada yalnızca arayüz metinleri tanımlanır. Menü/galeri katmanları boştur:
+ * Türkçede özgün veri zaten kullanılır.
+ */
+import {
+  manifesto,
+  story,
+  storyPage,
+  placePage,
+  features,
+  sampleReviews,
+  reviewsDisclaimer,
+  restaurant,
+} from "../data/restaurant";
+import { MENU_NOTE } from "../data/menu";
+import type { SiteContent } from "./types";
+
+export const tr: SiteContent = {
+  ui: {
+    common: {
+      reserve: "Rezervasyon Yap",
+      callUs: "Bizi Ara",
+      directions: "Yol Tarifi Al",
+      close: "Kapat",
+      callNow: "Hemen Ara",
+    },
+    nav: {
+      home: "Ana Sayfa",
+      story: "Hikayemiz",
+      place: "Mekân",
+      menu: "Menü",
+      gallery: "Galeri",
+      contact: "İletişim",
+      reservation: "Rezervasyon",
+      openMenu: "Menüyü aç",
+      closeMenu: "Menüyü kapat",
+      mainNav: "Ana gezinme",
+      mobileNav: "Mobil gezinme",
+      footerNav: "Alt gezinme",
+      skipToContent: "İçeriğe atla",
+      admin: "Yönetim",
+    },
+    home: {
+      docTitle: "Küçük Mustafa Köftecisi — 1939'dan Beri | Kırklareli",
+      docDesc:
+        "1939'dan günümüze yaşayan efsane. Meşe kömürünün korunda, dört kuşaktır aynı usulle pişen Kırklareli köftesi.",
+    },
+    hero: {
+      title: "1939'dan Beri",
+      tagline: "Meşe kömürünün korunda, dört kuşaktır aynı köfte.",
+      ctaMenu: "Menüyü İncele",
+      reviewGoogle: "Google'da Yorum Yap",
+      reviewTripadvisor: "TripAdvisor'da Yorum Yap",
+    },
+    stats: {
+      years: "yıldır aynı ocakta",
+      generations: "kuşak, tek usul",
+      portion: "porsiyon · 8 köfte",
+    },
+    homeStory: {
+      eyebrow: "Hikâyemiz",
+      title: "Bir seyyar arabayla başladı; bir şehrin hatırası oldu.",
+      captionShop: "Kasaplar Arası'ndaki dükkân",
+      captionUsta: "Köz başında usta",
+      quoteSub: "Kırklareli'nde birçok kişinin ortak cümlesi",
+    },
+    why: {
+      eyebrow: "Usul",
+      title: "Kırklareli köftesi neden farklı?",
+      lead: "Dört basit cevap: doğru et, sade harç, sabırlı kor ve hiç değişmeyen bir tabak.",
+    },
+    signature: {
+      eyebrow: "İmza Ürünler",
+      title: "Ocaktan çıkanların en bilinenleri",
+      lead: "Fiyatlar örnek menüdendir; güncel liste için işletmeye danışın.",
+      imageCaption: "250 gram, 8 köfte — 1939'dan beri aynı tabak.",
+      seeAll: "Menünün tamamını gör",
+    },
+    instagram: {
+      title: "Közün güncesi",
+      lead: "Dükkândan güncel kareler — tabaklar, salon ve közün etrafında dönen gündelik hayat.",
+      follow: "Instagram'da Takip Edin",
+      openPost: "Gönderiyi aç",
+    },
+    reviews: {
+      eyebrow: "Misafirlerimiz Ne Diyor?",
+      reviewsWord: "yorum",
+      rankLine: (_rank, total) =>
+        `Kırklareli'nde ${total} restoran arasında`,
+      ourPage: (source) => `${source} sayfamız`,
+      starsAria: (score, outOf) => `${score} / ${outOf} yıldız`,
+    },
+    location: {
+      eyebrow: "Bizi Bulun",
+      title: "Kasaplar Arası'nda, köz kokusunu takip edin.",
+      mapTitle: "Harita: Küçük Mustafa Köftecisi konumu",
+    },
+    footer: {
+      addressTitle: "Adres",
+      hoursTitle: "Çalışma Saatleri",
+      servicesTitle: "Hizmetler",
+      tablesChairs: (tables, chairs) => `${tables} masa · ${chairs} sandalye`,
+      tagline: "1939'dan beri, aynı közde.",
+    },
+    menuPage: {
+      docTitle: "Menü — Küçük Mustafa Köftecisi | Kırklareli",
+      docDesc:
+        "Kırklareli köftesi, ızgaralar, çorbalar, yöresel lezzetler ve tatlılar. Meşe kömürünün korunda, 1939'dan beri.",
+      heading: "Menü",
+      tagline: "Közden gelen ne varsa; çorbasından tatlısına, Trakya usulü.",
+      searchLabel: "Menüde ara",
+      searchPlaceholder: "Menüde ara: köfte, piyaz, hardaliye…",
+      clearSearch: "Aramayı temizle",
+      resultsFound: (n) => `${n} sonuç bulundu`,
+      noResultsTitle: "Aradığınızı közde bulamadık.",
+      noResultsHint: "Farklı bir kelimeyle deneyin — ör. “köfte”, “piyaz”, “hardaliye”.",
+      itemsCount: (n) => `${n} ürün`,
+      menuNoteExtra: "Alkollü servis yalnızca salonda geçerlidir. Fiyatlara KDV dahildir.",
+      categoriesAria: "Menü kategorileri",
+      tags: {
+        chef: "Şef Önerisi",
+        popular: "En Çok Tercih",
+        fresh: "Yeni",
+        local: "Yöresel",
+      },
+      view3d: "3D Gör · Masanıza Koyun",
+      m3dEyebrow: "3D Görünüm",
+      m3dPreparing: "3D model hazırlanıyor…",
+      m3dArButton: "Kamerayla Masanıza Koyun",
+      m3dHint:
+        "Modeli sürükleyerek döndürebilirsiniz. Telefonda “Kamerayla Masanıza Koyun”a dokunun; köfte tabağı gerçek boyutuyla masanızın üzerinde belirir.",
+      m3dQrHint: "Telefonunuzla okutun, AR'ı masanızda deneyin.",
+      m3dQrAria: "Telefonda açmak için QR kod",
+    },
+    gallery: {
+      docTitle: "Galeri — Küçük Mustafa Köftecisi | Kırklareli",
+      docDesc: "Dükkân, köz ve sofra: Küçük Mustafa Köftecisi'nden kareler.",
+      eyebrow: "Galeri",
+      title: "Közden ve sofradan kareler",
+      lead: "Bir kısmı bizim arşivden, bir kısmı atmosferi anlatmak için seçilmiş temsilî kareler — hangisi hangisi, üzerinde yazıyor.",
+      filterAll: "Tümü",
+      filterPlace: "Mekân",
+      filterEmber: "Közden",
+      filterTable: "Sofra",
+      filterAria: "Galeri filtresi",
+      representative: "Temsilî",
+      disclaimer:
+        "“Temsilî” işaretli kareler atmosferi anlatmak için seçilmiş stok görsellerdir; işletme arşivi fotoğraflarla zamanla zenginleşecektir.",
+      prev: "Önceki görsel",
+      next: "Sonraki görsel",
+      enlarge: (caption) => `Büyüt: ${caption}`,
+    },
+    contact: {
+      docTitle: "İletişim — Küçük Mustafa Köftecisi | 0288 212 76 12",
+      docDesc:
+        "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, Kırklareli. Haftanın 7 günü 09:00–03:00. Telefon: 0288 212 76 12.",
+      eyebrow: "İletişim",
+      title: "Bir telefon kadar yakınız",
+      lead: "Rezervasyon, paket servis ve sorularınız için bizi arayın; telefonun başında hep biri var.",
+      phoneTitle: "Telefon",
+      phoneNote: "Rezervasyon ve paket siparişleri telefonla alınır.",
+      addressTitle: "Adres",
+      hoursTitle: "Çalışma Saatleri",
+      hoursNote: "Gece yarısından sonra da ocak açık; çorba kazanı sabaha kadar iner.",
+      socialTitle: "Sosyal",
+      reviewsWord: "yorum",
+      parkingNote:
+        "Kasaplar Arası, çarşı içindedir; araçla gelenler için en yakın park alanı Şevket Dingiloğlu Parkı çevresidir.",
+      mapTitle: "Harita: Küçük Mustafa Köftecisi konumu",
+    },
+    reservation: {
+      docTitle: "Rezervasyon — Küçük Mustafa Köftecisi | 0288 212 76 12",
+      docDesc:
+        "Masanızı telefonla ayırtın: 0288 212 76 12. Haftanın 7 günü 09:00–03:00, 16 masa 75 sandalye.",
+      eyebrow: "Rezervasyon",
+      title: "Masanız közün karşısında ayrılsın",
+      lead: "Rezervasyonlar telefonla alınır — bir arama, otuz saniye. Aşağıdaki küçük plan, telefonda söyleyeceklerinizi hazırlamanız için.",
+      steps: [
+        {
+          no: "1",
+          title: "Bizi arayın",
+          text: `${restaurant.phone.display} — telefonun başında hep biri var.`,
+        },
+        {
+          no: "2",
+          title: "Gün, saat, kişi sayısı",
+          text: "Söylemeniz yeterli; kalabalık gruplar için bir gün önceden aramanızı öneririz.",
+        },
+        {
+          no: "3",
+          title: "Masanız hazır",
+          text: "Geldiğinizde adınızı söyleyin; közün en güzel gören masalarından biri sizindir.",
+        },
+      ],
+      capacityLine: (tables, chairs, days) =>
+        `${tables} masa · ${chairs} sandalye — ${days}, `,
+      planTitle: "Arama Öncesi Küçük Plan",
+      planText: "Doldurun, özeti telefonda okuyun ya da kopyalayın.",
+      planStrong: "Rezervasyon yalnızca telefonla kesinleşir.",
+      nameLabel: "Ad Soyad",
+      namePlaceholder: "Adınız",
+      dateLabel: "Tarih",
+      timeLabel: "Saat",
+      guestsLabel: "Kişi Sayısı",
+      guestsOption: (n) => `${n} kişi`,
+      guestsMany: "8'den kalabalık",
+      submit: "Özeti Hazırla",
+      callAndTell: "Ara ve İlet",
+      copy: "Özeti Kopyala",
+      copied: "Kopyalandı",
+      pickDate: "Özet için bir tarih seçin.",
+      summary: (name, dateText, time, guests) => {
+        const who = name ? `${name} adına` : "Adıma";
+        const kisi = guests === "8+" ? "8'den fazla kişi" : `${guests} kişi`;
+        return `${who} rezervasyon: ${dateText}, saat ${time}, ${kisi}.`;
+      },
+    },
+    storyPage: {
+      docTitle: "Hikayemiz — Küçük Mustafa Köftecisi | 1935'ten Bugüne",
+      docDesc:
+        "Mustafa Akkul'un 1935'teki seyyar arabasından bugüne: Kayacan ustalar, Ergin Kalınoğlu ve hiç sönmeyen bir köz. Kırklareli'nin köfte hafızası.",
+      eyebrow: "Hikayemiz",
+      title: "Bir közün seksen yılı aşkın nöbeti",
+      captionShop: "Aynı kapı, aynı tabela — Kasaplar Arası",
+      captionUsta: "Köz başında usta",
+      quoteSub: "Kırklareli'nde birçok kişinin ortak cümlesi",
+      closing:
+        "Hikâyenin gerisi sayfalara sığmaz; közün başında anlatılır. Sofrada yeriniz hazır.",
+      ctaPlace: "Mekânı Tanıyın",
+    },
+    placePage: {
+      docTitle: "Mekân — Küçük Mustafa Köftecisi | Kasaplar Arası, Kırklareli",
+      docDesc:
+        "16 masa, 75 sandalye, meşe kömürlü ocak. Şevket Dingiloğlu Parkı karşısında, haftanın 7 günü 09:00–03:00.",
+      eyebrow: "Mekân",
+      title: "Önü bakkaldı, arkası hep köfteci",
+      salonHeading: "On altı masa, yetmiş beş sandalye",
+      tableWord: "Masa",
+      chairWord: "Sandalye",
+      openWord: "Açık",
+      perDay: "/gün",
+      captionSalon: "Yenilenen salonumuz",
+      captionOcak: "Meşe kömürü, döküm ızgara",
+      ocakHeading: "Salonun kalbi arkada atar",
+      orgEyebrow: "Organizasyon",
+      captionOrg: "Toplu yemek için kurulan sofra",
+      servicesEyebrow: "Hizmetler",
+      servicesTitle: "Nasıl isterseniz",
+      seatsLine: (n) => `${n} kişilik salon`,
+      ctaGallery: "Galeriye Bakın",
+    },
+    langBox: { label: "Dil seçin" },
+  },
+  manifesto,
+  story,
+  storyPage,
+  placePage,
+  features,
+  sampleReviews,
+  reviewsDisclaimer,
+  hoursDays: restaurant.hours.days,
+  servicesList: restaurant.services,
+  menuNote: MENU_NOTE,
+  menu: { categories: {}, items: {} },
+  gallery: {},
+};

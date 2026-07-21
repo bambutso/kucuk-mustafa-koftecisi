@@ -1,4 +1,5 @@
 import { Search, X } from "lucide-react";
+import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { cn } from "../../utils/cn";
 
@@ -22,6 +23,7 @@ export function MenuFilterBar({
   onQueryChange,
 }: MenuFilterBarProps) {
   const searching = query.trim().length > 0;
+  const ui = useContent().ui.menuPage;
 
   // Mobilde yapışkan değil: navbar artık sayfayla kaydığı için top-16 boşlukta
   // asılı kalıyordu; en tepeye yapıştırmak ise iOS 26'da cam akışını bozuyor
@@ -32,7 +34,7 @@ export function MenuFilterBar({
       <Container className="flex flex-col gap-0 md:flex-row md:items-center md:justify-between md:gap-8">
         {/* Kategori sekmeleri */}
         <nav
-          aria-label="Menü kategorileri"
+          aria-label={ui.categoriesAria}
           className={cn(
             "no-scrollbar order-2 -mx-5 flex overflow-x-auto px-5 sm:-mx-8 sm:px-8 md:order-1 md:mx-0 md:px-0",
             searching && "pointer-events-none opacity-35",
@@ -65,7 +67,7 @@ export function MenuFilterBar({
         {/* Arama */}
         <div className="order-1 py-3 md:order-2 md:w-64 md:shrink-0 md:py-3">
           <label className="relative block">
-            <span className="sr-only">Menüde ara</span>
+            <span className="sr-only">{ui.searchLabel}</span>
             <Search
               aria-hidden
               className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cream/40"
@@ -74,14 +76,14 @@ export function MenuFilterBar({
               type="search"
               value={query}
               onChange={(event) => onQueryChange(event.target.value)}
-              placeholder="Menüde ara: köfte, piyaz, hardaliye…"
+              placeholder={ui.searchPlaceholder}
               className="h-10 w-full rounded-[2px] border border-earth/40 bg-coffee/60 pl-9 pr-9 font-sans text-sm text-cream placeholder:text-cream/35 transition-colors focus:border-copper focus:outline-none"
             />
             {searching && (
               <button
                 type="button"
                 onClick={() => onQueryChange("")}
-                aria-label="Aramayı temizle"
+                aria-label={ui.clearSearch}
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-cream/50 transition-colors hover:text-ember"
               >
                 <X className="h-4 w-4" />

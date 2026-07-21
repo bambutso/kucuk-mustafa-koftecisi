@@ -1,6 +1,8 @@
 import type { ComponentType } from "react";
 import { Box, ChefHat, Flame, MapPin, Sparkles } from "lucide-react";
 import type { ItemTag, MenuItem } from "../../types/menu";
+import { useContent } from "../../i18n";
+import type { SiteContent } from "../../i18n/types";
 import { Badge, type BadgeProps } from "../../components/ui/Badge";
 import { SpiceIndicator } from "../../components/ui/SpiceIndicator";
 import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
@@ -10,15 +12,15 @@ import { cn } from "../../utils/cn";
 const TAG_META: Record<
   ItemTag,
   {
-    label: string;
+    labelKey: keyof SiteContent["ui"]["menuPage"]["tags"];
     variant: BadgeProps["variant"];
     Icon: ComponentType<{ className?: string }>;
   }
 > = {
-  "sef-onerisi": { label: "Şef Önerisi", variant: "copper", Icon: ChefHat },
-  "cok-tercih": { label: "En Çok Tercih", variant: "ember", Icon: Flame },
-  yeni: { label: "Yeni", variant: "cream", Icon: Sparkles },
-  yoresel: { label: "Yöresel", variant: "earth", Icon: MapPin },
+  "sef-onerisi": { labelKey: "chef", variant: "copper", Icon: ChefHat },
+  "cok-tercih": { labelKey: "popular", variant: "ember", Icon: Flame },
+  yeni: { labelKey: "fresh", variant: "cream", Icon: Sparkles },
+  yoresel: { labelKey: "local", variant: "earth", Icon: MapPin },
 };
 
 interface MenuCardProps {
@@ -28,6 +30,7 @@ interface MenuCardProps {
 }
 
 export function MenuCard({ item, onView3D }: MenuCardProps) {
+  const ui = useContent().ui.menuPage;
   const hasMeta =
     (item.tags && item.tags.length > 0) || item.spice !== undefined;
 
@@ -78,7 +81,7 @@ export function MenuCard({ item, onView3D }: MenuCardProps) {
               return (
                 <Badge key={tag} variant={meta.variant}>
                   <meta.Icon aria-hidden className="h-3 w-3" />
-                  {meta.label}
+                  {ui.tags[meta.labelKey]}
                 </Badge>
               );
             })}
@@ -93,7 +96,7 @@ export function MenuCard({ item, onView3D }: MenuCardProps) {
             className="mt-4 inline-flex w-full items-center justify-center gap-2 border border-copper/50 bg-coal/40 px-4 py-2.5 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-copper transition-all duration-300 hover:border-ember hover:text-ember hover:shadow-[0_0_20px_rgba(217,119,47,0.25)]"
           >
             <Box aria-hidden className="h-4 w-4" />
-            3D Gör · Masanıza Koyun
+            {ui.view3d}
           </button>
         )}
       </div>

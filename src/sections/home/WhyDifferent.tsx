@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 import { Beef, Flame, HandPlatter, Wheat } from "lucide-react";
-import { features } from "../../data/restaurant";
+import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { SectionHeading } from "../../components/ui/SectionHeading";
 import { Reveal } from "../../components/ui/Reveal";
@@ -13,23 +13,22 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 export function WhyDifferent() {
+  const content = useContent();
+  const ui = content.ui.why;
   return (
-    <section
-      className="bg-charcoal py-24 md:py-32"
-      aria-label="Kırklareli köftesi neden farklı"
-    >
+    <section className="bg-charcoal py-24 md:py-32" aria-label={ui.title}>
       <Container>
         <Reveal>
           <SectionHeading
             align="center"
-            eyebrow="Usul"
-            title="Kırklareli köftesi neden farklı?"
-            lead="Dört basit cevap: doğru et, sade harç, sabırlı kor ve hiç değişmeyen bir tabak."
+            eyebrow={ui.eyebrow}
+            title={ui.title}
+            lead={ui.lead}
           />
         </Reveal>
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature, i) => {
+          {content.features.map((feature, i) => {
             const Icon = icons[feature.id] ?? Flame;
             return (
               <Reveal key={feature.id} delay={i * 0.08}>

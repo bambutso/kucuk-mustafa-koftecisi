@@ -1,12 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import {
-  galleryCategories,
-  galleryItems,
-  type GalleryItem,
-} from "../data/gallery";
+import { galleryItems, type GalleryItem } from "../data/gallery";
 import { images } from "../data/restaurant";
+import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
@@ -28,6 +25,8 @@ function Lightbox({
 }) {
   const reduceMotion = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
+  const content = useContent();
+  const ui = content.ui.gallery;
   const item = items[index];
 
   const prev = useCallback(
@@ -70,7 +69,7 @@ function Lightbox({
         <button
           ref={closeRef}
           type="button"
-          aria-label="Kapat"
+          aria-label={content.ui.common.close}
           onClick={onClose}
           className="p-2 text-cream/70 transition-colors hover:text-ember"
         >
@@ -84,7 +83,7 @@ function Lightbox({
       >
         <button
           type="button"
-          aria-label="Önceki görsel"
+          aria-label={ui.prev}
           onClick={prev}
           className="shrink-0 p-2 text-cream/60 transition-colors hover:text-ember"
         >
@@ -103,9 +102,11 @@ function Lightbox({
           />
           <figcaption className="mt-4 flex flex-wrap items-center justify-center gap-3 px-4 text-center">
             <span className="font-display text-lg italic text-cream/85">
-              {item.caption}
+              {content.gallery[item.id]?.caption ?? item.caption}
             </span>
-            {!item.authentic && <Badge variant="cream">Temsilî</Badge>}
+            {!item.authentic && (
+              <Badge variant="cream">{ui.representative}</Badge>
+            )}
           </figcaption>
           <p className="mt-1.5 text-xs text-cream/35">
             {index + 1} / {items.length}
@@ -114,7 +115,7 @@ function Lightbox({
 
         <button
           type="button"
-          aria-label="Sonraki görsel"
+          aria-label={ui.next}
           onClick={next}
           className="shrink-0 p-2 text-cream/60 transition-colors hover:text-ember"
         >
@@ -126,13 +127,19 @@ function Lightbox({
 }
 
 export default function GalleryPage() {
-  usePageMeta(
-    "Galeri — Küçük Mustafa Köftecisi | Kırklareli",
-    "Dükkân, köz ve sofra: Küçük Mustafa Köftecisi'nden kareler.",
-  );
+  const content = useContent();
+  const ui = content.ui.gallery;
+  usePageMeta(ui.docTitle, ui.docDesc);
 
   const [filter, setFilter] = useState<string>("hepsi");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const filterCategories = [
+    { id: "hepsi", label: ui.filterAll },
+    { id: "mekan", label: ui.filterPlace },
+    { id: "koz", label: ui.filterEmber },
+    { id: "sofra", label: ui.filterTable },
+  ];
 
   const visibleItems = useMemo(
     () =>
@@ -145,9 +152,9 @@ export default function GalleryPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Galeri"
-        title="Közden ve sofradan kareler"
-        lead="Bir kısmı bizim arşivden, bir kısmı atmosferi anlatmak için seçilmiş temsilî kareler — hangisi hangisi, üzerinde yazıyor."
+        eyebrow={ui.eyebrow}
+        title={ui.title}
+        lead={ui.lead}
         image={images.skewerSpread}
       />
 
@@ -156,10 +163,10 @@ export default function GalleryPage() {
           {/* Filtre */}
           <div
             role="group"
-            aria-label="Galeri filtresi"
+            aria-label={ui.filterAria}
             className="no-scrollbar -mx-5 flex overflow-x-auto px-5 sm:mx-0 sm:px-0"
           >
-            {galleryCategories.map((category) => {
+            {filterCategories.map((category) => {
               const isActive = filter === category.id;
               return (
                 <button
@@ -201,7 +208,9 @@ export default function GalleryPage() {
                   type="button"
                   onClick={() => setLightboxIndex(i)}
                   className="group relative block w-full overflow-hidden border border-earth/30 text-left transition-colors hover:border-copper/60"
-                  aria-label={`Büyüt: ${item.caption}`}
+                  aria-label={ui.enlarge(
+                    content.gallery[item.id]?.caption ?? item.caption,
+                  )}
                 >
                   <ImageWithFallback
                     src={item.src}
@@ -219,7 +228,7 @@ export default function GalleryPage() {
                   />
                   <span className="absolute bottom-3 left-4 right-4 flex items-center justify-between gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <span className="font-display text-sm italic text-cream">
-                      {item.caption}
+                      {content.gallery[item.id]?.caption ?? item.caption}
                     </span>
                   </span>
                   {!item.authentic && (
@@ -227,7 +236,7 @@ export default function GalleryPage() {
                       variant="cream"
                       className="absolute right-3 top-3 bg-coal/70"
                     >
-                      Temsilî
+                      {ui.representative}
                     </Badge>
                   )}
                 </button>
@@ -236,8 +245,7 @@ export default function GalleryPage() {
           </div>
 
           <p className="mt-8 text-xs leading-relaxed text-cream/40">
-            “Temsilî” işaretli kareler atmosferi anlatmak için seçilmiş stok
-            görsellerdir; işletme arşivi fotoğraflarla zamanla zenginleşecektir.
+            {ui.disclaimer}
           </p>
         </Container>
       </div>

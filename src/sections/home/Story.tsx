@@ -1,18 +1,19 @@
-import { images, story } from "../../data/restaurant";
+import { images } from "../../data/restaurant";
+import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { SectionHeading } from "../../components/ui/SectionHeading";
 import { Reveal } from "../../components/ui/Reveal";
 import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
 
 export function Story() {
+  const content = useContent();
+  const { story } = content;
+  const ui = content.ui.homeStory;
   return (
-    <section className="relative bg-coal py-24 md:py-32" aria-label="Hikâyemiz">
+    <section className="relative bg-coal py-24 md:py-32" aria-label={ui.eyebrow}>
       <Container>
         <Reveal>
-          <SectionHeading
-            eyebrow="Hikâyemiz"
-            title="Bir seyyar arabayla başladı; bir şehrin hatırası oldu."
-          />
+          <SectionHeading eyebrow={ui.eyebrow} title={ui.title} />
         </Reveal>
 
         <div className="mt-16 grid gap-16 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
@@ -51,7 +52,7 @@ export function Story() {
                   className="aspect-[3/2] w-full object-cover"
                 />
                 <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                  Kasaplar Arası'ndaki dükkân
+                  {ui.captionShop}
                 </figcaption>
               </figure>
             </Reveal>
@@ -65,7 +66,7 @@ export function Story() {
                   className="aspect-[3/2] w-full object-cover"
                 />
                 <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                  Köz başında usta
+                  {ui.captionUsta}
                 </figcaption>
               </figure>
             </Reveal>
@@ -79,7 +80,7 @@ export function Story() {
             “{story.pullQuote}”
           </blockquote>
           <p className="mt-4 text-xs uppercase tracking-[0.3em] text-cream/40">
-            Kırklareli'nde birçok kişinin ortak cümlesi
+            {ui.quoteSub}
           </p>
         </Reveal>
       </Container>

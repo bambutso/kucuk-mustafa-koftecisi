@@ -3,18 +3,23 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Clock, Menu as MenuIcon, Phone, X } from "lucide-react";
 import { restaurant } from "../../data/restaurant";
+import { useContent } from "../../i18n";
+import type { SiteContent } from "../../i18n/types";
 import { buttonVariants } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { cn } from "../../utils/cn";
 
 export const NAV_LINKS = [
-  { to: "/", label: "Ana Sayfa" },
-  { to: "/hikayemiz", label: "Hikayemiz" },
-  { to: "/mekan", label: "Mekân" },
-  { to: "/menu", label: "Menü" },
-  { to: "/galeri", label: "Galeri" },
-  { to: "/iletisim", label: "İletişim" },
-] as const;
+  { to: "/", key: "home" },
+  { to: "/hikayemiz", key: "story" },
+  { to: "/mekan", key: "place" },
+  { to: "/menu", key: "menu" },
+  { to: "/galeri", key: "gallery" },
+  { to: "/iletisim", key: "contact" },
+] as const satisfies ReadonlyArray<{
+  to: string;
+  key: keyof SiteContent["ui"]["nav"];
+}>;
 
 function NavItem({ to, children }: { to: string; children: ReactNode }) {
   return (
@@ -59,6 +64,8 @@ function Brand() {
 /** Tam ekran mobil menü çekmecesi */
 function MobileDrawer({ onClose }: { onClose: () => void }) {
   const reduceMotion = useReducedMotion();
+  const content = useContent();
+  const ui = content.ui;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -76,7 +83,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
     <motion.div
       role="dialog"
       aria-modal="true"
-      aria-label="Gezinme menüsü"
+      aria-label={ui.nav.mobileNav}
       className="fixed inset-0 z-[60] flex flex-col bg-coal pt-[env(safe-area-inset-top)]"
       initial={reduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -88,7 +95,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
         <button
           type="button"
           onClick={onClose}
-          aria-label="Menüyü kapat"
+          aria-label={ui.nav.closeMenu}
           className="p-2 text-cream/70 transition-colors hover:text-ember"
         >
           <X className="h-6 w-6" />
@@ -96,7 +103,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
       </Container>
 
       <nav
-        aria-label="Mobil gezinme"
+        aria-label={ui.nav.mobileNav}
         className="flex flex-1 flex-col justify-center px-8"
       >
         {NAV_LINKS.map((link, i) => (
@@ -117,7 +124,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
                 )
               }
             >
-              {link.label}
+              {ui.nav[link.key]}
             </NavLink>
           </motion.div>
         ))}
@@ -129,7 +136,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           className={cn(buttonVariants({ size: "lg" }), "w-full")}
         >
-          Rezervasyon
+          {ui.nav.reservation}
         </Link>
         <a
           href={restaurant.phone.href}
@@ -143,7 +150,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
         </a>
         <p className="mt-5 flex items-center justify-center gap-2 text-xs text-cream/45">
           <Clock aria-hidden className="h-3.5 w-3.5" />
-          {restaurant.hours.days} · {restaurant.hours.open} –{" "}
+          {content.hoursDays} · {restaurant.hours.open} –{" "}
           {restaurant.hours.close}
         </p>
       </div>
@@ -156,6 +163,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const location = useLocation();
+  const { ui } = useContent();
 
   useEffect(() => {
     // Eşik, çubuğun tamamen görünümden çıktığı nokta: absolute → fixed geçişi
@@ -199,12 +207,12 @@ export function Navbar() {
 
           {/* Masaüstü */}
           <nav
-            aria-label="Ana gezinme"
+            aria-label={ui.nav.mainNav}
             className="hidden items-center lg:flex"
           >
             {NAV_LINKS.map((link) => (
               <NavItem key={link.to} to={link.to}>
-                {link.label}
+                {ui.nav[link.key]}
               </NavItem>
             ))}
             <a
@@ -224,7 +232,7 @@ export function Navbar() {
               to="/rezervasyon"
               className={cn(buttonVariants({ size: "sm" }), "ml-2")}
             >
-              Rezervasyon
+              {ui.nav.reservation}
             </Link>
           </nav>
 
@@ -240,7 +248,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
-              aria-label="Menüyü aç"
+              aria-label={ui.nav.openMenu}
               aria-expanded={drawerOpen}
               className="p-2 text-cream/80 transition-colors hover:text-ember"
             >

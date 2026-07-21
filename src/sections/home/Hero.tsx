@@ -7,8 +7,9 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { ChevronDown, Phone } from "lucide-react";
+import { ChevronDown, ExternalLink, Phone, Star } from "lucide-react";
 import { igImages, restaurant } from "../../data/restaurant";
+import { useContent } from "../../i18n";
 import { buttonVariants } from "../../components/ui/Button";
 import { Stamp } from "../../components/ui/Stamp";
 import { cn } from "../../utils/cn";
@@ -30,6 +31,7 @@ const item: Variants = {
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const { ui } = useContent();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -79,7 +81,7 @@ export function Hero() {
           className="mt-6 font-display text-6xl font-semibold leading-[0.95] text-cream sm:text-7xl md:text-8xl"
         >
           <span className="sr-only">{restaurant.name} — </span>
-          1939'dan Beri
+          {ui.hero.title}
         </motion.h1>
 
         <motion.div variants={item} className="mx-auto mt-8 w-44">
@@ -90,7 +92,7 @@ export function Hero() {
           variants={item}
           className="mx-auto mt-8 max-w-md font-display text-xl italic leading-snug text-cream/80 sm:text-2xl"
         >
-          Meşe kömürünün korunda, dört kuşaktır aynı köfte.
+          {ui.hero.tagline}
         </motion.p>
 
         <motion.div
@@ -98,7 +100,7 @@ export function Hero() {
           className="mt-11 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Link to="/menu" className={cn(buttonVariants({ size: "lg" }), "w-56 sm:w-auto")}>
-            Menüyü İncele
+            {ui.hero.ctaMenu}
           </Link>
           <a
             href={restaurant.phone.href}
@@ -108,7 +110,38 @@ export function Hero() {
             )}
           >
             <Phone aria-hidden className="h-4 w-4" />
-            Bizi Ara
+            {ui.common.callUs}
+          </a>
+        </motion.div>
+
+        {/* Yorum kanalları: Google işletme kartı + TripAdvisor sayfası */}
+        <motion.div
+          variants={item}
+          className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row"
+        >
+          <a
+            href={restaurant.reviewLinks.google}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "w-56 border-cream/25 text-cream/80 hover:border-copper sm:w-auto",
+            )}
+          >
+            <Star aria-hidden className="h-3.5 w-3.5" />
+            {ui.hero.reviewGoogle}
+          </a>
+          <a
+            href={restaurant.reviewLinks.tripadvisor}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "w-56 border-cream/25 text-cream/80 hover:border-copper sm:w-auto",
+            )}
+          >
+            <ExternalLink aria-hidden className="h-3.5 w-3.5" />
+            {ui.hero.reviewTripadvisor}
           </a>
         </motion.div>
       </motion.div>

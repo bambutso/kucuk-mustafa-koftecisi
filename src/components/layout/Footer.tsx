@@ -8,18 +8,23 @@ import {
   Phone,
 } from "lucide-react";
 import { restaurant } from "../../data/restaurant";
+import { useContent } from "../../i18n";
+import type { SiteContent } from "../../i18n/types";
 import { Container } from "../ui/Container";
 import { Stamp } from "../ui/Stamp";
 
 const FOOTER_LINKS = [
-  { to: "/", label: "Ana Sayfa" },
-  { to: "/hikayemiz", label: "Hikayemiz" },
-  { to: "/mekan", label: "Mekân" },
-  { to: "/menu", label: "Menü" },
-  { to: "/galeri", label: "Galeri" },
-  { to: "/iletisim", label: "İletişim" },
-  { to: "/rezervasyon", label: "Rezervasyon" },
-] as const;
+  { to: "/", key: "home" },
+  { to: "/hikayemiz", key: "story" },
+  { to: "/mekan", key: "place" },
+  { to: "/menu", key: "menu" },
+  { to: "/galeri", key: "gallery" },
+  { to: "/iletisim", key: "contact" },
+  { to: "/rezervasyon", key: "reservation" },
+] as const satisfies ReadonlyArray<{
+  to: string;
+  key: keyof SiteContent["ui"]["nav"];
+}>;
 
 function ColumnTitle({ children }: { children: string }) {
   return <h3 className="eyebrow mb-5">{children}</h3>;
@@ -27,6 +32,8 @@ function ColumnTitle({ children }: { children: string }) {
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const content = useContent();
+  const ui = content.ui;
 
   return (
     <footer className="relative bg-coal">
@@ -69,7 +76,7 @@ export function Footer() {
 
           {/* Adres */}
           <div>
-            <ColumnTitle>Adres</ColumnTitle>
+            <ColumnTitle>{ui.footer.addressTitle}</ColumnTitle>
             <address className="not-italic">
               <p className="flex gap-2.5 text-sm leading-relaxed text-cream/70">
                 <MapPin aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
@@ -98,11 +105,11 @@ export function Footer() {
 
           {/* Saatler */}
           <div>
-            <ColumnTitle>Çalışma Saatleri</ColumnTitle>
+            <ColumnTitle>{ui.footer.hoursTitle}</ColumnTitle>
             <p className="flex gap-2.5 text-sm leading-relaxed text-cream/70">
               <Clock aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
               <span>
-                <span className="block">{restaurant.hours.days}</span>
+                <span className="block">{content.hoursDays}</span>
                 <span className="block font-semibold text-cream">
                   {restaurant.hours.open} – {restaurant.hours.close}
                 </span>
@@ -111,17 +118,19 @@ export function Footer() {
             <p className="mt-4 flex gap-2.5 text-sm leading-relaxed text-cream/70">
               <Armchair aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
               <span>
-                {restaurant.capacity.tables} masa ·{" "}
-                {restaurant.capacity.seats} sandalye
+                {ui.footer.tablesChairs(
+                  restaurant.capacity.tables,
+                  restaurant.capacity.seats,
+                )}
               </span>
             </p>
           </div>
 
           {/* Hizmetler */}
           <div>
-            <ColumnTitle>Hizmetler</ColumnTitle>
+            <ColumnTitle>{ui.footer.servicesTitle}</ColumnTitle>
             <ul className="space-y-2.5">
-              {restaurant.services.map((service) => (
+              {content.servicesList.map((service) => (
                 <li
                   key={service}
                   className="flex items-center gap-2.5 text-sm text-cream/70"
@@ -135,7 +144,7 @@ export function Footer() {
               to="/rezervasyon"
               className="mt-6 inline-block font-sans text-sm font-semibold text-copper transition-colors hover:text-ember"
             >
-              Rezervasyon →
+              {ui.nav.reservation} →
             </Link>
           </div>
         </div>
@@ -145,7 +154,7 @@ export function Footer() {
       <div className="border-t border-cream/10 py-5">
         <Container>
           <nav
-            aria-label="Alt gezinme"
+            aria-label={ui.nav.footerNav}
             className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
           >
             {FOOTER_LINKS.map((link) => (
@@ -154,7 +163,7 @@ export function Footer() {
                 to={link.to}
                 className="font-sans text-xs text-cream/50 transition-colors hover:text-ember"
               >
-                {link.label}
+                {ui.nav[link.key]}
               </Link>
             ))}
           </nav>
@@ -168,13 +177,13 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-5">
             <p className="font-display text-sm italic text-cream/50">
-              1939'dan beri, aynı közde.
+              {ui.footer.tagline}
             </p>
             <Link
               to="/yonetim"
               className="text-[0.65rem] uppercase tracking-[0.15em] text-cream/25 transition-colors hover:text-cream/60"
             >
-              Yönetim
+              {ui.nav.admin}
             </Link>
           </div>
         </Container>

@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import type { MenuItem } from "../types/menu";
-import { useMenu } from "../store/menuStore";
+import { useLocalizedMenu } from "../i18n/useLocalizedMenu";
+import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { useMediaQuery } from "../hooks/useMediaQuery";
@@ -16,12 +17,10 @@ import { Container } from "../components/ui/Container";
 import { Button } from "../components/ui/Button";
 
 export default function MenuPage() {
-  usePageMeta(
-    "Menü — Küçük Mustafa Köftecisi | Kırklareli",
-    "Kırklareli köftesi, ızgaralar, çorbalar, yöresel lezzetler ve tatlılar. Meşe kömürünün korunda, 1939'dan beri.",
-  );
+  const ui = useContent().ui.menuPage;
+  usePageMeta(ui.docTitle, ui.docDesc);
 
-  const { categories } = useMenu();
+  const { categories } = useLocalizedMenu();
   const categoryIds = useMemo(
     () => categories.map((category) => category.id),
     [categories],
@@ -110,7 +109,7 @@ export default function MenuPage() {
           results.length > 0 ? (
             <>
               <p className="mt-6 text-sm text-cream/50" role="status">
-                {results.length} sonuç bulundu
+                {ui.resultsFound(results.length)}
               </p>
               <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {results.map((item) => (
@@ -121,19 +120,16 @@ export default function MenuPage() {
           ) : (
             <div className="py-24 text-center" role="status">
               <p className="font-display text-3xl italic text-cream/70">
-                Aradığınızı közde bulamadık.
+                {ui.noResultsTitle}
               </p>
-              <p className="mt-3 text-sm text-cream/45">
-                Farklı bir kelimeyle deneyin — ör. “köfte”, “piyaz”,
-                “hardaliye”.
-              </p>
+              <p className="mt-3 text-sm text-cream/45">{ui.noResultsHint}</p>
               <Button
                 variant="outline"
                 size="sm"
                 className="mt-8"
                 onClick={() => setQuery("")}
               >
-                Aramayı temizle
+                {ui.clearSearch}
               </Button>
             </div>
           )

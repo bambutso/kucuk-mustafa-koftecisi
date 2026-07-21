@@ -139,6 +139,13 @@ export const restaurant = {
     tripadvisor:
       "https://www.tripadvisor.com.tr/Restaurant_Review-g3252637-d10962098-Reviews-Kucuk_Mustafa_Koftecisi-Kirklareli_Kirklareli_Province.html",
   },
+  /** Yorum kanalları — Google linki, işletme kartını ve "Yorum yazın" akışını açan kalıcı arama */
+  reviewLinks: {
+    google:
+      "https://www.google.com/search?q=K%C3%BC%C3%A7%C3%BCk+Mustafa+K%C3%B6ftecisi+K%C4%B1rklareli+Yorumlar",
+    tripadvisor:
+      "https://www.tripadvisor.com.tr/Restaurant_Review-g3252637-d10962098-Reviews-Kucuk_Mustafa_Koftecisi-Kirklareli_Kirklareli_Province.html",
+  },
   /** TripAdvisor'dan alınan gerçek veriler */
   rating: {
     score: 4.4,

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { images, story, storyPage } from "../data/restaurant";
+import { images } from "../data/restaurant";
+import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
@@ -10,34 +11,34 @@ import { Stamp } from "../components/ui/Stamp";
 import { buttonVariants } from "../components/ui/Button";
 import { cn } from "../utils/cn";
 
-/** Bölüm aralarına serpiştirilen gerçek kareler */
-const chapterFigures: Record<
-  string,
-  { src: string; alt: string; caption: string } | undefined
-> = {
-  "1939": {
-    src: images.storefront,
-    alt: "Küçük Mustafa Köftecisi'nin 1939 tabelalı dükkân cephesi",
-    caption: "Aynı kapı, aynı tabela — Kasaplar Arası",
-  },
-  bugun: {
-    src: images.ustaGrill,
-    alt: "Usta, meşe kömürünün korunda köfteleri pişirirken",
-    caption: "Köz başında usta",
-  },
-};
-
 export default function StoryPage() {
-  usePageMeta(
-    "Hikayemiz — Küçük Mustafa Köftecisi | 1935'ten Bugüne",
-    "Mustafa Akkul'un 1935'teki seyyar arabasından bugüne: Kayacan ustalar, Ergin Kalınoğlu ve hiç sönmeyen bir köz. Kırklareli'nin köfte hafızası.",
-  );
+  const content = useContent();
+  const ui = content.ui.storyPage;
+  const { storyPage, story } = content;
+  usePageMeta(ui.docTitle, ui.docDesc);
+
+  /** Bölüm aralarına serpiştirilen gerçek kareler */
+  const chapterFigures: Record<
+    string,
+    { src: string; alt: string; caption: string } | undefined
+  > = {
+    "1939": {
+      src: images.storefront,
+      alt: ui.captionShop,
+      caption: ui.captionShop,
+    },
+    bugun: {
+      src: images.ustaGrill,
+      alt: ui.captionUsta,
+      caption: ui.captionUsta,
+    },
+  };
 
   return (
     <>
       <PageHeader
-        eyebrow="Hikayemiz"
-        title="Bir közün seksen yılı aşkın nöbeti"
+        eyebrow={ui.eyebrow}
+        title={ui.title}
         lead={storyPage.lead}
         image={images.heroFire}
       />
@@ -107,21 +108,20 @@ export default function StoryPage() {
               “{story.pullQuote}”
             </blockquote>
             <p className="mt-4 text-xs uppercase tracking-[0.3em] text-cream/40">
-              Kırklareli'nde birçok kişinin ortak cümlesi
+              {ui.quoteSub}
             </p>
             <p className="mx-auto mt-10 max-w-xl text-base leading-relaxed text-cream/65">
-              Hikâyenin gerisi sayfalara sığmaz; közün başında anlatılır.
-              Sofrada yeriniz hazır.
+              {ui.closing}
             </p>
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
               <Link to="/rezervasyon" className={buttonVariants({})}>
-                Rezervasyon Yap
+                {content.ui.common.reserve}
               </Link>
               <Link
                 to="/mekan"
                 className={cn(buttonVariants({ variant: "outline" }))}
               >
-                Mekânı Tanıyın
+                {ui.ctaPlace}
                 <ArrowRight aria-hidden className="h-4 w-4" />
               </Link>
             </div>

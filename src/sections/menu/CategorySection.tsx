@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { MenuCategory, MenuItem } from "../../types/menu";
+import { useContent } from "../../i18n";
 import { MenuCard } from "./MenuCard";
 import { cn } from "../../utils/cn";
 
@@ -21,6 +22,7 @@ export function CategorySection({
   onView3D,
 }: CategorySectionProps) {
   const reduceMotion = useReducedMotion();
+  const ui = useContent().ui.menuPage;
   const expanded = !collapsible || open;
   const panelId = `panel-${category.id}`;
   const headingId = `heading-${category.id}`;
@@ -40,7 +42,7 @@ export function CategorySection({
       </div>
       <div className="flex items-center gap-3 pb-1">
         <span className="text-xs uppercase tracking-[0.2em] text-cream/35">
-          {category.items.length} ürün
+          {ui.itemsCount(category.items.length)}
         </span>
         {collapsible && (
           <ChevronDown

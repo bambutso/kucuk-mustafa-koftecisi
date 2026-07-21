@@ -10,7 +10,8 @@ import {
   Store,
   Wine,
 } from "lucide-react";
-import { igImages, images, placePage, restaurant } from "../data/restaurant";
+import { igImages, images, restaurant } from "../data/restaurant";
+import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
@@ -28,16 +29,16 @@ const serviceIcons: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 export default function PlacePage() {
-  usePageMeta(
-    "Mekân — Küçük Mustafa Köftecisi | Kasaplar Arası, Kırklareli",
-    "16 masa, 75 sandalye, meşe kömürlü ocak. Şevket Dingiloğlu Parkı karşısında, haftanın 7 günü 09:00–03:00.",
-  );
+  const content = useContent();
+  const ui = content.ui.placePage;
+  const { placePage } = content;
+  usePageMeta(ui.docTitle, ui.docDesc);
 
   return (
     <>
       <PageHeader
-        eyebrow="Mekân"
-        title="Önü bakkaldı, arkası hep köfteci"
+        eyebrow={ui.eyebrow}
+        title={ui.title}
         lead={placePage.lead}
         image={images.storefront}
       />
@@ -48,13 +49,13 @@ export default function PlacePage() {
           <Reveal>
             <SectionHeading
               eyebrow={placePage.salon.title}
-              title="On altı masa, yetmiş beş sandalye"
+              title={ui.salonHeading}
               lead={placePage.salon.text}
             />
             <dl className="mt-8 flex gap-10">
               <div>
                 <dt className="text-xs uppercase tracking-[0.2em] text-cream/45">
-                  Masa
+                  {ui.tableWord}
                 </dt>
                 <dd className="mt-1 font-display text-4xl font-semibold text-copper">
                   {restaurant.capacity.tables}
@@ -62,7 +63,7 @@ export default function PlacePage() {
               </div>
               <div>
                 <dt className="text-xs uppercase tracking-[0.2em] text-cream/45">
-                  Sandalye
+                  {ui.chairWord}
                 </dt>
                 <dd className="mt-1 font-display text-4xl font-semibold text-copper">
                   {restaurant.capacity.seats}
@@ -70,10 +71,10 @@ export default function PlacePage() {
               </div>
               <div>
                 <dt className="text-xs uppercase tracking-[0.2em] text-cream/45">
-                  Açık
+                  {ui.openWord}
                 </dt>
                 <dd className="mt-1 font-display text-4xl font-semibold text-copper">
-                  7<span className="text-xl">/gün</span>
+                  7<span className="text-xl">{ui.perDay}</span>
                 </dd>
               </div>
             </dl>
@@ -88,7 +89,7 @@ export default function PlacePage() {
                 className="aspect-[3/2] w-full object-cover"
               />
               <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                Yenilenen salonumuz
+                {ui.captionSalon}
               </figcaption>
             </figure>
           </Reveal>
@@ -107,7 +108,7 @@ export default function PlacePage() {
                 className="aspect-[3/2] w-full object-cover"
               />
               <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                Meşe kömürü, döküm ızgara
+                {ui.captionOcak}
               </figcaption>
             </figure>
           </Reveal>
@@ -117,7 +118,7 @@ export default function PlacePage() {
               {placePage.ocak.title}
             </p>
             <h2 className="mt-4 font-display text-4xl font-semibold leading-[1.05] text-cream md:text-5xl">
-              Salonun kalbi arkada atar
+              {ui.ocakHeading}
             </h2>
             <p className="mt-5 text-base leading-relaxed text-cream/65 md:text-lg">
               {placePage.ocak.text}
@@ -131,13 +132,13 @@ export default function PlacePage() {
         <Container className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <SectionHeading
-              eyebrow="Organizasyon"
+              eyebrow={ui.orgEyebrow}
               title={placePage.organizasyon.title}
               lead={placePage.organizasyon.text}
             />
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Link to="/rezervasyon" className={buttonVariants({})}>
-                Rezervasyon Yap
+                {content.ui.common.reserve}
               </Link>
               <a
                 href={restaurant.phone.href}
@@ -157,7 +158,7 @@ export default function PlacePage() {
                 className="aspect-[3/2] w-full object-cover"
               />
               <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                Toplu yemek için kurulan sofra
+                {ui.captionOrg}
               </figcaption>
             </figure>
           </Reveal>
@@ -170,8 +171,8 @@ export default function PlacePage() {
           <Reveal>
             <SectionHeading
               align="center"
-              eyebrow="Hizmetler"
-              title="Nasıl isterseniz"
+              eyebrow={ui.servicesEyebrow}
+              title={ui.servicesTitle}
             />
           </Reveal>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -213,18 +214,18 @@ export default function PlacePage() {
               </span>
               <span className="inline-flex items-center gap-2">
                 <Armchair aria-hidden className="h-4 w-4 text-copper" />
-                {restaurant.capacity.seats} kişilik salon
+                {ui.seatsLine(restaurant.capacity.seats)}
               </span>
             </div>
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
               <Link to="/rezervasyon" className={buttonVariants({})}>
-                Rezervasyon Yap
+                {content.ui.common.reserve}
               </Link>
               <Link
                 to="/galeri"
                 className={cn(buttonVariants({ variant: "outline" }))}
               >
-                Galeriye Bakın
+                {ui.ctaGallery}
               </Link>
             </div>
           </Reveal>
