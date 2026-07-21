@@ -172,7 +172,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
         </aside>
 
         {/* Durum + araç çubuğu */}
-        <div className="sticky top-16 z-40 -mx-5 mt-8 border-y border-cream/10 bg-charcoal/95 px-5 py-3 backdrop-blur-md sm:-mx-8 sm:px-8 md:top-20">
+        <div className="z-40 -mx-5 mt-8 border-y border-cream/10 bg-charcoal/95 px-5 py-3 backdrop-blur-md sm:-mx-8 sm:px-8 lg:sticky lg:top-20">
           <div className="flex flex-wrap items-center gap-2">
             <Button type="button" size="sm" onClick={handleSave} disabled={!dirty}>
               <Save aria-hidden className="h-3.5 w-3.5" />

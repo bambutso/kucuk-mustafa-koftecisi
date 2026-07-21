@@ -23,8 +23,12 @@ export function MenuFilterBar({
 }: MenuFilterBarProps) {
   const searching = query.trim().length > 0;
 
+  // Mobilde yapışkan değil: navbar artık sayfayla kaydığı için top-16 boşlukta
+  // asılı kalıyordu; en tepeye yapıştırmak ise iOS 26'da cam akışını bozuyor
+  // (Safari sticky elemanları da örnekliyor). lg+ ekranda navbar fixed olduğundan
+  // eski yapışkan davranış korunur.
   return (
-    <div className="sticky top-16 z-40 border-b border-cream/10 bg-charcoal/95 backdrop-blur-md md:top-20">
+    <div className="z-40 border-b border-cream/10 bg-charcoal/95 backdrop-blur-md lg:sticky lg:top-20">
       <Container className="flex flex-col gap-0 md:flex-row md:items-center md:justify-between md:gap-8">
         {/* Kategori sekmeleri */}
         <nav
