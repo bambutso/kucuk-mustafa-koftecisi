@@ -30,13 +30,19 @@ export const LANGS = ["tr", "en", "bg", "el", "ar", "es", "ja"];
 export const ROUTES = [
   {
     path: "",
+    heading: "Küçük Mustafa Köftecisi — Kırklareli Köftesi — 1939'dan Beri",
+    intro:
+      "Dana etine Kırklareli'nin coğrafi işaretli Kıvırcık kuzusu katılır; kuru soğan ve bayat ekmekle yoğrulur, meşe kömürünün korunda mühürlenir. Baharat azdır — damakta kalan et olsun diye. Yanında piyazlık soğan, közlenmiş yeşil biber ve ev yapımı acı sos.",
     priority: "1.0",
-    title: "Küçük Mustafa Köftecisi — 1939'dan Beri | Kırklareli",
+    title: "Küçük Mustafa Köftecisi — Kırklareli Köftesi, 1939'dan Beri",
     description:
       "1939'dan günümüze yaşayan efsane. Meşe kömürünün korunda, dört kuşaktır aynı usulle pişen Kırklareli köftesi.",
   },
   {
     path: "menu/",
+    heading: "Menü",
+    intro:
+      "Közden gelen ne varsa; çorbasından tatlısına, Trakya usulü. İmza köfteler, ızgaralar, mezeler, salatalar, tatlılar ve içecekler.",
     priority: "0.9",
     title: "Menü — Küçük Mustafa Köftecisi",
     description:
@@ -44,6 +50,9 @@ export const ROUTES = [
   },
   {
     path: "hikayemiz/",
+    heading: "Hikayemiz",
+    intro:
+      "1935'te Arasta Çarşısı'nın önündeki bir seyyar arabayla başladı; 1939'da Kasaplar Arası'ndaki dükkâna taşındı. Dört kuşaktır aynı ocak, aynı harç.",
     priority: "0.8",
     title: "Hikayemiz — Küçük Mustafa Köftecisi",
     description:
@@ -51,19 +60,28 @@ export const ROUTES = [
   },
   {
     path: "mekan/",
+    heading: "Mekân",
+    intro:
+      "Şevket Dingiloğlu Parkı'nın karşısında, Kasaplar Arası'nda; önü bir zamanlar bakkal, arkası hep köfteci olan dükkân.",
     priority: "0.8",
     title: "Mekân — Küçük Mustafa Köftecisi",
     description:
-      "Kasaplar Arası'nda 16 masa, 75 kişilik salon. Özel organizasyon ve toplu yemek için rezervasyon.",
+      "Kasaplar Arası'nda ahşap salon ve meşe kömürlü ocak. Özel organizasyon ve toplu yemek için rezervasyon.",
   },
   {
     path: "galeri/",
+    heading: "Galeri",
+    intro:
+      "Dükkân, köz ve sofra: Küçük Mustafa Köftecisi'nden gerçek kareler.",
     priority: "0.7",
     title: "Galeri — Küçük Mustafa Köftecisi",
     description: "Közden ve sofradan kareler: köfte, salon ve ocak başı.",
   },
   {
     path: "iletisim/",
+    heading: "İletişim",
+    intro:
+      "Karacaibrahim Mahallesi, Şükrü Naili Geçidi No:1, Kasaplar Arası, Merkez / Kırklareli. Telefon: 0288 212 76 12. Haftanın 7 günü 10:00–02:00.",
     priority: "0.7",
     title: "İletişim — Küçük Mustafa Köftecisi",
     description:
@@ -71,6 +89,9 @@ export const ROUTES = [
   },
   {
     path: "rezervasyon/",
+    heading: "Rezervasyon",
+    intro:
+      "Rezervasyonlar telefonla alınır: 0288 212 76 12. Haftanın 7 günü 10:00–02:00.",
     priority: "0.7",
     title: "Rezervasyon — Küçük Mustafa Köftecisi",
     description:

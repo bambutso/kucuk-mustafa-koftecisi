@@ -98,6 +98,8 @@ export interface SiteContent {
     home: { docTitle: string; docDesc: string };
     hero: {
       title: string;
+      /** H1'de markadan sonra okunan, ne sattığımızı söyleyen kısım */
+      srSuffix: string;
       tagline: string;
       ctaMenu: string;
       reviewGoogle: string;

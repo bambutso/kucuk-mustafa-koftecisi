@@ -33,6 +33,7 @@ export const ja: SiteContent = {
     },
     hero: {
       title: "1939年から",
+      srSuffix: "クルクラーレリのköfte",
       tagline: "樫炭のおき火の上で、四代にわたり変わらない köfte。",
       ctaMenu: "メニューを見る",
       reviewGoogle: "Google にレビューを書く",

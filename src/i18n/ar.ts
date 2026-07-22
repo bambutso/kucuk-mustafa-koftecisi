@@ -33,6 +33,7 @@ export const ar: SiteContent = {
     },
     hero: {
       title: "منذ عام 1939",
+      srSuffix: "كفتة كِركلاريلي",
       tagline: "على جمر فحم البلوط، الكفتة نفسها منذ أربعة أجيال.",
       ctaMenu: "تصفّح القائمة",
       reviewGoogle: "قيّمنا على Google",

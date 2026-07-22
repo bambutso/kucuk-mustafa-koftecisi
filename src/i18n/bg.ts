@@ -33,6 +33,7 @@ export const bg: SiteContent = {
     },
     hero: {
       title: "От 1939 година",
+      srSuffix: "Кюфте от Къркларели",
       tagline: "Върху жарава от дъбови въглища — едно и също кюфте от четири поколения.",
       ctaMenu: "Разгледай менюто",
       reviewGoogle: "Отзив в Google",

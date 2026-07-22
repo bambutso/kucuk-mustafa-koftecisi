@@ -33,6 +33,7 @@ export const en: SiteContent = {
     },
     hero: {
       title: "Since 1939",
+      srSuffix: "Kırklareli Köfte",
       tagline: "Over oak-charcoal embers, the same köfte for four generations.",
       ctaMenu: "See the Menu",
       reviewGoogle: "Review on Google",

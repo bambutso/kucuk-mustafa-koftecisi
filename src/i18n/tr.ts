@@ -46,6 +46,7 @@ export const tr: SiteContent = {
     },
     hero: {
       title: "1939'dan Beri",
+      srSuffix: "Kırklareli Köftesi",
       tagline: "Meşe kömürünün korunda, dört kuşaktır aynı köfte.",
       ctaMenu: "Menüyü İncele",
       reviewGoogle: "Google'da Yorum Yap",

@@ -33,6 +33,7 @@ export const el: SiteContent = {
     },
     hero: {
       title: "Από το 1939",
+      srSuffix: "Κεφτές Κιρκλαρελί",
       tagline: "Στη θράκα του κάρβουνου βελανιδιάς, ο ίδιος κεφτές εδώ και τέσσερις γενιές.",
       ctaMenu: "Δείτε το Μενού",
       reviewGoogle: "Κριτική στο Google",

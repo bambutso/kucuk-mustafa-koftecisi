@@ -33,6 +33,7 @@ export const es: SiteContent = {
     },
     hero: {
       title: "Desde 1939",
+      srSuffix: "Köfte de Kırklareli",
       tagline: "Sobre las brasas de carbón de roble, la misma köfte desde hace cuatro generaciones.",
       ctaMenu: "Ver el Menú",
       reviewGoogle: "Opinar en Google",

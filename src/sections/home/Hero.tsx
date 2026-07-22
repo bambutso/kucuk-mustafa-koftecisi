@@ -86,7 +86,13 @@ export function Hero() {
           variants={item}
           className="mt-6 font-display text-6xl font-semibold leading-[0.95] text-cream sm:text-7xl md:text-8xl"
         >
-          <span className="sr-only">{restaurant.name} — </span>
+          {/* Görsel tasarım yalnızca "1939'dan Beri" gösterir; H1'in tamamı
+              marka + ne sattığımız olsun diye baş kısım ekran okuyucuya ve
+              arama motoruna açık, gözle görünmez biçimde eklenir. Ön-render
+              edilen HTML'deki başlıkla (scripts/site.mjs) aynı metindir. */}
+          <span className="sr-only">
+            {restaurant.name} — {ui.hero.srSuffix} —{" "}
+          </span>
           {ui.hero.title}
         </motion.h1>
 
