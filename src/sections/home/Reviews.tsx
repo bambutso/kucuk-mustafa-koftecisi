@@ -1,5 +1,9 @@
 import { Award, ExternalLink, PenLine, Star } from "lucide-react";
-import { googleReviews, restaurant } from "../../data/restaurant";
+import {
+  googleReviews,
+  restaurant,
+  tripadvisorReviews,
+} from "../../data/restaurant";
 import { useContent, useLang } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { Reveal } from "../../components/ui/Reveal";
@@ -161,21 +165,29 @@ export function Reviews() {
           </div>
         </Reveal>
 
-        {/* Temsilî yorum kartları */}
+        {/* TripAdvisor'daki gerçek yorumlar */}
         <div>
           <div className="grid gap-5 sm:grid-cols-1">
-            {content.sampleReviews.map((review, i) => (
-              <Reveal key={review.context} delay={i * 0.1}>
-                <figure className="border-l-2 border-copper/60 bg-coffee/60 p-6 transition-colors duration-300 hover:bg-coffee">
-                  <blockquote className="font-display text-xl italic leading-snug text-cream/90">
-                    “{review.quote}”
-                  </blockquote>
-                  <figcaption className="mt-3 text-[0.65rem] uppercase tracking-[0.25em] text-cream/40">
-                    {review.context}
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
+            {tripadvisorReviews.map((review, i) => {
+              const text = content.tripadvisorReviews[review.id];
+              return (
+                <Reveal key={review.id} delay={i * 0.1}>
+                  <figure className="border-l-2 border-copper/60 bg-coffee/60 p-6 transition-colors duration-300 hover:bg-coffee">
+                    <blockquote className="font-display text-xl italic leading-snug text-cream/90">
+                      “{text?.quote}”
+                    </blockquote>
+                    <figcaption className="mt-3 flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.25em] text-cream/40">
+                      {text?.title}
+                      <Stars
+                        score={review.stars}
+                        outOf={rating.outOf}
+                        ariaLabel={ui.starsAria(review.stars, rating.outOf)}
+                      />
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              );
+            })}
           </div>
           {/* Google'daki gerçek müşteri yorumları */}
           <Reveal delay={0.25}>
@@ -210,11 +222,6 @@ export function Reviews() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.3}>
-            <p className="mt-6 text-xs leading-relaxed text-cream/40">
-              {content.reviewsDisclaimer}
-            </p>
-          </Reveal>
         </div>
       </Container>
     </section>

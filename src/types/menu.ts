@@ -19,8 +19,12 @@ export interface MenuItem {
   id: string;
   name: string;
   description: string;
-  /** TL cinsinden fiyat */
-  price: number;
+  /**
+   * TL cinsinden fiyat. Tanımsız bırakılabilir: işletmenin basılı menüsünde
+   * fiyatı bulunmayan kalemlerde (alkollü içecekler gibi) kart "fiyat için
+   * sorunuz" gösterir — uydurma fiyat yazmak yerine.
+   */
+  price?: number;
   /** Gramaj / adet bilgisi, ör. "250 g · 8 adet" */
   unit?: string;
   image?: string;

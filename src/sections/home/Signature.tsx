@@ -66,7 +66,7 @@ export function Signature() {
                   </h3>
                   <span aria-hidden className="price-leader" />
                   <span className="font-display text-xl font-semibold text-copper">
-                    {formatPrice(item.price)}
+                    {item.price === undefined ? "" : formatPrice(item.price)}
                   </span>
                 </div>
                 {item.unit && (

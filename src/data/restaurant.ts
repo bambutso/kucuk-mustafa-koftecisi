@@ -103,12 +103,9 @@ export const gmImages = {
   hayrabolu: local("gm-hayrabolu"),
   /** İnce belli bardakta çay, logolu runner üzerinde */
   cay: local("gm-cay"),
-  /**
-   * Rakı ve bira kareleri: alkollü ürünler menüden çıkarıldığı için şu an
-   * hiçbir sayfada gösterilmiyor. Görseller arşivde duruyor — alkollü servis
-   * yeniden menüye girerse doğrudan bağlanabilsin diye adları korundu.
-   */
+  /** Rakı ve işletmenin logolu peçetesi — Rakılar kategorisinde */
   raki: local("gm-raki"),
+  /** Buz gibi bira, dış masada — Biralar kategorisinde */
   bira: local("gm-bira"),
   /** Ocağın başı: döküm ızgara közün üstünde */
   ocak: local("gm-ocak"),
@@ -195,8 +192,9 @@ export const restaurant = {
   reviewLinks: {
     google:
       "https://search.google.com/local/writereview?placeid=ChIJySZnKUBTp0ARJC97bIU65i0",
+    /** Doğrudan yorum yazma formu (Google'daki karşılığıyla simetrik) */
     tripadvisor:
-      "https://www.tripadvisor.com.tr/Restaurant_Review-g3252637-d10962098-Reviews-Kucuk_Mustafa_Koftecisi-Kirklareli_Kirklareli_Province.html",
+      "https://www.tripadvisor.com.tr/UserReviewEdit-g3252637-d10962098-Kucuk_Mustafa_Koftecisi-Kirklareli_Kirklareli_Province.html",
   },
   /** TripAdvisor'dan alınan gerçek veriler */
   rating: {
@@ -223,8 +221,7 @@ export const restaurant = {
 /**
  * Google Haritalar kartındaki gerçek müşteri yorumları (22 Temmuz 2026).
  * Soyadlar baş harfe indirildi. Yorum metinleri i18n katmanında (`googleReviews`)
- * tutulur: özgün hâli Türkçedir, diğer diller çeviridir — bu durum
- * `reviewsDisclaimer` metninde belirtilir.
+ * tutulur: özgün hâli Türkçedir, diğer diller çeviridir.
  */
 export const googleReviews = [
   { id: "yesim", author: "Yeşim Ç.", stars: 5 },
@@ -292,26 +289,17 @@ export const features = [
  * Yorum kartları temsilîdir; gerçek müşteri yorumu değildir.
  * Puan, yorum sayısı ve sıralama ise TripAdvisor'ın gerçek verisidir.
  */
-export const sampleReviews = [
-  {
-    quote:
-      "Köfte tam kıvamında; közün kokusu tabağa kadar geliyor. Servis hızlı, esnaf güler yüzlü.",
-    context: "Lezzet ve servis üzerine",
-  },
-  {
-    quote:
-      "Kırklareli'ye yolu düşen buraya uğramadan dönmesin. Piyazı ve ev yapımı acı sosu başka yerde yok.",
-    context: "Yöresellik üzerine",
-  },
-  {
-    quote:
-      "Çocukluğumun tadı aynen duruyor. Bir zamanlar babamla gelirdim; şimdi oğlumla geliyorum.",
-    context: "Hatıralar üzerine",
-  },
+/**
+ * TripAdvisor'daki gerçek müşteri yorumları (22 Temmuz 2026'da sayfadan alındı).
+ * Yorum metinleri i18n katmanındadır (`tripadvisorReviews`): özgün dil
+ * Türkçedir, diğer diller çeviridir. TripAdvisor yorumcu adlarını herkese
+ * açık göstermediğinden kartlarda yorumun kendi başlığı kullanılır.
+ */
+export const tripadvisorReviews = [
+  { id: "kucuk-sehir", stars: 5 },
+  { id: "nefis", stars: 5 },
+  { id: "izgara-lezzeti", stars: 5 },
 ] as const;
-
-export const reviewsDisclaimer =
-  "TripAdvisor puanı, yorum sayısı ve sıralaması ile Google puanı ve yorum sayısı gerçek verilerdir. Üstteki alıntı kartları temsilîdir; Google bölümündeki alıntılar gerçek müşteri yorumlarından kısaltılmıştır (Türkçe dışındaki dillerde çeviridir).";
 
 /** Hikayemiz sayfası — genişletilmiş anlatı */
 export const storyPage = {

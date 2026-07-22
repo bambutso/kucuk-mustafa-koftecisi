@@ -58,9 +58,10 @@ export interface ServiceCard {
   text: string;
 }
 
-export interface SampleReview {
+/** Gerçek bir yorumun başlığı ve (kısaltılmış) metni */
+export interface RealReview {
+  title: string;
   quote: string;
-  context: string;
 }
 
 export interface ReservationStep {
@@ -158,6 +159,8 @@ export interface SiteContent {
       noResultsTitle: string;
       noResultsHint: string;
       itemsCount: (n: number) => string;
+      /** Fiyatı basılı menüde yazmayan kalemlerde (alkol vb.) gösterilir */
+      askPrice: string;
       menuNoteExtra: string;
       categoriesAria: string;
       tags: { chef: string; popular: string; fresh: string; local: string };
@@ -271,13 +274,16 @@ export interface SiteContent {
     services: ReadonlyArray<ServiceCard>;
   };
   features: ReadonlyArray<Feature>;
-  sampleReviews: ReadonlyArray<SampleReview>;
+  /**
+   * TripAdvisor'daki gerçek yorumlar, `tripadvisorReviews` id'leriyle eşleşir.
+   * Özgün dil Türkçedir; diğer diller çeviridir.
+   */
+  tripadvisorReviews: Record<string, RealReview>;
   /**
    * Google'daki gerçek yorumların metni, `googleReviews` id'leriyle eşleşir.
    * Özgün dil Türkçedir; diğer diller çeviridir.
    */
   googleReviews: Record<string, { quote: string }>;
-  reviewsDisclaimer: string;
   hoursDays: string;
   servicesList: ReadonlyArray<string>;
   menuNote: string;

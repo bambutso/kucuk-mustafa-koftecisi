@@ -1,18 +1,25 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────
- *  NOT: Bu menü örnek olarak hazırlanmıştır. Ürün içerikleri ve fiyatlar
- *  işletme tarafından güncellenecektir.
+ *  MENÜ — İŞLETMENİN KENDİ MENÜSÜNDEN OKUNDU
  *
- *  Ürünler; işletmenin bilinen mutfağı (köfte, ızgaralar, çorbalar, koyun
- *  yoğurdu, Hayrabolu tatlısı, hardaliye…) temel alınarak, 2026 Türkiye
- *  restoran fiyat seviyesine göre kurgulanmıştır.
+ *  Kaynaklar (Google Haritalar galerisindeki işletme fotoğrafları):
+ *   • Basılı menü (EN GÜNCEL fiyat kuşağı) → Izgara Çeşitleri, Başlangıçlar,
+ *     Salata/Meze/Soğuk Meze listeleri ve fiyatları.
+ *   • Ayaklı fiyat panosu (bir kuşak eski) → Tatlılar ve Soğuk İçecekler.
+ *     Bu iki kategorinin fiyatları basılı menüde görünmüyordu; pano
+ *     fiyatları ızgaralarda basılı menünün ~%12 altında kalıyor.
+ *   • Bar dolabı ve raf fotoğrafları → alkollü içecek markaları.
+ *     Alkolde FİYAT KAYNAĞI YOK; bu kalemler bilerek fiyatsız bırakıldı
+ *     (kart "fiyat için sorunuz" gösterir). Uydurma fiyat yazılmadı.
+ *
+ *  Ürün adları menüdeki yazımıyla korunmuştur.
  * ─────────────────────────────────────────────────────────────────────────
  */
 import type { MenuCategory } from "../types/menu";
-import { gmImages, igImages, images } from "./restaurant";
+import { gmImages, igImages } from "./restaurant";
 
 export const MENU_NOTE =
-  "Bu menü örnek olarak hazırlanmıştır. Ürün içerikleri ve fiyatlar işletme tarafından güncellenecektir.";
+  "Ürünler ve fiyatlar işletmenin kendi menüsünden alınmıştır; güncel liste için işletmeye danışınız.";
 
 export const menu: MenuCategory[] = [
   {
@@ -21,12 +28,11 @@ export const menu: MenuCategory[] = [
     note: "Dana + coğrafi işaretli Kıvırcık kuzu; meşe kömürünün korunda.",
     items: [
       {
-        id: "porsiyon-kofte",
-        name: "Porsiyon Köfte",
-        unit: "250 g · 8 adet",
+        id: "kucuk-mustafa-koftesi",
+        name: "Küçük Mustafa Köftesi",
         description:
-          "Kuru soğan ve bayat ekmekle yoğrulan harç, meşe korunda mühürlenir. Piyazlık soğan, közlenmiş yeşil biber ve ev yapımı acı sosla servis edilir.",
-        price: 380,
+          "Dükkânın adını taşıyan köfte. Kuru soğan ve bayat ekmekle yoğrulan harç meşe korunda mühürlenir; kemik suyuna batırılmış köy ekmeği eşliğinde gelir.",
+        price: 390,
         image: gmImages.koftePorsiyon,
         imageAlt:
           "Porsiyon köfte; ev yapımı acı sos, piyazlık soğan, domates ve közlenmiş biberle",
@@ -34,28 +40,39 @@ export const menu: MenuCategory[] = [
         model3d: {
           glb: `${import.meta.env.BASE_URL}models/kofte.glb`,
           usdz: `${import.meta.env.BASE_URL}models/kofte.usdz`,
-          poster: images.koftePlate,
-          alt: "Tabakta sekiz adet ızgara köfte, garnitürüyle — 3D model",
+          poster: gmImages.koftePorsiyon,
+          alt: "Tabakta ızgara köfte, garnitürüyle — 3D model",
         },
       },
       {
-        id: "bir-bucuk-porsiyon",
-        name: "Bir Buçuk Porsiyon Köfte",
-        unit: "375 g · 12 adet",
-        description:
-          "İştahı açık olanlara. Aynı harç, aynı kor; dört köfte fazlasıyla.",
-        price: 540,
+        id: "acili-kofte",
+        name: "Acılı Köfte",
+        description: "Aynı harç, acısı harca katılmış hâliyle.",
+        price: 410,
         image: gmImages.kofteOnikili,
         imageAlt: "Kalabalık köfte tabağı; domates ve piyazlık soğanla",
+        spice: 2,
       },
       {
-        id: "yarim-porsiyon",
-        name: "Yarım Porsiyon Köfte",
-        unit: "125 g · 4 adet",
-        description: "Küçük misafirlerimize ve hafif yemek isteyenlere.",
-        price: 220,
+        id: "kasarli-kofte",
+        name: "Kaşarlı Köfte",
+        description: "Köftenin içi kaşarla doldurulur; közde erir.",
+        price: 430,
         image: gmImages.kofteYarim,
-        imageAlt: "Yarım porsiyon köfte, közlenmiş yeşil biberle",
+        imageAlt: "Közlenmiş yeşil biberle servis edilen köfte tabağı",
+      },
+      {
+        id: "pastirmali-kofte",
+        name: "Pastırmalı Köfte",
+        description: "Harca pastırma katılır; közde kokusu salona yayılır.",
+        price: 450,
+      },
+      {
+        id: "sefin-koftesi",
+        name: "Şefin Köftesi",
+        description: "Ocağın başındaki ustanın kendi tarifi.",
+        price: 490,
+        tags: ["sef-onerisi"],
       },
     ],
   },
@@ -65,113 +82,238 @@ export const menu: MenuCategory[] = [
     note: "Hepsi meşe kömürünün korunda, döküm ızgarada.",
     items: [
       {
+        id: "tavuk-izgara",
+        name: "Tavuk Izgara",
+        description: "Az baharatlı, közde. Et yemeyenin gönlü kalmasın diye.",
+        price: 300,
+      },
+      {
+        id: "kasap-sucuk",
+        name: "Kasap Sucuk",
+        description: "Kasaplar Arası'nın sucuğu, közde kıtırlaşana kadar.",
+        price: 390,
+      },
+      {
+        id: "tava-ciger",
+        name: "Tava Ciğer",
+        description: "İnce doğranmış ciğer, kızgın tavada; piyazlık soğanla.",
+        price: 430,
+      },
+      {
+        id: "ciger-sis",
+        name: "Ciğer Şiş",
+        description: "Kuyruk yağıyla şişe dizilir, korda çevrilir.",
+        price: 450,
+      },
+      {
+        id: "antrikot",
+        name: "Antrikot",
+        description: "Kalın kesim, mühürlenip dinlendirilir.",
+        price: 590,
+      },
+      {
+        id: "istranca-kuzu-sis",
+        name: "Istranca Kuzu Şiş",
+        description:
+          "Istranca Dağları'nın kuzusundan kuşbaşı; közde mühürlenir, piyazlık soğan ve közlenmiş biberle.",
+        price: 650,
+        image: gmImages.kuzuSis,
+        imageAlt: "Közden inmiş kuzu şişler; domates ve közlenmiş biberle",
+        tags: ["yoresel"],
+      },
+      {
+        id: "kulbasti",
+        name: "Külbastı",
+        description: "İnce dövülmüş et, doğrudan külün üstünde.",
+        price: 650,
+      },
+      {
+        id: "kusleme",
+        name: "Küşleme",
+        description: "Kuzunun en makbul yeri; ağızda dağılır.",
+        price: 720,
+      },
+      {
+        id: "bonfile",
+        name: "Bonfile",
+        description: "Yağsız, yumuşak kesim; istediğiniz pişme derecesinde.",
+        price: 750,
+      },
+      {
+        id: "istranca-kuzu-pirzola",
+        name: "Istranca Kuzu Pirzola",
+        description: "Trakya kuzusundan, kemiği tutulacak kadar sulu.",
+        price: 750,
+        tags: ["yoresel"],
+      },
+      {
+        id: "istranca-kuzu-lokum",
+        name: "Istranca Kuzu Lokum",
+        description: "Kuzunun lokum gibi kesimi; sadece tuz ve kor.",
+        price: 790,
+        tags: ["yoresel"],
+      },
+      {
         id: "karisik-izgara",
         name: "Karışık Izgara",
-        unit: "Köfte · pirzola · şiş",
-        description:
-          "Kararsız kalanlara ocağın özeti: dört köfte, iki pirzola ve bir kuzu şiş, közlenmiş sebzelerle.",
-        price: 690,
+        unit: "1 Kuzu Lokum · 1 Kuzu Pirzola · 2 Köfte · 1 Külbastı",
+        description: "Kararsız kalanlara ocağın özeti; tek tabakta beş kalem.",
+        price: 790,
         image: gmImages.karisikIzgara,
         imageAlt: "Şiş ve köftelerle karışık ızgara tabağı, söğüş ve ekmekle",
         tags: ["sef-onerisi"],
       },
-      {
-        id: "kuzu-pirzola",
-        name: "Kuzu Pirzola",
-        unit: "4 adet",
-        description: "Trakya kuzusundan, kemiği tutulacak kadar sulu.",
-        price: 650,
-      },
-      {
-        id: "kuzu-sis",
-        name: "Kuzu Şiş",
-        unit: "2 şiş",
-        description:
-          "Kuşbaşı kuzu, közde mühürlenir; piyazlık soğan ve közlenmiş biberle.",
-        price: 520,
-        image: gmImages.kuzuSis,
-        imageAlt: "Közden inmiş kuzu şişler; domates ve közlenmiş biberle",
-      },
-      {
-        id: "tavuk-sis",
-        name: "Tavuk Şiş",
-        unit: "2 şiş",
-        description: "Az baharatlı, közde. Et yemeyenin gönlü kalmasın diye.",
-        price: 360,
-      },
     ],
   },
   {
-    id: "baslangiclar",
-    title: "Başlangıçlar",
-    note: "Sabah 10.00'dan gece kapanışa kadar kazanda.",
+    id: "ara-sicaklar",
+    title: "Ara Sıcaklar",
     items: [
       {
-        id: "kelle-paca",
-        name: "Kelle Paça Çorbası",
-        description:
-          "Gece üçe kadar açık bir köftecinin olmazsa olmazı. Sarımsaklı sirke ve pul biberle.",
-        price: 180,
-        tags: ["cok-tercih"],
-      },
-      {
-        id: "mercimek",
+        id: "mercimek-corbasi",
         name: "Mercimek Çorbası",
         description: "Tereyağlı, kıvamı yerinde. Limonla sevene.",
-        price: 140,
+        price: 120,
       },
       {
-        id: "tavuk-suyu",
-        name: "Tavuk Suyu Çorba",
-        description: "Şehriyeli, ev usulü. Kış akşamlarının ilacı.",
-        price: 150,
-      },
-    ],
-  },
-  {
-    id: "yoresel",
-    title: "Yöresel Lezzetler",
-    note: "Trakya'nın sofrasından, mevsimi geldikçe.",
-    items: [
-      {
-        id: "koyun-yogurdu",
-        name: "Mevsiminde Koyun Yoğurdu",
-        description:
-          "Süt bollaşınca kurulan yoğurt; kaşığın dik durduğu kıvamda. Mevsiminde sorunuz.",
-        price: 130,
-        image: gmImages.koyunYogurdu,
-        imageAlt: "Kaşığın dik durduğu kıvamda, kesme koyun yoğurdu",
-        tags: ["yoresel"],
+        id: "pacanga-boregi",
+        name: "Paçanga Böreği",
+        description: "Pastırma ve kaşar, ince yufkada kızarmış.",
+        price: 200,
       },
       {
-        id: "trakya-peynir",
-        name: "Trakya Beyaz Peynir Söğüşü",
-        description: "Yerli beyaz peynir, söğüş domates ve salatalıkla.",
-        price: 160,
-        image: gmImages.peynirSogus,
-        imageAlt: "Beyaz peynir söğüşü; domates, biber ve ekmekle kurulmuş masa",
-        tags: ["yoresel"],
+        id: "patates-kizartmasi",
+        name: "Patates Kızartması",
+        description: "Elde doğranmış, sıcak servis.",
+        price: 220,
       },
       {
         id: "guvec-kasarli-mantar",
         name: "Güveçte Kaşarlı Mantar",
         description:
           "Toprak güveçte, üzeri kaşarla örtülüp közde kızartılır. Ocaktan geldiği gibi, fokurdarken servis edilir.",
-        price: 240,
         image: igImages.guvecMantar,
         imageAlt: "Güveçte kaşarlı mantar, üzeri kızarmış halde",
         tags: ["yeni"],
       },
+    ],
+  },
+  {
+    id: "mezeler",
+    title: "Mezeler",
+    note: "Günlük hazırlanır; tabak tabak masaya gelir.",
+    items: [
       {
-        id: "kozde-biber-aci-sos",
-        name: "Közde Biber & Ev Yapımı Acı Sos",
-        description:
-          "Közlenmiş yeşil biberin yanında dükkânın kendi acı sosu. Köftenin yol arkadaşı, tek başına da meze.",
+        id: "sogus-tabagi",
+        name: "Söğüş Tabağı",
+        description: "Mevsim sebzesi, iri doğranmış, limonlu.",
+        price: 75,
+        image: gmImages.sogus,
+        imageAlt: "Limonlu söğüş tabağı; domates, soğan ve siyah zeytinle",
+      },
+      {
+        id: "cerez",
+        name: "Çerez",
+        description: "Kuruyemiş tabağı, rakının yanına.",
+        price: 100,
+      },
+      {
+        id: "eski-kasar",
+        name: "Eski Kaşar",
+        description: "Trakya'nın olgunlaşmış kaşarı, dilimlenmiş.",
         price: 120,
-        image: gmImages.kozdeBiber,
-        imageAlt: "Közlenmiş yeşil biberler, domates dilimleri ve piyazlık soğanla",
+        image: gmImages.peynirSogus,
+        imageAlt: "Beyaz peynir söğüşü; domates, biber ve ekmekle kurulmuş masa",
         tags: ["yoresel"],
+      },
+      { id: "atom", name: "Atom", description: "Yoğurtlu, acı biberli.", price: 150, spice: 3 },
+      {
+        id: "sirkeli-kapya",
+        name: "Sirkeli Kapya",
+        description: "Közlenmiş kapya biber, sirkeli sosuyla.",
+        price: 150,
+      },
+      { id: "semizotu", name: "Semizotu", description: "Yoğurtlu, sarımsaklı.", price: 150 },
+      { id: "haydari", name: "Haydari", description: "Süzme yoğurt, dereotu ve sarımsak.", price: 150 },
+      {
+        id: "havuc-tarator",
+        name: "Havuç Tarator",
+        description: "Rendelenmiş havuç, yoğurtla.",
+        price: 150,
+      },
+      { id: "rus-salatasi", name: "Rus Salatası", description: "Klasik, mayonezli.", price: 150 },
+      {
+        id: "kuru-domates",
+        name: "Kuru Domates",
+        description: "Zeytinyağında dinlendirilmiş.",
+        price: 150,
+      },
+      {
+        id: "acili-ezme",
+        name: "Acılı Ezme",
+        description: "İnce kıyım domates, biber ve soğan; ev usulü.",
+        price: 150,
         spice: 2,
+      },
+      { id: "cacik", name: "Cacık", description: "Salatalıklı, buz gibi.", price: 150 },
+      {
+        id: "koyun-yogurdu",
+        name: "Koyun Yoğurdu",
+        description: "Mevsiminde kurulan yoğurt; kaşığın dik durduğu kıvamda.",
+        price: 150,
+        image: gmImages.koyunYogurdu,
+        imageAlt: "Kaşığın dik durduğu kıvamda, kesme koyun yoğurdu",
+        tags: ["yoresel", "cok-tercih"],
+      },
+      {
+        id: "karisik-kizartma",
+        name: "Karışık Kızartma",
+        description: "Patlıcan, biber ve kabak; yoğurt ve domates sosuyla.",
+        price: 180,
+      },
+      {
+        id: "kopeoglu",
+        name: "Köpeoğlu",
+        description: "Közlenmiş patlıcan, yoğurt ve domates sosu.",
+        price: 180,
+      },
+      {
+        id: "soslu-patlican",
+        name: "Soslu Patlıcan",
+        description: "Kızarmış patlıcan, domates sosuyla.",
+        price: 180,
+      },
+      {
+        id: "manca",
+        name: "Manca",
+        description: "Trakya'nın göçmen mezesi; yoğurtlu, sarımsaklı.",
+        price: 180,
+        tags: ["yoresel"],
+      },
+      {
+        id: "girit",
+        name: "Girit",
+        description: "Beyaz peynir, ceviz ve yeşillikle ezilmiş.",
+        price: 190,
+      },
+      {
+        id: "lux-cerez",
+        name: "Lüx Çerez",
+        description: "Antep fıstığı ağırlıklı, geniş tabak.",
+        price: 190,
+      },
+      {
+        id: "soka",
+        name: "Soka",
+        description: "Balkan sofralarından, közlenmiş biberli meze.",
+        price: 210,
+        tags: ["yoresel"],
+      },
+      {
+        id: "buzlu-badem",
+        name: "Buzlu Badem",
+        description: "Buz üstünde, çıtır çıtır.",
+        price: 210,
       },
     ],
   },
@@ -180,30 +322,35 @@ export const menu: MenuCategory[] = [
     title: "Salatalar",
     items: [
       {
+        id: "coban-salatasi",
+        name: "Çoban Salatası",
+        description: "Domates, salatalık, biber ve soğan; ince kıyım.",
+        price: 170,
+        image: gmImages.cobanSalata,
+        imageAlt: "Çoban salatası; domates, salatalık, biber, soğan ve zeytinle",
+      },
+      {
         id: "piyaz",
         name: "Piyaz",
         description:
           "Kuru fasulye, bol kuru soğan, sirke ve zeytinyağı. Köftenin değişmez eşlikçisi.",
-        price: 150,
+        price: 170,
         image: gmImages.piyaz,
         imageAlt: "Kuru fasulye piyazı; domates, soğan ve haşlanmış yumurtayla",
         tags: ["cok-tercih"],
       },
       {
-        id: "coban-salata",
-        name: "Çoban Salatası",
-        description: "Domates, salatalık, biber ve soğan; ince kıyım.",
-        price: 160,
-        image: gmImages.cobanSalata,
-        imageAlt: "Çoban salatası; domates, salatalık, biber, soğan ve zeytinle",
+        id: "yesil-salata",
+        name: "Yeşil Salata",
+        description: "Mevsim yeşillikleri, limon ve zeytinyağıyla.",
+        price: 220,
       },
       {
-        id: "sogus",
-        name: "Söğüş Tabağı",
-        description: "Mevsim sebzesi, iri doğranmış, limonlu.",
-        price: 140,
-        image: gmImages.sogus,
-        imageAlt: "Limonlu söğüş tabağı; domates, soğan ve siyah zeytinle",
+        id: "sopska-salatasi",
+        name: "Şopska Salatası",
+        description: "Balkan klasiği; üzeri rendelenmiş beyaz peynirle.",
+        price: 250,
+        tags: ["yoresel"],
       },
     ],
   },
@@ -213,79 +360,83 @@ export const menu: MenuCategory[] = [
     note: "Köftenin üstüne tatlı, Trakya usulü.",
     items: [
       {
-        id: "hayrabolu",
-        name: "Hayrabolu Tatlısı",
+        id: "kaymakli-baklava",
+        name: "Havuç Dilimi Kaymaklı Baklava",
+        description: "Havuç dilimi kesim, üzeri kaymaklı.",
+        price: 90,
+      },
+      {
+        id: "kaymakli-peynir-tatlisi",
+        name: "Kaymaklı Peynir Tatlısı",
+        description: "Şerbetli peynir tatlısı, kaymağıyla.",
+        price: 90,
+      },
+      {
+        id: "kaymakli-hayrabolu",
+        name: "Kaymaklı Hayrabolu",
         description:
           "Trakya'nın peynirli şerbetli tatlısı; taze peynirle, ılık servis.",
-        price: 180,
+        price: 90,
         image: gmImages.hayrabolu,
         imageAlt: "Şerbetli peynir tatlısı, ılık servis",
         tags: ["sef-onerisi", "yoresel"],
       },
       {
-        id: "firin-sutlac",
-        name: "Fırın Sütlaç",
-        description: "Üstü közlenmiş, taş fırından.",
-        price: 160,
-      },
-      {
-        id: "tel-kadayif",
-        name: "Tel Kadayıf",
-        description: "Cevizli, şerbeti ölçülü, dilim dilim.",
-        price: 170,
-      },
-      {
-        id: "trilece",
-        name: "Trileçe",
+        id: "tralice",
+        name: "Traliçe",
+        unit: "Özel ev yapımı",
         description: "Balkan göçmenlerinin hediyesi; sütlü, karamelli.",
-        price: 160,
-        tags: ["yeni"],
-      },
-    ],
-  },
-  {
-    id: "icecekler",
-    title: "İçecekler",
-    items: [
-      {
-        id: "acik-ayran",
-        name: "Açık Ayran",
-        description: "Köpüklü, bakır maşrapada.",
-        price: 60,
-        tags: ["cok-tercih"],
-      },
-      {
-        id: "hardaliye",
-        name: "Hardaliye",
-        description:
-          "Kırklareli'nin asırlık içeceği: hardal tohumuyla fermente üzüm şırası.",
         price: 90,
         tags: ["yoresel"],
       },
       {
-        id: "salgam",
-        name: "Şalgam",
-        description: "Acılı ya da acısız.",
-        price: 70,
-        spice: 1,
+        id: "sutlac",
+        name: "Sütlaç",
+        description: "Üstü közlenmiş, fırından.",
+        price: 90,
       },
       {
-        id: "kola",
-        name: "Kola",
-        description: "Buz gibi, soğutucudan.",
-        price: 70,
+        id: "meyve-tabagi",
+        name: "Meyve Tabağı",
+        description: "Mevsim meyveleri, buz üstünde.",
+        price: 190,
       },
+    ],
+  },
+  {
+    id: "soguk-icecekler",
+    title: "Soğuk İçecekler",
+    items: [
+      { id: "su", name: "Su", description: "Yarım litre.", price: 20 },
       {
-        id: "gazoz",
-        name: "Gazoz",
-        description: "Cam şişede, buz gibi.",
-        price: 70,
+        id: "ayran",
+        name: "Ayran",
+        description: "Köpüklü, bakır maşrapada.",
+        price: 30,
+        tags: ["cok-tercih"],
       },
+      { id: "soda", name: "Soda", description: "Sade ya da meyveli.", price: 30 },
+      { id: "salgam", name: "Şalgam", description: "Acılı ya da acısız.", price: 40, spice: 1 },
+      { id: "kola", name: "Kola", description: "Buz gibi, soğutucudan.", price: 55 },
+      { id: "fanta", name: "Fanta", description: "Buz gibi, soğutucudan.", price: 55 },
+      { id: "sprite", name: "Sprite", description: "Buz gibi, soğutucudan.", price: 55 },
+      {
+        id: "hardaliye",
+        name: "Hardaliye",
+        description:
+          "Kırklareli'nin asırlık içeceği: hardal tohumuyla fermente üzüm şırası. Şişesi Kırk Kimse'den.",
+        tags: ["yoresel"],
+      },
+    ],
+  },
+  {
+    id: "sicak-icecekler",
+    title: "Sıcak İçecekler",
+    items: [
       {
         id: "cay",
         name: "Çay",
         description: "İnce belli bardakta, demli.",
-        price: 30,
         image: gmImages.cay,
         imageAlt: "İnce belli bardakta demli çay, logolu runner üzerinde",
       },
@@ -293,13 +444,108 @@ export const menu: MenuCategory[] = [
         id: "turk-kahvesi",
         name: "Türk Kahvesi",
         description: "Közde pişmiş, yanında lokum.",
-        price: 90,
+      },
+    ],
+  },
+  {
+    id: "biralar",
+    title: "Biralar",
+    note: "Alkollü servis salonda geçerlidir. Fiyatlar için servis ekibimize danışın.",
+    items: [
+      {
+        id: "efes-pilsen",
+        name: "Efes Pilsen",
+        description: "Soğuk servis, şişede.",
+        image: gmImages.bira,
+        imageAlt: "Buz gibi bira, dış masada",
       },
       {
-        id: "maden-suyu",
-        name: "Maden Suyu",
-        description: "Sade ya da meyveli.",
-        price: 50,
+        id: "tuborg-gold",
+        name: "Tuborg Gold",
+        description: "Soğuk servis, şişede.",
+      },
+    ],
+  },
+  {
+    id: "rakilar",
+    title: "Rakılar",
+    note: "Közde köftenin klasik eşlikçisi. Şişe boyları 20–100 cl arasında değişir.",
+    items: [
+      {
+        id: "yeni-raki",
+        name: "Yeni Rakı",
+        unit: "Yeni Seri",
+        description: "Klasik. Beyaz peynir ve kavunla.",
+        image: gmImages.raki,
+        imageAlt: "Rakı şişesi ve işletmenin logolu peçetesi",
+        tags: ["cok-tercih"],
+      },
+      {
+        id: "tekirdag-altin-seri",
+        name: "Tekirdağ Rakısı Altın Seri",
+        description: "Meşe fıçılarda dinlendirilmiş; Trakya'nın kendi rakısı.",
+        tags: ["yoresel"],
+      },
+      {
+        id: "tekirdag-sir-kavrulmus",
+        name: "Tekirdağ Rakısı Sır Kavrulmuş",
+        description: "Kavrulmuş anasonuyla, dolgun.",
+        tags: ["yoresel"],
+      },
+      {
+        id: "izmir-gobek",
+        name: "İzmir Rakısı Göbek",
+        description: "Göbek suyundan, yumuşak içimli.",
+      },
+      {
+        id: "kulup-rakisi",
+        name: "Kulüp Rakısı",
+        description: "Eski usul, sert karakterli.",
+      },
+      {
+        id: "efe-gold",
+        name: "Efe Gold",
+        description: "Hafif anasonlu, dengeli.",
+      },
+    ],
+  },
+  {
+    id: "viskiler",
+    title: "Viskiler",
+    note: "Kadeh ya da şişe olarak servis edilir.",
+    items: [
+      {
+        id: "chivas-regal-12",
+        name: "Chivas Regal 12",
+        unit: "12 yıllık",
+        description: "İskoç harman viski, yumuşak bitişli.",
+      },
+      {
+        id: "jack-daniels",
+        name: "Jack Daniel's",
+        unit: "Tennessee",
+        description: "Akçaağaç kömüründe süzülmüş, tatlımsı.",
+      },
+    ],
+  },
+  {
+    id: "saraplar",
+    title: "Şaraplar",
+    note: "Trakya bağlarından; kadeh ya da şişe.",
+    items: [
+      {
+        id: "saranta",
+        name: "Saranta",
+        description:
+          "Kırklareli bağlarından butik şarap; köftenin yanında yerli bir seçenek.",
+        tags: ["yoresel"],
+      },
+      {
+        id: "vino-dessera",
+        name: "Vino Dessera",
+        description:
+          "Vize'de üretilen Trakya şarabı; kırmızı ve beyaz seçenekleriyle.",
+        tags: ["yoresel"],
       },
     ],
   },

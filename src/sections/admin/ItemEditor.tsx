@@ -89,9 +89,15 @@ export function ItemEditor({
                 type="number"
                 min={0}
                 step={5}
-                value={item.price}
+                /* Boş bırakılırsa fiyat gösterilmez ("fiyat için sorunuz") */
+                value={item.price ?? ""}
                 onChange={(e) => {
-                  const value = Number(e.target.value);
+                  const raw = e.target.value.trim();
+                  if (raw === "") {
+                    onChange({ price: undefined });
+                    return;
+                  }
+                  const value = Number(raw);
                   onChange({ price: Number.isFinite(value) ? value : 0 });
                 }}
               />

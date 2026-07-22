@@ -9,8 +9,6 @@ import {
   storyPage,
   placePage,
   features,
-  sampleReviews,
-  reviewsDisclaimer,
   restaurant,
 } from "../data/restaurant";
 import { MENU_NOTE } from "../data/menu";
@@ -73,7 +71,7 @@ export const tr: SiteContent = {
     signature: {
       eyebrow: "İmza Ürünler",
       title: "Ocaktan çıkanların en bilinenleri",
-      lead: "Fiyatlar örnek menüdendir; güncel liste için işletmeye danışın.",
+      lead: "Fiyatlar işletmenin kendi menüsündendir; güncel liste için danışın.",
       imageCaption: "250 gram, 8 köfte — 1939'dan beri aynı tabak.",
       seeAll: "Menünün tamamını gör",
     },
@@ -118,6 +116,7 @@ export const tr: SiteContent = {
       noResultsTitle: "Aradığınızı közde bulamadık.",
       noResultsHint: "Farklı bir kelimeyle deneyin — ör. “köfte”, “piyaz”, “hardaliye”.",
       itemsCount: (n) => `${n} ürün`,
+      askPrice: "Fiyat için sorunuz",
       menuNoteExtra: "Fiyatlara KDV dahildir.",
       categoriesAria: "Menü kategorileri",
       tags: {
@@ -257,7 +256,24 @@ export const tr: SiteContent = {
   storyPage,
   placePage,
   features,
-  sampleReviews,
+  /* TripAdvisor'daki gerçek yorumlar; noktalama düzeltilip kısaltıldı. */
+  tripadvisorReviews: {
+    "kucuk-sehir": {
+      title: "Küçük şehirde büyük lezzet",
+      quote:
+        "Köftesi gerçekten çok lezzetli, porsiyonları doyurucu ve hizmeti oldukça samimi. Güler yüzlü çalışanları sayesinde kendinizi misafir gibi hissediyorsunuz. Kırklareli'ne yolu düşen herkese gönül rahatlığıyla tavsiye ederim.",
+    },
+    nefis: {
+      title: "Nefis",
+      quote:
+        "Restoranın köfteleri gerçekten çok lezzetliydi. Dışı hafifçe kızarmış, içi sulu ve yumuşaktı. Ortamı sıcak, servisi hızlı ve güler yüzlü.",
+    },
+    "izgara-lezzeti": {
+      title: "Kırklareli'nde ızgara lezzeti",
+      quote:
+        "Mekânın fiziki şartları, yiyecek çeşitleri ve lezzetleri harikaydı. Personelin güler yüzü, masa düzeni ve temizliği dikkatimizi çekti.",
+    },
+  },
   /* Google'daki gerçek yorumlar; noktalama düzeltilip kısaltıldı, anlam korundu. */
   googleReviews: {
     yesim: {
@@ -269,7 +285,6 @@ export const tr: SiteContent = {
         "Köfte, piyaz ve ayran aldık. Köftenin porsiyonu bol, tadı çok güzeldi. Fiyatı da uygun.",
     },
   },
-  reviewsDisclaimer,
   hoursDays: restaurant.hours.days,
   servicesList: restaurant.services,
   menuNote: MENU_NOTE,

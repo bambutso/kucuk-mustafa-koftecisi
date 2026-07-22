@@ -58,7 +58,7 @@ export const es: SiteContent = {
     signature: {
       eyebrow: "Platos Emblemáticos",
       title: "Lo más conocido de nuestra parrilla",
-      lead: "Los precios son de un menú de muestra; consulta la lista actual en el restaurante.",
+      lead: "Los precios proceden del menú propio del restaurante; consulta la lista actual.",
       imageCaption: "250 gramos, 8 köfte — el mismo plato desde 1939.",
       seeAll: "Ver el menú completo",
     },
@@ -102,6 +102,7 @@ export const es: SiteContent = {
       noResultsTitle: "Eso no lo hemos encontrado en las brasas.",
       noResultsHint: "Prueba con otra palabra — p. ej. «köfte», «piyaz», «hardaliye».",
       itemsCount: (n) => `${n} producto${n === 1 ? "" : "s"}`,
+      askPrice: "Consulta el precio",
       menuNoteExtra: "IVA incluido en los precios.",
       categoriesAria: "Categorías del menú",
       tags: {
@@ -369,23 +370,24 @@ export const es: SiteContent = {
       text: "Piyaz de cebolla fresca, pimiento verde asado a la brasa, salsa picante casera. Ocho köfte en una ración de 250 gramos — igual que en 1939.",
     },
   ],
-  sampleReviews: [
-    {
+  /* Opiniones reales de TripAdvisor; puntuación ajustada y ligeramente abreviadas. */
+  tripadvisorReviews: {
+    "kucuk-sehir": {
+      title: "Gran sabor en una ciudad pequeña",
       quote:
-        "La köfte está en su punto; el olor de las brasas llega hasta el plato. Servicio rápido y gente amable.",
-      context: "Sobre el sabor y el servicio",
+        "La köfte está realmente deliciosa, las raciones llenan y el trato es muy cercano. Con un personal siempre sonriente, te sientes como un invitado y no como un cliente. Se lo recomiendo sin dudarlo a cualquiera cuyo camino pase por Kırklareli.",
     },
-    {
+    nefis: {
+      title: "Exquisito",
       quote:
-        "Si tu camino pasa por Kırklareli, no te vayas sin parar aquí. El piyaz y la salsa picante casera no existen en ningún otro sitio.",
-      context: "Sobre el sabor local",
+        "Las köfte del restaurante estaban realmente deliciosas: ligeramente doradas por fuera, jugosas y tiernas por dentro. Ambiente acogedor, servicio rápido y con una sonrisa.",
     },
-    {
+    "izgara-lezzeti": {
+      title: "Sabor a la parrilla en Kırklareli",
       quote:
-        "El sabor de mi infancia es exactamente el mismo. Antes venía con mi padre; ahora vengo con mi hijo.",
-      context: "Sobre los recuerdos",
+        "El local, la variedad de platos y sus sabores eran estupendos. Nos llamaron la atención la amabilidad del personal, la disposición de las mesas y la limpieza.",
     },
-  ],
+  },
   googleReviews: {
     yesim: {
       quote:
@@ -396,130 +398,265 @@ export const es: SiteContent = {
         "Pedimos köfte, piyaz y ayran. La ración es generosa y el sabor, excelente. El precio también es razonable.",
     },
   },
-  reviewsDisclaimer:
-    "La puntuación, el número de opiniones y la clasificación proceden de TripAdvisor; las tarjetas de opinión son ejemplos ilustrativos.",
   hoursDays: "Los 7 días de la semana",
   servicesList: ["En el Local", "Servicio a Domicilio", "Para Llevar", "Servicio con Alcohol"],
   menuNote:
-    "Este menú es una muestra. El contenido de los productos y los precios los actualizará el restaurante.",
+    "Los productos y los precios están tomados del menú propio del restaurante; consulta la lista actual en el local.",
   menu: {
     categories: {
       "imza-kofteler": {
         title: "Köfte de la Casa",
-        note: "Ternera + cordero Kıvırcık con IGP; sobre brasas de carbón de roble.",
+        note: "Ternera + cordero Kıvırcık con IGP; sobre las brasas de carbón de roble.",
       },
       izgaralar: {
         title: "A la Parrilla",
         note: "Todo sobre brasas de carbón de roble, en parrilla de hierro fundido.",
       },
-      baslangiclar: {
-        title: "Entrantes",
-        note: "En la olla desde las nueve de la mañana hasta el cierre.",
-      },
-      yoresel: {
-        title: "Especialidades de la Región",
-        note: "De la mesa de Tracia, según lo que dé la temporada.",
+      "ara-sicaklar": { title: "Entrantes Calientes" },
+      mezeler: {
+        title: "Mezes",
+        note: "Se preparan cada día; llegan a la mesa plato a plato.",
       },
       salatalar: { title: "Ensaladas" },
       tatlilar: {
         title: "Postres",
         note: "Postre después de la köfte, al estilo de Tracia.",
       },
-      icecekler: { title: "Bebidas" },
+      "soguk-icecekler": { title: "Bebidas Frías" },
+      "sicak-icecekler": { title: "Bebidas Calientes" },
+      biralar: {
+        title: "Cervezas",
+        note: "El servicio con alcohol es solo en el comedor. Consulta los precios a nuestro equipo de sala.",
+      },
+      rakilar: {
+        title: "Rakı",
+        note: "El acompañante clásico de la köfte a la brasa. Las botellas van de 20 a 100 cl.",
+      },
+      viskiler: {
+        title: "Whiskies",
+        note: "Se sirve por copas o por botella.",
+      },
+      saraplar: {
+        title: "Vinos",
+        note: "De los viñedos de Tracia; por copas o por botella.",
+      },
     },
     items: {
-      "porsiyon-kofte": {
-        unit: "250 g · 8 unidades",
+      /* İmza Köfteler */
+      "kucuk-mustafa-koftesi": {
         description:
-          "Una masa amasada con cebolla y pan del día anterior, sellada sobre brasas de roble. Se sirve con piyaz de cebolla fresca, pimiento verde asado a la brasa y salsa picante casera.",
+          "La köfte que lleva el nombre de la casa. Una masa amasada con cebolla y pan del día anterior, sellada sobre las brasas de roble; llega acompañada de pan de pueblo mojado en caldo de huesos.",
       },
-      "bir-bucuk-porsiyon": {
-        unit: "375 g · 12 unidades",
-        description: "Para los apetitos grandes. La misma masa, las mismas brasas; cuatro köfte más.",
+      "acili-kofte": {
+        description: "La misma masa, con el picante amasado dentro.",
       },
-      "yarim-porsiyon": {
-        unit: "125 g · 4 unidades",
-        description: "Para nuestros clientes más pequeños y para los apetitos ligeros.",
+      "kasarli-kofte": {
+        description: "La köfte se rellena con queso kaşar; sobre las brasas se funde.",
       },
-      "karisik-izgara": {
-        unit: "Köfte · chuletas · brocheta",
+      "pastirmali-kofte": {
         description:
-          "Toda la parrilla en un solo plato para los indecisos: cuatro köfte, dos chuletas de cordero y una brocheta de cordero, con verduras asadas a la brasa.",
+          "A la masa se le añade pastırma; sobre las brasas su aroma llena el comedor.",
       },
-      "kuzu-pirzola": {
-        unit: "4 unidades",
-        description: "Cordero de Tracia, tan jugoso que se coge por el hueso.",
+      "sefin-koftesi": {
+        description: "La receta propia del maestro que está ante las brasas.",
       },
-      "kuzu-sis": {
-        unit: "2 brochetas",
-        description:
-          "Cordero en dados sellado sobre las brasas; con piyaz de cebolla fresca y pimiento asado.",
-      },
-      "tavuk-sis": {
-        unit: "2 brochetas",
+      /* Izgaralar */
+      "tavuk-izgara": {
         description: "Poco especiado, a la brasa. Para que nadie se quede sin lo suyo.",
       },
-      "kelle-paca": {
-        description:
-          "El imprescindible de una köftería abierta hasta las tres de la madrugada. Con vinagre al ajo y copos de guindilla.",
+      "kasap-sucuk": {
+        description: "Sucuk de Kasaplar Arası, a la brasa hasta que los bordes quedan crujientes.",
       },
-      mercimek: {
+      "tava-ciger": {
+        description: "Hígado cortado fino en la sartén bien caliente; con ensalada de cebolla.",
+      },
+      "ciger-sis": {
+        description: "Ensartado en brochetas con grasa de cola de cordero y girado sobre las brasas.",
+      },
+      antrikot: {
+        description: "Un corte grueso, sellado y después reposado.",
+      },
+      "istranca-kuzu-sis": {
+        description:
+          "Cordero en dados de los montes Istranca; sellado sobre las brasas y servido con ensalada de cebolla y pimiento asado.",
+      },
+      kulbasti: {
+        description: "Carne finamente golpeada, puesta directamente sobre la ceniza.",
+      },
+      kusleme: {
+        description: "La parte más preciada del cordero; se deshace en la boca.",
+      },
+      bonfile: {
+        description: "Un corte magro y tierno, al punto que tú prefieras.",
+      },
+      "istranca-kuzu-pirzola": {
+        description: "De cordero de Tracia, tan jugoso que se coge por el hueso.",
+      },
+      "istranca-kuzu-lokum": {
+        description: "El corte más meloso del cordero; solo sal y brasas.",
+      },
+      "karisik-izgara": {
+        unit: "1 Kuzu Lokum · 1 Kuzu Pirzola · 2 Köfte · 1 Külbastı",
+        description:
+          "Toda la parrilla resumida para los indecisos: cinco piezas en un solo plato.",
+      },
+      /* Ara Sıcaklar */
+      "mercimek-corbasi": {
         description: "Con mantequilla, en su punto justo de espesor. Con limón, si te apetece.",
       },
-      "tavuk-suyu": {
-        description: "Caldo de pollo casero con fideos finos. La mejor medicina del invierno.",
+      "pacanga-boregi": {
+        description: "Pastırma y queso kaşar, fritos en masa fina de yufka.",
       },
-      "koyun-yogurdu": {
-        description:
-          "Yogur de oveja cuajado cuando abunda la leche; tan espeso que la cuchara se sostiene de pie. Pregunta por él en temporada.",
-      },
-      "trakya-peynir": {
-        description: "Queso blanco de la región con tomate y pepino en rodajas.",
+      "patates-kizartmasi": {
+        description: "Cortadas a mano, servidas calientes.",
       },
       "guvec-kasarli-mantar": {
         description:
           "En cazuela de barro, cubierto de queso kaşar y gratinado sobre las brasas. Se sirve tal como sale del fuego, aún burbujeando.",
       },
-      "kozde-biber-aci-sos": {
+      /* Mezeler */
+      "sogus-tabagi": {
+        description: "Verduras de temporada, cortadas en trozos grandes, con limón.",
+      },
+      cerez: {
+        description: "Un plato de frutos secos, para acompañar el rakı.",
+      },
+      "eski-kasar": {
+        description: "El queso kaşar curado de Tracia, en lonchas.",
+      },
+      atom: { description: "Con yogur y guindillas picantes." },
+      "sirkeli-kapya": {
+        description: "Pimiento kapya asado a la brasa, con su aliño de vinagre.",
+      },
+      semizotu: { description: "Verdolaga con yogur y ajo." },
+      haydari: { description: "Yogur escurrido con eneldo y ajo." },
+      "havuc-tarator": { description: "Zanahoria rallada con yogur." },
+      "rus-salatasi": { description: "El clásico, con mayonesa." },
+      "kuru-domates": { description: "Reposados en aceite de oliva." },
+      "acili-ezme": {
+        description: "Tomate, pimiento y cebolla picados finos; al estilo de la casa.",
+      },
+      cacik: { description: "Con pepino, bien frío." },
+      "koyun-yogurdu": {
         description:
-          "Pimientos verdes asados a la brasa con la salsa picante de la casa. El compañero de la köfte y, por sí solo, un meze.",
+          "Yogur de oveja cuajado en temporada; tan espeso que la cuchara se sostiene de pie.",
+      },
+      "karisik-kizartma": {
+        description: "Berenjena, pimiento y calabacín; con yogur y salsa de tomate.",
+      },
+      kopeoglu: {
+        description: "Berenjena asada a la brasa con yogur y salsa de tomate.",
+      },
+      "soslu-patlican": {
+        description: "Berenjena frita con salsa de tomate.",
+      },
+      manca: {
+        description: "El meze de los emigrantes de Tracia; con yogur y ajo.",
+      },
+      girit: {
+        description: "Queso blanco majado con nueces y hierbas frescas.",
+      },
+      "lux-cerez": {
+        description: "Un plato generoso, con predominio del pistacho.",
+      },
+      soka: {
+        description: "De las mesas balcánicas: un meze de pimientos asados a la brasa.",
+      },
+      "buzlu-badem": {
+        description: "Sobre hielo, crujientes al morderlas.",
+      },
+      /* Salatalar */
+      "coban-salatasi": {
+        description: "Tomate, pepino, pimiento y cebolla; picados finos.",
       },
       piyaz: {
         description:
           "Alubias blancas, mucha cebolla, vinagre y aceite de oliva. La compañía inseparable de la köfte.",
       },
-      "coban-salata": {
-        description: "Tomate, pepino, pimiento y cebolla; picados finos.",
+      "yesil-salata": {
+        description: "Verduras de hoja de temporada, con limón y aceite de oliva.",
       },
-      sogus: {
-        description: "Verduras de temporada, cortadas en trozos grandes, con limón.",
+      "sopska-salatasi": {
+        description: "Un clásico balcánico, coronado con queso blanco rallado.",
       },
-      hayrabolu: {
+      /* Tatlılar */
+      "kaymakli-baklava": {
+        description: "Cortada en triángulos, con nata cuajada por encima.",
+      },
+      "kaymakli-peynir-tatlisi": {
+        description: "Postre de queso en almíbar, con su nata cuajada.",
+      },
+      "kaymakli-hayrabolu": {
         description:
           "El postre de queso en almíbar de Tracia; hecho con queso fresco, servido templado.",
       },
-      "firin-sutlac": {
-        description: "Arroz con leche al horno, caramelizado por encima, de horno de piedra.",
-      },
-      "tel-kadayif": {
-        description: "Con nueces, almíbar medido, porción a porción.",
-      },
-      trilece: {
+      tralice: {
+        unit: "Casero, receta propia",
         description: "Un regalo de los emigrantes balcánicos; lácteo, con caramelo.",
       },
-      "acik-ayran": {
-        description: "Espumoso, en jarra de cobre.",
+      sutlac: {
+        description: "Al horno, caramelizado por encima.",
       },
-      hardaliye: {
-        description:
-          "La bebida centenaria de Kırklareli: mosto de uva fermentado con semillas de mostaza.",
+      "meyve-tabagi": {
+        description: "Fruta de temporada, sobre hielo.",
       },
+      /* Soğuk İçecekler */
+      su: { description: "Medio litro." },
+      ayran: { description: "Espumoso, en jarra de cobre." },
+      soda: { description: "Natural o con sabor a fruta." },
       salgam: { description: "Picante o suave." },
       kola: { description: "Bien fría, del refrigerador." },
-      gazoz: { description: "En botella de cristal, bien fría." },
+      fanta: { description: "Bien fría, del refrigerador." },
+      sprite: { description: "Bien fría, del refrigerador." },
+      hardaliye: {
+        description:
+          "La bebida centenaria de Kırklareli: mosto de uva fermentado con semillas de mostaza. Embotellada por Kırk Kimse.",
+      },
+      /* Sıcak İçecekler */
       cay: { description: "En vaso de tulipán, bien cargado." },
-      "turk-kahvesi": { description: "Hecho sobre las brasas, con delicia turca." },
-      "maden-suyu": { description: "Natural o con sabor a fruta." },
+      "turk-kahvesi": {
+        description: "Hecho sobre las brasas, con delicia turca al lado.",
+      },
+      /* Biralar */
+      "efes-pilsen": { description: "Servida fría, en botella." },
+      "tuborg-gold": { description: "Servida fría, en botella." },
+      /* Rakılar */
+      "yeni-raki": {
+        unit: "Serie Nueva",
+        description: "El clásico. Con queso blanco y melón.",
+      },
+      "tekirdag-altin-seri": {
+        description: "Reposado en barricas de roble; el rakı propio de Tracia.",
+      },
+      "tekirdag-sir-kavrulmus": {
+        description: "Con anís tostado, de cuerpo pleno.",
+      },
+      "izmir-gobek": {
+        description: "Del corazón del destilado; suave al paladar.",
+      },
+      "kulup-rakisi": {
+        description: "A la vieja usanza, de carácter firme.",
+      },
+      "efe-gold": {
+        description: "Ligeramente anisado, bien equilibrado.",
+      },
+      /* Viskiler */
+      "chivas-regal-12": {
+        unit: "12 años",
+        description: "Whisky escocés de mezcla, de final suave.",
+      },
+      "jack-daniels": {
+        unit: "Tennessee",
+        description: "Filtrado en carbón de arce; dulzón.",
+      },
+      /* Şaraplar */
+      saranta: {
+        description:
+          "Vino de autor de los viñedos de Kırklareli; una opción local para acompañar la köfte.",
+      },
+      "vino-dessera": {
+        description: "Vino de Tracia elaborado en Vize; en tinto y en blanco.",
+      },
     },
   },
   gallery: {

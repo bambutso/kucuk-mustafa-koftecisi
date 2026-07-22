@@ -61,8 +61,15 @@ export function MenuCard({ item, onView3D }: MenuCardProps) {
             {item.name}
           </h3>
           <span aria-hidden className="price-leader" />
-          <p className="whitespace-nowrap font-display text-lg font-semibold text-copper">
-            {formatPrice(item.price)}
+          <p
+            className={cn(
+              "whitespace-nowrap font-display font-semibold",
+              item.price === undefined
+                ? "text-xs uppercase tracking-[0.14em] text-cream/45"
+                : "text-lg text-copper",
+            )}
+          >
+            {item.price === undefined ? ui.askPrice : formatPrice(item.price)}
           </p>
         </div>
 

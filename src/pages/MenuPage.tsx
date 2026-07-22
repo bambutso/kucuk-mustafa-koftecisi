@@ -41,9 +41,12 @@ export default function MenuPage() {
   useEffect(() => {
     const wanted = searchParams.get("model3d");
     if (!wanted) return;
+    /* Eski kimlik: menü gerçek menüye göre yenilenirken imza köfte yeniden
+       adlandırıldı. Dolaşımdaki QR/linkler kırılmasın diye eşlenir. */
+    const id = wanted === "porsiyon-kofte" ? "kucuk-mustafa-koftesi" : wanted;
     const found = categories
       .flatMap((category) => category.items)
-      .find((item) => item.id === wanted && item.model3d);
+      .find((item) => item.id === id && item.model3d);
     if (found) setView3DItem(found);
   }, [searchParams, categories]);
 
