@@ -25,7 +25,9 @@
 [CmdletBinding()]
 param(
   [string]$Server    = "kucukmustafakoftecisi.com",
-  [string]$User      = "islem@kucukmustafakoftecisi.com",
+  # islem@ hesabı public_ftp'ye chroot edilmişti ve web köküne çıkamıyordu;
+  # islem2@ alan adı kökünde (domains/<alan>/) açıldı, public_html içindedir.
+  [string]$User      = "islem2@kucukmustafakoftecisi.com",
   # cPanel/DirectAdmin'de web kökü public_html'dir. public_ftp ANONİM FTP
   # klasörüdür ve web sunucusu oradan yayın YAPMAZ.
   [string]$RemoteDir = "public_html",
