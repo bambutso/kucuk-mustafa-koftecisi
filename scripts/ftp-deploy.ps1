@@ -34,7 +34,9 @@ param(
   # Sunucu açık FTPS (AUTH TLS) desteklemiyorsa -NoTls ekleyin. Şifre o zaman
   # ağ üzerinde AÇIK METİN gider — mümkünse kullanmayın.
   [switch]$NoTls,
-  [switch]$ListOnly
+  [switch]$ListOnly,
+  # Web kökünü arar: giriş dizinini ve bilinen aday yolları tek tek dener.
+  [switch]$Explore
 )
 
 $ErrorActionPreference = "Stop"
@@ -47,7 +49,14 @@ $useSsl = -not $NoTls
 
 function New-FtpRequest {
   param([string]$Path, [string]$Method)
-  $uri = "ftp://$Server/$($Path -replace '\\','/' -replace '^/+','')"
+  $p = $Path -replace '\\','/'
+  # FTP adresinde tek eğik çizgi giriş dizinine göredir; kökten mutlak yol için
+  # çift eğik çizgi gerekir (ftp://sunucu//home/... ).
+  $uri = if ($p -match '^/') {
+    "ftp://$Server//$($p -replace '^/+','')"
+  } else {
+    "ftp://$Server/$p"
+  }
   $req = [System.Net.FtpWebRequest]::Create($uri)
   $req.Credentials = $cred
   $req.Method      = $Method
@@ -57,6 +66,58 @@ function New-FtpRequest {
   $req.KeepAlive   = $false
   $req.Timeout     = 120000
   return $req
+}
+
+# --- Web kökünü arama modu --------------------------------------------------
+if ($Explore) {
+  function Get-FtpListing {
+    param([string]$Path)
+    try {
+      $r = New-FtpRequest -Path $Path -Method ([System.Net.WebRequestMethods+Ftp]::ListDirectory)
+      $s = $r.GetResponse()
+      $rd = New-Object System.IO.StreamReader($s.GetResponseStream())
+      $txt = $rd.ReadToEnd(); $rd.Close(); $s.Close()
+      return @{ ok = $true; items = ($txt -split "`r?`n" | Where-Object { $_ }) }
+    } catch {
+      return @{ ok = $false; err = $_.Exception.Message }
+    }
+  }
+
+  $adaylar = @(
+    "",
+    "public_html",
+    "public_ftp",
+    "domains/kucukmustafakoftecisi.com/public_html",
+    "/home/kucukmus/domains/kucukmustafakoftecisi.com/public_html",
+    "/home/kucukmus/domains/kucukmustafakoftecisi.com",
+    "/home/kucukmus",
+    "/"
+  )
+
+  Write-Host "FTP klasor arastirmasi — $User@$Server" -ForegroundColor Cyan
+  Write-Host ("=" * 60)
+  foreach ($a in $adaylar) {
+    $etiket = if ($a -eq "") { "(giris dizini)" } else { $a }
+    $r = Get-FtpListing -Path $a
+    if ($r.ok) {
+      Write-Host ""
+      Write-Host "VAR  → $etiket" -ForegroundColor Green
+      if ($r.items.Count -eq 0) {
+        Write-Host "       (bos)" -ForegroundColor DarkGray
+      } else {
+        $r.items | Select-Object -First 25 | ForEach-Object { "       $_" }
+        if ($r.items.Count -gt 25) { Write-Host "       … +$($r.items.Count - 25) kayit daha" -ForegroundColor DarkGray }
+      }
+    } else {
+      $kisa = if ($r.err -match "550") { "yok (550)" } elseif ($r.err -match "530") { "giris reddedildi (530)" } else { $r.err }
+      Write-Host "yok  → $etiket  [$kisa]" -ForegroundColor DarkGray
+    }
+  }
+  Write-Host ""
+  Write-Host ("=" * 60)
+  Write-Host "Icinde index.html / cgi-bin gibi dosyalar olan VEYA sitenin gorunecegi klasor web kokudur." -ForegroundColor Cyan
+  Write-Host "Bulduktan sonra:  yayinla.bat  dosyasini o klasore gore guncelleyecegiz." -ForegroundColor Cyan
+  exit 0
 }
 
 # --- Bağlantı testi / dizin listesi -----------------------------------------
