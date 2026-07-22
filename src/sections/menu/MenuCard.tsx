@@ -48,6 +48,8 @@ export function MenuCard({ item, onView3D }: MenuCardProps) {
             alt={item.imageAlt ?? item.name}
             fallbackLabel={item.name}
             loading="lazy"
+            /* Menü ızgarası: 1 → 2 → 3 sütun; en geniş kapta ~350px */
+            sizes="(min-width: 1280px) 350px, (min-width: 640px) 50vw, calc(100vw - 2.5rem)"
             className="warm-photo aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
         </div>

@@ -85,6 +85,8 @@ export default function StoryPage() {
                         alt={figure.alt}
                         fallbackLabel={figure.caption}
                         loading="lazy"
+                        /* Anlatı içindeki arşiv karesi: max-w-md (448px) */
+                        sizes="(min-width: 640px) 448px, calc(100vw - 2.5rem)"
                         className="aspect-[3/2] w-full object-cover"
                       />
                       <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">

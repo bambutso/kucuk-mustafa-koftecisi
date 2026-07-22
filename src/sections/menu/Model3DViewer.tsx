@@ -5,6 +5,7 @@ import type { MenuItem } from "../../types/menu";
 import { DEFAULT_LANG, LANG_PARAM, useContent, useLang } from "../../i18n";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { cn } from "../../utils/cn";
+import { gallerySrcSet } from "../../utils/images";
 
 /** model-viewer kütüphanesi yalnızca modal ilk açıldığında yüklenir. */
 let modelViewerPromise: Promise<unknown> | null = null;
@@ -147,6 +148,8 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
               {model.poster && (
                 <img
                   src={model.poster}
+                  srcSet={gallerySrcSet(model.poster)}
+                  sizes="176px"
                   alt=""
                   className="h-32 w-44 object-cover opacity-40"
                 />

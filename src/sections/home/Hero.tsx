@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { ChevronDown, ExternalLink, Phone, Star } from "lucide-react";
 import { igImages, restaurant } from "../../data/restaurant";
+import { gallerySrcSet } from "../../utils/images";
 import { useContent } from "../../i18n";
 import { buttonVariants } from "../../components/ui/Button";
 import { Stamp } from "../../components/ui/Stamp";
@@ -54,6 +55,11 @@ export function Hero() {
       >
         <motion.img
           src={igImages.kofteTabak}
+          srcSet={gallerySrcSet(igImages.kofteTabak)}
+          sizes="100vw"
+          /* Sayfanın en büyük görseli ve ilk görünen öge: geciktirmeden çekilsin */
+          fetchPriority="high"
+          decoding="async"
           alt=""
           className="h-full w-full scale-105 object-cover object-[center_55%]"
           initial={reduceMotion ? undefined : { scale: 1.14, opacity: 0.6 }}

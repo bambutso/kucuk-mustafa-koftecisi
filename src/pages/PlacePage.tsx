@@ -86,6 +86,8 @@ export default function PlacePage() {
                 alt="Yenilenen salon: bordo kadife koltuklar, ahşap lambri duvarlar"
                 fallbackLabel="Yenilenen salon"
                 loading="lazy"
+                /* lg'den sonra iki sütunlu ızgaranın yarısı (~530px) */
+                sizes="(min-width: 1024px) 530px, calc(100vw - 2.5rem)"
                 className="aspect-[3/2] w-full object-cover"
               />
               <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
@@ -155,6 +157,7 @@ export default function PlacePage() {
                 alt="Toplu yemek için kurulmuş uzun masa, pencere kenarında"
                 fallbackLabel="Organizasyon masası"
                 loading="lazy"
+                sizes="(min-width: 1024px) 530px, calc(100vw - 2.5rem)"
                 className="aspect-[3/2] w-full object-cover"
               />
               <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">

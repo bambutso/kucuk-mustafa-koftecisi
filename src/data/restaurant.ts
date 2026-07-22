@@ -2,6 +2,7 @@
  * İşletmeye ait tüm gerçek bilgiler tek kaynaktan yönetilir.
  * Kaynaklar: işletme künyesi, kirklarelikoftesi.com, TripAdvisor.
  */
+import { galleryImage } from "../utils/images";
 
 export const CART_YEAR = 1935;
 export const FOUNDING_YEAR = 1939;
@@ -11,9 +12,13 @@ export function shopAge(): number {
   return new Date().getFullYear() - FOUNDING_YEAR;
 }
 
-/** Wix CDN'deki gerçek işletme fotoğrafları için boyutlandırılmış URL üretir. */
+/**
+ * Wix CDN'deki gerçek işletme fotoğrafları için boyutlandırılmış URL üretir.
+ * `enc_auto`: Wix, tarayıcının Accept başlığına bakıp AVIF/WebP döner
+ * (eski tarayıcılara JPEG). Ölçüldü: 1200x800 karede 233 KB → 113 KB.
+ */
 function wixPhoto(id: string, w = 1200, h = 800): string {
-  return `https://static.wixstatic.com/media/1d5e1c_${id}~mv2.jpg/v1/fill/w_${w},h_${h},al_c,q_85/kucuk-mustafa-koftecisi.jpg`;
+  return `https://static.wixstatic.com/media/1d5e1c_${id}~mv2.jpg/v1/fill/w_${w},h_${h},al_c,q_85,enc_auto/kucuk-mustafa-koftecisi.jpg`;
 }
 
 function unsplash(id: string, w = 1600): string {
@@ -42,32 +47,36 @@ export const images = {
 /**
  * İşletmenin kendi Instagram arşivinden indirilen kareler (@kucukmustafakoftecisi1939).
  * CDN linkleri kısa ömürlü olduğundan siteye yerel kopyaları gömülüdür.
+ *
+ * Kaynak JPEG'ler media/gallery altında (yayınlanmaz); public/gallery'deki
+ * WebP sürümleri `npm run images` ile üretilir. Aşağıdaki adres en büyük
+ * sürümü gösterir; küçük ekranlar srcSet ile daha darını indirir.
  */
-function local(file: string): string {
-  return `${import.meta.env.BASE_URL}gallery/${file}`;
+function local(name: string): string {
+  return galleryImage(name, import.meta.env.BASE_URL);
 }
 
 export const igImages = {
   /** Ekmek üstünde iki iri köfte, söğüş garnitürüyle — güncel sunum */
-  kofteTabak: local("ig-kofte-tabak.jpg"),
+  kofteTabak: local("ig-kofte-tabak"),
   /** Güveçte kaşarlı mantar — yeni ürün */
-  guvecMantar: local("ig-guvec-mantar.jpg"),
+  guvecMantar: local("ig-guvec-mantar"),
   /** Logo işlemeli menü föyü, loş lamba ışığında */
-  menuFoyu: local("ig-menu-foyu.jpg"),
+  menuFoyu: local("ig-menu-foyu"),
   /** Yenilenen salon: bordo kadife koltuklar, ahşap lambri */
-  salonBordo: local("ig-salon-bordo.jpg"),
+  salonBordo: local("ig-salon-bordo"),
   /** Salon, kırmızı perde ve tuğla dokusu */
-  salonPerde: local("ig-salon-perde.jpg"),
+  salonPerde: local("ig-salon-perde"),
   /** Toplu yemek / organizasyon için kurulmuş uzun masa */
-  organizasyon: local("ig-organizasyon.jpg"),
+  organizasyon: local("ig-organizasyon"),
   /** Logo baskılı runner ile masa kurulumu detayı */
-  masaDetay: local("ig-masa-detay.jpg"),
+  masaDetay: local("ig-masa-detay"),
   /** Salonun gündelik hali, misafirlerle */
-  salonIci: local("ig-salon-ici.jpg"),
+  salonIci: local("ig-salon-ici"),
   /** Gece atmosferi: mum ışığı ve kadehler */
-  geceAtmosfer: local("ig-gece-atmosfer.jpg"),
+  geceAtmosfer: local("ig-gece-atmosfer"),
   /** Pirinç masa lambası detayı */
-  lamba: local("ig-lamba.jpg"),
+  lamba: local("ig-lamba"),
 } as const;
 
 /** Ana sayfadaki Instagram şeridi — gerçek gönderi linkleriyle */

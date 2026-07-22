@@ -1,6 +1,7 @@
 import { useState, type ImgHTMLAttributes } from "react";
 import { Flame } from "lucide-react";
 import { cn } from "../../utils/cn";
+import { gallerySrcSet } from "../../utils/images";
 
 interface ImageWithFallbackProps extends ImgHTMLAttributes<HTMLImageElement> {
   /** Görsel yüklenemezse fallback üzerinde görünen kısa metin */
@@ -10,14 +11,22 @@ interface ImageWithFallbackProps extends ImgHTMLAttributes<HTMLImageElement> {
 /**
  * Dış kaynaklı görseller (Unsplash / işletme CDN'i) kırılırsa
  * marka paletinde zarif bir yer tutucuya düşer.
+ *
+ * Yerel galeri kareleri için srcSet'i dosya adından kendisi kurar; çağrı yeri
+ * yalnızca `sizes` bildirir. `sizes` verilmezse tarayıcı 100vw varsayar ve en
+ * büyük sürümü indirir — ızgara içindeki görsellerde mutlaka bildirin.
  */
 export function ImageWithFallback({
   fallbackLabel,
   className,
   alt = "",
+  src,
+  srcSet,
   ...props
 }: ImageWithFallbackProps) {
   const [failed, setFailed] = useState(false);
+  const responsiveSrcSet =
+    srcSet ?? (typeof src === "string" ? gallerySrcSet(src) : undefined);
 
   if (failed) {
     return (
@@ -43,6 +52,8 @@ export function ImageWithFallback({
     <img
       className={className}
       alt={alt}
+      src={src}
+      srcSet={responsiveSrcSet}
       onError={() => setFailed(true)}
       {...props}
     />

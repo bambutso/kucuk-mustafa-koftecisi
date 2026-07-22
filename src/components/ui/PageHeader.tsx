@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Container } from "./Container";
 import { Reveal } from "./Reveal";
+import { gallerySrcSet } from "../../utils/images";
 
 interface PageHeaderProps {
   eyebrow: string;
@@ -25,6 +26,9 @@ export function PageHeader({
         <div aria-hidden className="absolute inset-0">
           <img
             src={image}
+            srcSet={gallerySrcSet(image)}
+            sizes="100vw"
+            decoding="async"
             alt=""
             className="h-full w-full object-cover opacity-25"
           />

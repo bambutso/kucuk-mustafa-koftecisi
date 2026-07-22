@@ -2,6 +2,7 @@ import { igImages, restaurant } from "../../data/restaurant";
 import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { Reveal } from "../../components/ui/Reveal";
+import { gallerySrcSet } from "../../utils/images";
 
 export function MenuHeader() {
   const content = useContent();
@@ -12,6 +13,9 @@ export function MenuHeader() {
       <div aria-hidden className="absolute inset-0">
         <img
           src={igImages.menuFoyu}
+          srcSet={gallerySrcSet(igImages.menuFoyu)}
+          sizes="100vw"
+          decoding="async"
           alt=""
           className="h-full w-full object-cover object-[center_35%] opacity-30"
         />

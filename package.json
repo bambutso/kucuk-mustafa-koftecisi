@@ -6,6 +6,7 @@
   "description": "Küçük Mustafa Köftecisi — 1939'dan günümüze yaşayan efsane. Kırklareli.",
   "scripts": {
     "dev": "vite",
+    "images": "node scripts/gen-images.mjs",
     "sitemap": "node scripts/gen-sitemap.mjs",
     "prebuild": "node scripts/gen-sitemap.mjs",
     "build": "tsc --noEmit && vite build",
@@ -32,6 +33,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.1.5"

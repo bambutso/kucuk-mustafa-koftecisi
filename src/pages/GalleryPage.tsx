@@ -11,6 +11,7 @@ import { Reveal } from "../components/ui/Reveal";
 import { Badge } from "../components/ui/Badge";
 import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 import { cn } from "../utils/cn";
+import { gallerySrcSet } from "../utils/images";
 
 function Lightbox({
   items,
@@ -94,6 +95,9 @@ function Lightbox({
           <motion.img
             key={item.id}
             src={item.src}
+            srcSet={gallerySrcSet(item.src)}
+            /* Büyütülmüş görünüm: neredeyse ekran genişliği kadar */
+            sizes="90vw"
             alt={item.alt}
             className="max-h-[72vh] w-auto max-w-full border border-copper/30 object-contain"
             initial={reduceMotion ? false : { opacity: 0, scale: 0.985 }}
@@ -217,6 +221,8 @@ export default function GalleryPage() {
                     alt={item.alt}
                     fallbackLabel={item.caption}
                     loading="lazy"
+                    /* Masonry: 1 → 2 → 3 sütun; en geniş kapta ~350px */
+                    sizes="(min-width: 1200px) 350px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, calc(100vw - 2.5rem)"
                     className={cn(
                       "w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]",
                       item.authentic && "warm-photo",

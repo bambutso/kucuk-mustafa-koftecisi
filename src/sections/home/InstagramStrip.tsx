@@ -46,6 +46,8 @@ export function InstagramStrip() {
                   alt={post.alt}
                   fallbackLabel="Instagram karesi"
                   loading="lazy"
+                  /* Izgara: mobilde 2, sm'den sonra 3 sütun; en geniş kapta ~350px */
+                  sizes="(min-width: 1200px) 350px, (min-width: 640px) 33vw, 50vw"
                   className="aspect-square w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                 />
                 <span
