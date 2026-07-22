@@ -48,7 +48,14 @@ $cred = New-Object System.Net.NetworkCredential($User, $Password)
 $useSsl = -not $NoTls
 
 function New-FtpRequest {
-  param([string]$Path, [string]$Method, [int]$TimeoutMs = 120000)
+  param(
+    [string]$Path,
+    [string]$Method,
+    [int]$TimeoutMs = 120000,
+    # $null = betiğin genel ayarını kullan; aksi hâlde bu çağrıya özel ezer.
+    $Ssl = $null,
+    $Passive = $null
+  )
   $p = $Path -replace '\\','/'
   # FTP adresinde tek eğik çizgi giriş dizinine göredir; kökten mutlak yol için
   # çift eğik çizgi gerekir (ftp://sunucu//home/... ).
@@ -60,8 +67,8 @@ function New-FtpRequest {
   $req = [System.Net.FtpWebRequest]::Create($uri)
   $req.Credentials = $cred
   $req.Method      = $Method
-  $req.EnableSsl   = $useSsl
-  $req.UsePassive  = $true
+  $req.EnableSsl   = if ($null -eq $Ssl) { $useSsl } else { [bool]$Ssl }
+  $req.UsePassive  = if ($null -eq $Passive) { $true } else { [bool]$Passive }
   $req.UseBinary   = $true
   $req.KeepAlive   = $false
   $req.Timeout     = $TimeoutMs
