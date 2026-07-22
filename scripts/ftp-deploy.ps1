@@ -68,9 +68,19 @@ try {
   $listing = $reader.ReadToEnd()
   $reader.Close(); $res.Close()
 } catch {
-  Write-Host "BAĞLANTI HATASI: $($_.Exception.Message)" -ForegroundColor Red
-  if ($useSsl) {
-    Write-Host "Sunucu FTPS desteklemiyor olabilir. -NoTls ekleyip tekrar deneyin." -ForegroundColor Yellow
+  $msg = $_.Exception.Message
+  # 530 = kullanıcı adı/şifre reddedildi · 550 = klasör yok
+  if ($msg -match "530") {
+    Write-Host "GİRİŞ REDDEDİLDİ (530): kullanıcı adı veya şifre hatalı." -ForegroundColor Red
+    Write-Host "Kullanıcı: $User" -ForegroundColor Yellow
+  } elseif ($msg -match "550") {
+    Write-Host "KLASÖR BULUNAMADI (550): '$RemoteDir' yok." -ForegroundColor Red
+    Write-Host "Hangi klasörlerin olduğunu görmek için -ListOnly ile çalıştırın." -ForegroundColor Yellow
+  } else {
+    Write-Host "BAĞLANTI HATASI: $msg" -ForegroundColor Red
+    if ($useSsl) {
+      Write-Host "Sunucu FTPS desteklemiyor olabilir. -NoTls ekleyip tekrar deneyin." -ForegroundColor Yellow
+    }
   }
   exit 1
 }
