@@ -48,7 +48,7 @@ $cred = New-Object System.Net.NetworkCredential($User, $Password)
 $useSsl = -not $NoTls
 
 function New-FtpRequest {
-  param([string]$Path, [string]$Method)
+  param([string]$Path, [string]$Method, [int]$TimeoutMs = 120000)
   $p = $Path -replace '\\','/'
   # FTP adresinde tek eğik çizgi giriş dizinine göredir; kökten mutlak yol için
   # çift eğik çizgi gerekir (ftp://sunucu//home/... ).
@@ -64,16 +64,21 @@ function New-FtpRequest {
   $req.UsePassive  = $true
   $req.UseBinary   = $true
   $req.KeepAlive   = $false
-  $req.Timeout     = 120000
+  $req.Timeout     = $TimeoutMs
+  $req.ReadWriteTimeout = $TimeoutMs
   return $req
 }
 
 # --- Web kökünü arama modu --------------------------------------------------
 if ($Explore) {
+  # Kısa zaman aşımı: takılan bir aday tüm taramayı kilitlemesin.
+  $KISA = 20000
+
   function Get-FtpListing {
     param([string]$Path)
     try {
-      $r = New-FtpRequest -Path $Path -Method ([System.Net.WebRequestMethods+Ftp]::ListDirectory)
+      $r = New-FtpRequest -Path $Path -TimeoutMs $KISA `
+             -Method ([System.Net.WebRequestMethods+Ftp]::ListDirectory)
       $s = $r.GetResponse()
       $rd = New-Object System.IO.StreamReader($s.GetResponseStream())
       $txt = $rd.ReadToEnd(); $rd.Close(); $s.Close()
@@ -82,6 +87,20 @@ if ($Explore) {
       return @{ ok = $false; err = $_.Exception.Message }
     }
   }
+
+  # PWD veri bağlantısı açmaz; pasif mod engelliyse bile çalışır ve bize
+  # kullanıcının hangi klasöre indiğini doğrudan söyler.
+  Write-Host "Giris dizini soruluyor (PWD)..." -ForegroundColor DarkGray
+  try {
+    $r = New-FtpRequest -Path "" -TimeoutMs $KISA `
+           -Method ([System.Net.WebRequestMethods+Ftp]::PrintWorkingDirectory)
+    $s = $r.GetResponse()
+    Write-Host "GIRIS DIZINI: $($s.StatusDescription.Trim())" -ForegroundColor Green
+    $s.Close()
+  } catch {
+    Write-Host "PWD alinamadi: $($_.Exception.Message)" -ForegroundColor Yellow
+  }
+  Write-Host ""
 
   $adaylar = @(
     "",
@@ -98,6 +117,7 @@ if ($Explore) {
   Write-Host ("=" * 60)
   foreach ($a in $adaylar) {
     $etiket = if ($a -eq "") { "(giris dizini)" } else { $a }
+    Write-Host "deneniyor: $etiket ..." -ForegroundColor DarkGray
     $r = Get-FtpListing -Path $a
     if ($r.ok) {
       Write-Host ""
