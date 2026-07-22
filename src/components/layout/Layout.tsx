@@ -1,5 +1,6 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useContent } from "../../i18n";
+import { SeoHead } from "../../i18n/SeoHead";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
@@ -21,6 +22,7 @@ export function Layout() {
       </main>
       <Footer />
       <LanguageSwitcher />
+      <SeoHead />
       <ScrollRestoration />
     </div>
   );

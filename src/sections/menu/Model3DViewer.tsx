@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Camera, Smartphone, X } from "lucide-react";
 import type { MenuItem } from "../../types/menu";
-import { useContent } from "../../i18n";
+import { DEFAULT_LANG, LANG_PARAM, useContent, useLang } from "../../i18n";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { cn } from "../../utils/cn";
 
@@ -20,6 +20,7 @@ interface Model3DViewerProps {
 
 export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
   const content = useContent();
+  const { lang } = useLang();
   const ui = content.ui.menuPage;
   const reduceMotion = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -49,7 +50,11 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
   /* Masaüstünde: telefona geçiş için QR kod (AR kamera akışı telefonda çalışır) */
   useEffect(() => {
     if (!isDesktop || !qrRef.current) return;
-    const url = `${window.location.origin}${import.meta.env.BASE_URL}menu?model3d=${item.id}`;
+    /* Sondaki eğik çizgi: GitHub Pages "menu" isteğini "menu/" adresine yönlendirir,
+       doğrudan doğru adrese gidip fazladan atlamayı atlıyoruz. Dil de taşınır ki
+       QR'ı okuyan misafir sayfayı bulunduğu dilde açsın. */
+    const langQuery = lang === DEFAULT_LANG ? "" : `&${LANG_PARAM}=${lang}`;
+    const url = `${window.location.origin}${import.meta.env.BASE_URL}menu/?model3d=${item.id}${langQuery}`;
     import("qrcode").then((QRCode) => {
       if (!qrRef.current) return;
       QRCode.toCanvas(qrRef.current, url, {
@@ -58,7 +63,7 @@ export function Model3DViewer({ item, onClose }: Model3DViewerProps) {
         color: { dark: "#1b1b1b", light: "#f7f2ea" },
       });
     });
-  }, [isDesktop, item.id]);
+  }, [isDesktop, item.id, lang]);
 
   if (!model) return null;
 

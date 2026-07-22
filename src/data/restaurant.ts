@@ -112,6 +112,13 @@ export const restaurant = {
     display: "0288 212 76 12",
     href: "tel:+902882127612",
   },
+  /**
+   * Google'ın işletme kartı kimliği. Maps embed uçnoktasından çıkarıldı ve
+   * döndürdüğü adresle ("Küçük Mustafa Köftecisi, Karacaibrahim, 39000 Kırklareli
+   * Merkez") doğrulandı. Yol tarifi ve yorum linkleri arama tahminine değil
+   * doğrudan bu karta gider.
+   */
+  googlePlaceId: "ChIJySZnKUBTp0ARJC97bIU65i0",
   address: {
     lines: [
       "Karacaibrahim Mahallesi",
@@ -120,7 +127,7 @@ export const restaurant = {
     ],
     landmark: "Şevket Dingiloğlu Parkı karşısı",
     directionsUrl:
-      "https://www.google.com/maps/dir/?api=1&destination=K%C3%BC%C3%A7%C3%BCk+Mustafa+K%C3%B6ftecisi+K%C4%B1rklareli",
+      "https://www.google.com/maps/dir/?api=1&destination=K%C3%BC%C3%A7%C3%BCk+Mustafa+K%C3%B6ftecisi+K%C4%B1rklareli&destination_place_id=ChIJySZnKUBTp0ARJC97bIU65i0",
     embedUrl:
       "https://maps.google.com/maps?q=K%C3%BC%C3%A7%C3%BCk+Mustafa+K%C3%B6ftecisi+K%C4%B1rklareli&z=16&ie=UTF8&output=embed",
   },
@@ -138,11 +145,14 @@ export const restaurant = {
     instagram: "https://www.instagram.com/kucukmustafakoftecisi1939/",
     tripadvisor:
       "https://www.tripadvisor.com.tr/Restaurant_Review-g3252637-d10962098-Reviews-Kucuk_Mustafa_Koftecisi-Kirklareli_Kirklareli_Province.html",
+    /** İşletmenin Google Haritalar kartı */
+    google:
+      "https://www.google.com/maps/place/?q=place_id:ChIJySZnKUBTp0ARJC97bIU65i0",
   },
-  /** Yorum kanalları — Google linki, işletme kartını ve "Yorum yazın" akışını açan kalıcı arama */
+  /** Yorum kanalları — Google linki doğrudan yıldız/yorum yazma penceresini açar */
   reviewLinks: {
     google:
-      "https://www.google.com/search?q=K%C3%BC%C3%A7%C3%BCk+Mustafa+K%C3%B6ftecisi+K%C4%B1rklareli+Yorumlar",
+      "https://search.google.com/local/writereview?placeid=ChIJySZnKUBTp0ARJC97bIU65i0",
     tripadvisor:
       "https://www.tripadvisor.com.tr/Restaurant_Review-g3252637-d10962098-Reviews-Kucuk_Mustafa_Koftecisi-Kirklareli_Kirklareli_Province.html",
   },

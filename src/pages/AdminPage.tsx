@@ -260,6 +260,7 @@ export default function AdminPage() {
   usePageMeta(
     "Yönetim — Küçük Mustafa Köftecisi",
     "Menü düzenleme paneli (demo).",
+    true, // arama sonuçlarına girmesin
   );
 
   const [authed, setAuthed] = useState(

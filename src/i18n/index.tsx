@@ -17,6 +17,11 @@ import { ar } from "./ar";
 const DICTS: Record<Lang, SiteContent> = { tr, en, bg, el, ar };
 const STORAGE_KEY = "km-lang";
 
+/** Kanonik dil: URL'de dil parametresi taşımaz, sitenin varsayılanıdır. */
+export const DEFAULT_LANG: Lang = "tr";
+/** Paylaşılabilir dil linki: ?lang=bg */
+export const LANG_PARAM = "lang";
+
 interface LanguageContextValue {
   lang: Lang;
   setLang: (lang: Lang) => void;
@@ -26,18 +31,36 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-function readStoredLang(): Lang {
+export function isLang(value: string | null | undefined): value is Lang {
+  return !!value && LANGS.some((l) => l.code === value);
+}
+
+/**
+ * Öncelik: paylaşılan linkteki dil → kayıtlı tercih → Türkçe.
+ *
+ * Tarayıcı diline göre otomatik geçiş BİLEREK yok: Googlebot siteyi en-US ile
+ * gezer, parametresiz (Türkçe kanonik) adreste İngilizce içerik görür ve ana
+ * sayfa yanlış dille indekslenirdi. Doğru dile yönlendirmeyi hreflang etiketleri
+ * ile sitemap yapar — ziyaretçi zaten arama sonucunda kendi dilindeki adrese düşer.
+ */
+function initialLang(): Lang {
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get(LANG_PARAM);
+    if (isLang(fromUrl)) return fromUrl;
+  } catch {
+    /* bozuk sorgu dizesi — sıradaki kaynağa geç */
+  }
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored && LANGS.some((l) => l.code === stored)) return stored as Lang;
+    if (isLang(stored)) return stored;
   } catch {
     /* localStorage kapalıysa varsayılan dil */
   }
-  return "tr";
+  return DEFAULT_LANG;
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(readStoredLang);
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
   const setLang = useCallback((next: Lang) => {
     setLangState(next);
