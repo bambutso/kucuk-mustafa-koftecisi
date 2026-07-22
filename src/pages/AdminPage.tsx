@@ -14,6 +14,7 @@ import type { MenuCategory } from "../types/menu";
 import {
   getMenuSnapshot,
   isValidMenu,
+  menuBoyutu,
   resetMenu,
   saveMenu,
   useMenu,
@@ -24,6 +25,7 @@ import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { AdminLogin } from "../sections/admin/AdminLogin";
 import { CategoryEditor } from "../sections/admin/CategoryEditor";
+import { cn } from "../utils/cn";
 
 const AUTH_KEY = "kmk-admin";
 
@@ -43,6 +45,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
     () => JSON.stringify(draft) !== JSON.stringify(categories),
     [draft, categories],
   );
+  const boyutKb = useMemo(() => menuBoyutu(draft), [draft]);
 
   const flash = (text: string) => {
     setMessage(text);
@@ -79,8 +82,15 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
   };
 
   const handleSave = () => {
-    saveMenu(draft);
-    flash("Menü kaydedildi. Değişiklikler bu tarayıcıda görünür durumda.");
+    try {
+      saveMenu(draft);
+      flash("Menü kaydedildi. Değişiklikler bu tarayıcıda görünür durumda.");
+    } catch (hata) {
+      /* Kota dolduysa mesaj uzun; kısa süreli flash yerine kalıcı gösterilir */
+      window.alert(
+        hata instanceof Error ? hata.message : "Menü kaydedilemedi.",
+      );
+    }
   };
 
   const handleDiscard = () => {
@@ -187,6 +197,21 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
             >
               Vazgeç
             </Button>
+            {/* Görseller menü verisinin içinde saklandığı için doluluk görünür
+                olmalı; tarayıcı kotası ~5 MB civarında. */}
+            <span
+              className={cn(
+                "ml-1 text-[0.7rem] tabular-nums",
+                boyutKb > 4000
+                  ? "text-ember"
+                  : boyutKb > 2500
+                    ? "text-copper"
+                    : "text-cream/35",
+              )}
+              title="Menünün tarayıcıda kapladığı alan (görseller dahil). Sınır yaklaşık 5000 KB."
+            >
+              {boyutKb} KB
+            </span>
             <span className="mx-1 h-5 w-px bg-cream/15" aria-hidden />
             <Button type="button" variant="ghost" size="sm" onClick={handleExport}>
               <Download aria-hidden className="h-3.5 w-3.5" />

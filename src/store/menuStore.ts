@@ -61,10 +61,43 @@ export function getMenuSnapshot(): MenuSnapshot {
   return snapshot;
 }
 
+/**
+ * Menüyü kaydeder.
+ *
+ * Panelden yüklenen görseller veri adresi (data URL) olarak menünün içinde
+ * durur; bu yüzden localStorage kotası (tarayıcıya göre ~5 MB) dolabilir.
+ * Kota aşıldığında sessizce kaybolmasın diye anlaşılır bir hata fırlatılır —
+ * çağıran taraf kullanıcıya gösterir.
+ */
 export function saveMenu(categories: MenuCategory[]): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(categories));
+  const veri = JSON.stringify(categories);
+  try {
+    localStorage.setItem(STORAGE_KEY, veri);
+  } catch (hata) {
+    const kotaHatasi =
+      hata instanceof DOMException &&
+      (hata.name === "QuotaExceededError" ||
+        hata.name === "NS_ERROR_DOM_QUOTA_REACHED");
+    if (kotaHatasi) {
+      throw new Error(
+        `Tarayıcı depolama alanı doldu (${menuBoyutuKb(veri)} KB). ` +
+          "Bazı ürün görsellerini kaldırın ya da daha küçük kareler yükleyin. " +
+          "Menüyü JSON olarak dışa aktarmak veriyi güvene alır.",
+      );
+    }
+    throw hata;
+  }
   snapshot = { categories, customized: true };
   emit();
+}
+
+function menuBoyutuKb(veri: string): number {
+  return Math.round(new Blob([veri]).size / 1024);
+}
+
+/** Menünün kayıtlı hâlinin yaklaşık boyutu (KB) — panelde gösterilir. */
+export function menuBoyutu(categories: MenuCategory[]): number {
+  return menuBoyutuKb(JSON.stringify(categories));
 }
 
 export function resetMenu(): void {

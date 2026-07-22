@@ -1,6 +1,8 @@
-import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
+import { useId, useRef, useState } from "react";
+import { ChevronDown, ChevronUp, ImageUp, Trash2, X } from "lucide-react";
 import type { ItemTag, MenuItem, SpiceLevel } from "../../types/menu";
 import { Input, Labelled, Select, Textarea } from "../../components/ui/Field";
+import { boyutMetni, gorseliHazirla } from "../../utils/imageUpload";
 import { cn } from "../../utils/cn";
 
 const TAG_OPTIONS: ReadonlyArray<{ value: ItemTag; label: string }> = [
@@ -30,6 +32,30 @@ export function ItemEditor({
   onMove,
   onDelete,
 }: ItemEditorProps) {
+  const dosyaRef = useRef<HTMLInputElement>(null);
+  const dosyaId = useId();
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [gorselNotu, setGorselNotu] = useState<string | null>(null);
+
+  const gorselSecildi = async (file: File | undefined) => {
+    if (!file) return;
+    setYukleniyor(true);
+    setGorselNotu(null);
+    try {
+      const g = await gorseliHazirla(file);
+      onChange({ image: g.dataUrl });
+      setGorselNotu(
+        `Eklendi: ${g.genislik}×${g.yukseklik} ${g.bicim.toUpperCase()}, ${boyutMetni(g.bayt)}`,
+      );
+    } catch (hata) {
+      setGorselNotu(hata instanceof Error ? hata.message : "Görsel eklenemedi.");
+    } finally {
+      setYukleniyor(false);
+      /* Aynı dosya art arda seçilebilsin diye girdi sıfırlanır */
+      if (dosyaRef.current) dosyaRef.current.value = "";
+    }
+  };
+
   const toggleTag = (tag: ItemTag) => {
     const current = item.tags ?? [];
     const next = current.includes(tag)
@@ -160,16 +186,92 @@ export function ItemEditor({
             />
           )}
         </Labelled>
-        <Labelled label="Görsel URL" hint="Boş bırakılırsa kart metin olarak görünür">
+        <div className="sm:col-span-2">
+          <p className="mb-1.5 text-xs uppercase tracking-[0.15em] text-cream/50">
+            Görsel
+          </p>
+          <div className="flex flex-wrap items-start gap-4">
+            {item.image ? (
+              <div className="relative shrink-0">
+                <img
+                  src={item.image}
+                  alt=""
+                  className="h-24 w-24 rounded-[2px] border border-earth/40 object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    onChange({ image: undefined, imageAlt: undefined });
+                    setGorselNotu(null);
+                  }}
+                  aria-label="Görseli kaldır"
+                  className="absolute -right-2 -top-2 rounded-full border border-earth/50 bg-coal p-1 text-cream/70 transition-colors hover:text-ember"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[2px] border border-dashed border-earth/40 text-[0.6rem] uppercase tracking-[0.15em] text-cream/30">
+                Görsel yok
+              </div>
+            )}
+
+            <div className="min-w-[15rem] flex-1 space-y-2">
+              {/* Dosya girdisi gizli; tıklama görünür butondan tetiklenir */}
+              <input
+                ref={dosyaRef}
+                id={dosyaId}
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(e) => void gorselSecildi(e.target.files?.[0])}
+              />
+              <label
+                htmlFor={dosyaId}
+                className={cn(
+                  "inline-flex cursor-pointer items-center gap-2 border border-copper/50 bg-coal/40 px-4 py-2 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-copper transition-colors",
+                  "hover:border-ember hover:text-ember",
+                  yukleniyor && "pointer-events-none opacity-60",
+                )}
+              >
+                <ImageUp aria-hidden className="h-4 w-4" />
+                {yukleniyor ? "İşleniyor…" : "Bilgisayardan Yükle"}
+              </label>
+
+              <Input
+                type="text"
+                aria-label="Görsel adresi"
+                value={item.image?.startsWith("data:") ? "" : (item.image ?? "")}
+                placeholder={
+                  item.image?.startsWith("data:")
+                    ? "Yüklenen görsel kullanılıyor"
+                    : "veya adres yapıştırın: https://…"
+                }
+                disabled={item.image?.startsWith("data:")}
+                onChange={(e) => onChange({ image: e.target.value || undefined })}
+              />
+
+              <p className="text-[0.7rem] leading-relaxed text-cream/40">
+                {gorselNotu ??
+                  "Fotoğraf otomatik olarak 1000 piksele küçültülüp WebP'ye çevrilir."}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <Labelled
+          label="Görsel Açıklaması"
+          hint="Görme engelli okuyucular ve görsel yüklenmezse görünür"
+          className="sm:col-span-2"
+        >
           {(id) => (
             <Input
               id={id}
-              type="url"
-              value={item.image ?? ""}
+              value={item.imageAlt ?? ""}
               onChange={(e) =>
-                onChange({ image: e.target.value || undefined })
+                onChange({ imageAlt: e.target.value || undefined })
               }
-              placeholder="https://…"
+              placeholder="Örn. Porsiyon köfte, közlenmiş biberle"
             />
           )}
         </Labelled>
