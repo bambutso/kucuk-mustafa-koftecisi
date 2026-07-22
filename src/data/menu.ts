@@ -448,13 +448,20 @@ export const menu: MenuCategory[] = [
     ],
   },
   {
-    id: "biralar",
-    title: "Biralar",
+    id: "alkollu-icecekler",
+    title: "Alkollü İçecekler",
     note: "Alkollü servis salonda geçerlidir. Fiyatlar için servis ekibimize danışın.",
+    groups: [
+      { id: "biralar", title: "Biralar" },
+      { id: "rakilar", title: "Rakılar" },
+      { id: "viskiler", title: "Viskiler" },
+      { id: "saraplar", title: "Şaraplar" },
+    ],
     items: [
       {
         id: "efes-pilsen",
         name: "Efes Pilsen",
+        group: "biralar",
         description: "Soğuk servis, şişede.",
         image: gmImages.bira,
         imageAlt: "Buz gibi bira, dış masada",
@@ -462,18 +469,13 @@ export const menu: MenuCategory[] = [
       {
         id: "tuborg-gold",
         name: "Tuborg Gold",
+        group: "biralar",
         description: "Soğuk servis, şişede.",
       },
-    ],
-  },
-  {
-    id: "rakilar",
-    title: "Rakılar",
-    note: "Közde köftenin klasik eşlikçisi. Şişe boyları 20–100 cl arasında değişir.",
-    items: [
       {
         id: "yeni-raki",
         name: "Yeni Rakı",
+        group: "rakilar",
         unit: "Yeni Seri",
         description: "Klasik. Beyaz peynir ve kavunla.",
         image: gmImages.raki,
@@ -483,59 +485,53 @@ export const menu: MenuCategory[] = [
       {
         id: "tekirdag-altin-seri",
         name: "Tekirdağ Rakısı Altın Seri",
+        group: "rakilar",
         description: "Meşe fıçılarda dinlendirilmiş; Trakya'nın kendi rakısı.",
         tags: ["yoresel"],
       },
       {
         id: "tekirdag-sir-kavrulmus",
         name: "Tekirdağ Rakısı Sır Kavrulmuş",
+        group: "rakilar",
         description: "Kavrulmuş anasonuyla, dolgun.",
         tags: ["yoresel"],
       },
       {
         id: "izmir-gobek",
         name: "İzmir Rakısı Göbek",
+        group: "rakilar",
         description: "Göbek suyundan, yumuşak içimli.",
       },
       {
         id: "kulup-rakisi",
         name: "Kulüp Rakısı",
+        group: "rakilar",
         description: "Eski usul, sert karakterli.",
       },
       {
         id: "efe-gold",
         name: "Efe Gold",
+        group: "rakilar",
         description: "Hafif anasonlu, dengeli.",
       },
-    ],
-  },
-  {
-    id: "viskiler",
-    title: "Viskiler",
-    note: "Kadeh ya da şişe olarak servis edilir.",
-    items: [
       {
         id: "chivas-regal-12",
         name: "Chivas Regal 12",
+        group: "viskiler",
         unit: "12 yıllık",
         description: "İskoç harman viski, yumuşak bitişli.",
       },
       {
         id: "jack-daniels",
         name: "Jack Daniel's",
+        group: "viskiler",
         unit: "Tennessee",
         description: "Akçaağaç kömüründe süzülmüş, tatlımsı.",
       },
-    ],
-  },
-  {
-    id: "saraplar",
-    title: "Şaraplar",
-    note: "Trakya bağlarından; kadeh ya da şişe.",
-    items: [
       {
         id: "saranta",
         name: "Saranta",
+        group: "saraplar",
         description:
           "Kırklareli bağlarından butik şarap; köftenin yanında yerli bir seçenek.",
         tags: ["yoresel"],
@@ -543,6 +539,7 @@ export const menu: MenuCategory[] = [
       {
         id: "vino-dessera",
         name: "Vino Dessera",
+        group: "saraplar",
         description:
           "Vize'de üretilen Trakya şarabı; kırmızı ve beyaz seçenekleriyle.",
         tags: ["yoresel"],

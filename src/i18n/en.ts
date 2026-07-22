@@ -424,21 +424,15 @@ export const en: SiteContent = {
       },
       "soguk-icecekler": { title: "Cold Drinks" },
       "sicak-icecekler": { title: "Hot Drinks" },
-      biralar: {
-        title: "Beers",
+      "alkollu-icecekler": {
+        title: "Alcoholic Drinks",
         note: "Licensed service applies in the dining room. Please ask our team for prices.",
-      },
-      rakilar: {
-        title: "Rakı",
-        note: "The classic companion to köfte off the embers. Bottle sizes range from 20 to 100 cl.",
-      },
-      viskiler: {
-        title: "Whisky",
-        note: "Served by the glass or by the bottle.",
-      },
-      saraplar: {
-        title: "Wines",
-        note: "From the Thracian vineyards; by the glass or the bottle.",
+        groups: {
+          biralar: "Beers",
+          rakilar: "Rakı",
+          viskiler: "Whisky",
+          saraplar: "Wines",
+        },
       },
     },
     items: {

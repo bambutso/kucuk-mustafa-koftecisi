@@ -25,6 +25,11 @@ export interface MenuItem {
    * sorunuz" gösterir — uydurma fiyat yazmak yerine.
    */
   price?: number;
+  /**
+   * Kategori içindeki alt grup (bkz. `MenuCategory.groups`). Ör. Alkollü
+   * İçecekler kategorisinde "biralar" | "rakilar" | "viskiler" | "saraplar".
+   */
+  group?: string;
   /** Gramaj / adet bilgisi, ör. "250 g · 8 adet" */
   unit?: string;
   image?: string;
@@ -40,5 +45,11 @@ export interface MenuCategory {
   title: string;
   /** Kategori altında görünen kısa açıklama */
   note?: string;
+  /**
+   * Kategori içi alt başlıklar (sekme değil, bölüm içi ayrım). Sıralıdır;
+   * ürünler `MenuItem.group` ile buraya bağlanır. Grubu olmayan ürünler
+   * alt başlıkların üstünde listelenir.
+   */
+  groups?: ReadonlyArray<{ id: string; title: string }>;
   items: MenuItem[];
 }

@@ -24,6 +24,18 @@ export function CategorySection({
   const reduceMotion = useReducedMotion();
   const ui = useContent().ui.menuPage;
   const expanded = !collapsible || open;
+
+  /* Grup tanımı olmayan kategorilerde tüm ürünler tek ızgarada kalır. */
+  const ungrouped = category.groups
+    ? category.items.filter((item) => !item.group)
+    : category.items;
+  const groups = (category.groups ?? [])
+    .map((group) => ({
+      ...group,
+      items: category.items.filter((item) => item.group === group.id),
+    }))
+    .filter((group) => group.items.length > 0);
+
   const panelId = `panel-${category.id}`;
   const headingId = `heading-${category.id}`;
 
@@ -87,11 +99,31 @@ export function CategorySection({
             transition={{ duration: 0.35, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="grid gap-5 pt-8 sm:grid-cols-2 xl:grid-cols-3">
-              {category.items.map((item) => (
-                <MenuCard key={item.id} item={item} onView3D={onView3D} />
-              ))}
-            </div>
+            {/* Grupsuz ürünler önce; alt başlıklı gruplar ardından */}
+            {ungrouped.length > 0 && (
+              <div className="grid gap-5 pt-8 sm:grid-cols-2 xl:grid-cols-3">
+                {ungrouped.map((item) => (
+                  <MenuCard key={item.id} item={item} onView3D={onView3D} />
+                ))}
+              </div>
+            )}
+
+            {groups.map((group) => (
+              <div key={group.id}>
+                <h3 className="mt-10 flex items-center gap-4 font-display text-xl font-semibold text-copper first:mt-8">
+                  {group.title}
+                  <span aria-hidden className="h-px flex-1 bg-earth/35" />
+                  <span className="text-xs uppercase tracking-[0.2em] text-cream/30">
+                    {ui.itemsCount(group.items.length)}
+                  </span>
+                </h3>
+                <div className="grid gap-5 pt-5 sm:grid-cols-2 xl:grid-cols-3">
+                  {group.items.map((item) => (
+                    <MenuCard key={item.id} item={item} onView3D={onView3D} />
+                  ))}
+                </div>
+              </div>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>

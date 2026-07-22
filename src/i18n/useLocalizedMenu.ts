@@ -20,6 +20,10 @@ export function useLocalizedMenu(): { categories: MenuCategory[] } {
         ...category,
         title: cat?.title ?? category.title,
         note: category.note ? (cat?.note ?? category.note) : category.note,
+        groups: category.groups?.map((group) => ({
+          ...group,
+          title: cat?.groups?.[group.id] ?? group.title,
+        })),
         items: category.items.map((item) => {
           const tr9n = content.menu.items[item.id];
           return {

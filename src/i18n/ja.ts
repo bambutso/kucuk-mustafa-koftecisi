@@ -424,21 +424,15 @@ export const ja: SiteContent = {
       },
       "soguk-icecekler": { title: "冷たい飲みもの" },
       "sicak-icecekler": { title: "温かい飲みもの" },
-      biralar: {
-        title: "ビール",
+      "alkollu-icecekler": {
+        title: "アルコール飲料",
         note: "酒類の提供は客席のみとなります。価格はスタッフにお尋ねください。",
-      },
-      rakilar: {
-        title: "ラク",
-        note: "おき火の köfte に添える、古くからの相棒。ボトルは 20〜100 cl まで各種ございます。",
-      },
-      viskiler: {
-        title: "ウイスキー",
-        note: "グラスまたはボトルでご提供します。",
-      },
-      saraplar: {
-        title: "ワイン",
-        note: "トラキアのぶどう畑から。グラスまたはボトルで。",
+        groups: {
+          biralar: "ビール",
+          rakilar: "ラク",
+          viskiler: "ウイスキー",
+          saraplar: "ワイン",
+        },
       },
     },
     items: {

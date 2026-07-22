@@ -424,21 +424,15 @@ export const es: SiteContent = {
       },
       "soguk-icecekler": { title: "Bebidas Frías" },
       "sicak-icecekler": { title: "Bebidas Calientes" },
-      biralar: {
-        title: "Cervezas",
-        note: "El servicio con alcohol es solo en el comedor. Consulta los precios a nuestro equipo de sala.",
-      },
-      rakilar: {
-        title: "Rakı",
-        note: "El acompañante clásico de la köfte a la brasa. Las botellas van de 20 a 100 cl.",
-      },
-      viskiler: {
-        title: "Whiskies",
-        note: "Se sirve por copas o por botella.",
-      },
-      saraplar: {
-        title: "Vinos",
-        note: "De los viñedos de Tracia; por copas o por botella.",
+      "alkollu-icecekler": {
+        title: "Bebidas Alcohólicas",
+        note: "El servicio de alcohol solo es válido en el salón. Consulta los precios a nuestro equipo.",
+        groups: {
+          biralar: "Cervezas",
+          rakilar: "Rakı",
+          viskiler: "Whiskies",
+          saraplar: "Vinos",
+        },
       },
     },
     items: {

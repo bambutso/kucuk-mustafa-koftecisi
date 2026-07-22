@@ -289,7 +289,15 @@ export interface SiteContent {
   menuNote: string;
   /** id-anahtarlı çeviri katmanı; tr için boş bırakılır (özgün veri kullanılır) */
   menu: {
-    categories: Record<string, { title: string; note?: string }>;
+    categories: Record<
+      string,
+      {
+        title: string;
+        note?: string;
+        /** Kategori içi alt başlıklar: grup id'si → çevrilmiş başlık */
+        groups?: Record<string, string>;
+      }
+    >;
     items: Record<string, { unit?: string; description: string }>;
   };
   gallery: Record<string, { caption: string }>;

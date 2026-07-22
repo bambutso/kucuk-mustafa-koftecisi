@@ -24,16 +24,22 @@ export function Stamp({ className }: { className?: string }) {
           strokeWidth="0.75"
           className="stroke-copper/40"
         />
+        <defs>
+          <path
+            id="stamp-circle"
+            d="M 60,60 m -47,0 a 47,47 0 1,1 94,0 a 47,47 0 1,1 -94,0"
+          />
+        </defs>
+        {/*
+          Dönme merkezi viewBox'ın (60,60) noktası — yani dairenin merkezi.
+          `fill-box` KULLANILMAZ: o, merkezi yazının sınır kutusuna göre alır;
+          yazı çemberi tam kapatmadığı için kutu asimetriktir ve yazı tipi
+          geç yüklendiğinde kutu değişip damga gözle görülür biçimde kayar.
+        */}
         <g
           className="motion-safe:animate-[spin_55s_linear_infinite]"
-          style={{ transformBox: "fill-box", transformOrigin: "center" }}
+          style={{ transformBox: "view-box", transformOrigin: "60px 60px" }}
         >
-          <defs>
-            <path
-              id="stamp-circle"
-              d="M 60,60 m -47,0 a 47,47 0 1,1 94,0 a 47,47 0 1,1 -94,0"
-            />
-          </defs>
           <text
             fontSize="8.2"
             letterSpacing="2.4"
