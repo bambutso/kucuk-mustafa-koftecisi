@@ -426,7 +426,7 @@ export const en: SiteContent = {
       "sicak-icecekler": { title: "Hot Drinks" },
       "alkollu-icecekler": {
         title: "Alcoholic Drinks",
-        note: "Licensed service applies in the dining room. Please ask our team for prices.",
+        note: "Licensed service applies in the dining room. Beer is a 50 cl bottle; rakı, whisky and wine are priced per glass. Prices in this section are ESTIMATES — please ask our team for the exact price.",
         groups: {
           biralar: "Beers",
           rakilar: "Rakı",

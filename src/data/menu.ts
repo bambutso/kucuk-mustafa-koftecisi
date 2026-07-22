@@ -8,9 +8,17 @@
  *   • Ayaklı fiyat panosu (bir kuşak eski) → Tatlılar ve Soğuk İçecekler.
  *     Bu iki kategorinin fiyatları basılı menüde görünmüyordu; pano
  *     fiyatları ızgaralarda basılı menünün ~%12 altında kalıyor.
- *   • Bar dolabı ve raf fotoğrafları → alkollü içecek markaları.
- *     Alkolde FİYAT KAYNAĞI YOK; bu kalemler bilerek fiyatsız bırakıldı
- *     (kart "fiyat için sorunuz" gösterir). Uydurma fiyat yazılmadı.
+ *   • Bar dolabı ve raf fotoğrafları → alkollü içecek MARKALARI.
+ *
+ *  ⚠ ALKOL FİYATLARI TAHMİNÎDİR — işletmenin menüsünde görünmüyordu.
+ *  Kullanıcı isteğiyle, uydurma yerine gerçek piyasa verisine oranlanarak
+ *  hesaplandı (Temmuz 2026 perakende): Yeni Rakı 70 cl ≈ 1.525 ₺,
+ *  Chivas Regal 12 70 cl ≈ 1.795 ₺, Efes/Tuborg 50 cl ≈ 93–110 ₺;
+ *  restoranlarda rakı 35 cl 575–700 ₺ bandında. Buradan tek kadeh (5 cl) ve
+ *  şişe fiyatları, işletmenin kendi fiyat seviyesine (köfte 390 ₺, meze
+ *  150–210 ₺) oranlanarak türetildi. Kategori notunda tahminî oldukları
+ *  yazılıdır; işletmeden kesin liste gelince not kaldırılıp fiyatlar
+ *  güncellenmelidir.
  *
  *  Ürün adları menüdeki yazımıyla korunmuştur.
  * ─────────────────────────────────────────────────────────────────────────
@@ -450,7 +458,7 @@ export const menu: MenuCategory[] = [
   {
     id: "alkollu-icecekler",
     title: "Alkollü İçecekler",
-    note: "Alkollü servis salonda geçerlidir. Fiyatlar için servis ekibimize danışın.",
+    note: "Alkollü servis salonda geçerlidir. Bira 50 cl şişe; rakı, viski ve şarap tek kadeh fiyatıdır. Bu bölümdeki fiyatlar TAHMİNÎDİR — kesin fiyat için servis ekibimize danışın.",
     groups: [
       { id: "biralar", title: "Biralar" },
       { id: "rakilar", title: "Rakılar" },
@@ -462,6 +470,7 @@ export const menu: MenuCategory[] = [
         id: "efes-pilsen",
         name: "Efes Pilsen",
         group: "biralar",
+        price: 180,
         description: "Soğuk servis, şişede.",
         image: gmImages.bira,
         imageAlt: "Buz gibi bira, dış masada",
@@ -470,12 +479,14 @@ export const menu: MenuCategory[] = [
         id: "tuborg-gold",
         name: "Tuborg Gold",
         group: "biralar",
+        price: 180,
         description: "Soğuk servis, şişede.",
       },
       {
         id: "yeni-raki",
         name: "Yeni Rakı",
         group: "rakilar",
+        price: 220,
         unit: "Yeni Seri",
         description: "Klasik. Beyaz peynir ve kavunla.",
         image: gmImages.raki,
@@ -486,6 +497,7 @@ export const menu: MenuCategory[] = [
         id: "tekirdag-altin-seri",
         name: "Tekirdağ Rakısı Altın Seri",
         group: "rakilar",
+        price: 240,
         description: "Meşe fıçılarda dinlendirilmiş; Trakya'nın kendi rakısı.",
         tags: ["yoresel"],
       },
@@ -493,6 +505,7 @@ export const menu: MenuCategory[] = [
         id: "tekirdag-sir-kavrulmus",
         name: "Tekirdağ Rakısı Sır Kavrulmuş",
         group: "rakilar",
+        price: 260,
         description: "Kavrulmuş anasonuyla, dolgun.",
         tags: ["yoresel"],
       },
@@ -500,24 +513,28 @@ export const menu: MenuCategory[] = [
         id: "izmir-gobek",
         name: "İzmir Rakısı Göbek",
         group: "rakilar",
+        price: 230,
         description: "Göbek suyundan, yumuşak içimli.",
       },
       {
         id: "kulup-rakisi",
         name: "Kulüp Rakısı",
         group: "rakilar",
+        price: 210,
         description: "Eski usul, sert karakterli.",
       },
       {
         id: "efe-gold",
         name: "Efe Gold",
         group: "rakilar",
+        price: 220,
         description: "Hafif anasonlu, dengeli.",
       },
       {
         id: "chivas-regal-12",
         name: "Chivas Regal 12",
         group: "viskiler",
+        price: 450,
         unit: "12 yıllık",
         description: "İskoç harman viski, yumuşak bitişli.",
       },
@@ -525,6 +542,7 @@ export const menu: MenuCategory[] = [
         id: "jack-daniels",
         name: "Jack Daniel's",
         group: "viskiler",
+        price: 420,
         unit: "Tennessee",
         description: "Akçaağaç kömüründe süzülmüş, tatlımsı.",
       },
@@ -532,6 +550,7 @@ export const menu: MenuCategory[] = [
         id: "saranta",
         name: "Saranta",
         group: "saraplar",
+        price: 320,
         description:
           "Kırklareli bağlarından butik şarap; köftenin yanında yerli bir seçenek.",
         tags: ["yoresel"],
@@ -540,6 +559,7 @@ export const menu: MenuCategory[] = [
         id: "vino-dessera",
         name: "Vino Dessera",
         group: "saraplar",
+        price: 340,
         description:
           "Vize'de üretilen Trakya şarabı; kırmızı ve beyaz seçenekleriyle.",
         tags: ["yoresel"],

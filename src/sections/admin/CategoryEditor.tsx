@@ -22,11 +22,12 @@ interface CategoryEditorProps {
 }
 
 function newItem(): MenuItem {
+  /* Fiyat bilerek boş: doldurulana kadar kartta "fiyat için sorunuz" yazar,
+     menüye yanlışlıkla 0 ₺ düşmez. */
   return {
     id: crypto.randomUUID(),
     name: "Yeni Ürün",
     description: "",
-    price: 0,
   };
 }
 
@@ -64,6 +65,43 @@ export function CategoryEditor({
   const addItem = () => {
     onChange({ items: [...category.items, newItem()] });
     setExpanded(true);
+  };
+
+  const groups = category.groups ?? [];
+
+  const addGroup = () => {
+    const id = `grup-${crypto.randomUUID().slice(0, 8)}`;
+    onChange({ groups: [...groups, { id, title: "Yeni Alt Kategori" }] });
+  };
+
+  const renameGroup = (index: number, title: string) => {
+    onChange({
+      groups: groups.map((group, i) => (i === index ? { ...group, title } : group)),
+    });
+  };
+
+  const moveGroup = (index: number, direction: -1 | 1) => {
+    const target = index + direction;
+    if (target < 0 || target >= groups.length) return;
+    const next = [...groups];
+    [next[index], next[target]] = [next[target], next[index]];
+    onChange({ groups: next });
+  };
+
+  /* Alt kategori silinince ürünler silinmez, yalnızca bağı kopar. */
+  const deleteGroup = (index: number) => {
+    const group = groups[index];
+    const used = category.items.filter((item) => item.group === group.id).length;
+    const warning = used
+      ? `"${group.title}" silinsin mi? ${used} ürün alt kategorisiz kalacak (ürünler silinmez).`
+      : `"${group.title}" silinsin mi?`;
+    if (!window.confirm(warning)) return;
+    onChange({
+      groups: groups.filter((_, i) => i !== index),
+      items: category.items.map((item) =>
+        item.group === group.id ? { ...item, group: undefined } : item,
+      ),
+    });
   };
 
   return (
@@ -146,6 +184,71 @@ export function CategoryEditor({
             </Labelled>
           </div>
 
+          {/* Alt kategoriler — ör. Alkollü İçecekler altında Biralar/Rakılar */}
+          <div className="mt-5 border border-earth/25 bg-coal/40 p-4">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-xs uppercase tracking-[0.15em] text-cream/50">
+                Alt Kategoriler
+              </p>
+              <Button type="button" variant="outline" size="sm" onClick={addGroup}>
+                <Plus aria-hidden className="h-3.5 w-3.5" />
+                Alt Kategori Ekle
+              </Button>
+            </div>
+
+            {groups.length === 0 ? (
+              <p className="mt-3 text-xs leading-relaxed text-cream/40">
+                Alt kategori yok — ürünler tek liste hâlinde görünür. Ekledikten
+                sonra her ürünün kendi kartından hangi alt kategoriye gireceğini
+                seçebilirsiniz.
+              </p>
+            ) : (
+              <ul className="mt-3 space-y-2">
+                {groups.map((group, index) => (
+                  <li key={group.id} className="flex items-center gap-2">
+                    <Input
+                      aria-label={`Alt kategori adı: ${group.title}`}
+                      value={group.title}
+                      onChange={(e) => renameGroup(index, e.target.value)}
+                    />
+                    <span className="shrink-0 text-xs tabular-nums text-cream/35">
+                      {
+                        category.items.filter((item) => item.group === group.id)
+                          .length
+                      }
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => moveGroup(index, -1)}
+                      disabled={index === 0}
+                      aria-label="Alt kategoriyi yukarı taşı"
+                      className="p-1.5 text-cream/50 transition-colors hover:text-copper disabled:opacity-25"
+                    >
+                      <ChevronUp className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => moveGroup(index, 1)}
+                      disabled={index === groups.length - 1}
+                      aria-label="Alt kategoriyi aşağı taşı"
+                      className="p-1.5 text-cream/50 transition-colors hover:text-copper disabled:opacity-25"
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => deleteGroup(index)}
+                      aria-label={`Alt kategoriyi sil: ${group.title}`}
+                      className="p-1.5 text-cream/50 transition-colors hover:text-ember"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
           <div className="mt-5 space-y-4">
             {category.items.map((item, index) => (
               <ItemEditor
@@ -153,6 +256,7 @@ export function CategoryEditor({
                 item={item}
                 isFirst={index === 0}
                 isLast={index === category.items.length - 1}
+                groups={groups}
                 onChange={(patch) => updateItem(index, patch)}
                 onMove={(direction) => moveItem(index, direction)}
                 onDelete={() => deleteItem(index)}

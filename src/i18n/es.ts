@@ -426,7 +426,7 @@ export const es: SiteContent = {
       "sicak-icecekler": { title: "Bebidas Calientes" },
       "alkollu-icecekler": {
         title: "Bebidas Alcohólicas",
-        note: "El servicio de alcohol solo es válido en el salón. Consulta los precios a nuestro equipo.",
+        note: "El servicio de alcohol solo es válido en el salón. La cerveza es botella de 50 cl; el rakı, el whisky y el vino se sirven por copa. Los precios de esta sección son ESTIMADOS — consulta el precio exacto a nuestro equipo.",
         groups: {
           biralar: "Cervezas",
           rakilar: "Rakı",

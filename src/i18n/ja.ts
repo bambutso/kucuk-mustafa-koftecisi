@@ -426,7 +426,7 @@ export const ja: SiteContent = {
       "sicak-icecekler": { title: "温かい飲みもの" },
       "alkollu-icecekler": {
         title: "アルコール飲料",
-        note: "酒類の提供は客席のみとなります。価格はスタッフにお尋ねください。",
+        note: "酒類の提供は客席のみとなります。ビールは 50 cl 瓶、ラク・ウイスキー・ワインはグラス単位の価格です。この区分の価格は目安です — 正確な価格はスタッフにお尋ねください。",
         groups: {
           biralar: "ビール",
           rakilar: "ラク",

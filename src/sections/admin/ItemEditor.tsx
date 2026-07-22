@@ -14,6 +14,8 @@ interface ItemEditorProps {
   item: MenuItem;
   isFirst: boolean;
   isLast: boolean;
+  /** Kategorinin alt kategorileri; boşsa seçim kutusu gösterilmez */
+  groups?: ReadonlyArray<{ id: string; title: string }>;
   onChange: (patch: Partial<MenuItem>) => void;
   onMove: (direction: -1 | 1) => void;
   onDelete: () => void;
@@ -23,6 +25,7 @@ export function ItemEditor({
   item,
   isFirst,
   isLast,
+  groups,
   onChange,
   onMove,
   onDelete,
@@ -123,6 +126,29 @@ export function ItemEditor({
             )}
           </Labelled>
         </div>
+        {groups && groups.length > 0 && (
+          <Labelled
+            label="Alt Kategori"
+            hint="Kategori içinde hangi başlığın altında görünsün?"
+          >
+            {(id) => (
+              <Select
+                id={id}
+                value={item.group ?? ""}
+                onChange={(e) =>
+                  onChange({ group: e.target.value || undefined })
+                }
+              >
+                <option value="">Alt kategorisiz</option>
+                {groups.map((group) => (
+                  <option key={group.id} value={group.id}>
+                    {group.title}
+                  </option>
+                ))}
+              </Select>
+            )}
+          </Labelled>
+        )}
         <Labelled label="Gramaj / Adet" hint="Örn. 250 g · 8 adet (boş bırakılabilir)">
           {(id) => (
             <Input
