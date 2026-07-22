@@ -218,28 +218,62 @@ foreach ($f in $files) {
   $dir = Split-Path $remote -Parent
   Confirm-RemoteDir -Dir ($dir -replace '\\','/')
 
-  try {
-    $r = New-FtpRequest -Path $remote -Method ([System.Net.WebRequestMethods+Ftp]::UploadFile)
-    $bytes = [System.IO.File]::ReadAllBytes($f.FullName)
-    $r.ContentLength = $bytes.Length
-    $s = $r.GetRequestStream()
-    $s.Write($bytes, 0, $bytes.Length)
-    $s.Close()
-    $r.GetResponse().Close()
-    $done++
-    Write-Progress -Activity "Yükleniyor" -Status "$done/$($files.Count) — $rel" `
-                   -PercentComplete (($done / $files.Count) * 100)
-  } catch {
-    $failed += "$rel — $($_.Exception.Message)"
+  $bytes = [System.IO.File]::ReadAllBytes($f.FullName)
+  $sonHata = $null
+  $ok = $false
+
+  # Zaman aşımına uğrayan aktarım sunucuda 0 baytlık dosya bırakabiliyor —
+  # bu, eksik dosyadan daha kötüdür (tarayıcı boş modül alır). Bu yüzden her
+  # yüklemeden sonra uzak boyut doğrulanır ve tutmazsa yeniden denenir.
+  for ($deneme = 1; $deneme -le 3 -and -not $ok; $deneme++) {
+    try {
+      $r = New-FtpRequest -Path $remote -Method ([System.Net.WebRequestMethods+Ftp]::UploadFile)
+      $r.ContentLength = $bytes.Length
+      $s = $r.GetRequestStream()
+      $s.Write($bytes, 0, $bytes.Length)
+      $s.Close()
+      $r.GetResponse().Close()
+
+      $uzak = -1
+      try {
+        $q = New-FtpRequest -Path $remote -TimeoutMs 30000 `
+               -Method ([System.Net.WebRequestMethods+Ftp]::GetFileSize)
+        $qr = $q.GetResponse()
+        $uzak = $qr.ContentLength
+        $qr.Close()
+      } catch {
+        # Sunucu SIZE desteklemiyorsa doğrulama atlanır, yükleme geçerli sayılır
+        $uzak = $bytes.Length
+      }
+
+      if ($uzak -eq $bytes.Length) {
+        $ok = $true
+      } else {
+        $sonHata = "uzak boyut $uzak, olmasi gereken $($bytes.Length)"
+        Start-Sleep -Seconds 2
+      }
+    } catch {
+      $sonHata = $_.Exception.Message
+      Start-Sleep -Seconds 2
+    }
   }
+
+  if ($ok) {
+    $done++
+  } else {
+    $failed += "$rel — $sonHata"
+  }
+  Write-Progress -Activity "Yükleniyor" -Status "$($done + $failed.Count)/$($files.Count) — $rel" `
+                 -PercentComplete ((($done + $failed.Count) / $files.Count) * 100)
 }
 Write-Progress -Activity "Yükleniyor" -Completed
 
 Write-Host ""
-Write-Host "Yüklenen: $done / $($files.Count)" -ForegroundColor Green
+Write-Host "Yüklenen ve boyutu doğrulanan: $done / $($files.Count)" -ForegroundColor Green
 if ($failed) {
-  Write-Host "Başarısız: $($failed.Count)" -ForegroundColor Red
+  Write-Host "Başarısız: $($failed.Count) — 3 denemede de yüklenemedi:" -ForegroundColor Red
   $failed | Select-Object -First 15 | ForEach-Object { "  $_" }
+  Write-Host "Betiği tekrar çalıştırın; genelde ikinci seferde tamamlanır." -ForegroundColor Yellow
 } else {
   Write-Host "Tamamlandı → https://$Server/" -ForegroundColor Green
 }
