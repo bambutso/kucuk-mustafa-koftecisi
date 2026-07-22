@@ -1,8 +1,9 @@
 /**
- * Galeri içeriği. Gerçek işletme fotoğrafları ile paleti tamamlayan
- * temsilî atmosfer kareleri (Unsplash) bir arada; temsilî olanlar işaretlidir.
+ * Galeri içeriği. Tamamı işletmenin kendi arşivi (Instagram, Wix) ile
+ * Google Haritalar kartındaki ziyaretçi karelerinden oluşur; temsilî
+ * (stok) kare kalmadı. `authentic` alanı olası gelecek eklemeler için durur.
  */
-import { igImages, images } from "./restaurant";
+import { gmImages, igImages, images } from "./restaurant";
 
 export type GalleryCategoryId = "mekan" | "koz" | "sofra";
 
@@ -25,10 +26,6 @@ export const galleryCategories: ReadonlyArray<{
   { id: "koz", label: "Közden" },
   { id: "sofra", label: "Sofra" },
 ];
-
-function unsplash(id: string, w = 1400): string {
-  return `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
-}
 
 export const galleryItems: GalleryItem[] = [
   {
@@ -129,42 +126,42 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "ates",
-    src: unsplash("photo-1475738972911-5b44ce984c42", 1600),
-    alt: "Karanlıkta yanan odun ateşi, yükselen kıvılcımlar",
+    src: gmImages.ocak,
+    alt: "Ocağın başı: döküm ızgara, közün üstünde",
     caption: "Meşe kömürü kor bağlayana kadar beklenir",
     category: "koz",
-    authentic: false,
+    authentic: true,
   },
   {
     id: "dokum",
-    src: unsplash("photo-1594041680534-e8c8cdebd659"),
-    alt: "Döküm tabakta ızgara et, közlenmiş biber ve patates",
+    src: gmImages.karisikIzgara,
+    alt: "Şiş ve köftelerle karışık ızgara tabağı, söğüş ve ekmekle",
     caption: "Közden inen, sıcak servis edilir",
     category: "sofra",
-    authentic: false,
+    authentic: true,
   },
   {
     id: "sis",
-    src: unsplash("photo-1603360946369-dc9bb6258143"),
-    alt: "Piyazlık soğan ve domatesle servis edilen şişler",
+    src: gmImages.kuzuSis,
+    alt: "Közden inmiş kuzu şişler; domates ve közlenmiş biberle",
     caption: "Şişin yanında piyazlık soğan eksik olmaz",
     category: "sofra",
-    authentic: false,
+    authentic: true,
   },
   {
     id: "sofra-kurulumu",
-    src: unsplash("photo-1555939594-58d7cb561ad1"),
-    alt: "Şişler, közlenmiş biber ve patlıcanla kurulmuş sofra",
-    caption: "Közlenmiş sebze, sofranın harcı",
+    src: gmImages.sofraKurulumu,
+    alt: "Kurulmuş sofra: köfte, piyaz, acı sos ve ekmek sepeti",
+    caption: "Köfte, piyaz, acı sos: sofra kurulmuştur",
     category: "sofra",
-    authentic: false,
+    authentic: true,
   },
   {
     id: "cay",
-    src: unsplash("photo-1571934811356-5cc061b6821f"),
-    alt: "Demli çay ve kurutulmuş bitkiler",
+    src: gmImages.cay,
+    alt: "İnce belli bardakta demli çay, logolu runner üzerinde",
     caption: "Hesaptan önce mutlaka bir çay",
     category: "sofra",
-    authentic: false,
+    authentic: true,
   },
 ];

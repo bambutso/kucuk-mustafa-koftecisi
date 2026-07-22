@@ -138,7 +138,7 @@ export const tr: SiteContent = {
       docDesc: "Dükkân, köz ve sofra: Küçük Mustafa Köftecisi'nden kareler.",
       eyebrow: "Galeri",
       title: "Közden ve sofradan kareler",
-      lead: "Bir kısmı bizim arşivden, bir kısmı atmosferi anlatmak için seçilmiş temsilî kareler — hangisi hangisi, üzerinde yazıyor.",
+      lead: "Tamamı gerçek kareler: kendi arşivimizden ve misafirlerimizin Google'da paylaştıklarından.",
       filterAll: "Tümü",
       filterPlace: "Mekân",
       filterEmber: "Közden",

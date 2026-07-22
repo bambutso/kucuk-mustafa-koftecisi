@@ -9,7 +9,7 @@
  * ─────────────────────────────────────────────────────────────────────────
  */
 import type { MenuCategory } from "../types/menu";
-import { igImages, images } from "./restaurant";
+import { gmImages, igImages, images } from "./restaurant";
 
 export const MENU_NOTE =
   "Bu menü örnek olarak hazırlanmıştır. Ürün içerikleri ve fiyatlar işletme tarafından güncellenecektir.";
@@ -27,8 +27,9 @@ export const menu: MenuCategory[] = [
         description:
           "Kuru soğan ve bayat ekmekle yoğrulan harç, meşe korunda mühürlenir. Piyazlık soğan, közlenmiş yeşil biber ve ev yapımı acı sosla servis edilir.",
         price: 380,
-        image: images.koftePlate,
-        imageAlt: "Sekiz adet köfte; közlenmiş biber, domates ve piyazlık soğanla",
+        image: gmImages.koftePorsiyon,
+        imageAlt:
+          "Porsiyon köfte; ev yapımı acı sos, piyazlık soğan, domates ve közlenmiş biberle",
         tags: ["sef-onerisi", "cok-tercih"],
         model3d: {
           glb: `${import.meta.env.BASE_URL}models/kofte.glb`,
@@ -44,6 +45,8 @@ export const menu: MenuCategory[] = [
         description:
           "İştahı açık olanlara. Aynı harç, aynı kor; dört köfte fazlasıyla.",
         price: 540,
+        image: gmImages.kofteOnikili,
+        imageAlt: "Kalabalık köfte tabağı; domates ve piyazlık soğanla",
       },
       {
         id: "yarim-porsiyon",
@@ -51,6 +54,8 @@ export const menu: MenuCategory[] = [
         unit: "125 g · 4 adet",
         description: "Küçük misafirlerimize ve hafif yemek isteyenlere.",
         price: 220,
+        image: gmImages.kofteYarim,
+        imageAlt: "Yarım porsiyon köfte, közlenmiş yeşil biberle",
       },
       {
         id: "kofte-ekmek",
@@ -78,8 +83,8 @@ export const menu: MenuCategory[] = [
         description:
           "Kararsız kalanlara ocağın özeti: dört köfte, iki pirzola ve bir kuzu şiş, közlenmiş sebzelerle.",
         price: 690,
-        image: images.grillPlate,
-        imageAlt: "Döküm tabakta karışık ızgara, közlenmiş biber ve patatesle",
+        image: gmImages.karisikIzgara,
+        imageAlt: "Şiş ve köftelerle karışık ızgara tabağı, söğüş ve ekmekle",
         tags: ["sef-onerisi"],
       },
       {
@@ -96,8 +101,8 @@ export const menu: MenuCategory[] = [
         description:
           "Kuşbaşı kuzu, közde mühürlenir; piyazlık soğan ve közlenmiş biberle.",
         price: 520,
-        image: images.lambSkewer,
-        imageAlt: "Piyazlık soğan ve domatesle servis edilen kuzu şiş",
+        image: gmImages.kuzuSis,
+        imageAlt: "Közden inmiş kuzu şişler; domates ve közlenmiş biberle",
       },
       {
         id: "tavuk-sis",
@@ -146,6 +151,8 @@ export const menu: MenuCategory[] = [
         description:
           "Süt bollaşınca kurulan yoğurt; kaşığın dik durduğu kıvamda. Mevsiminde sorunuz.",
         price: 130,
+        image: gmImages.koyunYogurdu,
+        imageAlt: "Kaşığın dik durduğu kıvamda, kesme koyun yoğurdu",
         tags: ["yoresel"],
       },
       {
@@ -153,6 +160,8 @@ export const menu: MenuCategory[] = [
         name: "Trakya Beyaz Peynir Söğüşü",
         description: "Yerli beyaz peynir, söğüş domates ve salatalıkla.",
         price: 160,
+        image: gmImages.peynirSogus,
+        imageAlt: "Beyaz peynir söğüşü; domates, biber ve ekmekle kurulmuş masa",
         tags: ["yoresel"],
       },
       {
@@ -171,6 +180,8 @@ export const menu: MenuCategory[] = [
         description:
           "Közlenmiş yeşil biberin yanında dükkânın kendi acı sosu. Köftenin yol arkadaşı, tek başına da meze.",
         price: 120,
+        image: gmImages.kozdeBiber,
+        imageAlt: "Közlenmiş yeşil biberler, domates dilimleri ve piyazlık soğanla",
         tags: ["yoresel"],
         spice: 2,
       },
@@ -186,6 +197,8 @@ export const menu: MenuCategory[] = [
         description:
           "Kuru fasulye, bol kuru soğan, sirke ve zeytinyağı. Köftenin değişmez eşlikçisi.",
         price: 150,
+        image: gmImages.piyaz,
+        imageAlt: "Kuru fasulye piyazı; domates, soğan ve haşlanmış yumurtayla",
         tags: ["cok-tercih"],
       },
       {
@@ -193,12 +206,16 @@ export const menu: MenuCategory[] = [
         name: "Çoban Salatası",
         description: "Domates, salatalık, biber ve soğan; ince kıyım.",
         price: 160,
+        image: gmImages.cobanSalata,
+        imageAlt: "Çoban salatası; domates, salatalık, biber, soğan ve zeytinle",
       },
       {
         id: "sogus",
         name: "Söğüş Tabağı",
         description: "Mevsim sebzesi, iri doğranmış, limonlu.",
         price: 140,
+        image: gmImages.sogus,
+        imageAlt: "Limonlu söğüş tabağı; domates, soğan ve siyah zeytinle",
       },
     ],
   },
@@ -213,6 +230,8 @@ export const menu: MenuCategory[] = [
         description:
           "Trakya'nın peynirli şerbetli tatlısı; taze peynirle, ılık servis.",
         price: 180,
+        image: gmImages.hayrabolu,
+        imageAlt: "Şerbetli peynir tatlısı, ılık servis",
         tags: ["sef-onerisi", "yoresel"],
       },
       {
@@ -273,6 +292,8 @@ export const menu: MenuCategory[] = [
         name: "Çay",
         description: "İnce belli bardakta, demli.",
         price: 30,
+        image: gmImages.cay,
+        imageAlt: "İnce belli bardakta demli çay, logolu runner üzerinde",
       },
       {
         id: "turk-kahvesi",
@@ -292,6 +313,8 @@ export const menu: MenuCategory[] = [
         unit: "50 cl",
         description: "Soğuk servis. Alkollü servis salonda geçerlidir.",
         price: 160,
+        image: gmImages.bira,
+        imageAlt: "Buz gibi bira, dış masada",
       },
       {
         id: "raki",
@@ -299,6 +322,8 @@ export const menu: MenuCategory[] = [
         unit: "Tek kadeh",
         description: "Közde köftenin klasik eşlikçisi; beyaz peynir ve kavunla.",
         price: 220,
+        image: gmImages.raki,
+        imageAlt: "Rakı şişesi ve işletmenin logolu peçetesi",
       },
     ],
   },

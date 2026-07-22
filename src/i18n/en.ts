@@ -122,7 +122,7 @@ export const en: SiteContent = {
       docDesc: "The shop, the embers and the table: scenes from Küçük Mustafa Köftecisi.",
       eyebrow: "Gallery",
       title: "Scenes from the embers and the table",
-      lead: "Some are from our own archive, some are illustrative shots chosen to convey the atmosphere — each one is labelled.",
+      lead: "All real shots: from our own archive and from what our guests share on Google.",
       filterAll: "All",
       filterPlace: "The Place",
       filterEmber: "The Embers",
@@ -545,7 +545,7 @@ export const en: SiteContent = {
     ates: { caption: "We wait until the oak charcoal turns to embers" },
     dokum: { caption: "Off the embers, served hot" },
     sis: { caption: "A skewer never goes without onion piyaz" },
-    "sofra-kurulumu": { caption: "Ember-roasted vegetables, the table's mortar" },
+    "sofra-kurulumu": { caption: "Köfte, piyaz, hot sauce: the table is set" },
     cay: { caption: "Always a tea before the bill" },
   },
 };

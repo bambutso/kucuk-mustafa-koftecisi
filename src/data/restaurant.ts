@@ -34,14 +34,6 @@ export const images = {
   storefront: wixPhoto("cc20b1bff6874f1eb4740fb21c07dd2b"),
   /** Gerçek fotoğraf: usta, köz başında */
   ustaGrill: wixPhoto("d55687df66b840fb8657152e7b0fbc56"),
-  /** Dökme tavada ızgara — koyu atmosfer (Unsplash) */
-  grillPlate: unsplash("photo-1594041680534-e8c8cdebd659", 1200),
-  /** Piyazlık soğanla şiş tabağı (Unsplash) */
-  lambSkewer: unsplash("photo-1603360946369-dc9bb6258143", 1200),
-  /** Şiş ve közlenmiş sebze sofrası (Unsplash) */
-  skewerSpread: unsplash("photo-1555939594-58d7cb561ad1", 1200),
-  /** Sıcak ahşap dokulu salon atmosferi (Unsplash) */
-  salonInterior: unsplash("photo-1514933651103-005eec06c04b", 1600),
 } as const;
 
 /**
@@ -77,6 +69,48 @@ export const igImages = {
   geceAtmosfer: local("ig-gece-atmosfer"),
   /** Pirinç masa lambası detayı */
   lamba: local("ig-lamba"),
+} as const;
+
+/**
+ * İşletmenin Google Haritalar kartındaki galeriden seçilen ziyaretçi kareleri
+ * (Temmuz 2026). Google CDN adresleri kalıcı olmadığından kaynak JPEG'ler
+ * media/gallery altında tutulur; WebP sürümleri `npm run images` ile üretilir.
+ */
+export const gmImages = {
+  /** Porsiyon köfte; ev yapımı acı sos kasesi ve söğüşüyle */
+  koftePorsiyon: local("gm-kofte-porsiyon"),
+  /** Kalabalık köfte tabağı — bir buçuk porsiyonluk bolluk */
+  kofteOnikili: local("gm-kofte-onikili"),
+  /** Üç köftelik hafif tabak, közlenmiş biberle */
+  kofteYarim: local("gm-kofte-yarim"),
+  /** Şiş ve köftelerin buluştuğu karışık ızgara sofrası */
+  karisikIzgara: local("gm-karisik-izgara"),
+  /** Közden inmiş kuzu şişler; domates ve közlenmiş biberle */
+  kuzuSis: local("gm-kuzu-sis"),
+  /** Kaşığın dik durduğu kıvamda koyun yoğurdu */
+  koyunYogurdu: local("gm-koyun-yogurdu"),
+  /** Beyaz peynir söğüşü; köfte ve ekmekle kurulmuş masa */
+  peynirSogus: local("gm-peynir-sogus"),
+  /** Közlenmiş yeşil biber ve domates tabağı */
+  kozdeBiber: local("gm-kozde-biber"),
+  /** Kuru fasulye piyazı; domates, soğan ve haşlanmış yumurtayla */
+  piyaz: local("gm-piyaz"),
+  /** İnce kıyım çoban salatası, zeytinli */
+  cobanSalata: local("gm-coban-salata"),
+  /** Limonlu söğüş tabağı; domates, soğan ve siyah zeytin */
+  sogus: local("gm-sogus"),
+  /** Şerbetli peynir tatlısı — Hayrabolu usulü */
+  hayrabolu: local("gm-hayrabolu"),
+  /** İnce belli bardakta çay, logolu runner üzerinde */
+  cay: local("gm-cay"),
+  /** Rakı ve işletmenin logolu peçetesi */
+  raki: local("gm-raki"),
+  /** Buz gibi bira, dış masada */
+  bira: local("gm-bira"),
+  /** Ocağın başı: döküm ızgara közün üstünde */
+  ocak: local("gm-ocak"),
+  /** Kurulmuş sofra: köfte, piyaz, acı sos ve ekmek sepeti */
+  sofraKurulumu: local("gm-sofra-kurulumu"),
 } as const;
 
 /** Ana sayfadaki Instagram şeridi — gerçek gönderi linkleriyle */

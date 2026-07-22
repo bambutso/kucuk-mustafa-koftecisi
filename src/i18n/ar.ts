@@ -122,7 +122,7 @@ export const ar: SiteContent = {
       docDesc: "المحل والجمر والمائدة: لقطات من Küçük Mustafa Köftecisi.",
       eyebrow: "المعرض",
       title: "لقطات من الجمر والمائدة",
-      lead: "بعضها من أرشيفنا، وبعضها لقطات توضيحية اختيرت لنقل الأجواء — وكلٌّ منها موسوم بما هو.",
+      lead: "كل اللقطات حقيقية: من أرشيفنا ومما يشاركه ضيوفنا على Google.",
       filterAll: "الكل",
       filterPlace: "المكان",
       filterEmber: "الجمر",
@@ -544,7 +544,7 @@ export const ar: SiteContent = {
     ates: { caption: "نصبر حتى يصير فحم البلوط جمرًا" },
     dokum: { caption: "ما نزل عن الجمر يُقدَّم ساخنًا" },
     sis: { caption: "لا يغيب بياز البصل عن جانب الشيش" },
-    "sofra-kurulumu": { caption: "الخضار المشوية، ملاط المائدة" },
+    "sofra-kurulumu": { caption: "كفتة وبياز وصلصة حارة: المائدة جاهزة" },
     cay: { caption: "قبل الحساب، لا بدّ من شاي" },
   },
 };

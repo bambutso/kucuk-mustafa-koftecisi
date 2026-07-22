@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { galleryItems, type GalleryItem } from "../data/gallery";
-import { images } from "../data/restaurant";
+import { gmImages } from "../data/restaurant";
 import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
@@ -159,7 +159,7 @@ export default function GalleryPage() {
         eyebrow={ui.eyebrow}
         title={ui.title}
         lead={ui.lead}
-        image={images.skewerSpread}
+        image={gmImages.kofteOnikili}
       />
 
       <div className="bg-charcoal py-14 md:py-20">

@@ -2,6 +2,23 @@
 
 /** Yerel galeri karelerinin üretilmiş WebP genişlikleri: dosya adı → [genişlikler] */
 export const IMAGE_WIDTHS: Record<string, number[]> = {
+  "gm-bira": [480, 960, 1200],
+  "gm-cay": [480, 960, 1440],
+  "gm-coban-salata": [480, 900],
+  "gm-hayrabolu": [480, 900],
+  "gm-karisik-izgara": [480, 960, 1200],
+  "gm-kofte-onikili": [480, 960, 1440],
+  "gm-kofte-porsiyon": [480, 960, 1200],
+  "gm-kofte-yarim": [480, 960, 1200],
+  "gm-koyun-yogurdu": [480, 900],
+  "gm-kozde-biber": [480, 960, 1440],
+  "gm-kuzu-sis": [480, 960, 1200],
+  "gm-ocak": [480, 960, 1440],
+  "gm-peynir-sogus": [480, 960, 1440],
+  "gm-piyaz": [480, 900],
+  "gm-raki": [480, 900],
+  "gm-sofra-kurulumu": [480, 900],
+  "gm-sogus": [480, 900],
   "ig-gece-atmosfer": [480, 960, 1439],
   "ig-guvec-mantar": [480, 960, 1438],
   "ig-kofte-tabak": [480, 960, 1440],
