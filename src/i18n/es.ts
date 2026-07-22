@@ -438,6 +438,7 @@ export const es: SiteContent = {
     items: {
       /* İmza Köfteler */
       "kucuk-mustafa-koftesi": {
+        unit: "225 g · 8 unidades",
         description:
           "La köfte que lleva el nombre de la casa. Una masa amasada con cebolla y pan del día anterior, sellada sobre las brasas de roble; llega acompañada de pan de pueblo mojado en caldo de huesos.",
       },

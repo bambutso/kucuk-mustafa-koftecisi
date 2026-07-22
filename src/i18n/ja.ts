@@ -438,6 +438,7 @@ export const ja: SiteContent = {
     items: {
       /* İmza Köfteler */
       "kucuk-mustafa-koftesi": {
+        unit: "225 g · 8個",
         description:
           "店の名を冠した köfte。玉ねぎと一日おいたパンで練り上げた生地を樫炭のおき火で封じ込め、骨の出汁にひたした田舎パンを添えてお出しします。",
       },

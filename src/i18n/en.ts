@@ -438,6 +438,7 @@ export const en: SiteContent = {
     items: {
       /* İmza Köfteler */
       "kucuk-mustafa-koftesi": {
+        unit: "225 g · 8 pieces",
         description:
           "The köfte that carries the shop's name. A mix kneaded with onion and day-old bread, seared over oak embers; served with village bread dipped in bone broth.",
       },

@@ -38,6 +38,7 @@ export const menu: MenuCategory[] = [
       {
         id: "kucuk-mustafa-koftesi",
         name: "Küçük Mustafa Köftesi",
+        unit: "225 g · 8 adet",
         description:
           "Dükkânın adını taşıyan köfte. Kuru soğan ve bayat ekmekle yoğrulan harç meşe korunda mühürlenir; kemik suyuna batırılmış köy ekmeği eşliğinde gelir.",
         price: 390,
