@@ -13,8 +13,10 @@ import { en } from "./en";
 import { bg } from "./bg";
 import { el } from "./el";
 import { ar } from "./ar";
+import { es } from "./es";
+import { ja } from "./ja";
 
-const DICTS: Record<Lang, SiteContent> = { tr, en, bg, el, ar };
+const DICTS: Record<Lang, SiteContent> = { tr, en, bg, el, ar, es, ja };
 const STORAGE_KEY = "km-lang";
 
 /** Kanonik dil: URL'de dil parametresi taşımaz, sitenin varsayılanıdır. */

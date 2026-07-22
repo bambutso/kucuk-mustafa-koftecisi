@@ -74,6 +74,9 @@ export const en: SiteContent = {
       rankLine: (_rank, total) => `among ${total} restaurants in Kırklareli`,
       ourPage: (source) => `Our ${source} page`,
       starsAria: (score, outOf) => `${score} out of ${outOf} stars`,
+      googleEyebrow: "Google Reviews",
+      googleLine: "Our real rating on Google Maps",
+      writeReview: "Leave a review",
     },
     location: {
       eyebrow: "Find Us",
@@ -84,7 +87,6 @@ export const en: SiteContent = {
       addressTitle: "Address",
       hoursTitle: "Opening Hours",
       servicesTitle: "Services",
-      tablesChairs: (tables, chairs) => `${tables} tables · ${chairs} seats`,
       tagline: "Since 1939, over the same embers.",
     },
     menuPage: {
@@ -100,7 +102,7 @@ export const en: SiteContent = {
       noResultsTitle: "We couldn't find that on the embers.",
       noResultsHint: "Try another word — e.g. “köfte”, “piyaz”, “hardaliye”.",
       itemsCount: (n) => `${n} item${n === 1 ? "" : "s"}`,
-      menuNoteExtra: "Alcohol is served in the dining room only. VAT included in prices.",
+      menuNoteExtra: "VAT included in prices.",
       categoriesAria: "Menu categories",
       tags: {
         chef: "Chef's Pick",
@@ -138,7 +140,7 @@ export const en: SiteContent = {
     contact: {
       docTitle: "Contact — Küçük Mustafa Köftecisi | +90 288 212 76 12",
       docDesc:
-        "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, Kırklareli. Open 7 days, 09:00–03:00. Phone: +90 288 212 76 12.",
+        "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, Kırklareli. Open 7 days, 10:00–02:00. Phone: +90 288 212 76 12.",
       eyebrow: "Contact",
       title: "As close as a phone call",
       lead: "Call us for reservations, takeaway and any questions; there's always someone by the phone.",
@@ -156,7 +158,7 @@ export const en: SiteContent = {
     reservation: {
       docTitle: "Reservation — Küçük Mustafa Köftecisi | +90 288 212 76 12",
       docDesc:
-        "Book your table by phone: +90 288 212 76 12. Open 7 days, 09:00–03:00, 16 tables, 75 seats.",
+        "Book your table by phone: +90 288 212 76 12. Open 7 days, 10:00–02:00.",
       eyebrow: "Reservation",
       title: "Let your table wait by the embers",
       lead: "Reservations are taken by phone — one call, thirty seconds. The little plan below helps you prepare what to say.",
@@ -177,8 +179,7 @@ export const en: SiteContent = {
           text: "Give your name when you arrive; one of the tables with the best view of the embers is yours.",
         },
       ],
-      capacityLine: (tables, chairs, days) =>
-        `${tables} tables · ${chairs} seats — ${days}, `,
+      hoursLine: (days) => `${days}, `,
       planTitle: "A Little Plan Before You Call",
       planText: "Fill it in, then read the summary on the phone or copy it.",
       planStrong: "Reservations are only confirmed by phone.",
@@ -216,13 +217,13 @@ export const en: SiteContent = {
     placePage: {
       docTitle: "The Place — Küçük Mustafa Köftecisi | Kasaplar Arası, Kırklareli",
       docDesc:
-        "16 tables, 75 seats, an oak-charcoal grill. Opposite Şevket Dingiloğlu Park, open 7 days, 09:00–03:00.",
+        "An oak-charcoal grill and a warm wooden room. Opposite Şevket Dingiloğlu Park, open 7 days, 10:00–02:00.",
       eyebrow: "The Place",
       title: "A grocer's up front, a köfte grill in the back — always",
-      salonHeading: "Sixteen tables, seventy-five seats",
-      tableWord: "Tables",
-      chairWord: "Seats",
+      salonHeading: "Wood, warmth and tables close together",
       openWord: "Open",
+      hoursWord: "Hours",
+      sinceWord: "Founded",
       perDay: "/week",
       captionSalon: "Our renewed dining room",
       captionOcak: "Oak charcoal, cast-iron grill",
@@ -231,7 +232,6 @@ export const en: SiteContent = {
       captionOrg: "A table set for a group dinner",
       servicesEyebrow: "Services",
       servicesTitle: "However you like",
-      seatsLine: (n) => `room for ${n} guests`,
       ctaGallery: "See the Gallery",
     },
     langBox: { label: "Choose language" },
@@ -324,7 +324,7 @@ export const en: SiteContent = {
       {
         id: "yerinde",
         title: "Dine In",
-        text: "7 days a week, 09:00–03:00. Tradesmen at noon, families in the evening, night-shift workers after midnight; the room is never empty.",
+        text: "7 days a week, 10:00–02:00. Tradesmen at noon, families in the evening, night-shift workers after midnight; the room is never empty.",
       },
       {
         id: "paket",
@@ -334,7 +334,7 @@ export const en: SiteContent = {
       {
         id: "gelal",
         title: "Pick Up",
-        text: "Straight from the counter. Köfte wrapped in bread, the park across the street — the rest is up to you.",
+        text: "Straight from the counter. Packed hot off the embers, the park across the street — the rest is up to you.",
       },
       {
         id: "alkollu",
@@ -386,6 +386,16 @@ export const en: SiteContent = {
       context: "On memories",
     },
   ],
+  googleReviews: {
+    yesim: {
+      quote:
+        "It looks like a small tradesmen's eatery, yet its delicious köfte, superb sheep's yoghurt and crisp salad stayed with us. The toasted bread they offered was a lovely touch. Nice room, enjoyable meal.",
+    },
+    oznur: {
+      quote:
+        "We had köfte, piyaz and ayran. Generous portion, and the taste was excellent. The price is fair too.",
+    },
+  },
   reviewsDisclaimer:
     "Score, review count and ranking are TripAdvisor data; the review cards are illustrative examples.",
   hoursDays: "7 days a week",
@@ -430,11 +440,6 @@ export const en: SiteContent = {
       "yarim-porsiyon": {
         unit: "125 g · 4 pieces",
         description: "For our little guests and lighter appetites.",
-      },
-      "kofte-ekmek": {
-        unit: "4 pieces",
-        description:
-          "Grab it from the counter and eat it in the park. In half a loaf, with onion piyaz and hot sauce if you like.",
       },
       "karisik-izgara": {
         unit: "Köfte · chops · skewer",
@@ -510,19 +515,11 @@ export const en: SiteContent = {
           "Kırklareli's centuries-old drink: grape must fermented with mustard seeds.",
       },
       salgam: { description: "Spicy or mild." },
+      kola: { description: "Ice cold, from the cooler." },
       gazoz: { description: "In a glass bottle, ice cold." },
       cay: { description: "In a tulip glass, well brewed." },
       "turk-kahvesi": { description: "Brewed on the embers, with Turkish delight." },
       "maden-suyu": { description: "Plain or fruit-flavoured." },
-      "yerli-bira": {
-        unit: "50 cl",
-        description: "Served cold. Alcohol is served in the dining room only.",
-      },
-      raki: {
-        unit: "Single glass",
-        description:
-          "The classic companion to köfte off the embers; with white cheese and melon.",
-      },
     },
   },
   gallery: {

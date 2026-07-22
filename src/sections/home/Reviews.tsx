@@ -1,5 +1,5 @@
-import { Award, ExternalLink, Star } from "lucide-react";
-import { restaurant } from "../../data/restaurant";
+import { Award, ExternalLink, PenLine, Star } from "lucide-react";
+import { googleReviews, restaurant } from "../../data/restaurant";
 import { useContent, useLang } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { Reveal } from "../../components/ui/Reveal";
@@ -37,8 +37,32 @@ function Stars({
   );
 }
 
+/** Google'ın çok renkli "G" harfi — marka rengiyle çizilmez, özgün hâliyle durur. */
+function GoogleMark({ className }: { className?: string }) {
+  return (
+    <svg aria-hidden focusable="false" viewBox="0 0 48 48" className={className}>
+      <path
+        fill="#4285F4"
+        d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12.1c-.2 2-1.6 5-4.5 7l6.9 5.4c4.1-3.8 6.6-9.4 6.6-15.7z"
+      />
+      <path
+        fill="#34A853"
+        d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-7.1 5.5C8.1 41.1 15.4 46 24 46z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.1-5.5C2.9 17 2 20.4 2 24s.9 7 2.4 9.9l7.1-5.5z"
+      />
+      <path
+        fill="#EA4335"
+        d="M24 10.2c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4 29.9 2 24 2 15.4 2 8.1 6.9 4.4 14.1l7.1 5.5C13.3 14.3 18.2 10.2 24 10.2z"
+      />
+    </svg>
+  );
+}
+
 export function Reviews() {
-  const { rating, socials } = restaurant;
+  const { rating, googleRating, socials, reviewLinks } = restaurant;
   const content = useContent();
   const { locale } = useLang();
   const ui = content.ui.reviews;
@@ -85,6 +109,56 @@ export function Reviews() {
               <ExternalLink aria-hidden className="h-4 w-4" />
             </a>
           </div>
+
+          {/* Google: TripAdvisor bloğuyla aynı kolonda, daha küçük ölçekte */}
+          <div className="mt-10 border-t border-earth/30 pt-8">
+            <p className="flex items-center gap-2.5 eyebrow !mt-0">
+              <GoogleMark className="h-4 w-4 shrink-0" />
+              {ui.googleEyebrow}
+            </p>
+            <div className="mt-5 flex items-end gap-4">
+              <p className="font-display text-5xl font-semibold leading-none text-cream">
+                {googleRating.score.toLocaleString(locale)}
+              </p>
+              <div className="pb-1">
+                <Stars
+                  score={googleRating.score}
+                  outOf={googleRating.outOf}
+                  ariaLabel={ui.starsAria(
+                    googleRating.score,
+                    googleRating.outOf,
+                  )}
+                />
+                <p className="mt-2 text-sm text-cream/55">
+                  {googleRating.count.toLocaleString(locale)} {ui.reviewsWord} ·{" "}
+                  {googleRating.source}
+                </p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-cream/60">
+              {ui.googleLine}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+              <a
+                href={socials.google}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-copper transition-colors hover:text-ember"
+              >
+                {ui.ourPage(googleRating.source)}
+                <ExternalLink aria-hidden className="h-4 w-4" />
+              </a>
+              <a
+                href={reviewLinks.google}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-cream/60 transition-colors hover:text-ember"
+              >
+                <PenLine aria-hidden className="h-4 w-4" />
+                {ui.writeReview}
+              </a>
+            </div>
+          </div>
         </Reveal>
 
         {/* Temsilî yorum kartları */}
@@ -103,6 +177,39 @@ export function Reviews() {
               </Reveal>
             ))}
           </div>
+          {/* Google'daki gerçek müşteri yorumları */}
+          <Reveal delay={0.25}>
+            <div className="mt-6 border-t border-earth/30 pt-6">
+              <p className="flex items-center gap-2.5 eyebrow !mt-0">
+                <GoogleMark className="h-4 w-4 shrink-0" />
+                {ui.googleEyebrow}
+              </p>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                {googleReviews.map((review) => (
+                  <figure
+                    key={review.id}
+                    className="border-l-2 border-copper/40 bg-coffee/40 p-5 transition-colors duration-300 hover:bg-coffee/70"
+                  >
+                    <blockquote className="font-display text-base italic leading-snug text-cream/85">
+                      “{content.googleReviews[review.id]?.quote}”
+                    </blockquote>
+                    <figcaption className="mt-3 flex flex-wrap items-center gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-cream/40">
+                      {review.author}
+                      <Stars
+                        score={review.stars}
+                        outOf={googleRating.outOf}
+                        ariaLabel={ui.starsAria(
+                          review.stars,
+                          googleRating.outOf,
+                        )}
+                      />
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
           <Reveal delay={0.3}>
             <p className="mt-6 text-xs leading-relaxed text-cream/40">
               {content.reviewsDisclaimer}

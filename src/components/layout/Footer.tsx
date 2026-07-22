@@ -1,12 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  Armchair,
-  Check,
-  Clock,
-  ExternalLink,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Check, Clock, ExternalLink, MapPin, Phone } from "lucide-react";
 import { restaurant } from "../../data/restaurant";
 import { useContent } from "../../i18n";
 import type { SiteContent } from "../../i18n/types";
@@ -113,15 +106,6 @@ export function Footer() {
                 <span className="block font-semibold text-cream">
                   {restaurant.hours.open} – {restaurant.hours.close}
                 </span>
-              </span>
-            </p>
-            <p className="mt-4 flex gap-2.5 text-sm leading-relaxed text-cream/70">
-              <Armchair aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
-              <span>
-                {ui.footer.tablesChairs(
-                  restaurant.capacity.tables,
-                  restaurant.capacity.seats,
-                )}
               </span>
             </p>
           </div>

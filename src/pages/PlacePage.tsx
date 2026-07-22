@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import { Link } from "react-router-dom";
 import {
-  Armchair,
+  CalendarDays,
   Clock,
   Flame,
   HandPlatter,
@@ -10,7 +10,12 @@ import {
   Store,
   Wine,
 } from "lucide-react";
-import { igImages, images, restaurant } from "../data/restaurant";
+import {
+  FOUNDING_YEAR,
+  igImages,
+  images,
+  restaurant,
+} from "../data/restaurant";
 import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
@@ -52,21 +57,13 @@ export default function PlacePage() {
               title={ui.salonHeading}
               lead={placePage.salon.text}
             />
-            <dl className="mt-8 flex gap-10">
+            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-6">
               <div>
                 <dt className="text-xs uppercase tracking-[0.2em] text-cream/45">
-                  {ui.tableWord}
+                  {ui.sinceWord}
                 </dt>
                 <dd className="mt-1 font-display text-4xl font-semibold text-copper">
-                  {restaurant.capacity.tables}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-[0.2em] text-cream/45">
-                  {ui.chairWord}
-                </dt>
-                <dd className="mt-1 font-display text-4xl font-semibold text-copper">
-                  {restaurant.capacity.seats}
+                  {FOUNDING_YEAR}
                 </dd>
               </div>
               <div>
@@ -75,6 +72,15 @@ export default function PlacePage() {
                 </dt>
                 <dd className="mt-1 font-display text-4xl font-semibold text-copper">
                   7<span className="text-xl">{ui.perDay}</span>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.2em] text-cream/45">
+                  {ui.hoursWord}
+                </dt>
+                <dd className="mt-1 whitespace-nowrap font-display text-4xl font-semibold text-copper">
+                  {restaurant.hours.open}
+                  <span className="text-xl">–{restaurant.hours.close}</span>
                 </dd>
               </div>
             </dl>
@@ -216,8 +222,8 @@ export default function PlacePage() {
                 {restaurant.hours.open} – {restaurant.hours.close}
               </span>
               <span className="inline-flex items-center gap-2">
-                <Armchair aria-hidden className="h-4 w-4 text-copper" />
-                {ui.seatsLine(restaurant.capacity.seats)}
+                <CalendarDays aria-hidden className="h-4 w-4 text-copper" />
+                {content.hoursDays}
               </span>
             </div>
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">

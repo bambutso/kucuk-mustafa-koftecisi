@@ -1,5 +1,5 @@
 import { useMemo, useState, type FormEvent } from "react";
-import { Armchair, Check, Copy, Phone } from "lucide-react";
+import { Check, Clock, Copy, Phone } from "lucide-react";
 import { igImages, restaurant } from "../data/restaurant";
 import { useContent, useLang } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -108,12 +108,8 @@ export default function ReservationPage() {
                 {restaurant.phone.display}
               </a>
               <p className="mt-4 flex items-center gap-2 text-xs text-cream/45">
-                <Armchair aria-hidden className="h-3.5 w-3.5" />
-                {ui.capacityLine(
-                  restaurant.capacity.tables,
-                  restaurant.capacity.seats,
-                  content.hoursDays,
-                )}
+                <Clock aria-hidden className="h-3.5 w-3.5" />
+                {ui.hoursLine(content.hoursDays)}
                 {restaurant.hours.open} – {restaurant.hours.close}
               </p>
             </Reveal>

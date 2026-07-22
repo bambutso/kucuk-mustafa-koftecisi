@@ -90,6 +90,9 @@ export const tr: SiteContent = {
         `Kırklareli'nde ${total} restoran arasında`,
       ourPage: (source) => `${source} sayfamız`,
       starsAria: (score, outOf) => `${score} / ${outOf} yıldız`,
+      googleEyebrow: "Google Yorumları",
+      googleLine: "Google Haritalar'daki gerçek puanımız",
+      writeReview: "Siz de yorum yazın",
     },
     location: {
       eyebrow: "Bizi Bulun",
@@ -100,7 +103,6 @@ export const tr: SiteContent = {
       addressTitle: "Adres",
       hoursTitle: "Çalışma Saatleri",
       servicesTitle: "Hizmetler",
-      tablesChairs: (tables, chairs) => `${tables} masa · ${chairs} sandalye`,
       tagline: "1939'dan beri, aynı közde.",
     },
     menuPage: {
@@ -116,7 +118,7 @@ export const tr: SiteContent = {
       noResultsTitle: "Aradığınızı közde bulamadık.",
       noResultsHint: "Farklı bir kelimeyle deneyin — ör. “köfte”, “piyaz”, “hardaliye”.",
       itemsCount: (n) => `${n} ürün`,
-      menuNoteExtra: "Alkollü servis yalnızca salonda geçerlidir. Fiyatlara KDV dahildir.",
+      menuNoteExtra: "Fiyatlara KDV dahildir.",
       categoriesAria: "Menü kategorileri",
       tags: {
         chef: "Şef Önerisi",
@@ -154,7 +156,7 @@ export const tr: SiteContent = {
     contact: {
       docTitle: "İletişim — Küçük Mustafa Köftecisi | 0288 212 76 12",
       docDesc:
-        "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, Kırklareli. Haftanın 7 günü 09:00–03:00. Telefon: 0288 212 76 12.",
+        "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, Kırklareli. Haftanın 7 günü 10:00–02:00. Telefon: 0288 212 76 12.",
       eyebrow: "İletişim",
       title: "Bir telefon kadar yakınız",
       lead: "Rezervasyon, paket servis ve sorularınız için bizi arayın; telefonun başında hep biri var.",
@@ -172,7 +174,7 @@ export const tr: SiteContent = {
     reservation: {
       docTitle: "Rezervasyon — Küçük Mustafa Köftecisi | 0288 212 76 12",
       docDesc:
-        "Masanızı telefonla ayırtın: 0288 212 76 12. Haftanın 7 günü 09:00–03:00, 16 masa 75 sandalye.",
+        "Masanızı telefonla ayırtın: 0288 212 76 12. Haftanın 7 günü 10:00–02:00.",
       eyebrow: "Rezervasyon",
       title: "Masanız közün karşısında ayrılsın",
       lead: "Rezervasyonlar telefonla alınır — bir arama, otuz saniye. Aşağıdaki küçük plan, telefonda söyleyeceklerinizi hazırlamanız için.",
@@ -193,8 +195,7 @@ export const tr: SiteContent = {
           text: "Geldiğinizde adınızı söyleyin; közün en güzel gören masalarından biri sizindir.",
         },
       ],
-      capacityLine: (tables, chairs, days) =>
-        `${tables} masa · ${chairs} sandalye — ${days}, `,
+      hoursLine: (days) => `${days}, `,
       planTitle: "Arama Öncesi Küçük Plan",
       planText: "Doldurun, özeti telefonda okuyun ya da kopyalayın.",
       planStrong: "Rezervasyon yalnızca telefonla kesinleşir.",
@@ -232,14 +233,14 @@ export const tr: SiteContent = {
     placePage: {
       docTitle: "Mekân — Küçük Mustafa Köftecisi | Kasaplar Arası, Kırklareli",
       docDesc:
-        "16 masa, 75 sandalye, meşe kömürlü ocak. Şevket Dingiloğlu Parkı karşısında, haftanın 7 günü 09:00–03:00.",
+        "Meşe kömürlü ocak, ahşap salon. Şevket Dingiloğlu Parkı karşısında, haftanın 7 günü 10:00–02:00.",
       eyebrow: "Mekân",
       title: "Önü bakkaldı, arkası hep köfteci",
-      salonHeading: "On altı masa, yetmiş beş sandalye",
-      tableWord: "Masa",
-      chairWord: "Sandalye",
+      salonHeading: "Ahşap, sıcak ve birbirine yakın masalar",
       openWord: "Açık",
       perDay: "/gün",
+      hoursWord: "Saatler",
+      sinceWord: "Kuruluş",
       captionSalon: "Yenilenen salonumuz",
       captionOcak: "Meşe kömürü, döküm ızgara",
       ocakHeading: "Salonun kalbi arkada atar",
@@ -247,7 +248,6 @@ export const tr: SiteContent = {
       captionOrg: "Toplu yemek için kurulan sofra",
       servicesEyebrow: "Hizmetler",
       servicesTitle: "Nasıl isterseniz",
-      seatsLine: (n) => `${n} kişilik salon`,
       ctaGallery: "Galeriye Bakın",
     },
     langBox: { label: "Dil seçin" },
@@ -258,6 +258,17 @@ export const tr: SiteContent = {
   placePage,
   features,
   sampleReviews,
+  /* Google'daki gerçek yorumlar; noktalama düzeltilip kısaltıldı, anlam korundu. */
+  googleReviews: {
+    yesim: {
+      quote:
+        "Küçük esnaf lokantası görünümünde; lezzetli köfteleri, enfes koyun yoğurdu ve tazecik salatasıyla aklımıza kazındı. Kızarmış ekmek ikramı ayrı bir güzellik kattı. Ortam güzel, yemek keyifliydi.",
+    },
+    oznur: {
+      quote:
+        "Köfte, piyaz ve ayran aldık. Köftenin porsiyonu bol, tadı çok güzeldi. Fiyatı da uygun.",
+    },
+  },
   reviewsDisclaimer,
   hoursDays: restaurant.hours.days,
   servicesList: restaurant.services,

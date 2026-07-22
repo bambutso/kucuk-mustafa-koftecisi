@@ -103,9 +103,12 @@ export const gmImages = {
   hayrabolu: local("gm-hayrabolu"),
   /** İnce belli bardakta çay, logolu runner üzerinde */
   cay: local("gm-cay"),
-  /** Rakı ve işletmenin logolu peçetesi */
+  /**
+   * Rakı ve bira kareleri: alkollü ürünler menüden çıkarıldığı için şu an
+   * hiçbir sayfada gösterilmiyor. Görseller arşivde duruyor — alkollü servis
+   * yeniden menüye girerse doğrudan bağlanabilsin diye adları korundu.
+   */
   raki: local("gm-raki"),
-  /** Buz gibi bira, dış masada */
   bira: local("gm-bira"),
   /** Ocağın başı: döküm ızgara közün üstünde */
   ocak: local("gm-ocak"),
@@ -176,12 +179,8 @@ export const restaurant = {
   },
   hours: {
     days: "Haftanın 7 günü",
-    open: "09:00",
-    close: "03:00",
-  },
-  capacity: {
-    tables: 16,
-    seats: 75,
+    open: "10:00",
+    close: "02:00",
   },
   services: ["Yerinde Servis", "Paket Servis", "Gel Al", "Alkollü Servis"],
   socials: {
@@ -209,7 +208,28 @@ export const restaurant = {
     award: "Travellers' Choice",
     source: "TripAdvisor",
   },
+  /**
+   * Google Haritalar işletme kartından okunan gerçek veriler (22 Temmuz 2026).
+   * Dağılım: 565 adet 5★, 130 adet 4★, 38 adet 3★.
+   */
+  googleRating: {
+    score: 4.5,
+    outOf: 5,
+    count: 787,
+    source: "Google",
+  },
 } as const;
+
+/**
+ * Google Haritalar kartındaki gerçek müşteri yorumları (22 Temmuz 2026).
+ * Soyadlar baş harfe indirildi. Yorum metinleri i18n katmanında (`googleReviews`)
+ * tutulur: özgün hâli Türkçedir, diğer diller çeviridir — bu durum
+ * `reviewsDisclaimer` metninde belirtilir.
+ */
+export const googleReviews = [
+  { id: "yesim", author: "Yeşim Ç.", stars: 5 },
+  { id: "oznur", author: "Öznur T.", stars: 5 },
+] as const;
 
 /** Ana sayfa — marka özeti */
 export const manifesto = {
@@ -291,7 +311,7 @@ export const sampleReviews = [
 ] as const;
 
 export const reviewsDisclaimer =
-  "Puan, yorum sayısı ve sıralama TripAdvisor verisidir; yorum kartları temsilî örneklerdir.";
+  "TripAdvisor puanı, yorum sayısı ve sıralaması ile Google puanı ve yorum sayısı gerçek verilerdir. Üstteki alıntı kartları temsilîdir; Google bölümündeki alıntılar gerçek müşteri yorumlarından kısaltılmıştır (Türkçe dışındaki dillerde çeviridir).";
 
 /** Hikayemiz sayfası — genişletilmiş anlatı */
 export const storyPage = {
@@ -345,7 +365,7 @@ export const placePage = {
   lead: "Şevket Dingiloğlu Parkı'nın karşısında, Kasaplar Arası'nda; önü bir zamanlar bakkal, arkası hep köfteci olan dükkân.",
   salon: {
     title: "Salon",
-    text: "On altı masa, yetmiş beş sandalye. Ne büyük bir salon, ne gösterişli bir dekor — formika değil ahşap, poster değil hatıra. Masalar birbirine yakındır; çünkü burada yan masayla muhabbet, mönünün gayriresmî parçasıdır.",
+    text: "Ne büyük bir salon, ne gösterişli bir dekor — formika değil ahşap, poster değil hatıra. Masalar birbirine yakındır; çünkü burada yan masayla muhabbet, mönünün gayriresmî parçasıdır.",
   },
   ocak: {
     title: "Ocak",
@@ -359,7 +379,7 @@ export const placePage = {
     {
       id: "yerinde",
       title: "Yerinde Servis",
-      text: "Haftanın 7 günü 09:00–03:00. Öğle esnafı, akşam aileler, gece vardiyadan çıkanlar; salon hiç boş kalmaz.",
+      text: "Haftanın 7 günü 10:00–02:00. Öğle esnafı, akşam aileler, gece vardiyadan çıkanlar; salon hiç boş kalmaz.",
     },
     {
       id: "paket",
@@ -369,7 +389,7 @@ export const placePage = {
     {
       id: "gelal",
       title: "Gel Al",
-      text: "Tezgâhtan teslim. Köfte ekmek sarılır, park karşıda — gerisi size kalmış.",
+      text: "Tezgâhtan teslim. Közden indiği gibi paketlenir, park karşıda — gerisi size kalmış.",
     },
     {
       id: "alkollu",

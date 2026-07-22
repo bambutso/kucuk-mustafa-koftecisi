@@ -57,18 +57,6 @@ export const menu: MenuCategory[] = [
         image: gmImages.kofteYarim,
         imageAlt: "Yarım porsiyon köfte, közlenmiş yeşil biberle",
       },
-      {
-        id: "kofte-ekmek",
-        name: "Köfte Ekmek",
-        unit: "4 adet",
-        description:
-          "Tezgâhtan alıp parkta yemenin adresi. Piyazlık soğan ve isteğe göre acı sosla, yarım ekmek arası.",
-        price: 240,
-        image: igImages.kofteTabak,
-        imageAlt: "Ekmek üstünde köfte, söğüş garnitürüyle",
-        tags: ["cok-tercih"],
-        spice: 1,
-      },
     ],
   },
   {
@@ -116,7 +104,7 @@ export const menu: MenuCategory[] = [
   {
     id: "baslangiclar",
     title: "Başlangıçlar",
-    note: "Sabah 09.00'dan gece kapanışa kadar kazanda.",
+    note: "Sabah 10.00'dan gece kapanışa kadar kazanda.",
     items: [
       {
         id: "kelle-paca",
@@ -282,6 +270,12 @@ export const menu: MenuCategory[] = [
         spice: 1,
       },
       {
+        id: "kola",
+        name: "Kola",
+        description: "Buz gibi, soğutucudan.",
+        price: 70,
+      },
+      {
         id: "gazoz",
         name: "Gazoz",
         description: "Cam şişede, buz gibi.",
@@ -306,24 +300,6 @@ export const menu: MenuCategory[] = [
         name: "Maden Suyu",
         description: "Sade ya da meyveli.",
         price: 50,
-      },
-      {
-        id: "yerli-bira",
-        name: "Yerli Bira",
-        unit: "50 cl",
-        description: "Soğuk servis. Alkollü servis salonda geçerlidir.",
-        price: 160,
-        image: gmImages.bira,
-        imageAlt: "Buz gibi bira, dış masada",
-      },
-      {
-        id: "raki",
-        name: "Rakı",
-        unit: "Tek kadeh",
-        description: "Közde köftenin klasik eşlikçisi; beyaz peynir ve kavunla.",
-        price: 220,
-        image: gmImages.raki,
-        imageAlt: "Rakı şişesi ve işletmenin logolu peçetesi",
       },
     ],
   },

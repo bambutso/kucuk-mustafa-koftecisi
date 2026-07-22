@@ -12,7 +12,7 @@ export const SITE = "https://bambutso.github.io/kucuk-mustafa-koftecisi/";
 
 /** URL'de parametre taşımayan kanonik dil */
 export const DEFAULT_LANG = "tr";
-export const LANGS = ["tr", "en", "bg", "el", "ar"];
+export const LANGS = ["tr", "en", "bg", "el", "ar", "es", "ja"];
 
 /**
  * Herkese açık rotalar. /yonetim bilerek yok: yönetim paneli noindex taşır.

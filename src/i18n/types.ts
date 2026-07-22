@@ -5,7 +5,10 @@
  * (yönetim panelinden eklenen yeni ürünler böylece bozulmaz).
  */
 
-export type Lang = "tr" | "en" | "bg" | "el" | "ar";
+export type Lang = "tr" | "en" | "bg" | "el" | "ar" | "es" | "ja";
+
+/** Dil kutusunda bayrağı çizilen ülkeler (bkz. components/ui/Flag.tsx) */
+export type LangCountry = "TR" | "GB" | "BG" | "GR" | "SA" | "ES" | "JP";
 
 export const LANGS: ReadonlyArray<{
   code: Lang;
@@ -14,12 +17,19 @@ export const LANGS: ReadonlyArray<{
   dir: "ltr" | "rtl";
   /** Tarih biçimlendirme için yerel ayar */
   locale: string;
+  /**
+   * Dil kutusundaki bayrağın ülkesi (ISO 3166-1 alpha-2).
+   * Dil ≠ ülke; burada dilin en yaygın tanındığı bayrak seçilir.
+   */
+  country: LangCountry;
 }> = [
-  { code: "tr", label: "Türkçe", dir: "ltr", locale: "tr-TR" },
-  { code: "en", label: "English", dir: "ltr", locale: "en-GB" },
-  { code: "bg", label: "Български", dir: "ltr", locale: "bg-BG" },
-  { code: "el", label: "Ελληνικά", dir: "ltr", locale: "el-GR" },
-  { code: "ar", label: "العربية", dir: "rtl", locale: "ar" },
+  { code: "tr", label: "Türkçe", dir: "ltr", locale: "tr-TR", country: "TR" },
+  { code: "en", label: "English", dir: "ltr", locale: "en-GB", country: "GB" },
+  { code: "bg", label: "Български", dir: "ltr", locale: "bg-BG", country: "BG" },
+  { code: "el", label: "Ελληνικά", dir: "ltr", locale: "el-GR", country: "GR" },
+  { code: "ar", label: "العربية", dir: "rtl", locale: "ar", country: "SA" },
+  { code: "es", label: "Español", dir: "ltr", locale: "es-ES", country: "ES" },
+  { code: "ja", label: "日本語", dir: "ltr", locale: "ja-JP", country: "JP" },
 ];
 
 export interface Chapter {
@@ -120,6 +130,10 @@ export interface SiteContent {
       rankLine: (rank: number, total: number) => string;
       ourPage: (source: string) => string;
       starsAria: (score: number, outOf: number) => string;
+      /** Google bloğu — TripAdvisor bloğuyla simetrik başlık ve etiketler */
+      googleEyebrow: string;
+      googleLine: string;
+      writeReview: string;
     };
     location: {
       eyebrow: string;
@@ -130,7 +144,6 @@ export interface SiteContent {
       addressTitle: string;
       hoursTitle: string;
       servicesTitle: string;
-      tablesChairs: (tables: number, chairs: number) => string;
       tagline: string;
     };
     menuPage: {
@@ -196,7 +209,8 @@ export interface SiteContent {
       title: string;
       lead: string;
       steps: ReadonlyArray<ReservationStep>;
-      capacityLine: (tables: number, chairs: number, days: string) => string;
+      /** "Haftanın 7 günü, " — ardından saat aralığı basılır */
+      hoursLine: (days: string) => string;
       planTitle: string;
       planText: string;
       planStrong: string;
@@ -231,10 +245,10 @@ export interface SiteContent {
       eyebrow: string;
       title: string;
       salonHeading: string;
-      tableWord: string;
-      chairWord: string;
       openWord: string;
       perDay: string;
+      hoursWord: string;
+      sinceWord: string;
       captionSalon: string;
       captionOcak: string;
       ocakHeading: string;
@@ -242,7 +256,6 @@ export interface SiteContent {
       captionOrg: string;
       servicesEyebrow: string;
       servicesTitle: string;
-      seatsLine: (n: number) => string;
       ctaGallery: string;
     };
     langBox: { label: string };
@@ -259,6 +272,11 @@ export interface SiteContent {
   };
   features: ReadonlyArray<Feature>;
   sampleReviews: ReadonlyArray<SampleReview>;
+  /**
+   * Google'daki gerçek yorumların metni, `googleReviews` id'leriyle eşleşir.
+   * Özgün dil Türkçedir; diğer diller çeviridir.
+   */
+  googleReviews: Record<string, { quote: string }>;
   reviewsDisclaimer: string;
   hoursDays: string;
   servicesList: ReadonlyArray<string>;

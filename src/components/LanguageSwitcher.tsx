@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Check, Languages } from "lucide-react";
+import { Check } from "lucide-react";
 import { useLang } from "../i18n";
 import { LANGS } from "../i18n/types";
+import { Flag } from "./ui/Flag";
 import { cn } from "../utils/cn";
 
 /**
@@ -52,7 +53,7 @@ export function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? undefined : { opacity: 0, y: 8 }}
             transition={{ duration: 0.18 }}
-            className="mb-2 w-44 border border-earth/50 bg-coal/95 py-1.5 shadow-[0_18px_40px_-12px_rgba(0,0,0,0.7)] backdrop-blur-md"
+            className="mb-2 max-h-[60vh] w-48 overflow-y-auto border border-earth/50 bg-coal/95 py-1.5 shadow-[0_18px_40px_-12px_rgba(0,0,0,0.7)] backdrop-blur-md"
           >
             {LANGS.map((l) => {
               const active = l.code === lang;
@@ -67,14 +68,20 @@ export function LanguageSwitcher() {
                       setOpen(false);
                     }}
                     className={cn(
-                      "flex w-full items-center justify-between px-4 py-2 text-start font-sans text-sm transition-colors",
+                      "flex w-full items-center gap-3 px-4 py-2 text-start font-sans text-sm transition-colors",
                       active
                         ? "font-semibold text-ember"
                         : "text-cream/75 hover:bg-coffee/70 hover:text-cream",
                     )}
                   >
-                    <span>{l.label}</span>
-                    {active && <Check aria-hidden className="h-3.5 w-3.5" />}
+                    <Flag
+                      country={l.country}
+                      className="h-3.5 w-5 shrink-0 rounded-[1px] ring-1 ring-cream/20"
+                    />
+                    <span className="flex-1">{l.label}</span>
+                    {active && (
+                      <Check aria-hidden className="h-3.5 w-3.5 shrink-0" />
+                    )}
                   </button>
                 </li>
               );
@@ -93,7 +100,12 @@ export function LanguageSwitcher() {
           "hover:border-copper/60 hover:text-ember",
         )}
       >
-        <Languages aria-hidden className="h-4 w-4 text-copper" />
+        {current && (
+          <Flag
+            country={current.country}
+            className="h-3.5 w-5 rounded-[1px] ring-1 ring-cream/25"
+          />
+        )}
         {current?.code.toUpperCase()}
       </button>
     </div>
