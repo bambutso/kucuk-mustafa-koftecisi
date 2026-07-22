@@ -120,7 +120,7 @@ export const galleryItems: GalleryItem[] = [
     id: "porsiyon",
     src: images.koftePlate,
     alt: "Sekiz köfte, közlenmiş biber, domates ve piyazlık soğan",
-    caption: "Porsiyon: 250 gram, sekiz köfte — 1939'dan beri aynı tabak",
+    caption: "Porsiyon: 225 gram, sekiz köfte — 1939'dan beri aynı tabak",
     category: "sofra",
     authentic: true,
   },

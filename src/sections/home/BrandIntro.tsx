@@ -9,7 +9,7 @@ export function BrandIntro() {
   const stats = [
     { value: String(shopAge()), label: content.ui.stats.years },
     { value: "4", label: content.ui.stats.generations },
-    { value: "250 g", label: content.ui.stats.portion },
+    { value: "225 g", label: content.ui.stats.portion },
   ];
 
   return (

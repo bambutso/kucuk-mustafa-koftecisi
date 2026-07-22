@@ -59,7 +59,7 @@ export const en: SiteContent = {
       eyebrow: "Signature Dishes",
       title: "The best-known plates from our grill",
       lead: "Prices are taken from the restaurant's own menu; please ask for the current list.",
-      imageCaption: "250 grams, 8 meatballs — the same plate since 1939.",
+      imageCaption: "225 grams, 8 meatballs — the same plate since 1939.",
       seeAll: "See the full menu",
     },
     instagram: {
@@ -367,7 +367,7 @@ export const en: SiteContent = {
       id: "sunum",
       kicker: "Serving",
       title: "The plate that never changes",
-      text: "Fresh onion piyaz, ember-roasted green pepper, homemade hot sauce. Eight meatballs in a 250-gram portion — the same since 1939.",
+      text: "Fresh onion piyaz, ember-roasted green pepper, homemade hot sauce. Eight meatballs in a 225-gram portion — the same since 1939.",
     },
   ],
   /* Real reviews from TripAdvisor; punctuation tidied and lightly shortened. */
@@ -668,7 +668,7 @@ export const en: SiteContent = {
     },
     usta: { caption: "The master at the embers — the tongs never rest" },
     porsiyon: {
-      caption: "A portion: 250 grams, eight meatballs — the same plate since 1939",
+      caption: "A portion: 225 grams, eight meatballs — the same plate since 1939",
     },
     ates: { caption: "We wait until the oak charcoal turns to embers" },
     dokum: { caption: "Off the embers, served hot" },

@@ -175,7 +175,7 @@ export function ItemEditor({
             )}
           </Labelled>
         )}
-        <Labelled label="Gramaj / Adet" hint="Örn. 250 g · 8 adet (boş bırakılabilir)">
+        <Labelled label="Gramaj / Adet" hint="Örn. 225 g · 8 adet (boş bırakılabilir)">
           {(id) => (
             <Input
               id={id}

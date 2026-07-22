@@ -59,7 +59,7 @@ export const ja: SiteContent = {
       eyebrow: "看板料理",
       title: "炉から生まれる、いちばん知られた皿",
       lead: "価格は店舗自身のメニューによるものです。最新の一覧は店舗にお問い合わせください。",
-      imageCaption: "250グラム、köfte 8個 — 1939年から変わらない一皿。",
+      imageCaption: "225グラム、köfte 8個 — 1939年から変わらない一皿。",
       seeAll: "メニューをすべて見る",
     },
     instagram: {
@@ -367,7 +367,7 @@ export const ja: SiteContent = {
       id: "sunum",
       kicker: "盛りつけ",
       title: "決して変わらない一皿",
-      text: "生玉ねぎの piyaz、おき火で焼いた青唐辛子、自家製の辛いソース。250グラムの一人前に köfte が八個 — 1939年から、同じです。",
+      text: "生玉ねぎの piyaz、おき火で焼いた青唐辛子、自家製の辛いソース。225グラムの一人前に köfte が八個 — 1939年から、同じです。",
     },
   ],
   /* TripAdvisor に寄せられた実際のレビュー。句読点を整え、少し短くしています。 */
@@ -668,7 +668,7 @@ export const ja: SiteContent = {
     },
     usta: { caption: "おき火の前の職人 — トングが休むことはありません" },
     porsiyon: {
-      caption: "一人前：250グラム、köfte 八個 — 1939年から変わらない一皿",
+      caption: "一人前：225グラム、köfte 八個 — 1939年から変わらない一皿",
     },
     ates: { caption: "樫炭がおき火になるまで、待ちます" },
     dokum: { caption: "おき火からおりたものは、熱いうちに" },

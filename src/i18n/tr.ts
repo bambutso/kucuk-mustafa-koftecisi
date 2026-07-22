@@ -72,7 +72,7 @@ export const tr: SiteContent = {
       eyebrow: "İmza Ürünler",
       title: "Ocaktan çıkanların en bilinenleri",
       lead: "Fiyatlar işletmenin kendi menüsündendir; güncel liste için danışın.",
-      imageCaption: "250 gram, 8 köfte — 1939'dan beri aynı tabak.",
+      imageCaption: "225 gram, 8 köfte — 1939'dan beri aynı tabak.",
       seeAll: "Menünün tamamını gör",
     },
     instagram: {

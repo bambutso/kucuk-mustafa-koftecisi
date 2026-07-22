@@ -281,7 +281,7 @@ export const features = [
     id: "sunum",
     kicker: "Sunum",
     title: "Değişmeyen tabak",
-    text: "Piyazlık kuru soğan, közlenmiş yeşil biber, ev yapımı acı sos. 250 gramlık porsiyonda sekiz köfte — 1939'dan beri böyle.",
+    text: "Piyazlık kuru soğan, közlenmiş yeşil biber, ev yapımı acı sos. 225 gramlık porsiyonda sekiz köfte — 1939'dan beri böyle.",
   },
 ] as const;
 

@@ -30,7 +30,7 @@ export interface MenuItem {
    * İçecekler kategorisinde "biralar" | "rakilar" | "viskiler" | "saraplar".
    */
   group?: string;
-  /** Gramaj / adet bilgisi, ör. "250 g · 8 adet" */
+  /** Gramaj / adet bilgisi, ör. "225 g · 8 adet" */
   unit?: string;
   image?: string;
   imageAlt?: string;

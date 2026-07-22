@@ -59,7 +59,7 @@ export const es: SiteContent = {
       eyebrow: "Platos Emblemáticos",
       title: "Lo más conocido de nuestra parrilla",
       lead: "Los precios proceden del menú propio del restaurante; consulta la lista actual.",
-      imageCaption: "250 gramos, 8 köfte — el mismo plato desde 1939.",
+      imageCaption: "225 gramos, 8 köfte — el mismo plato desde 1939.",
       seeAll: "Ver el menú completo",
     },
     instagram: {
@@ -367,7 +367,7 @@ export const es: SiteContent = {
       id: "sunum",
       kicker: "El Servicio",
       title: "El plato que nunca cambia",
-      text: "Piyaz de cebolla fresca, pimiento verde asado a la brasa, salsa picante casera. Ocho köfte en una ración de 250 gramos — igual que en 1939.",
+      text: "Piyaz de cebolla fresca, pimiento verde asado a la brasa, salsa picante casera. Ocho köfte en una ración de 225 gramos — igual que en 1939.",
     },
   ],
   /* Opiniones reales de TripAdvisor; puntuación ajustada y ligeramente abreviadas. */
@@ -668,7 +668,7 @@ export const es: SiteContent = {
     },
     usta: { caption: "El maestro ante las brasas — las tenazas nunca descansan" },
     porsiyon: {
-      caption: "Una ración: 250 gramos, ocho köfte — el mismo plato desde 1939",
+      caption: "Una ración: 225 gramos, ocho köfte — el mismo plato desde 1939",
     },
     ates: { caption: "Esperamos a que el carbón de roble se haga brasa" },
     dokum: { caption: "Recién salido de las brasas, servido caliente" },
