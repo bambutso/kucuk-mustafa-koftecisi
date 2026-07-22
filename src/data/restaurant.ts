@@ -113,6 +113,48 @@ export const gmImages = {
   sofraKurulumu: local("gm-sofra-kurulumu"),
 } as const;
 
+/**
+ * Menü kalemleri için toplanan ek kareler (Temmuz 2026).
+ *
+ * Kaynaklar ve doğrulama:
+ *  • TripAdvisor — SADECE işletmenin markası görünen kareler alındı
+ *    (logolu peçete/servis takımı). O sayfa yakındaki başka restoranların
+ *    ve seyahat reklamlarının görsellerini de yüklüyor; markasız kareler
+ *    hangi mekâna ait olduğu kanıtlanamadığı için KULLANILMADI.
+ *  • mekanlar.com — işletmenin kendi künye sayfasındaki kareler.
+ *  • Google Haritalar — işletmenin kendi kartındaki ziyaretçi galerisi.
+ */
+export const mnImages = {
+  /** Istranca kuzu pirzola; logolu peçetenin yanında (TripAdvisor) */
+  kuzuPirzola: local("mn-kuzu-pirzola"),
+  /** Köfte tabağı, logolu peçeteyle (TripAdvisor) */
+  sefinKoftesi: local("mn-sefin-koftesi"),
+  /** Dinlendirilmiş antrikot, ortası pembe */
+  antrikot: local("mn-antrikot"),
+  /** Külbastı; domates, közlenmiş biber ve piyazlık soğanla */
+  kulbasti: local("mn-kulbasti"),
+  /** Paçanga böreği, dilimlenmiş */
+  pacangaBoregi: local("mn-pacanga-boregi"),
+  /** Kasap sucuğu dilimleri, söğüşle */
+  kasapSucuk: local("mn-kasap-sucuk"),
+  /** Ev yapımı acılı ezme */
+  aciliEzme: local("mn-acili-ezme"),
+  /** Cacık, salatanın yanında */
+  cacik: local("mn-cacik"),
+  /** Köpeoğlu — közlenmiş patlıcan, domates sosu ve yoğurt */
+  kopeoglu: local("mn-kopeoglu"),
+  /** Şopska usulü salata; salatalık, domates, biber ve zeytin */
+  sopska: local("mn-sopska"),
+  /** Şerbetli peynir tatlısı, tabakta */
+  peynirTatlisi: local("mn-peynir-tatlisi"),
+  /** Kırk Kimse hardaliye şişeleri, rafta */
+  hardaliye: local("mn-hardaliye"),
+  /** Tekirdağ Rakısı şişeleri, bar rafında */
+  tekirdag: local("mn-tekirdag"),
+  /** Rakı kadehi ve su bardağı */
+  rakiKadeh: local("mn-raki-kadeh"),
+} as const;
+
 /** Ana sayfadaki Instagram şeridi — gerçek gönderi linkleriyle */
 export const instagramStrip = [
   {

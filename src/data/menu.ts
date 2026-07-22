@@ -24,7 +24,7 @@
  * ─────────────────────────────────────────────────────────────────────────
  */
 import type { MenuCategory } from "../types/menu";
-import { gmImages, igImages } from "./restaurant";
+import { gmImages, igImages, mnImages } from "./restaurant";
 
 export const MENU_NOTE =
   "Ürünler ve fiyatlar işletmenin kendi menüsünden alınmıştır; güncel liste için işletmeye danışınız.";
@@ -86,6 +86,8 @@ export const menu: MenuCategory[] = [
         description: "Ocağın başındaki ustanın kendi tarifi.",
         price: 490,
         tags: ["sef-onerisi"],
+        image: mnImages.sefinKoftesi,
+        imageAlt: "Şefin köftesi; piyazlık soğan ve logolu peçeteyle",
       },
     ],
   },
@@ -105,6 +107,8 @@ export const menu: MenuCategory[] = [
         name: "Kasap Sucuk",
         description: "Kasaplar Arası'nın sucuğu, közde kıtırlaşana kadar.",
         price: 390,
+        image: mnImages.kasapSucuk,
+        imageAlt: "Dilimlenmiş kasap sucuğu; domates ve piyazlık soğanla",
       },
       {
         id: "tava-ciger",
@@ -123,6 +127,8 @@ export const menu: MenuCategory[] = [
         name: "Antrikot",
         description: "Kalın kesim, mühürlenip dinlendirilir.",
         price: 590,
+        image: mnImages.antrikot,
+        imageAlt: "Dinlendirilmiş antrikot, ortası pembe kalacak şekilde",
       },
       {
         id: "istranca-kuzu-sis",
@@ -139,6 +145,8 @@ export const menu: MenuCategory[] = [
         name: "Külbastı",
         description: "İnce dövülmüş et, doğrudan külün üstünde.",
         price: 650,
+        image: mnImages.kulbasti,
+        imageAlt: "Külbastı; domates, közlenmiş biber ve piyazlık soğanla",
       },
       {
         id: "kusleme",
@@ -158,6 +166,8 @@ export const menu: MenuCategory[] = [
         description: "Trakya kuzusundan, kemiği tutulacak kadar sulu.",
         price: 750,
         tags: ["yoresel"],
+        image: mnImages.kuzuPirzola,
+        imageAlt: "Istranca kuzu pirzola; söğüş ve közlenmiş biberle",
       },
       {
         id: "istranca-kuzu-lokum",
@@ -193,6 +203,8 @@ export const menu: MenuCategory[] = [
         name: "Paçanga Böreği",
         description: "Pastırma ve kaşar, ince yufkada kızarmış.",
         price: 200,
+        image: mnImages.pacangaBoregi,
+        imageAlt: "Paçanga böreği, dilimlenmiş halde",
       },
       {
         id: "patates-kizartmasi",
@@ -267,8 +279,17 @@ export const menu: MenuCategory[] = [
         description: "İnce kıyım domates, biber ve soğan; ev usulü.",
         price: 150,
         spice: 2,
+        image: mnImages.aciliEzme,
+        imageAlt: "Ev yapımı acılı ezme, kâsede",
       },
-      { id: "cacik", name: "Cacık", description: "Salatalıklı, buz gibi.", price: 150 },
+      {
+        id: "cacik",
+        name: "Cacık",
+        description: "Salatalıklı, buz gibi.",
+        price: 150,
+        image: mnImages.cacik,
+        imageAlt: "Cacık; yanında çoban salatası",
+      },
       {
         id: "koyun-yogurdu",
         name: "Koyun Yoğurdu",
@@ -289,6 +310,8 @@ export const menu: MenuCategory[] = [
         name: "Köpeoğlu",
         description: "Közlenmiş patlıcan, yoğurt ve domates sosu.",
         price: 180,
+        image: mnImages.kopeoglu,
+        imageAlt: "Köpeoğlu: közlenmiş patlıcan, domates sosu ve yoğurt",
       },
       {
         id: "soslu-patlican",
@@ -364,6 +387,8 @@ export const menu: MenuCategory[] = [
         description: "Balkan klasiği; üzeri rendelenmiş beyaz peynirle.",
         price: 250,
         tags: ["yoresel"],
+        image: mnImages.sopska,
+        imageAlt: "Şopska salatası; salatalık, domates, biber ve zeytin",
       },
     ],
   },
@@ -383,6 +408,8 @@ export const menu: MenuCategory[] = [
         name: "Kaymaklı Peynir Tatlısı",
         description: "Şerbetli peynir tatlısı, kaymağıyla.",
         price: 90,
+        image: mnImages.peynirTatlisi,
+        imageAlt: "Şerbetli peynir tatlısı, tabakta",
       },
       {
         id: "kaymakli-hayrabolu",
@@ -439,6 +466,8 @@ export const menu: MenuCategory[] = [
         description:
           "Kırklareli'nin asırlık içeceği: hardal tohumuyla fermente üzüm şırası. Şişesi Kırk Kimse'den.",
         tags: ["yoresel"],
+        image: mnImages.hardaliye,
+        imageAlt: "Kırk Kimse hardaliye şişeleri, rafta",
       },
     ],
   },
@@ -505,6 +534,8 @@ export const menu: MenuCategory[] = [
         price: 240,
         description: "Meşe fıçılarda dinlendirilmiş; Trakya'nın kendi rakısı.",
         tags: ["yoresel"],
+        image: mnImages.tekirdag,
+        imageAlt: "Tekirdağ Rakısı şişeleri, bar rafında",
       },
       {
         id: "tekirdag-sir-kavrulmus",
@@ -527,6 +558,8 @@ export const menu: MenuCategory[] = [
         group: "rakilar",
         price: 210,
         description: "Eski usul, sert karakterli.",
+        image: mnImages.rakiKadeh,
+        imageAlt: "Rakı kadehi ve yanında su bardağı",
       },
       {
         id: "efe-gold",
