@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /yonetim
 
-Sitemap: https://bambutso.github.io/kucuk-mustafa-koftecisi/sitemap.xml
+Sitemap: https://www.kucukmustafakoftecisi.com/sitemap.xml

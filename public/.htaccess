@@ -1,0 +1,126 @@
+# ============================================================================
+#  Küçük Mustafa Köftecisi — Apache / LiteSpeed sunucu ayarları
+#  (Güzel Hosting Linux paketleri — cPanel)
+#
+#  Bu dosya public/ içindedir; her build'de dist/ köküne kopyalanır.
+#  FTP ile yüklerken public_html içine GİZLİ DOSYALARI DA gönderdiğinden emin ol
+#  (FileZilla: Sunucu ▸ "Gizli dosyaları göstermeye zorla").
+# ============================================================================
+
+AddDefaultCharset UTF-8
+Options -Indexes
+
+
+# ---------------------------------------------------------------------------
+#  1) MIME TİPLERİ — EN KRİTİK BÖLÜM
+#
+#  Menüdeki 3D/AR köfte modeli buna bağlıdır. Sunucu .usdz dosyasını doğru
+#  tiple göndermezse iPhone'da "kamerada gör" (AR Quick Look) HİÇ AÇILMAZ;
+#  .glb yanlış tiple gelirse 3D görüntüleyici masaüstünde de boş kalır.
+# ---------------------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType model/vnd.usdz+zip  .usdz
+  AddType model/gltf-binary   .glb
+  AddType model/gltf+json     .gltf
+
+  # Görsel ve font tipleri (bazı paylaşımlı sunucularda tanımsız gelir)
+  AddType image/webp          .webp
+  AddType image/avif          .avif
+  AddType image/svg+xml       .svg
+  AddType font/woff2          .woff2
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+#  2) YÖNLENDİRMELER — HTTPS ve tek alan adı
+#
+#  Kanonik adres: https://www.kucukmustafakoftecisi.com
+#  Bu adres scripts/site.mjs içindeki SITE ile AYNI olmalıdır (sitemap, canonical
+#  ve hreflang etiketleri oradan üretilir); alan adı değişirse iki dosya birlikte
+#  güncellenir. Hedef adres tam yazılmıştır: http + www'suz gelen ziyaretçi tek
+#  yönlendirmeyle doğru adrese ulaşır, zincir kurulmaz.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTP ▸ HTTPS  (3D/AR ve kamera erişimi yalnızca HTTPS'te çalışır)
+  # X-Forwarded-Proto koşulu, sunucu bir vekilin arkasındaysa oluşacak
+  # sonsuz yönlendirme döngüsünü engeller.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://www.kucukmustafakoftecisi.com/$1 [R=301,L]
+
+  # www'suz ▸ www'lu
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^(.*)$ https://www.kucukmustafakoftecisi.com/$1 [R=301,L]
+
+  # -------------------------------------------------------------------------
+  #  SPA yönlendirmesi
+  #  /menu/, /galeri/ gibi rotaların gerçek index.html'i vardır (ön-render),
+  #  onlar doğrudan servis edilir. /yonetim gibi ön-render edilmeyen rotalar
+  #  uygulamaya düşer. Eksik dosya uzantıları hariç tutulur ki kayıp bir
+  #  görsel index.html yerine gerçek 404 dönsün.
+  # -------------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !\.(js|mjs|css|map|png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|glb|gltf|usdz|xml|txt|json|mp4|webm|pdf)$ [NC]
+  RewriteRule . /index.html [L]
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+#  3) SIKIŞTIRMA
+#  LiteSpeed çoğunlukla kendisi yapar; Apache'ye düşerse diye açık bırakıldı.
+# ---------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+  # 3D modeller zaten sıkıştırılmış kaplarda gelir, tekrar sıkıştırma
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+#  4) ÖNBELLEK
+#  /assets/ altındaki dosya adları içerik özetli (hash) — sonsuza dek saklanır.
+#  HTML asla önbelleğe alınmaz, yoksa güncelleme ziyaretçiye ulaşmaz.
+#  public/ altındaki görsel ve modeller hash taşımaz → 7 gün.
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "\.(js|mjs|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(png|jpe?g|webp|avif|gif|svg|ico|glb|gltf|usdz|mp4|webm)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # Güvenlik başlıkları
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+  # AR/3D için kamera ve uzamsal izleme kendi alan adımıza açık kalmalı
+  Header set Permissions-Policy "camera=(self), xr-spatial-tracking=(self), microphone=(), geolocation=()"
+
+  # HSTS — SSL'in sorunsuz çalıştığını doğruladıktan SONRA aç.
+  # Erken açarsan SSL bozulduğunda ziyaretçi siteye hiç giremez.
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+#  5) HATA SAYFASI
+#  Bulunmayan adresler uygulamanın kendi 404 ekranına düşer.
+# ---------------------------------------------------------------------------
+ErrorDocument 404 /index.html

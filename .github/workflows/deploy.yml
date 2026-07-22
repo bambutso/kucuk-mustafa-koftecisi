@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
+# Site artık kendi alan adında (Güzel Hosting) yayındadır; GitHub Pages kopyası
+# yalnızca yedek/önizleme amaçlıdır. Otomatik yayın kapalıdır — açık kalsaydı
+# Google aynı içeriği iki adreste görüp arama sıralamasını bölerdi.
+# Elle çalıştırmak için: GitHub ▸ Actions ▸ bu iş akışı ▸ "Run workflow".
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -24,7 +26,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build
+      # Alt yol altında yayın için base komut satırından geçilir.
+      # SITE_URL ezilmez: canonical/hreflang etiketleri asıl alan adını
+      # göstersin ki bu kopya arama sonuçlarında onunla yarışmasın.
+      - run: npm run build -- --base=/kucuk-mustafa-koftecisi/
       # SPA yönlendirmesi: bilinmeyen yollar 404.html üzerinden uygulamaya düşer
       - name: SPA fallback
         run: cp dist/index.html dist/404.html

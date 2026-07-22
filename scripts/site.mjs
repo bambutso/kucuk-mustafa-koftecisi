@@ -7,8 +7,16 @@
  *   LANGS   → src/i18n/types.ts (LANGS)
  */
 
-/** Yayın adresi. Özel alan adına geçilirse burası ve vite.config.ts base'i birlikte değişir. */
-export const SITE = "https://bambutso.github.io/kucuk-mustafa-koftecisi/";
+/**
+ * Yayın adresi — sitenin alan adı SADECE burada tanımlıdır.
+ * sitemap.xml, robots.txt, canonical/hreflang etiketleri ve index.html içindeki
+ * schema.org "url" alanı hep buradan beslenir.
+ *
+ * Alan adı değişirse yalnızca aşağıdaki satırı düzenle. Sondaki eğik çizgi şart.
+ * GitHub Pages'e (alt yol altında) yayın için SITE_URL + BASE_PATH ortam
+ * değişkenleri geçici olarak ezer — bkz. .github/workflows/deploy.yml.
+ */
+export const SITE = process.env.SITE_URL ?? "https://www.kucukmustafakoftecisi.com/";
 
 /** URL'de parametre taşımayan kanonik dil */
 export const DEFAULT_LANG = "tr";

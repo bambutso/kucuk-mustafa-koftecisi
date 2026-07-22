@@ -11,7 +11,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_LANG, LANGS, ROUTES, urlFor } from "./site.mjs";
+import { DEFAULT_LANG, LANGS, ROUTES, SITE, urlFor } from "./site.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = resolve(ROOT, "dist");
@@ -36,6 +36,10 @@ function render(template, { path, title, description }) {
   const t = escapeAttr(title);
   const d = escapeAttr(description);
   return template
+    /* index.html'deki schema.org "url" alanı: alan adı site.mjs'te tek yerde
+       durabilsin diye şablonda %SITE_URL% yer tutucusu olarak yazılıdır.
+       (npm run dev sırasında yer tutucu ham haliyle görünür, zararsızdır.) */
+    .replaceAll("%SITE_URL%", SITE)
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
     .replace(
       /<meta\s+name="description"[^>]*>/,
