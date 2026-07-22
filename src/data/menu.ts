@@ -56,6 +56,7 @@ export const menu: MenuCategory[] = [
       {
         id: "acili-kofte",
         name: "Acılı Köfte",
+        unit: "225 g · 8 adet",
         description: "Aynı harç, acısı harca katılmış hâliyle.",
         price: 410,
         image: gmImages.kofteOnikili,
@@ -65,6 +66,7 @@ export const menu: MenuCategory[] = [
       {
         id: "kasarli-kofte",
         name: "Kaşarlı Köfte",
+        unit: "225 g · 8 adet",
         description: "Köftenin içi kaşarla doldurulur; közde erir.",
         price: 430,
         image: gmImages.kofteYarim,
@@ -73,12 +75,14 @@ export const menu: MenuCategory[] = [
       {
         id: "pastirmali-kofte",
         name: "Pastırmalı Köfte",
+        unit: "225 g · 8 adet",
         description: "Harca pastırma katılır; közde kokusu salona yayılır.",
         price: 450,
       },
       {
         id: "sefin-koftesi",
         name: "Şefin Köftesi",
+        unit: "225 g · 8 adet",
         description: "Ocağın başındaki ustanın kendi tarifi.",
         price: 490,
         tags: ["sef-onerisi"],

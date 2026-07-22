@@ -443,16 +443,20 @@ export const en: SiteContent = {
           "The köfte that carries the shop's name. A mix kneaded with onion and day-old bread, seared over oak embers; served with village bread dipped in bone broth.",
       },
       "acili-kofte": {
+        unit: "225 g · 8 pieces",
         description: "The same mix, with the heat kneaded straight into it.",
       },
       "kasarli-kofte": {
+        unit: "225 g · 8 pieces",
         description: "The köfte is filled with kaşar cheese; it melts over the embers.",
       },
       "pastirmali-kofte": {
+        unit: "225 g · 8 pieces",
         description:
           "Pastırma goes into the mix; over the embers its scent drifts through the room.",
       },
       "sefin-koftesi": {
+        unit: "225 g · 8 pieces",
         description: "The recipe of the master who stands at the grill.",
       },
       /* Izgaralar */

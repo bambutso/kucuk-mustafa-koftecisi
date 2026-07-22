@@ -443,16 +443,20 @@ export const es: SiteContent = {
           "La köfte que lleva el nombre de la casa. Una masa amasada con cebolla y pan del día anterior, sellada sobre las brasas de roble; llega acompañada de pan de pueblo mojado en caldo de huesos.",
       },
       "acili-kofte": {
+        unit: "225 g · 8 unidades",
         description: "La misma masa, con el picante amasado dentro.",
       },
       "kasarli-kofte": {
+        unit: "225 g · 8 unidades",
         description: "La köfte se rellena con queso kaşar; sobre las brasas se funde.",
       },
       "pastirmali-kofte": {
+        unit: "225 g · 8 unidades",
         description:
           "A la masa se le añade pastırma; sobre las brasas su aroma llena el comedor.",
       },
       "sefin-koftesi": {
+        unit: "225 g · 8 unidades",
         description: "La receta propia del maestro que está ante las brasas.",
       },
       /* Izgaralar */

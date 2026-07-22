@@ -443,16 +443,20 @@ export const ja: SiteContent = {
           "店の名を冠した köfte。玉ねぎと一日おいたパンで練り上げた生地を樫炭のおき火で封じ込め、骨の出汁にひたした田舎パンを添えてお出しします。",
       },
       "acili-kofte": {
+        unit: "225 g · 8個",
         description: "同じ生地に、辛みをそのまま練り込んだもの。",
       },
       "kasarli-kofte": {
+        unit: "225 g · 8個",
         description: "köfte の中に kaşar チーズを詰めます。おき火の上でとろけます。",
       },
       "pastirmali-kofte": {
+        unit: "225 g · 8個",
         description:
           "生地に pastırma を混ぜ込みます。おき火にのせると、その香りが客席まで広がります。",
       },
       "sefin-koftesi": {
+        unit: "225 g · 8個",
         description: "炉の前に立つ職人自身のレシピです。",
       },
       /* Izgaralar */
