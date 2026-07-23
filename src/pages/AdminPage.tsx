@@ -8,6 +8,8 @@ import {
   Plus,
   RotateCcw,
   Save,
+  Loader2,
+  Globe,
   Upload,
 } from "lucide-react";
 import type { MenuCategory } from "../types/menu";
@@ -26,6 +28,11 @@ import { Badge } from "../components/ui/Badge";
 import { AdminLogin } from "../sections/admin/AdminLogin";
 import { CategoryEditor } from "../sections/admin/CategoryEditor";
 import { cn } from "../utils/cn";
+import {
+  kayitliSifre,
+  menuyuYayinla,
+  sifreyiUnut,
+} from "../utils/yonetimApi";
 
 const AUTH_KEY = "kmk-admin";
 
@@ -39,6 +46,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
     structuredClone(categories),
   );
   const [message, setMessage] = useState<string | null>(null);
+  const [yayinlaniyor, setYayinlaniyor] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const dirty = useMemo(
@@ -90,6 +98,36 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
       window.alert(
         hata instanceof Error ? hata.message : "Menü kaydedilemedi.",
       );
+    }
+  };
+
+  /**
+   * Menüyü sunucuya gönderir; bundan sonra TÜM ziyaretçiler bu menüyü görür.
+   * Kaydetmek (tarayıcıya yazmak) ile yayınlamak bilerek ayrı: yanlışlıkla
+   * yarım bir düzenleme siteye çıkmasın.
+   */
+  const handlePublish = async () => {
+    const sifre = kayitliSifre();
+    if (!sifre) {
+      window.alert("Oturum düşmüş. Çıkış yapıp yeniden giriş yapın.");
+      return;
+    }
+    setYayinlaniyor(true);
+    try {
+      const sonuc = await menuyuYayinla(draft, sifre);
+      saveMenu(draft);
+      flash(
+        `Yayınlandı: ${sonuc.kategori} kategori, ${sonuc.urun} ürün. Menü artık tüm ziyaretçilerde güncel.`,
+      );
+    } catch (hata) {
+      const mesaj = hata instanceof Error ? hata.message : "Yayınlanamadı.";
+      window.alert(mesaj);
+      if (/şifre/i.test(mesaj)) {
+        sifreyiUnut();
+        onLogout();
+      }
+    } finally {
+      setYayinlaniyor(false);
     }
   };
 
@@ -196,6 +234,20 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
               disabled={!dirty}
             >
               Vazgeç
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              onClick={() => void handlePublish()}
+              disabled={yayinlaniyor}
+              title="Menüyü sunucuya gönderir; tüm ziyaretçiler görür"
+            >
+              {yayinlaniyor ? (
+                <Loader2 aria-hidden className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                <Globe aria-hidden className="h-3.5 w-3.5" />
+              )}
+              {yayinlaniyor ? "Yayınlanıyor…" : "Yayınla"}
             </Button>
             {/* Görseller menü verisinin içinde saklandığı için doluluk görünür
                 olmalı; tarayıcı kotası ~5 MB civarında. */}

@@ -1,0 +1,18 @@
+# ============================================================================
+#  api/ klasörü — yönetim paneli sunucu ucu
+# ============================================================================
+
+# config.php şifre özetini taşır: tarayıcıdan doğrudan istenemez.
+# (PHP olarak çalıştırıldığında zaten çıktı vermez; bu ek bir güvenlik katmanı.)
+<Files "config.php">
+  Require all denied
+</Files>
+
+# Bu klasörde dizin listesi görünmesin
+Options -Indexes
+
+# Yalnızca .php dosyaları servis edilsin; yanlışlıkla kopyalanan .bak, .json,
+# .log gibi dosyalar dışarıdan okunamasın.
+<FilesMatch "\.(bak|json|log|txt|ini|sql|zip)$">
+  Require all denied
+</FilesMatch>

@@ -10,6 +10,12 @@
 AddDefaultCharset UTF-8
 Options -Indexes
 
+# NOT: Yüklenen görsellerin bulunduğu /yuklenen klasöründe kod çalışmasını
+# engelleyen kurallar, klasör oluşturulurken api/gorsel.php tarafından o
+# klasörün KENDİ .htaccess dosyasına yazılır. Buraya <Directory> yazılamaz —
+# o yönerge yalnızca sunucu yapılandırmasında geçerlidir, .htaccess içinde
+# sunucuyu 500 hatasına düşürür.
+
 
 # ---------------------------------------------------------------------------
 #  1) MIME TİPLERİ — EN KRİTİK BÖLÜM
@@ -62,9 +68,15 @@ Options -Indexes
   #  uygulamaya düşer. Eksik dosya uzantıları hariç tutulur ki kayıp bir
   #  görsel index.html yerine gerçek 404 dönsün.
   # -------------------------------------------------------------------------
+  #  /api/ ve /data/ uygulamaya DÜŞMEZ: yönetim ucu ile menü dosyası kendi
+  #  yanıtlarını vermeli. Buraya düşerse panel JSON yerine index.html alır ve
+  #  "beklenmeyen yanıt" hatası verir.
+  RewriteCond %{REQUEST_URI} ^/(api|data|yuklenen)/ [NC]
+  RewriteRule . - [L]
+
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} !\.(js|mjs|css|map|png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|glb|gltf|usdz|xml|txt|json|mp4|webm|pdf)$ [NC]
+  RewriteCond %{REQUEST_URI} !\.(js|mjs|css|map|png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|glb|gltf|usdz|xml|txt|json|php|mp4|webm|pdf)$ [NC]
   RewriteRule . /index.html [L]
 </IfModule>
 

@@ -1,9 +1,14 @@
 /**
- * Menü deposu: varsayılan menü `data/menu.ts`'den gelir; yönetim panelinde
- * yapılan değişiklikler localStorage'a yazılır ve varsayılanın önüne geçer.
+ * Menü deposu — üç katman, öncelik sırasıyla:
  *
- * NOT (demo sınırı): localStorage cihaza özeldir. Menünün tüm ziyaretçilere
- * yayınlanabilmesi için sunucu taraflı bir kayıt (API/CMS) gerekir.
+ *   1. SUNUCU  (/data/menu.json)  → panelden "Yayınla" denince yazılır,
+ *      TÜM ziyaretçiler bunu görür. Asıl kaynak budur.
+ *   2. TARAYICI (localStorage)    → panelde kaydedilmiş ama HENÜZ
+ *      yayınlanmamış taslak; yalnızca düzenleyenin cihazında görünür.
+ *   3. KOD      (data/menu.ts)    → ikisi de yoksa devreye giren varsayılan.
+ *
+ * Sunucudaki dosya derleme çıktısının dışında durur; bu yüzden siteyi yeniden
+ * yayınlamak canlı menüyü ezmez.
  */
 import { useSyncExternalStore } from "react";
 import { menu as defaultMenu } from "../data/menu";
@@ -69,11 +74,49 @@ function emit() {
   for (const listener of listeners) listener();
 }
 
+/** Sunucudaki yayınlanmış menü; okunana kadar null. */
+let sunucuMenusu: MenuCategory[] | null = null;
+let sunucudanOkundu = false;
+
+/**
+ * Yayınlanmış menüyü sunucudan çeker ve varsa uygular.
+ *
+ * Hata durumunda SESSİZCE geçilir: sunucu ucu henüz kurulmamışsa ya da
+ * geçici bir sorun varsa site koddaki menüyle çalışmaya devam eder —
+ * ziyaretçi boş sayfa görmez.
+ */
+export async function sunucuMenusunuYukle(): Promise<void> {
+  if (sunucudanOkundu) return;
+  sunucudanOkundu = true;
+  try {
+    const yanit = await fetch(
+      `${import.meta.env.BASE_URL}data/menu.json?v=${Date.now()}`,
+      { cache: "no-store" },
+    );
+    if (!yanit.ok) return;
+    const veri: unknown = await yanit.json();
+    if (!isValidMenu(veri)) return;
+    sunucuMenusu = veri;
+    /* Taslak yoksa yayınlanmış menüyü göster */
+    if (readOverride() === null) {
+      snapshot = { categories: veri, customized: false };
+      emit();
+    }
+  } catch {
+    /* sunucu ucu yok ya da ulaşılamıyor — koddaki menüyle devam */
+  }
+}
+
+/** Sunucuda yayınlanmış bir menü var mı? */
+export function yayindakiMenu(): MenuCategory[] | null {
+  return sunucuMenusu;
+}
+
 export function getMenuSnapshot(): MenuSnapshot {
   if (snapshot === null) {
     const override = readOverride();
     snapshot = {
-      categories: override ?? defaultMenu,
+      categories: override ?? sunucuMenusu ?? defaultMenu,
       customized: override !== null,
     };
   }

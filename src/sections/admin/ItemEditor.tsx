@@ -8,6 +8,7 @@ import type {
 } from "../../types/menu";
 import { Input, Labelled, Select, Textarea } from "../../components/ui/Field";
 import { boyutMetni, gorseliHazirla } from "../../utils/imageUpload";
+import { gorselYukle, kayitliSifre } from "../../utils/yonetimApi";
 import { cn } from "../../utils/cn";
 
 const TAG_OPTIONS: ReadonlyArray<{ value: ItemTag; label: string }> = [
@@ -45,15 +46,34 @@ export function ItemEditor({
   const [yukleniyor, setYukleniyor] = useState(false);
   const [gorselNotu, setGorselNotu] = useState<string | null>(null);
 
+  /**
+   * Görseli SUNUCUYA yükler; böylece tüm ziyaretçilerde görünür ve menü
+   * verisi şişmez. Sunucu ucuna ulaşılamazsa tarayıcıda küçültülüp menüye
+   * gömülür — o hâlde yalnızca bu cihazda görünür, kullanıcıya söylenir.
+   */
   const gorselSecildi = async (file: File | undefined) => {
     if (!file) return;
     setYukleniyor(true);
     setGorselNotu(null);
+    const sifre = kayitliSifre();
     try {
+      if (sifre) {
+        try {
+          const s = await gorselYukle(file, sifre);
+          onChange({ image: s.yol });
+          setGorselNotu(
+            `Sunucuya yüklendi: ${s.genislik}×${s.yukseklik}, ${boyutMetni(s.bayt)} — yayınlayınca herkeste görünür.`,
+          );
+          return;
+        } catch (sunucuHatasi) {
+          /* Sunucu ucu yoksa aşağıdaki tarayıcı yoluna düşülür */
+          console.warn("Sunucuya yüklenemedi, cihaza gömülüyor:", sunucuHatasi);
+        }
+      }
       const g = await gorseliHazirla(file);
       onChange({ image: g.dataUrl });
       setGorselNotu(
-        `Eklendi: ${g.genislik}×${g.yukseklik} ${g.bicim.toUpperCase()}, ${boyutMetni(g.bayt)}`,
+        `Cihaza eklendi: ${g.genislik}×${g.yukseklik} ${g.bicim.toUpperCase()}, ${boyutMetni(g.bayt)} — sunucuya yüklenemedi, yalnızca bu cihazda görünür.`,
       );
     } catch (hata) {
       setGorselNotu(hata instanceof Error ? hata.message : "Görsel eklenemedi.");
