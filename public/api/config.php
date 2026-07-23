@@ -12,17 +12,54 @@
  * Yazılabilir veri klasörü. Derleme çıktısının (dist) DIŞINDA durur ki her
  * yayında üzerine yazılmasın — canlı menü ve şifre kaybolmasın.
  */
+/**
+ * İKİ AYRI KLASÖR — bilerek:
+ *
+ *  VERI_KLASORU  (public_html/data)  → menu.json burada durur ve HERKESE
+ *      AÇIK olmak ZORUNDADIR; site menüyü tarayıcıdan buradan okur.
+ *
+ *  GIZLI_KLASORU (public_html'in DIŞINDA) → şifre özeti ve giriş sayacı.
+ *      Web kökünün dışında olduğu için sunucu bu dosyalara hiçbir adresten
+ *      erişim veremez. .htaccess kurallarına güvenmek yerine böyle yapıldı:
+ *      kural bir gün çalışmazsa (paylaşımlı sunucularda AllowOverride
+ *      ayarları değişebiliyor) sır yine de açığa çıkmaz.
+ */
 const VERI_KLASORU = __DIR__ . '/../data';
 const MENU_DOSYASI = VERI_KLASORU . '/menu.json';
-const SIFRE_DOSYASI = VERI_KLASORU . '/sifre.php';
+
+/** public_html/api/../../gizli  →  .../domains/<alan>/gizli */
+const GIZLI_KLASORU = __DIR__ . '/../../gizli';
+const SIFRE_DOSYASI = GIZLI_KLASORU . '/sifre.php';
+
+/** Web kökünün dışına yazamayan sunucular için son çare (o zaman .htaccess korur) */
+const YEDEK_SIFRE_DOSYASI = VERI_KLASORU . '/sifre.php';
+
+/** Şifrenin yazılacağı/okunacağı yol: dışarısı mümkünse orası. */
+function sifre_yolu(): string
+{
+    if (is_file(SIFRE_DOSYASI)) {
+        return SIFRE_DOSYASI;
+    }
+    if (is_file(YEDEK_SIFRE_DOSYASI)) {
+        return YEDEK_SIFRE_DOSYASI;
+    }
+    return klasoru_hazirla(GIZLI_KLASORU) ? SIFRE_DOSYASI : YEDEK_SIFRE_DOSYASI;
+}
 
 /** Kayıtlı şifre özetini okur; henüz belirlenmemişse boş döner. */
 function sifre_ozeti(): string
 {
-    if (!is_file(SIFRE_DOSYASI)) {
+    /* Eski kurulum public_html içine yazmış olabilir: bir kereliğine dışarı taşı. */
+    if (!is_file(SIFRE_DOSYASI) && is_file(YEDEK_SIFRE_DOSYASI)) {
+        if (klasoru_hazirla(GIZLI_KLASORU) && @copy(YEDEK_SIFRE_DOSYASI, SIFRE_DOSYASI)) {
+            @unlink(YEDEK_SIFRE_DOSYASI);
+        }
+    }
+    $yol = is_file(SIFRE_DOSYASI) ? SIFRE_DOSYASI : YEDEK_SIFRE_DOSYASI;
+    if (!is_file($yol)) {
         return '';
     }
-    $ozet = @include SIFRE_DOSYASI;
+    $ozet = @include $yol;
     return is_string($ozet) ? $ozet : '';
 }
 
@@ -72,6 +109,12 @@ function veri_klasoru_hazirla(): bool
     if (!klasoru_hazirla(VERI_KLASORU)) {
         return false;
     }
+    /* Gizli klasör web kökünün dışında olsa bile bir koruma bırak: bazı
+       paylaşımlı sunucularda alan adı klasörünün tamamı yayınlanabiliyor. */
+    if (is_dir(GIZLI_KLASORU) && !is_file(GIZLI_KLASORU . '/.htaccess')) {
+        @file_put_contents(GIZLI_KLASORU . '/.htaccess', "Require all denied" . PHP_EOL);
+    }
+
     $koruma = VERI_KLASORU . '/.htaccess';
     if (!is_file($koruma)) {
         @file_put_contents($koruma, implode(PHP_EOL, [
@@ -95,7 +138,8 @@ function veri_klasoru_hazirla(): bool
 /** Basit, dosya tabanlı hatalı giriş sayacı. */
 function hata_sayaci(): array
 {
-    $dosya = VERI_KLASORU . '/.giris-denemeleri';
+    $dosya = (klasoru_hazirla(GIZLI_KLASORU) ? GIZLI_KLASORU : VERI_KLASORU)
+        . '/giris-denemeleri.json';
     $simdi = time();
     $kayit = ['adet' => 0, 'ilk' => $simdi];
     if (is_file($dosya)) {

@@ -34,10 +34,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     } else {
         $icerik = "<?php\n/* Yönetim şifresinin özeti. Elle düzenlemeyin. */\nreturn "
             . var_export(password_hash($yeni, PASSWORD_DEFAULT), true) . ";\n";
-        if (@file_put_contents(SIFRE_DOSYASI, $icerik) === false) {
-            $mesaj = 'Şifre kaydedilemedi. data klasörünün yazma izni olmalı.';
+        $hedef = sifre_yolu();
+        if (@file_put_contents($hedef, $icerik) === false) {
+            $mesaj = 'Şifre kaydedilemedi. Klasör yazma iznini kontrol edin.';
         } else {
-            @chmod(SIFRE_DOSYASI, 0640);
+            @chmod($hedef, 0640);
+            /* Eski, web kökü içindeki kopya varsa temizle */
+            if ($hedef !== YEDEK_SIFRE_DOSYASI && is_file(YEDEK_SIFRE_DOSYASI)) {
+                @unlink(YEDEK_SIFRE_DOSYASI);
+            }
             $basarili = true;
             $mesaj = $ilkKurulum
                 ? 'Şifreniz belirlendi. Artık /yonetim sayfasından giriş yapabilirsiniz.'
