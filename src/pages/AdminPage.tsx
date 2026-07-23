@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState, type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import {
-  AlertTriangle,
+  Info,
   Download,
   ExternalLink,
   LogOut,
@@ -207,15 +207,15 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
           </div>
         </div>
 
-        {/* Demo sınırı uyarısı */}
-        <aside className="mt-8 flex items-start gap-3 border border-copper/40 bg-coffee/60 p-5">
-          <AlertTriangle aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
-          <p className="text-xs leading-relaxed text-cream/60">
-            Bu panel bir <strong className="text-cream/85">demo</strong>dur:
-            değişiklikler yalnızca bu tarayıcının hafızasında saklanır ve
-            sadece bu cihazda görünür. Menünün tüm ziyaretçilere yayınlanması
-            için sunucu taraflı bir kayıt (API/CMS) gerekir. JSON indir/yükle
-            ile değişikliklerinizi yedekleyip taşıyabilirsiniz.
+        {/* İki düğmenin farkı: yarım kalmış düzenleme yanlışlıkla yayına
+            çıkmasın diye kaydetmek ile yayınlamak ayrı tutuluyor. */}
+        <aside className="mt-8 flex items-start gap-3 border border-earth/30 bg-coffee/40 p-4">
+          <Info aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
+          <p className="text-xs leading-relaxed text-cream/55">
+            <strong className="text-cream/85">Kaydet</strong> değişikliği yalnızca
+            bu tarayıcıya taslak olarak yazar.{" "}
+            <strong className="text-cream/85">Yayınla</strong> ise sunucuya gönderir;
+            menü o anda tüm ziyaretçilerde güncellenir.
           </p>
         </aside>
 
@@ -336,7 +336,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
 export default function AdminPage() {
   usePageMeta(
     "Yönetim — Küçük Mustafa Köftecisi",
-    "Menü düzenleme paneli (demo).",
+    "Menü düzenleme paneli.",
     true, // arama sonuçlarına girmesin
   );
 
