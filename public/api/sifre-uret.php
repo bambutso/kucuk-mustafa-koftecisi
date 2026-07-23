@@ -29,7 +29,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         $mesaj = 'Yeni şifre en az 8 karakter olmalı.';
     } elseif ($yeni !== $tekrar) {
         $mesaj = 'İki şifre birbirini tutmuyor.';
-    } elseif (!klasoru_hazirla(VERI_KLASORU)) {
+    } elseif (!veri_klasoru_hazirla()) {
         $mesaj = 'data klasörü oluşturulamadı. Klasör yazma iznini kontrol edin.';
     } else {
         $icerik = "<?php\n/* Yönetim şifresinin özeti. Elle düzenlemeyin. */\nreturn "

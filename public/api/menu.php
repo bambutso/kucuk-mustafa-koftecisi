@@ -56,7 +56,7 @@ foreach ($veri as $kategori) {
     }
 }
 
-if (!klasoru_hazirla(VERI_KLASORU)) {
+if (!veri_klasoru_hazirla()) {
     json_yanit(500, ['hata' => 'data klasörü oluşturulamadı. Klasör izinlerini kontrol edin.']);
 }
 

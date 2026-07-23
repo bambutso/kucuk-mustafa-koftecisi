@@ -54,6 +54,44 @@ function klasoru_hazirla(string $yol): bool
     return is_dir($yol) || @mkdir($yol, 0755, true);
 }
 
+/**
+ * data/ klasörünü hazırlar ve korumasını yazar.
+ *
+ * Klasörde menu.json HERKESE AÇIK olmalı (site onu okur), ama sifre.php,
+ * .giris-denemeleri ve .bak/.tmp yedekleri dışarıdan istenememeli.
+ *
+ * sifre.php PHP olarak çalıştığında çıktı vermez, yani özet normalde
+ * sızmaz; ama sunucuda PHP bir gün devre dışı kalırsa kaynak düz metin
+ * servis edilirdi. Bu kural o ihtimali de kapatır.
+ *
+ * Yasak listesi yerine "her şeyi kapat, menu.json'u aç" yazılmadı: o kurgu
+ * yanlış giderse menü okunamaz ve site menüsüz kalırdı.
+ */
+function veri_klasoru_hazirla(): bool
+{
+    if (!klasoru_hazirla(VERI_KLASORU)) {
+        return false;
+    }
+    $koruma = VERI_KLASORU . '/.htaccess';
+    if (!is_file($koruma)) {
+        @file_put_contents($koruma, implode(PHP_EOL, [
+            'Options -Indexes -ExecCGI',
+            '',
+            '# Betikler, yedekler ve yarim yazilmis dosyalar disariya kapali',
+            '<FilesMatch "\.(php|phtml|phar|pl|py|sh|cgi|bak|tmp)$">',
+            '  Require all denied',
+            '</FilesMatch>',
+            '',
+            '# Nokta ile baslayan dosyalar (.giris-denemeleri, .htaccess) kapali',
+            '<FilesMatch "^\.">',
+            '  Require all denied',
+            '</FilesMatch>',
+            '',
+        ]));
+    }
+    return true;
+}
+
 /** Basit, dosya tabanlı hatalı giriş sayacı. */
 function hata_sayaci(): array
 {
@@ -76,7 +114,7 @@ function hatayi_kaydet(): void
 {
     [$kayit, $dosya] = hata_sayaci();
     $kayit['adet'] = (int) $kayit['adet'] + 1;
-    klasoru_hazirla(VERI_KLASORU);
+    veri_klasoru_hazirla();
     @file_put_contents($dosya, json_encode($kayit));
 }
 
@@ -123,3 +161,7 @@ function yetki_dogrula(): void
     }
     hatalari_sifirla();
 }
+
+/* Klasör koruması her istekte kendini onarır: kurulum sırasında
+   oluşturulmuş eski bir data/ klasöründe .htaccess eksikse tamamlanır. */
+veri_klasoru_hazirla();
