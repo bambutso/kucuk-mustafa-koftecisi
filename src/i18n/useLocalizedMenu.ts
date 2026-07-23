@@ -23,13 +23,19 @@ export function useLocalizedMenu(): { categories: MenuCategory[] } {
         groups: category.groups?.map((group) => ({
           ...group,
           title: cat?.groups?.[group.id] ?? group.title,
+          note: group.note
+            ? (cat?.groupNotes?.[group.id] ?? group.note)
+            : group.note,
         })),
         items: category.items.map((item) => {
           const tr9n = content.menu.items[item.id];
           return {
             ...item,
             unit: item.unit ? (tr9n?.unit ?? item.unit) : item.unit,
-            description: tr9n?.description ?? item.description,
+            /* Açıklamasız kalemlerde (içecek/alkol) çeviri de aranmaz */
+            description: item.description
+              ? (tr9n?.description ?? item.description)
+              : undefined,
           };
         }),
       };

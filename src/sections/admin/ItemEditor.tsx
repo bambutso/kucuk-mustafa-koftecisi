@@ -1,6 +1,11 @@
 import { useId, useRef, useState } from "react";
-import { ChevronDown, ChevronUp, ImageUp, Trash2, X } from "lucide-react";
-import type { ItemTag, MenuItem, SpiceLevel } from "../../types/menu";
+import { ChevronDown, ChevronUp, ImageUp, Plus, Trash2, X } from "lucide-react";
+import type {
+  ItemTag,
+  MenuItem,
+  PriceVariant,
+  SpiceLevel,
+} from "../../types/menu";
 import { Input, Labelled, Select, Textarea } from "../../components/ui/Field";
 import { boyutMetni, gorseliHazirla } from "../../utils/imageUpload";
 import { cn } from "../../utils/cn";
@@ -11,6 +16,9 @@ const TAG_OPTIONS: ReadonlyArray<{ value: ItemTag; label: string }> = [
   { value: "yeni", label: "Yeni" },
   { value: "yoresel", label: "Yöresel" },
 ];
+
+/** Rakı ölçüleri; siteye çevrili gelmesi için bu kimlikler kullanılmalı. */
+const OLCU_ONERILERI = ["tek", "duble", "20cl", "35cl", "50cl", "70cl", "100cl"];
 
 interface ItemEditorProps {
   item: MenuItem;
@@ -55,6 +63,21 @@ export function ItemEditor({
       if (dosyaRef.current) dosyaRef.current.value = "";
     }
   };
+
+  const olculer = item.variants ?? [];
+
+  const olculeriYaz = (next: PriceVariant[]) =>
+    onChange({ variants: next.length > 0 ? next : undefined });
+
+  const olcuEkle = () => {
+    /* Sıradaki kullanılmamış standart ölçüyü hazır getirir */
+    const kullanilan = new Set(olculer.map((o) => o.label));
+    const sonraki = OLCU_ONERILERI.find((o) => !kullanilan.has(o)) ?? "";
+    olculeriYaz([...olculer, { label: sonraki, price: 0 }]);
+  };
+
+  const olcuDegistir = (index: number, patch: Partial<PriceVariant>) =>
+    olculeriYaz(olculer.map((o, i) => (i === index ? { ...o, ...patch } : o)));
 
   const toggleTag = (tag: ItemTag) => {
     const current = item.tags ?? [];
@@ -111,13 +134,19 @@ export function ItemEditor({
           )}
         </Labelled>
         <div className="grid grid-cols-2 gap-4">
-          <Labelled label="Fiyat (₺)">
+          <Labelled
+            label="Fiyat (₺)"
+            hint={
+              olculer.length > 0 ? "Ölçüler tanımlı — bu alan kullanılmaz" : undefined
+            }
+          >
             {(id) => (
               <Input
                 id={id}
                 type="number"
                 min={0}
                 step={5}
+                disabled={olculer.length > 0}
                 /* Boş bırakılırsa fiyat gösterilmez ("fiyat için sorunuz") */
                 value={item.price ?? ""}
                 onChange={(e) => {
@@ -275,16 +304,101 @@ export function ItemEditor({
             />
           )}
         </Labelled>
-        <Labelled label="Açıklama" className="sm:col-span-2">
+        <Labelled
+          label="Açıklama"
+          hint="Alkollü ürünlerde boş bırakın — servis ifadesi yazılmaz"
+          className="sm:col-span-2"
+        >
           {(id) => (
             <Textarea
               id={id}
-              value={item.description}
-              onChange={(e) => onChange({ description: e.target.value })}
+              value={item.description ?? ""}
+              onChange={(e) =>
+                onChange({ description: e.target.value || undefined })
+              }
             />
           )}
         </Labelled>
       </div>
+
+      {/* Ölçüye göre fiyatlanan kalemler (rakılar) */}
+      <fieldset className="mt-5 border-t border-earth/25 pt-4">
+        <legend className="sr-only">Ölçüler ve fiyatları</legend>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-cream/60">
+            Ölçüler ve Fiyatları
+          </p>
+          <button
+            type="button"
+            onClick={olcuEkle}
+            className="inline-flex items-center gap-1.5 border border-copper/50 px-3 py-1.5 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-copper transition-colors hover:border-ember hover:text-ember"
+          >
+            <Plus aria-hidden className="h-3.5 w-3.5" />
+            Ölçü Ekle
+          </button>
+        </div>
+
+        {olculer.length === 0 ? (
+          <p className="mt-2 text-[0.7rem] leading-relaxed text-cream/40">
+            Rakı gibi ölçüye göre fiyatlanan ürünlerde kullanılır. Ölçü
+            eklendiğinde yukarıdaki tek fiyat alanı yerine bu liste gösterilir.
+          </p>
+        ) : (
+          <>
+            <ul className="mt-3 space-y-2">
+              {olculer.map((olcu, index) => (
+                <li key={index} className="flex items-end gap-2">
+                  <Labelled label="Ölçü" className="flex-1">
+                    {(id) => (
+                      <Input
+                        id={id}
+                        list={`${dosyaId}-olcu`}
+                        value={olcu.label}
+                        onChange={(e) =>
+                          olcuDegistir(index, { label: e.target.value })
+                        }
+                      />
+                    )}
+                  </Labelled>
+                  <Labelled label="Fiyat (₺)" className="w-32">
+                    {(id) => (
+                      <Input
+                        id={id}
+                        type="number"
+                        min={0}
+                        step={5}
+                        value={olcu.price}
+                        onChange={(e) => {
+                          const value = Number(e.target.value);
+                          olcuDegistir(index, {
+                            price: Number.isFinite(value) ? value : 0,
+                          });
+                        }}
+                      />
+                    )}
+                  </Labelled>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      olculeriYaz(olculer.filter((_, i) => i !== index))
+                    }
+                    aria-label={`Ölçüyü sil: ${olcu.label}`}
+                    className="mb-1.5 p-1.5 text-cream/50 transition-colors hover:text-ember"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+            {/* Bu kimlikler siteye çevrili gelir; serbest metin çevrilmez */}
+            <datalist id={`${dosyaId}-olcu`}>
+              {OLCU_ONERILERI.map((olcu) => (
+                <option key={olcu} value={olcu} />
+              ))}
+            </datalist>
+          </>
+        )}
+      </fieldset>
 
       <fieldset className="mt-4">
         <legend className="mb-2 block font-sans text-xs font-semibold uppercase tracking-[0.14em] text-cream/60">

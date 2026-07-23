@@ -104,6 +104,16 @@ export const ja: SiteContent = {
       noResultsHint: "別の言葉でお試しください — 例：「köfte」「piyaz」「hardaliye」。",
       itemsCount: (n) => `${n}品`,
       askPrice: "価格はお問い合わせください",
+      priceOnRequest: "価格はスタッフにおたずねください",
+      servings: {
+        tek: "シングル",
+        duble: "ダブル",
+        "20cl": "20 cl",
+        "35cl": "35 cl",
+        "50cl": "50 cl",
+        "70cl": "70 cl",
+        "100cl": "100 cl",
+      },
       menuNoteExtra: "価格には付加価値税が含まれています。",
       categoriesAria: "メニューのカテゴリー",
       tags: {
@@ -145,9 +155,9 @@ export const ja: SiteContent = {
         "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, クルクラーレリ。年中無休、10:00–02:00。電話：+90 288 212 76 12。",
       eyebrow: "お問い合わせ",
       title: "お電話一本の近さです",
-      lead: "ご予約、お持ち帰り、その他のご質問はお電話ください。電話のそばには、いつも誰かがおります。",
+      lead: "ご予約およびご質問はお電話ください。電話のそばには、いつも誰かがおります。",
       phoneTitle: "電話",
-      phoneNote: "ご予約とお持ち帰りのご注文は、お電話で承ります。",
+      phoneNote: "ご予約はお電話で承ります。",
       addressTitle: "住所",
       hoursTitle: "営業時間",
       hoursNote: "真夜中を過ぎても炉の火は灯り、スープの鍋は朝まで静かに煮えています。",
@@ -329,16 +339,6 @@ export const ja: SiteContent = {
         text: "週七日、10:00–02:00。昼は商人、夕方はご家族連れ、夜半を過ぎれば夜勤明けの人たち。客席が空になることはありません。",
       },
       {
-        id: "paket",
-        title: "デリバリー",
-        text: "お電話でご注文ください。おき火からおりたまま、お手元までお届けします：+90 288 212 76 12。",
-      },
-      {
-        id: "gelal",
-        title: "テイクアウト",
-        text: "台から直接どうぞ。おき火から下ろしたてを包みます。通りの向かいには公園 — あとは、ご自由に。",
-      },
-      {
         id: "alkollu",
         title: "酒類の提供",
         text: "客席では rakı と地ビールをお出ししています。おき火からおりた köfte に rakı を合わせるのは、トラキアの古い習わしです。",
@@ -400,263 +400,161 @@ export const ja: SiteContent = {
     },
   },
   hoursDays: "年中無休",
-  servicesList: ["店内でのお食事", "デリバリー", "テイクアウト", "酒類の提供"],
+  servicesList: ["店内でのお食事", "酒類の提供"],
   menuNote:
     "商品と価格は店舗自身のメニューから採録したものです。最新の一覧は店舗にお問い合わせください。",
   menu: {
     categories: {
       "imza-kofteler": {
-        title: "看板の köfte",
-        note: "牛肉＋地理的表示の Kıvırcık 仔羊。樫炭のおき火の上で。",
+        title: "看板キョフテ",
+        note: "牛肉と、PGI認証のクヴルジュク種ラム肉。樫の炭火で。",
+      },
+      baslangiclar: {
+        title: "前菜",
+        groups: {
+          salatalar: "サラダ各種",
+          "ara-sicaklar": "温前菜",
+          mezeler: "メゼ各種",
+          "soguk-mezeler": "冷製メゼ各種",
+        },
+        groupNotes: {
+          "soguk-mezeler": "1皿の目安は150〜175g。",
+        },
       },
       izgaralar: {
-        title: "炭火焼き",
-        note: "すべて樫炭のおき火で、鋳鉄の網の上で。",
+        title: "焼き物各種",
+        note: "すべて樫の炭火、鋳鉄の焼き網で。",
       },
-      "ara-sicaklar": { title: "温かい前菜" },
-      mezeler: {
-        title: "メゼ",
-        note: "毎日その日に仕込みます。一皿ずつ、食卓へお運びします。",
+      baliklar: {
+        title: "当店の魚料理",
+        note: "商品の価格は仕入れ値により決定されます。詳細はスタッフにお尋ねください。",
+        groups: {
+          "izgara-balik": "焼き魚",
+          "kizartma-balik": "揚げ魚",
+        },
       },
-      salatalar: { title: "サラダ" },
       tatlilar: {
-        title: "デザート",
-        note: "köfte のあとに甘いものを、トラキア流に。",
+        title: "甘味",
+        note: "キョフテの後に甘味を、トラキア流で。",
       },
-      "soguk-icecekler": { title: "冷たい飲みもの" },
-      "sicak-icecekler": { title: "温かい飲みもの" },
+      icecekler: {
+        title: "飲み物",
+        groups: {
+          "soguk-icecekler": "冷たい飲み物",
+          "sicak-icecekler": "温かい飲み物",
+        },
+      },
       "alkollu-icecekler": {
         title: "アルコール飲料",
-        note: "酒類の提供は客席のみとなります。ビールは 50 cl 瓶、ラク・ウイスキー・ワインはグラス単位の価格です。この区分の価格は目安です — 正確な価格はスタッフにお尋ねください。",
+        note: "酒類の提供は店内限定。",
         groups: {
-          biralar: "ビール",
           rakilar: "ラク",
-          viskiler: "ウイスキー",
           saraplar: "ワイン",
+          "kadeh-sarap": "グラスワイン",
+          biralar: "ビール",
+          "yabanci-alkoller": "洋酒",
+        },
+        groupNotes: {
+          saraplar: "ボトル価格",
+          "yabanci-alkoller": "ダブル価格",
         },
       },
     },
     items: {
-      /* İmza Köfteler */
       "kucuk-mustafa-koftesi": {
-        unit: "225 g · 8個",
-        description:
-          "店の名を冠した köfte。玉ねぎと一日おいたパンで練り上げた生地を樫炭のおき火で封じ込め、骨の出汁にひたした田舎パンを添えてお出しします。",
+        unit: "225 g ・ 8個",
+        description: "店の名を冠したキョフテ。玉ねぎと固くなったパンを練り込んだ生地を、樫の炭火で焼き締める。骨出汁に浸した田舎パンを添えて。",
       },
-      "acili-kofte": {
-        unit: "225 g · 8個",
-        description: "同じ生地に、辛みをそのまま練り込んだもの。",
-      },
+      "acili-kofte": { unit: "230 g ・ 2個", description: "唐辛子を練り込んだ、同じ生地で。" },
       "kasarli-kofte": {
-        unit: "225 g · 8個",
-        description: "köfte の中に kaşar チーズを詰めます。おき火の上でとろけます。",
+        unit: "240 g ・ 2個",
+        description: "キョフテの中にカシャルを詰めて。炭火でとろけて。",
       },
       "pastirmali-kofte": {
-        unit: "225 g · 8個",
-        description:
-          "生地に pastırma を混ぜ込みます。おき火にのせると、その香りが客席まで広がります。",
+        unit: "240 g ・ 2個",
+        description: "生地にパストゥルマを練り込んで。炭火で焼くと、香りが店中に広がる。",
       },
       "sefin-koftesi": {
-        unit: "225 g · 8個",
-        description: "炉の前に立つ職人自身のレシピです。",
+        unit: "250 g ・ 2個",
+        description: "炭火の前に立つ職人、自らのレシピで。",
       },
-      /* Izgaralar */
-      "tavuk-izgara": {
-        description:
-          "香辛料は控えめに、おき火で。赤身のお肉を召し上がらない方も、物足りない思いをなさらないように。",
-      },
+      piyaz: { description: "白いんげん豆と玉ねぎたっぷり、酢とオリーブオイルで。キョフテの永遠の相棒。" },
+      "coban-salatasi": { description: "トマト、きゅうり、ピーマン、玉ねぎ。細かく刻んで。" },
+      "akdeniz-salata": { description: "季節の青菜、オリーブとオリーブオイルで。" },
+      "sopska-salatasi": { description: "バルカンの定番、すりおろした白チーズをのせて。" },
+      "mercimek-corbasi": { description: "バターの香り、ちょうどよいとろみ。お好みでレモンを。" },
+      "patates-kizartmasi": { description: "手切りのポテト、熱々で。" },
+      "sogus-tabagi": { description: "ざく切りの新鮮なきゅうり、塩を添えて。" },
+      cerez: { description: "ナッツの盛り合わせ、語らいのお供に。" },
+      "eski-kasar": { description: "トラキア産、熟成カシャルをスライスして。" },
+      "lux-cerez": { description: "アンテップ・ピスタチオを中心に、大皿で。" },
+      "tek-peynir": { description: "白チーズを、スライスして。" },
+      atom: { description: "ヨーグルトと唐辛子で。" },
+      "sirkeli-kapya": { description: "炭火で焼いた赤パプリカを、酢のソースで。" },
+      semizotu: { description: "ヨーグルトとにんにくで。" },
+      haydari: { description: "水切りヨーグルトに、ディルとにんにくを。" },
+      "havuc-tarator": { description: "すりおろした人参を、ヨーグルトで。" },
+      "rus-salatasi": { description: "定番の、マヨネーズ和え。" },
+      "acili-ezme": { description: "細かく刻んだトマト、ピーマン、玉ねぎ、家庭の味で。" },
+      cacik: { description: "きゅうり入り、氷のように冷たく。" },
+      "karisik-kizartma": { description: "茄子、ピーマン、ズッキーニ。ヨーグルトとトマトソースで。" },
+      kopeoglu: { description: "炭火で焼いた茄子に、ヨーグルトとトマトソースを。" },
+      "soslu-patlican": { description: "揚げた茄子を、トマトソースで。" },
+      manca: { description: "トラキアに渡った移民のメゼ、ヨーグルトとにんにくで。" },
+      "koyun-yogurdu": { description: "旬に仕込む羊乳ヨーグルト、スプーンが立つほどの濃厚さで。" },
+      girit: { description: "白チーズを、くるみと青菜で和えて。" },
+      soka: { description: "バルカンの食卓から、焼きピーマンのメゼ。" },
+      "tavuk-izgara": { description: "控えめな香辛料、炭火で。赤身の肉が苦手な方にも。" },
       "kasap-sucuk": {
-        description: "Kasaplar Arası の sucuk を、おき火で縁がカリッとなるまで。",
+        unit: "200 g",
+        description: "カサップラル・アラス産のスジュクを、パリッとするまで炭火で。",
       },
       "tava-ciger": {
-        description: "細かく刻んだレバーを、熱した鉄鍋で。生玉ねぎの付け合わせとともに。",
+        unit: "225 g",
+        description: "細かく刻んだレバーを、熱したフライパンで。薄切り玉ねぎを添えて。",
       },
-      "ciger-sis": {
-        description: "尾脂とともに串に刺し、おき火の上で返しながら焼き上げます。",
-      },
-      antrikot: {
-        description: "厚めの一枚を表面から封じ、そのあと休ませます。",
-      },
+      "ciger-sis": { unit: "225 g ・ 3本", description: "尾脂とともに串に刺し、炭火で回しながら。" },
+      hamburger: { description: "炭火で焼いた牛肉のキョフテを、パンに挟んで。" },
+      antrikot: { unit: "200 g", description: "厚切りを焼き締め、休ませて。" },
       "istranca-kuzu-sis": {
-        description:
-          "ウストランジャ山地の仔羊を角切りに。おき火で封じ込め、生玉ねぎの付け合わせと焼いた青唐辛子を添えて。",
+        unit: "260 g ・ 3本",
+        description: "ウストランジャ山地のラムを角切りにし、炭火で焼き締めて。薄切り玉ねぎと焼きピーマンを添えて。",
       },
-      kulbasti: {
-        description: "薄く叩いた肉を、灰の上に直接のせて。",
-      },
-      kusleme: {
-        description: "仔羊のいちばん値打ちのある部位。口の中でほどけます。",
-      },
-      bonfile: {
-        description: "脂の少ない、柔らかな部位。お好みの焼き加減で。",
-      },
+      kulbasti: { unit: "270 g ・ 3本", description: "薄く叩いた肉、灰の上でじか焼き。" },
+      kusleme: { unit: "180〜200 g ・ 1個", description: "ラムの最も美味な部位、口の中でほろりと。" },
+      bonfile: { unit: "200 g", description: "脂の少ない柔らかな部位、お好みの焼き加減で。" },
       "istranca-kuzu-pirzola": {
-        description: "トラキアの仔羊から。骨を手に持ちたくなるほど、しっとりと。",
+        unit: "240 g ・ 3個",
+        description: "トラキア産ラム、骨まで持てるほどジューシーで。",
       },
       "istranca-kuzu-lokum": {
-        description: "仔羊のいちばんとろける部位。塩とおき火だけで。",
+        unit: "240 g ・ 4個",
+        description: "ロクムのようにとろけるラムの部位。塩と炭火だけで。",
       },
       "karisik-izgara": {
-        unit: "Kuzu Lokum 1 · Kuzu Pirzola 1 · Köfte 2 · Külbastı 1",
-        description: "迷ってしまう方へ、炉のすべてを一皿に。五品をひとつのお皿で。",
+        unit: "1 ラムロクム ・ 1 ラムチョップ ・ 2 キョフテ ・ 1 キュルバストゥ",
+        description: "決めきれない方へ、炭火焼きの真髄を一皿に。五品を一枚のお皿で。",
       },
-      /* Ara Sıcaklar */
-      "mercimek-corbasi": {
-        description: "バター仕立てで、とろみもちょうどよく。お好みでレモンを。",
+      "karisik-kofte": {
+        unit: "2人前 ・ 4 プレーンキョフテ ・ 1 辛味 ・ 1 カシャル入り ・ 1 パストゥルマ入り ・ 1 シェフのキョフテ",
+        description: "五種のキョフテを一皿に。分かち合うために。",
       },
-      "pacanga-boregi": {
-        description: "pastırma と kaşar チーズを、薄い yufka で包んでカリッと揚げ焼きに。",
-      },
-      "patates-kizartmasi": {
-        description: "手切りのフライドポテトを、熱いうちに。",
-      },
-      "guvec-kasarli-mantar": {
-        description:
-          "素焼きの器に入れ、kaşar チーズで覆っておき火で焼き上げます。炉から出たそのまま、ふつふつと音を立てながらお出しします。",
-      },
-      /* Mezeler */
-      "sogus-tabagi": {
-        description: "季節の野菜を大きめに切り、レモンを添えて。",
-      },
-      cerez: {
-        description: "ナッツの盛り合わせ。rakı のお供に。",
-      },
-      "eski-kasar": {
-        description: "熟成させたトラキアの kaşar チーズを、スライスで。",
-      },
-      atom: { description: "ヨーグルトに、辛い唐辛子を効かせて。" },
-      "sirkeli-kapya": {
-        description: "おき火で焼いた kapya パプリカを、酢のソースで。",
-      },
-      semizotu: { description: "スベリヒユを、ヨーグルトとにんにくで。" },
-      haydari: { description: "水切りヨーグルトに、ディルとにんにくを。" },
-      "havuc-tarator": { description: "すりおろした人参を、ヨーグルトとともに。" },
-      "rus-salatasi": { description: "定番の、マヨネーズ仕立て。" },
-      "kuru-domates": { description: "オリーブオイルに漬けて寝かせたもの。" },
-      "acili-ezme": {
-        description: "細かく刻んだトマト、唐辛子、玉ねぎ。店の自家製です。",
-      },
-      cacik: { description: "きゅうり入りで、よく冷やして。" },
-      "koyun-yogurdu": {
-        description:
-          "乳の季節に仕込む羊乳のヨーグルト。スプーンが立つほどの濃さです。",
-      },
-      "karisik-kizartma": {
-        description: "なす、ピーマン、ズッキーニ。ヨーグルトとトマトソースを添えて。",
-      },
-      kopeoglu: {
-        description: "おき火で焼いたなすに、ヨーグルトとトマトソース。",
-      },
-      "soslu-patlican": {
-        description: "揚げたなすを、トマトソースで。",
-      },
-      manca: {
-        description: "トラキアの移民が伝えたメゼ。ヨーグルトとにんにくで。",
-      },
-      girit: {
-        description: "白チーズを、くるみと香草とともに練り上げて。",
-      },
-      "lux-cerez": {
-        description: "ピスタチオを主役にした、たっぷりの盛り合わせ。",
-      },
-      soka: {
-        description: "バルカンの食卓から。おき火で焼いた唐辛子のメゼです。",
-      },
-      "buzlu-badem": {
-        description: "氷の上で、カリッと。",
-      },
-      /* Salatalar */
-      "coban-salatasi": {
-        description: "トマト、きゅうり、ピーマン、玉ねぎを、細かく刻んで。",
-      },
-      piyaz: {
-        description:
-          "白いんげん豆に、たっぷりの玉ねぎ、酢とオリーブオイル。köfte とは切り離せない相棒です。",
-      },
-      "yesil-salata": {
-        description: "季節の葉野菜を、レモンとオリーブオイルで。",
-      },
-      "sopska-salatasi": {
-        description: "バルカンの定番。仕上げに白チーズをすりおろして。",
-      },
-      /* Tatlılar */
-      "kaymakli-baklava": {
-        description: "人参の形に切り分け、上に kaymak を添えて。",
-      },
-      "kaymakli-peynir-tatlisi": {
-        description: "シロップに浸したチーズの菓子に、kaymak を添えて。",
-      },
-      "kaymakli-hayrabolu": {
-        description:
-          "トラキアの、チーズを使ったシロップ漬けの菓子。フレッシュチーズで仕込み、温かいままお出しします。",
-      },
-      tralice: {
-        unit: "自家製の特製",
-        description: "バルカン移民が伝えた贈りもの。ミルクとキャラメルの菓子です。",
-      },
-      sutlac: {
-        description: "表面をこんがりと焼いた、オーブン仕上げのライスプディング。",
-      },
-      "meyve-tabagi": {
-        description: "季節の果物を、氷の上に。",
-      },
-      /* Soğuk İçecekler */
-      su: { description: "500 ミリリットル。" },
-      ayran: { description: "泡立てて、銅のカップで。" },
-      soda: { description: "プレーン、またはフルーツ入り。" },
-      salgam: { description: "辛口とマイルドがございます。" },
-      kola: { description: "冷蔵庫から、よく冷えたものを。" },
-      fanta: { description: "冷蔵庫から、よく冷えたものを。" },
-      sprite: { description: "冷蔵庫から、よく冷えたものを。" },
-      hardaliye: {
-        description:
-          "クルクラーレリに何百年も伝わる飲みもの。からし種で発酵させたぶどうの搾り汁です。瓶は Kırk Kimse のもの。",
-      },
-      /* Sıcak İçecekler */
-      cay: { description: "くびれたグラスで、しっかりと濃く。" },
-      "turk-kahvesi": {
-        description: "おき火で炊き、ロクムを添えて。",
-      },
-      /* Biralar */
-      "efes-pilsen": { description: "瓶で、よく冷やしてお出しします。" },
-      "tuborg-gold": { description: "瓶で、よく冷やしてお出しします。" },
-      /* Rakılar */
-      "yeni-raki": {
-        unit: "新シリーズ",
-        description: "定番の一本。白チーズとメロンとともに。",
-      },
-      "tekirdag-altin-seri": {
-        description: "樫の樽で寝かせた、トラキア自身の rakı。",
-      },
-      "tekirdag-sir-kavrulmus": {
-        description: "焙煎したアニスで、厚みのある味わい。",
-      },
-      "izmir-gobek": {
-        description: "蒸留の中心部分から。口当たりのやわらかな一本。",
-      },
-      "kulup-rakisi": {
-        description: "昔ながらの製法で、力強い個性。",
-      },
-      "efe-gold": {
-        description: "アニスは軽やかに、バランスよく。",
-      },
-      /* Viskiler */
-      "chivas-regal-12": {
-        unit: "12年もの",
-        description: "スコッチのブレンデッドウイスキー。余韻はなめらかです。",
-      },
-      "jack-daniels": {
-        unit: "テネシー",
-        description: "サトウカエデの炭で濾した、ほのかに甘い一本。",
-      },
-      /* Şaraplar */
-      saranta: {
-        description:
-          "クルクラーレリのぶどう畑から生まれたブティックワイン。köfte に合わせる、地元の一本です。",
-      },
-      "vino-dessera": {
-        description: "ヴィゼで造られるトラキアのワイン。赤と白をご用意しています。",
-      },
+      cupra: { description: "丸ごと一尾、炭火で。" },
+      levrek: { description: "丸ごと一尾、炭火で。" },
+      lufer: { description: "旬の時期、ボスポラス海峡の名物魚。" },
+      somon: { description: "厚切り、炭火で。" },
+      sardalya: { description: "とうもろこし粉をまぶし、熱した油で。" },
+      hamsi: { description: "旬の時期、フライパンで。" },
+      istavrit: { description: "とうもろこし粉をまぶし、熱した油で。" },
+      mezgit: { description: "骨なし、フライパンでカリッと。" },
+      "kabak-tatlisi": { description: "タヒニとくるみを添えて。" },
+      profiterol: { description: "チョコレートソースをかけて、冷たいまま。" },
+      sutlac: { description: "表面を焼き色よく、オーブンから。" },
+      dondurma: { unit: "3スクープ", description: "本日のフレーバーからお好みで。" },
+      "kaymakli-hayrabolu": { description: "トラキアのチーズシロップ菓子。タヒニとくるみを添えて。" },
+      "antep-fistikli-baklava": { description: "カイマク添え。" },
+      "meyve-tabagi": { description: "季節のフルーツを、氷の上に。" },
+      peja: { unit: "ノンアルコール" },
     },
   },
   gallery: {

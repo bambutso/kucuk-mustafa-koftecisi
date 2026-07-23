@@ -15,16 +15,35 @@ export interface Model3DAsset {
   alt: string;
 }
 
+/**
+ * Aynı ürünün ölçüye göre değişen fiyatı. Rakılarda kullanılır: bir marka tek
+ * kalemdir, altında Tek/Duble/20 cl … 100 cl fiyatları listelenir.
+ *
+ * `label` sabit ve küçük bir kimlik kümesidir (`tek` `duble` `20cl` `35cl`
+ * `50cl` `70cl` `100cl`); arayüz bunu `ui.menuPage.servings` üzerinden
+ * çevirir, karşılığı yoksa olduğu gibi gösterir.
+ */
+export interface PriceVariant {
+  label: string;
+  price: number;
+}
+
 export interface MenuItem {
   id: string;
   name: string;
-  description: string;
   /**
-   * TL cinsinden fiyat. Tanımsız bırakılabilir: işletmenin basılı menüsünde
-   * fiyatı bulunmayan kalemlerde (alkollü içecekler gibi) kart "fiyat için
-   * sorunuz" gösterir — uydurma fiyat yazmak yerine.
+   * Ürünün altında italik görünen kısa tanıtım. İçecekler ve alkollü
+   * ürünlerde bilerek yoktur — işletme kararı: alkolün altına servis/garnitür
+   * ifadesi yazılmaz, müşteri o şekilde servis edildiğini sanmasın.
+   */
+  description?: string;
+  /**
+   * TL cinsinden fiyat. Tanımsız bırakılabilir: fiyatı güne göre değişen
+   * kalemlerde (balıklar) satırda fiyat yerine kategori notu geçerlidir.
    */
   price?: number;
+  /** Ölçüye göre fiyatlanan kalemlerde `price` yerine bu kullanılır (rakılar) */
+  variants?: ReadonlyArray<PriceVariant>;
   /**
    * Kategori içindeki alt grup (bkz. `MenuCategory.groups`). Ör. Alkollü
    * İçecekler kategorisinde "biralar" | "rakilar" | "viskiler" | "saraplar".
@@ -46,10 +65,15 @@ export interface MenuCategory {
   /** Kategori altında görünen kısa açıklama */
   note?: string;
   /**
+   * Fiyat sütunu yerine `note`u öne çıkaran kategori (balıklar). Satırlarda
+   * fiyat gösterilmez; not, başlığın altında çerçeveli kutuda durur.
+   */
+  priceOnRequest?: boolean;
+  /**
    * Kategori içi alt başlıklar (sekme değil, bölüm içi ayrım). Sıralıdır;
    * ürünler `MenuItem.group` ile buraya bağlanır. Grubu olmayan ürünler
    * alt başlıkların üstünde listelenir.
    */
-  groups?: ReadonlyArray<{ id: string; title: string }>;
+  groups?: ReadonlyArray<{ id: string; title: string; note?: string }>;
   items: MenuItem[];
 }

@@ -221,7 +221,7 @@ export const restaurant = {
     open: "10:00",
     close: "02:00",
   },
-  services: ["Yerinde Servis", "Paket Servis", "Gel Al", "Alkollü Servis"],
+  services: ["Yerinde Servis", "Alkollü Servis"],
   socials: {
     instagram: "https://www.instagram.com/kucukmustafakoftecisi1939/",
     tripadvisor:
@@ -410,16 +410,6 @@ export const placePage = {
       id: "yerinde",
       title: "Yerinde Servis",
       text: "Haftanın 7 günü 10:00–02:00. Öğle esnafı, akşam aileler, gece vardiyadan çıkanlar; salon hiç boş kalmaz.",
-    },
-    {
-      id: "paket",
-      title: "Paket Servis",
-      text: "Telefonla sipariş verin, közden indiği gibi kapınıza gelsin: 0288 212 76 12.",
-    },
-    {
-      id: "gelal",
-      title: "Gel Al",
-      text: "Tezgâhtan teslim. Közden indiği gibi paketlenir, park karşıda — gerisi size kalmış.",
     },
     {
       id: "alkollu",

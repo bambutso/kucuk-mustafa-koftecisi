@@ -9,7 +9,25 @@ import { useSyncExternalStore } from "react";
 import { menu as defaultMenu } from "../data/menu";
 import type { MenuCategory } from "../types/menu";
 
-const STORAGE_KEY = "kmk-menu-v1";
+/**
+ * Sürüm numarası menü ŞEMASI ya da varsayılan menü KUŞAĞI değiştiğinde
+ * artırılır. Aksi hâlde panelden bir kez kaydetmiş cihazlarda eski menü
+ * localStorage'dan gelip yenisini sessizce ezer ve site güncellenmemiş
+ * görünür. v2: 2026-07-23'te işletmenin güncel menüsüne geçildi.
+ */
+const STORAGE_KEY = "kmk-menu-v2";
+const ESKI_ANAHTARLAR = ["kmk-menu-v1"];
+
+/** Artık okunmayan sürümleri temizler; kota boşa dolmasın. */
+function eskiKayitlariSil(): void {
+  for (const anahtar of ESKI_ANAHTARLAR) {
+    try {
+      localStorage.removeItem(anahtar);
+    } catch {
+      /* depolama kapalıysa önemsiz */
+    }
+  }
+}
 
 export interface MenuSnapshot {
   categories: MenuCategory[];
@@ -37,6 +55,7 @@ export function isValidMenu(value: unknown): value is MenuCategory[] {
 
 function readOverride(): MenuCategory[] | null {
   try {
+    eskiKayitlariSil();
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed: unknown = JSON.parse(raw);

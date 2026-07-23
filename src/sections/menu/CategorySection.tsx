@@ -1,8 +1,8 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Info } from "lucide-react";
 import type { MenuCategory, MenuItem } from "../../types/menu";
 import { useContent } from "../../i18n";
-import { MenuCard } from "./MenuCard";
+import { MenuRow } from "./MenuRow";
 import { cn } from "../../utils/cn";
 
 interface CategorySectionProps {
@@ -12,6 +12,34 @@ interface CategorySectionProps {
   open: boolean;
   onToggle: () => void;
   onView3D?: (item: MenuItem) => void;
+}
+
+/**
+ * Ölçülü kalemler (rakılar) satır içinde kendi fiyat listesini açtığı için
+ * yüksek olur; o grupları iki sütuna bölmek okumayı zorlaştırıyor.
+ */
+function ItemList({
+  items,
+  category,
+  onView3D,
+}: {
+  items: MenuItem[];
+  category: MenuCategory;
+  onView3D?: (item: MenuItem) => void;
+}) {
+  const cokSutunlu = !items.some((item) => item.variants?.length);
+  return (
+    <div className={cn("grid gap-x-14", cokSutunlu && "lg:grid-cols-2")}>
+      {items.map((item) => (
+        <MenuRow
+          key={item.id}
+          item={item}
+          priceOnRequest={category.priceOnRequest}
+          onView3D={onView3D}
+        />
+      ))}
+    </div>
+  );
 }
 
 export function CategorySection({
@@ -25,7 +53,7 @@ export function CategorySection({
   const ui = useContent().ui.menuPage;
   const expanded = !collapsible || open;
 
-  /* Grup tanımı olmayan kategorilerde tüm ürünler tek ızgarada kalır. */
+  /* Grup tanımı olmayan kategorilerde tüm ürünler tek listede kalır. */
   const ungrouped = category.groups
     ? category.items.filter((item) => !item.group)
     : category.items;
@@ -48,7 +76,8 @@ export function CategorySection({
         >
           {category.title}
         </h2>
-        {category.note && (
+        {/* Fiyatı sorulacak kategoride not, başlık altı değil kutu içinde durur */}
+        {category.note && !category.priceOnRequest && (
           <p className="mt-1.5 text-sm italic text-cream/45">{category.note}</p>
         )}
       </div>
@@ -99,28 +128,45 @@ export function CategorySection({
             transition={{ duration: 0.35, ease: "easeInOut" }}
             className="overflow-hidden"
           >
+            {/* Balık gibi fiyatı güne göre değişen kategorilerde not öne çıkar */}
+            {category.priceOnRequest && category.note && (
+              <p className="mt-6 flex items-start gap-3 border border-copper/35 bg-coffee/60 px-4 py-3.5 text-sm leading-relaxed text-cream/75">
+                <Info aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-copper" />
+                {category.note}
+              </p>
+            )}
+
             {/* Grupsuz ürünler önce; alt başlıklı gruplar ardından */}
             {ungrouped.length > 0 && (
-              <div className="grid gap-5 pt-8 sm:grid-cols-2 xl:grid-cols-3">
-                {ungrouped.map((item) => (
-                  <MenuCard key={item.id} item={item} onView3D={onView3D} />
-                ))}
+              <div className="pt-4">
+                <ItemList
+                  items={ungrouped}
+                  category={category}
+                  onView3D={onView3D}
+                />
               </div>
             )}
 
             {groups.map((group) => (
               <div key={group.id}>
-                <h3 className="mt-10 flex items-center gap-4 font-display text-xl font-semibold text-copper first:mt-8">
+                <h3 className="mt-9 flex items-center gap-4 font-display text-xl font-semibold text-copper first:mt-6">
                   {group.title}
                   <span aria-hidden className="h-px flex-1 bg-earth/35" />
                   <span className="text-xs uppercase tracking-[0.2em] text-cream/30">
                     {ui.itemsCount(group.items.length)}
                   </span>
                 </h3>
-                <div className="grid gap-5 pt-5 sm:grid-cols-2 xl:grid-cols-3">
-                  {group.items.map((item) => (
-                    <MenuCard key={item.id} item={item} onView3D={onView3D} />
-                  ))}
+                {group.note && (
+                  <p className="mt-1 text-xs italic text-cream/40">
+                    {group.note}
+                  </p>
+                )}
+                <div className="pt-2">
+                  <ItemList
+                    items={group.items}
+                    category={category}
+                    onView3D={onView3D}
+                  />
                 </div>
               </div>
             ))}

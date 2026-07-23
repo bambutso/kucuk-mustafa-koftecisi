@@ -104,6 +104,16 @@ export const en: SiteContent = {
       noResultsHint: "Try another word — e.g. “köfte”, “piyaz”, “hardaliye”.",
       itemsCount: (n) => `${n} item${n === 1 ? "" : "s"}`,
       askPrice: "Ask for price",
+      priceOnRequest: "Please ask our staff for the price",
+      servings: {
+        tek: "Single",
+        duble: "Double",
+        "20cl": "20 cl",
+        "35cl": "35 cl",
+        "50cl": "50 cl",
+        "70cl": "70 cl",
+        "100cl": "100 cl",
+      },
       menuNoteExtra: "VAT included in prices.",
       categoriesAria: "Menu categories",
       tags: {
@@ -145,9 +155,9 @@ export const en: SiteContent = {
         "Karacaibrahim Mah. Şükrü Naili Geçidi No:1, Kasaplar Arası, Kırklareli. Open 7 days, 10:00–02:00. Phone: +90 288 212 76 12.",
       eyebrow: "Contact",
       title: "As close as a phone call",
-      lead: "Call us for reservations, takeaway and any questions; there's always someone by the phone.",
+      lead: "Call us for reservations and any questions; there's always someone by the phone.",
       phoneTitle: "Phone",
-      phoneNote: "Reservations and takeaway orders are taken by phone.",
+      phoneNote: "Reservations are taken by phone.",
       addressTitle: "Address",
       hoursTitle: "Opening Hours",
       hoursNote: "The grill stays lit past midnight; the soup pot simmers until morning.",
@@ -329,16 +339,6 @@ export const en: SiteContent = {
         text: "7 days a week, 10:00–02:00. Tradesmen at noon, families in the evening, night-shift workers after midnight; the room is never empty.",
       },
       {
-        id: "paket",
-        title: "Takeaway Delivery",
-        text: "Order by phone and it arrives at your door straight off the embers: +90 288 212 76 12.",
-      },
-      {
-        id: "gelal",
-        title: "Pick Up",
-        text: "Straight from the counter. Packed hot off the embers, the park across the street — the rest is up to you.",
-      },
-      {
         id: "alkollu",
         title: "Licensed Service",
         text: "Rakı and local beer are served in the dining room. Köfte off the embers with rakı is an old Thracian custom.",
@@ -400,7 +400,7 @@ export const en: SiteContent = {
     },
   },
   hoursDays: "7 days a week",
-  servicesList: ["Dine In", "Takeaway Delivery", "Pick Up", "Licensed Service"],
+  servicesList: ["Dine In", "Licensed Service"],
   menuNote:
     "Dishes and prices are taken from the restaurant's own menu; please ask the restaurant for the current list.",
   menu: {
@@ -409,254 +409,201 @@ export const en: SiteContent = {
         title: "Signature Köfte",
         note: "Beef + PGI-certified Kıvırcık lamb; over oak-charcoal embers.",
       },
+      baslangiclar: {
+        title: "Starters",
+        groups: {
+          salatalar: "Salads",
+          "ara-sicaklar": "Hot Starters",
+          mezeler: "Mezes",
+          "soguk-mezeler": "Cold Mezes",
+        },
+        groupNotes: {
+          "soguk-mezeler": "Portions average 150–175 g.",
+        },
+      },
       izgaralar: {
         title: "Grills",
         note: "All over oak-charcoal embers, on a cast-iron grill.",
       },
-      "ara-sicaklar": { title: "Hot Starters" },
-      mezeler: {
-        title: "Mezes",
-        note: "Prepared fresh each day; they come to the table plate by plate.",
+      baliklar: {
+        title: "Our Fish",
+        note: "Fish prices follow the daily market price. Please ask our staff for details.",
+        groups: {
+          "izgara-balik": "Grilled Fish",
+          "kizartma-balik": "Fried Fish",
+        },
       },
-      salatalar: { title: "Salads" },
       tatlilar: {
         title: "Desserts",
         note: "Dessert after köfte, the Thracian way.",
       },
-      "soguk-icecekler": { title: "Cold Drinks" },
-      "sicak-icecekler": { title: "Hot Drinks" },
+      icecekler: {
+        title: "Drinks",
+        groups: {
+          "soguk-icecekler": "Cold Drinks",
+          "sicak-icecekler": "Hot Drinks",
+        },
+      },
       "alkollu-icecekler": {
         title: "Alcoholic Drinks",
-        note: "Licensed service applies in the dining room. Beer is a 50 cl bottle; rakı, whisky and wine are priced per glass. Prices in this section are ESTIMATES — please ask our team for the exact price.",
+        note: "Licensed service applies in the dining room.",
         groups: {
-          biralar: "Beers",
           rakilar: "Rakı",
-          viskiler: "Whisky",
           saraplar: "Wines",
+          "kadeh-sarap": "Wine by the Glass",
+          biralar: "Beers",
+          "yabanci-alkoller": "Imported Spirits",
+        },
+        groupNotes: {
+          saraplar: "Price per bottle.",
+          "yabanci-alkoller": "Price per double.",
         },
       },
     },
     items: {
-      /* İmza Köfteler */
       "kucuk-mustafa-koftesi": {
         unit: "225 g · 8 pieces",
-        description:
-          "The köfte that carries the shop's name. A mix kneaded with onion and day-old bread, seared over oak embers; served with village bread dipped in bone broth.",
+        description: "The köfte that carries the shop's name. Kneaded with onion and day-old bread, seared over oak embers; served with village bread dipped in bone broth.",
       },
       "acili-kofte": {
-        unit: "225 g · 8 pieces",
-        description: "The same mix, with the heat kneaded straight into it.",
+        unit: "230 g · 2 pieces",
+        description: "The same mix, with the chilli kneaded right in.",
       },
       "kasarli-kofte": {
-        unit: "225 g · 8 pieces",
-        description: "The köfte is filled with kaşar cheese; it melts over the embers.",
+        unit: "240 g · 2 pieces",
+        description: "Filled with kaşar cheese; it melts over the embers.",
       },
       "pastirmali-kofte": {
-        unit: "225 g · 8 pieces",
-        description:
-          "Pastırma goes into the mix; over the embers its scent drifts through the room.",
+        unit: "240 g · 2 pieces",
+        description: "Pastırma folded into the mix; its aroma fills the room over the embers.",
       },
       "sefin-koftesi": {
-        unit: "225 g · 8 pieces",
-        description: "The recipe of the master who stands at the grill.",
+        unit: "250 g · 2 pieces",
+        description: "The grill master's own recipe.",
       },
-      /* Izgaralar */
-      "tavuk-izgara": {
-        description: "Lightly spiced, over the embers. So no one goes without.",
+      piyaz: {
+        description: "White beans, plenty of onion, vinegar and olive oil. Köfte's constant companion.",
       },
-      "kasap-sucuk": {
-        description: "Sucuk from Kasaplar Arası, grilled until the edges turn crisp.",
+      "coban-salatasi": {
+        description: "Tomato, cucumber, pepper and onion; finely chopped.",
       },
-      "tava-ciger": {
-        description: "Finely chopped liver in a searing-hot pan; with fresh onion salad.",
+      "akdeniz-salata": {
+        description: "Seasonal greens with olives and olive oil.",
       },
-      "ciger-sis": {
-        description: "Threaded onto skewers with tail fat and turned over the embers.",
+      "sopska-salatasi": {
+        description: "A Balkan classic, topped with grated white cheese.",
       },
-      antrikot: {
-        description: "A thick cut, seared and then rested.",
-      },
-      "istranca-kuzu-sis": {
-        description:
-          "Cubed lamb from the Istranca Mountains; seared over the embers and served with fresh onion salad and roasted pepper.",
-      },
-      kulbasti: {
-        description: "Thinly beaten meat, laid straight over the ashes.",
-      },
-      kusleme: {
-        description: "The most prized cut of the lamb; it falls apart on the tongue.",
-      },
-      bonfile: {
-        description: "A lean, tender cut, cooked exactly as you like it.",
-      },
-      "istranca-kuzu-pirzola": {
-        description: "Thracian lamb, juicy enough to pick up by the bone.",
-      },
-      "istranca-kuzu-lokum": {
-        description: "The lamb's most melting cut; nothing but salt and embers.",
-      },
-      "karisik-izgara": {
-        unit: "1 Kuzu Lokum · 1 Kuzu Pirzola · 2 Köfte · 1 Külbastı",
-        description:
-          "The grill summed up for the undecided: five items on a single plate.",
-      },
-      /* Ara Sıcaklar */
       "mercimek-corbasi": {
-        description: "With butter, just the right thickness. Lemon on the side, if you like.",
+        description: "Buttery, just the right thickness. With lemon if you like.",
       },
-      "pacanga-boregi": {
-        description: "Pastırma and kaşar cheese, fried crisp in thin yufka pastry.",
-      },
-      "patates-kizartmasi": {
-        description: "Hand-cut, served hot.",
-      },
-      "guvec-kasarli-mantar": {
-        description:
-          "In a clay pot, capped with kaşar cheese and browned over the embers. Served straight from the fire, still bubbling.",
-      },
-      /* Mezeler */
+      "patates-kizartmasi": { description: "Hand-cut, served hot." },
       "sogus-tabagi": {
-        description: "Seasonal vegetables, coarsely cut, with lemon.",
+        description: "Coarsely cut fresh cucumber, salt on the side.",
       },
-      cerez: {
-        description: "A plate of nuts, to keep the rakı company.",
-      },
-      "eski-kasar": {
-        description: "Thrace's matured kaşar cheese, sliced.",
-      },
+      cerez: { description: "A plate of nuts, for the conversation." },
+      "eski-kasar": { description: "Thrace's matured kaşar cheese, sliced." },
+      "lux-cerez": { description: "A generous plate, heavy on pistachios." },
+      "tek-peynir": { description: "White cheese, sliced." },
       atom: { description: "Yoghurt with hot peppers." },
       "sirkeli-kapya": {
-        description: "Ember-roasted kapya peppers in a vinegar dressing.",
+        description: "Roasted red peppers in a vinegar dressing.",
       },
       semizotu: { description: "Purslane with yoghurt and garlic." },
-      haydari: { description: "Strained yoghurt with dill and garlic." },
+      haydari: { description: "Strained yoghurt, dill and garlic." },
       "havuc-tarator": { description: "Grated carrot with yoghurt." },
       "rus-salatasi": { description: "The classic, with mayonnaise." },
-      "kuru-domates": { description: "Rested in olive oil." },
       "acili-ezme": {
         description: "Finely chopped tomato, pepper and onion; house style.",
       },
-      cacik: { description: "With cucumber, served ice cold." },
-      "koyun-yogurdu": {
-        description:
-          "Sheep's yoghurt set in season; thick enough to hold a spoon upright.",
-      },
+      cacik: { description: "With cucumber, ice-cold." },
       "karisik-kizartma": {
         description: "Aubergine, pepper and courgette; with yoghurt and tomato sauce.",
       },
       kopeoglu: {
-        description: "Ember-roasted aubergine with yoghurt and tomato sauce.",
+        description: "Roasted aubergine with yoghurt and tomato sauce.",
       },
-      "soslu-patlican": {
-        description: "Fried aubergine in tomato sauce.",
-      },
+      "soslu-patlican": { description: "Fried aubergine in tomato sauce." },
       manca: {
-        description: "The migrants' meze of Thrace; with yoghurt and garlic.",
+        description: "A meze of Thrace's Balkan settlers; yoghurt and garlic.",
       },
-      girit: {
-        description: "White cheese mashed with walnuts and fresh herbs.",
+      "koyun-yogurdu": {
+        description: "Sheep's yoghurt set in season; thick enough to stand a spoon in.",
       },
-      "lux-cerez": {
-        description: "A generous plate, heavy on pistachios.",
+      girit: { description: "White cheese mashed with walnuts and herbs." },
+      soka: { description: "From Balkan tables: a meze of roasted peppers." },
+      "tavuk-izgara": {
+        description: "Lightly spiced, over the embers. For those who'd rather skip red meat.",
       },
-      soka: {
-        description: "From Balkan tables: a meze of ember-roasted peppers.",
+      "kasap-sucuk": {
+        unit: "200 g",
+        description: "Sucuk from Kasaplar Arası, grilled until crisp.",
       },
-      "buzlu-badem": {
-        description: "On ice, crisp to the bite.",
+      "tava-ciger": {
+        unit: "225 g",
+        description: "Finely diced liver in a hot pan; with sliced onion.",
       },
-      /* Salatalar */
-      "coban-salatasi": {
-        description: "Tomato, cucumber, pepper and onion; finely chopped.",
+      "ciger-sis": {
+        unit: "225 g · 3 skewers",
+        description: "Threaded onto skewers with tail fat, turned over the embers.",
       },
-      piyaz: {
-        description:
-          "White beans, plenty of onion, vinegar and olive oil. The köfte's inseparable companion.",
+      hamburger: { description: "A beef patty from the embers, in a bun." },
+      antrikot: {
+        unit: "200 g",
+        description: "A thick cut, seared then rested.",
       },
-      "yesil-salata": {
-        description: "Seasonal greens with lemon and olive oil.",
+      "istranca-kuzu-sis": {
+        unit: "260 g · 3 skewers",
+        description: "Cubed lamb from the Istranca Mountains; seared over embers, with sliced onion and roasted pepper.",
       },
-      "sopska-salatasi": {
-        description: "A Balkan classic, finished with grated white cheese.",
+      kulbasti: {
+        unit: "270 g · 3 skewers",
+        description: "Thinly pounded meat, straight over the ashes.",
       },
-      /* Tatlılar */
-      "kaymakli-baklava": {
-        description: "Cut in carrot-slice wedges, topped with clotted cream.",
+      kusleme: {
+        unit: "180–200 g · 1 piece",
+        description: "The most prized cut of lamb; it melts in the mouth.",
       },
-      "kaymakli-peynir-tatlisi": {
-        description: "Cheese dessert in syrup, with clotted cream.",
+      bonfile: {
+        unit: "200 g",
+        description: "Lean and tender; cooked to your liking.",
+      },
+      "istranca-kuzu-pirzola": {
+        unit: "240 g · 3 pieces",
+        description: "Thracian lamb, juicy enough to eat off the bone.",
+      },
+      "istranca-kuzu-lokum": {
+        unit: "240 g · 4 pieces",
+        description: "The lamb cut that melts like lokum; salt and embers, nothing else.",
+      },
+      "karisik-izgara": {
+        unit: "1 lamb lokum · 1 lamb chop · 2 köfte · 1 külbastı",
+        description: "The grill in summary, for the undecided; five items on one plate.",
+      },
+      "karisik-kofte": {
+        unit: "serves 2 · 4 plain köfte · 1 spicy · 1 cheese · 1 pastırma · 1 chef's",
+        description: "All five köfte on one plate; made for sharing.",
+      },
+      cupra: { description: "Whole, over the embers." },
+      levrek: { description: "Whole, over the embers." },
+      lufer: { description: "In season, the Bosphorus's prized fish." },
+      somon: { description: "A thick fillet, over the embers." },
+      sardalya: { description: "Dusted in cornmeal, fried in hot oil." },
+      hamsi: { description: "In season, pan-fried." },
+      istavrit: { description: "Dusted in cornmeal, fried in hot oil." },
+      mezgit: { description: "Boneless, pan-fried." },
+      "kabak-tatlisi": { description: "Served with tahini and walnuts." },
+      profiterol: { description: "With chocolate sauce, served cold." },
+      sutlac: { description: "Oven-baked, browned on top." },
+      dondurma: {
+        unit: "3 scoops",
+        description: "Your choice from the day's flavours.",
       },
       "kaymakli-hayrabolu": {
-        description:
-          "Thrace's cheese dessert in syrup; made with fresh cheese, served warm.",
+        description: "Thrace's cheese dessert in syrup; served with tahini and walnuts.",
       },
-      tralice: {
-        unit: "Homemade, our own recipe",
-        description: "A gift of the Balkan migrants; milky, with caramel.",
-      },
-      sutlac: {
-        description: "Baked in the oven, caramelised on top.",
-      },
-      "meyve-tabagi": {
-        description: "Seasonal fruit, on ice.",
-      },
-      /* Soğuk İçecekler */
-      su: { description: "Half a litre." },
-      ayran: { description: "Foamy, in a copper tankard." },
-      soda: { description: "Plain or fruit-flavoured." },
-      salgam: { description: "Spicy or mild." },
-      kola: { description: "Ice cold, from the cooler." },
-      fanta: { description: "Ice cold, from the cooler." },
-      sprite: { description: "Ice cold, from the cooler." },
-      hardaliye: {
-        description:
-          "Kırklareli's centuries-old drink: grape must fermented with mustard seeds. Bottled by Kırk Kimse.",
-      },
-      /* Sıcak İçecekler */
-      cay: { description: "In a tulip glass, well brewed." },
-      "turk-kahvesi": {
-        description: "Brewed on the embers, with Turkish delight on the side.",
-      },
-      /* Biralar */
-      "efes-pilsen": { description: "Served cold, by the bottle." },
-      "tuborg-gold": { description: "Served cold, by the bottle." },
-      /* Rakılar */
-      "yeni-raki": {
-        unit: "New Series",
-        description: "The classic. With white cheese and melon.",
-      },
-      "tekirdag-altin-seri": {
-        description: "Rested in oak casks; Thrace's own rakı.",
-      },
-      "tekirdag-sir-kavrulmus": {
-        description: "Full-bodied, with roasted aniseed.",
-      },
-      "izmir-gobek": {
-        description: "From the heart of the distillate; smooth on the palate.",
-      },
-      "kulup-rakisi": {
-        description: "Old style, firm in character.",
-      },
-      "efe-gold": {
-        description: "Lightly aniseed, well balanced.",
-      },
-      /* Viskiler */
-      "chivas-regal-12": {
-        unit: "12 years old",
-        description: "A blended Scotch whisky with a smooth finish.",
-      },
-      "jack-daniels": {
-        unit: "Tennessee",
-        description: "Mellowed through sugar-maple charcoal; softly sweet.",
-      },
-      /* Şaraplar */
-      saranta: {
-        description:
-          "A boutique wine from the Kırklareli vineyards; a local choice to go with the köfte.",
-      },
-      "vino-dessera": {
-        description: "A Thracian wine made in Vize; in red and white.",
-      },
+      "antep-fistikli-baklava": { description: "Served with clotted cream." },
+      "meyve-tabagi": { description: "Seasonal fruit, on ice." },
+      peja: { unit: "Alcohol-free" },
     },
   },
   gallery: {

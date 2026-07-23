@@ -161,8 +161,12 @@ export interface SiteContent {
       noResultsTitle: string;
       noResultsHint: string;
       itemsCount: (n: number) => string;
-      /** Fiyatı basılı menüde yazmayan kalemlerde (alkol vb.) gösterilir */
+      /** Fiyatı basılı menüde yazmayan kalemlerde gösterilir */
       askPrice: string;
+      /** Fiyatı güne göre değişen kategorilerde (balıklar) ekran okuyucu metni */
+      priceOnRequest: string;
+      /** Ölçü kimliği → görünen ad (rakı fiyat listesi); eşi yoksa ham gösterilir */
+      servings: Record<string, string>;
       menuNoteExtra: string;
       categoriesAria: string;
       tags: { chef: string; popular: string; fresh: string; local: string };
@@ -298,9 +302,11 @@ export interface SiteContent {
         note?: string;
         /** Kategori içi alt başlıklar: grup id'si → çevrilmiş başlık */
         groups?: Record<string, string>;
+        /** Alt başlıkların altındaki küçük not: grup id'si → çevrilmiş not */
+        groupNotes?: Record<string, string>;
       }
     >;
-    items: Record<string, { unit?: string; description: string }>;
+    items: Record<string, { unit?: string; description?: string }>;
   };
   gallery: Record<string, { caption: string }>;
 }

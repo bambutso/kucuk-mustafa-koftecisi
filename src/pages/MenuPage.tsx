@@ -10,7 +10,7 @@ import { useMediaQuery } from "../hooks/useMediaQuery";
 import { MenuHeader } from "../sections/menu/MenuHeader";
 import { MenuFilterBar } from "../sections/menu/MenuFilterBar";
 import { CategorySection } from "../sections/menu/CategorySection";
-import { MenuCard } from "../sections/menu/MenuCard";
+import { MenuRow } from "../sections/menu/MenuRow";
 import { MenuNote } from "../sections/menu/MenuNote";
 import { Model3DViewer } from "../sections/menu/Model3DViewer";
 import { Container } from "../components/ui/Container";
@@ -59,15 +59,18 @@ export default function MenuPage() {
     }
   };
 
+  /* Sonuçlar kategorisini de taşır: balıklarda fiyat sütunu boş kalmalı. */
   const results = useMemo(() => {
     const q = query.trim().toLocaleLowerCase("tr");
     if (!q) return [];
     return categories.flatMap((category) =>
-      category.items.filter(
-        (item) =>
-          item.name.toLocaleLowerCase("tr").includes(q) ||
-          item.description.toLocaleLowerCase("tr").includes(q),
-      ),
+      category.items
+        .filter(
+          (item) =>
+            item.name.toLocaleLowerCase("tr").includes(q) ||
+            (item.description ?? "").toLocaleLowerCase("tr").includes(q),
+        )
+        .map((item) => ({ item, priceOnRequest: category.priceOnRequest })),
     );
   }, [query, categories]);
 
@@ -114,9 +117,14 @@ export default function MenuPage() {
               <p className="mt-6 text-sm text-cream/50" role="status">
                 {ui.resultsFound(results.length)}
               </p>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                {results.map((item) => (
-                  <MenuCard key={item.id} item={item} onView3D={setView3DItem} />
+              <div className="mt-2 grid gap-x-14 lg:grid-cols-2">
+                {results.map(({ item, priceOnRequest }) => (
+                  <MenuRow
+                    key={item.id}
+                    item={item}
+                    priceOnRequest={priceOnRequest}
+                    onView3D={setView3DItem}
+                  />
                 ))}
               </div>
             </>

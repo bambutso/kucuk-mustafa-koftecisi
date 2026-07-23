@@ -6,8 +6,6 @@ import {
   Flame,
   HandPlatter,
   MapPin,
-  ShoppingBag,
-  Store,
   Wine,
 } from "lucide-react";
 import {
@@ -26,10 +24,9 @@ import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 import { buttonVariants } from "../components/ui/Button";
 import { cn } from "../utils/cn";
 
+/* Paket servis ve gel-al 2026-07-23'te kaldırıldı — işletme artık vermiyor. */
 const serviceIcons: Record<string, ComponentType<{ className?: string }>> = {
   yerinde: HandPlatter,
-  paket: ShoppingBag,
-  gelal: Store,
   alkollu: Wine,
 };
 
