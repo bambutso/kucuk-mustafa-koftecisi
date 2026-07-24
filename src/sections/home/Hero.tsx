@@ -8,7 +8,8 @@ import {
   type Variants,
 } from "framer-motion";
 import { ChevronDown, ExternalLink, Phone, Star } from "lucide-react";
-import { restaurant } from "../../data/restaurant";
+import { igImages, restaurant } from "../../data/restaurant";
+import { gallerySrcSet } from "../../utils/images";
 import { useContent } from "../../i18n";
 import { buttonVariants } from "../../components/ui/Button";
 import { Stamp } from "../../components/ui/Stamp";
@@ -53,7 +54,8 @@ export function Hero() {
         style={reduceMotion ? undefined : { y: bgY }}
       >
         <motion.img
-          src={`${import.meta.env.BASE_URL}gallery/sofra-hero.webp`}
+          src={igImages.kofteTabak}
+          srcSet={gallerySrcSet(igImages.kofteTabak)}
           sizes="100vw"
           /* Sayfanın en büyük görseli ve ilk görünen öge: geciktirmeden çekilsin */
           fetchPriority="high"
