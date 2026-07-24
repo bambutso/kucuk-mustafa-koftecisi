@@ -1,8 +1,11 @@
 import { usePageMeta } from "../hooks/usePageMeta";
 import { useContent } from "../i18n";
+import { Container } from "../components/ui/Container";
+import { Reveal } from "../components/ui/Reveal";
 import { Hero } from "../sections/home/Hero";
 import { BrandIntro } from "../sections/home/BrandIntro";
 import { About } from "../sections/home/About";
+import { AtaturkHardaliye } from "../sections/home/AtaturkHardaliye";
 import { Story } from "../sections/home/Story";
 import { WhyDifferent } from "../sections/home/WhyDifferent";
 import { WhyUsStrip } from "../sections/home/WhyUsStrip";
@@ -18,6 +21,24 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+
+      {/* Kırklareli — Atatürk sözü (giriş).
+         YER TUTUCU: doğrulanmış tam söz işletme tarafından eklenecek;
+         sahte bir söz YAZILMADI. Metni değiştirmek yeterli. */}
+      <section className="bg-coal py-12 text-center" aria-label="Atatürk sözü">
+        <Container>
+          <Reveal>
+            <div className="kor-line mx-auto mb-6 w-16" />
+            <blockquote className="mx-auto max-w-2xl font-display text-xl italic leading-snug text-cream/90 sm:text-2xl">
+              “Kırklareli ile ilgili Atatürk sözü buraya eklenecek.”
+            </blockquote>
+            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-copper">
+              Mustafa Kemal Atatürk
+            </p>
+          </Reveal>
+        </Container>
+      </section>
+
       <BrandIntro />
       <About />
       <Story />
@@ -25,6 +46,7 @@ export default function HomePage() {
       <WhyUsStrip />
       <Signature />
       <InstagramStrip />
+      <AtaturkHardaliye />
       <Reviews />
       <LocationPreview />
     </>
