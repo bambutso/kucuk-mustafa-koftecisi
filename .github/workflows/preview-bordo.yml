@@ -1,0 +1,80 @@
+name: Preview — Bordo (koyu + beyaz)
+
+# İki bordo varyantını GitHub Pages'te iki alt adrese yayınlar (yalnızca önizleme):
+#   .../kucuk-mustafa-koftecisi/koyu/   ← master (bordo koyu)
+#   .../kucuk-mustafa-koftecisi/beyaz/  ← master + scripts/apply-beyaz-theme.mjs
+# Canlı üretim sitesini (Güzel Hosting) etkilemez. Elle: Actions ▸ Run workflow.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Build KOYU
+        run: |
+          npm run build -- --base=/kucuk-mustafa-koftecisi/koyu/
+          cp dist/index.html dist/404.html
+          mkdir -p site/koyu
+          cp -r dist/. site/koyu/
+
+      - name: Apply BEYAZ theme
+        run: node scripts/apply-beyaz-theme.mjs
+
+      - name: Build BEYAZ
+        run: |
+          npm run build -- --base=/kucuk-mustafa-koftecisi/beyaz/
+          cp dist/index.html dist/404.html
+          mkdir -p site/beyaz
+          cp -r dist/. site/beyaz/
+
+      - name: Landing page + .nojekyll
+        run: |
+          touch site/.nojekyll
+          cat > site/index.html <<'HTML'
+          <!doctype html><html lang="tr"><head><meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1">
+          <meta name="robots" content="noindex">
+          <title>Bordo Önizleme — Küçük Mustafa Köftecisi</title></head>
+          <body style="margin:0;font-family:system-ui,-apple-system,sans-serif;background:#171013;color:#f5ece1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;box-sizing:border-box">
+          <h1 style="font-family:Georgia,serif;font-weight:600;font-size:2rem;margin:0 0 .4rem">Bordo Önizleme</h1>
+          <p style="opacity:.6;margin:0 0 2.5rem">Küçük Mustafa Köftecisi — iki varyantı karşılaştırın</p>
+          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center">
+            <a href="koyu/" style="text-decoration:none;padding:1.4rem 2.5rem;border:1px solid #6d343c;background:#1f0c10;color:#cfa269;border-radius:12px;font-size:1.15rem">▶ Bordo Koyu</a>
+            <a href="beyaz/" style="text-decoration:none;padding:1.4rem 2.5rem;border:1px solid #cbb393;background:#f4ebdd;color:#8a1c22;border-radius:12px;font-size:1.15rem">▶ Bordo Beyaz</a>
+          </div>
+          </body></html>
+          HTML
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
