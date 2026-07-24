@@ -54,7 +54,7 @@ function Brand() {
       <img
         src={`${import.meta.env.BASE_URL}gallery/logo.webp`}
         alt="Küçük Mustafa Köftecisi — 1939"
-        className="h-12 w-auto transition-opacity duration-300 group-hover:opacity-90 md:h-16"
+        className="h-16 w-auto transition-opacity duration-300 group-hover:opacity-90 md:h-20"
       />
     </Link>
   );
@@ -201,7 +201,7 @@ export function Navbar() {
               : "border-transparent bg-transparent",
           )}
         />
-        <Container className="relative flex h-16 items-center justify-between md:h-20">
+        <Container className="relative flex h-20 items-center justify-between md:h-24">
           <Brand />
 
           {/* Masaüstü */}

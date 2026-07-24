@@ -29,7 +29,8 @@ export function AtaturkTribute() {
         <Reveal delay={0.1}>
           <div className="kor-line mx-auto w-16 sm:mx-0" />
           <blockquote className="mt-5 font-display text-2xl italic leading-snug text-cream sm:text-3xl">
-            “Ne Mutlu Türk'üm Diyene!”
+            “Kırklareli Türk Ocağında çok kıymetli arkadaşlarla geçirdiğim
+            zamanın hatırasını ölmez hislerle saklayacağım.”
           </blockquote>
           <p className="mt-3 text-xs uppercase tracking-[0.3em] text-copper">
             Mustafa Kemal Atatürk
