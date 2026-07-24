@@ -30,10 +30,11 @@ export const images = {
   heroFire: unsplash("photo-1475738972911-5b44ce984c42", 2000),
   /** Gerçek fotoğraf: 8 köftelik porsiyon, közlenmiş biber ve piyazıyla */
   koftePlate: wixPhoto("e862a722eaef4dacb3e88864c27efbd1"),
-  /** Gerçek fotoğraf: 1939 tabelalı dükkân cephesi */
-  storefront: wixPhoto("cc20b1bff6874f1eb4740fb21c07dd2b"),
-  /** Gerçek fotoğraf: usta, köz başında */
-  ustaGrill: wixPhoto("d55687df66b840fb8657152e7b0fbc56"),
+  /* İşletme isteğiyle KALDIRILDI (2026-07-24) — bir daha kullanılmayacak:
+     storefront (cc20b1bff6874f1eb4740fb21c07dd2b) ve
+     ustaGrill  (d55687df66b840fb8657152e7b0fbc56).
+     Bu iki kare Hikayemiz/Mekân/İletişim'de placeholder'la, Galeri'de tamamen
+     kaldırıldı. */
 } as const;
 
 /**
@@ -326,6 +327,46 @@ export const features = [
     text: "Piyazlık kuru soğan, közlenmiş yeşil biber, ev yapımı acı sos. 225 gramlık porsiyonda sekiz köfte — 1939'dan beri böyle.",
   },
 ] as const;
+
+/** Ana sayfa — "Hakkımızda" bölümü (işletmeden gelen resmî metin) */
+export const about = {
+  eyebrow: "Hakkımızda",
+  title: "Değişmeyen lezzet, değişmeyen özen",
+  paragraphs: [
+    "Küçük Mustafa Köftecisi, değişmeyen lezzet anlayışı ve yüksek kalite standardıyla misafirlerine her zaman en iyi deneyimi sunmayı hedefler. Her detay, ilk andan son lokmaya kadar aynı özenle düşünülür.",
+    "Mutfağımızda kullandığımız tüm ürünler titizlikle seçilir. Yemeklerimizde yalnızca natürel sızma zeytinyağı ve ayçiçek yağı kullanılır; palm yağı ve benzeri işlenmiş yağlara kesinlikle yer verilmez. Çünkü soframıza gelen her misafir için en sağlıklı ve en güvenilir ürünleri sunmayı bir ilke sayarız.",
+    "Lezzetin sürdürülebilir olması için güven şarttır. Bu nedenle mutfağımızda temizlik ve hijyen kuralları en üst seviyede uygulanır; tüm hazırlık ve servis süreçleri büyük bir titizlikle yürütülür.",
+    "Küçük Mustafa Köftecisi'nde amaç yalnızca yemek sunmak değil; kaliteli, güvenilir ve keyifli bir deneyim yaşatmaktır.",
+  ],
+  cards: [
+    {
+      id: "icerik",
+      title: "Doğal ve Seçkin İçerik",
+      text: "Katkısız, özenle seçilmiş ürünler.",
+    },
+    {
+      id: "hijyen",
+      title: "Yüksek Hijyen Standartları",
+      text: "Her aşamada titizlik ve kontrol.",
+    },
+    {
+      id: "memnuniyet",
+      title: "Müşteri Memnuniyeti",
+      text: "Her zaman aynı kalite, aynı özen.",
+    },
+  ],
+} as const;
+
+/** Ana sayfa — "Neden Biz" şeridi (kısa rozetler) */
+export const whyUs = {
+  eyebrow: "Neden Biz",
+  items: [
+    { id: "yag", text: "Yalnızca natürel sızma zeytinyağı ve ayçiçek yağı" },
+    { id: "palm", text: "Palm yağı ve işlenmiş yağ yok" },
+    { id: "hijyen", text: "Üst düzey hijyen standartları" },
+    { id: "secki", text: "Özenle seçilmiş, katkısız ürünler" },
+  ],
+} as const;
 
 /**
  * Yorum kartları temsilîdir; gerçek müşteri yorumu değildir.

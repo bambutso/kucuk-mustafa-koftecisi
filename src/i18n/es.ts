@@ -371,6 +371,30 @@ export const es: SiteContent = {
       text: "Piyaz de cebolla fresca, pimiento verde asado a la brasa, salsa picante casera. Ocho köfte en una ración de 225 gramos — igual que en 1939.",
     },
   ],
+  about: {
+    eyebrow: "Sobre nosotros",
+    title: "Sabor que no cambia, cuidado que no cambia",
+    paragraphs: [
+      "Küçük Mustafa Köftecisi aspira a ofrecer siempre a sus huéspedes la mejor experiencia, con una idea del sabor que no cambia y un alto estándar de calidad. Cada detalle se piensa con el mismo esmero, desde el primer momento hasta el último bocado.",
+      "Todos los productos que usamos en nuestra cocina se eligen con cuidado. En nuestros platos empleamos únicamente aceite de oliva virgen extra natural y aceite de girasol; el aceite de palma y otras grasas procesadas no tienen cabida. Porque hacemos un principio de servir a cada huésped de nuestra mesa los productos más sanos y fiables.",
+      "Para que el sabor perdure, la confianza es imprescindible. Por eso las normas de limpieza e higiene se aplican al más alto nivel en nuestra cocina, y todos los procesos de preparación y servicio se llevan a cabo con el mayor esmero.",
+      "En Küçük Mustafa Köftecisi el objetivo no es solo servir comida, sino brindar una experiencia de calidad, fiable y placentera.",
+    ],
+    cards: [
+      { id: "icerik", title: "Ingredientes naturales y selectos", text: "Productos sin aditivos, elegidos con esmero." },
+      { id: "hijyen", title: "Altos estándares de higiene", text: "Esmero y control en cada paso." },
+      { id: "memnuniyet", title: "Satisfacción del huésped", text: "Siempre la misma calidad, el mismo esmero." },
+    ],
+  },
+  whyUs: {
+    eyebrow: "Por qué nosotros",
+    items: [
+      { id: "yag", text: "Solo aceite de oliva virgen extra natural y de girasol" },
+      { id: "palm", text: "Sin aceite de palma ni grasas procesadas" },
+      { id: "hijyen", text: "Higiene del más alto nivel" },
+      { id: "secki", text: "Productos seleccionados con cuidado y sin aditivos" },
+    ],
+  },
   /* Opiniones reales de TripAdvisor; puntuación ajustada y ligeramente abreviadas. */
   tripadvisorReviews: {
     "kucuk-sehir": {

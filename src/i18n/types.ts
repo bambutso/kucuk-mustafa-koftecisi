@@ -52,6 +52,27 @@ export interface Feature {
   text: string;
 }
 
+/** "Hakkımızda" bölümündeki vurgu kartı (ikon bileşende, metin i18n'de). */
+export interface AboutCard {
+  id: string;
+  title: string;
+  text: string;
+}
+
+/** Ana sayfa "Hakkımızda" bölümü: metin paragrafları + 3 vurgu kartı. */
+export interface AboutContent {
+  eyebrow: string;
+  title: string;
+  paragraphs: ReadonlyArray<string>;
+  cards: ReadonlyArray<AboutCard>;
+}
+
+/** Ana sayfa "Neden Biz" şeridi: kısa rozet metinleri (ikon bileşende). */
+export interface WhyUsContent {
+  eyebrow: string;
+  items: ReadonlyArray<{ id: string; text: string }>;
+}
+
 export interface ServiceCard {
   id: string;
   title: string;
@@ -280,6 +301,10 @@ export interface SiteContent {
     services: ReadonlyArray<ServiceCard>;
   };
   features: ReadonlyArray<Feature>;
+  /** Ana sayfa "Hakkımızda" bölümü */
+  about: AboutContent;
+  /** Ana sayfa "Neden Biz" şeridi */
+  whyUs: WhyUsContent;
   /**
    * TripAdvisor'daki gerçek yorumlar, `tripadvisorReviews` id'leriyle eşleşir.
    * Özgün dil Türkçedir; diğer diller çeviridir.

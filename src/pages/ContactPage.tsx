@@ -5,7 +5,7 @@ import {
   Navigation,
   Phone,
 } from "lucide-react";
-import { images, restaurant } from "../data/restaurant";
+import { restaurant } from "../data/restaurant";
 import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
@@ -21,11 +21,11 @@ export default function ContactPage() {
 
   return (
     <>
+      {/* Eski cephe fotoğrafı kaldırıldı — başlık düz koyu zeminde. */}
       <PageHeader
         eyebrow={ui.eyebrow}
         title={ui.title}
         lead={ui.lead}
-        image={images.storefront}
       />
 
       <div className="bg-charcoal py-16 md:py-24">

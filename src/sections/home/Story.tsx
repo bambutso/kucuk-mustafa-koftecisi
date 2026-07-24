@@ -1,4 +1,4 @@
-import { images } from "../../data/restaurant";
+import { storyPhotos } from "../../data/storyImages";
 import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { SectionHeading } from "../../components/ui/SectionHeading";
@@ -40,34 +40,30 @@ export function Story() {
             ))}
           </ol>
 
-          {/* Arşiv fotoğrafları — işletmenin gerçek kareleri */}
+          {/* Eski usta/cephe fotoğrafları kaldırıldı — yeni fotoğraflar gelene
+             kadar nötr yer tutucu gösterilir. Yollar src/data/storyImages.ts'te;
+             foto gelince yalnızca orayı güncellemek yeterli. */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
             <Reveal delay={0.1}>
               <figure className="archive-frame rotate-1">
                 <ImageWithFallback
-                  src={images.storefront}
-                  alt="Küçük Mustafa Köftecisi'nin 1939 tabelalı dükkân cephesi"
-                  fallbackLabel="Dükkân cephesi"
+                  src={storyPhotos.storefront}
+                  alt=""
+                  fallbackLabel="Fotoğraf yakında"
                   loading="lazy"
                   className="aspect-[3/2] w-full object-cover"
                 />
-                <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                  {ui.captionShop}
-                </figcaption>
               </figure>
             </Reveal>
             <Reveal delay={0.22}>
               <figure className="archive-frame -mt-6 ml-10 -rotate-1 sm:ml-16">
                 <ImageWithFallback
-                  src={images.ustaGrill}
-                  alt="Usta, meşe kömürünün korunda köfteleri pişirirken"
-                  fallbackLabel="Usta köz başında"
+                  src={storyPhotos.ustaGrill}
+                  alt=""
+                  fallbackLabel="Fotoğraf yakında"
                   loading="lazy"
                   className="aspect-[3/2] w-full object-cover"
                 />
-                <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                  {ui.captionUsta}
-                </figcaption>
               </figure>
             </Reveal>
           </div>

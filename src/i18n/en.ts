@@ -371,6 +371,30 @@ export const en: SiteContent = {
       text: "Fresh onion piyaz, ember-roasted green pepper, homemade hot sauce. Eight meatballs in a 225-gram portion — the same since 1939.",
     },
   ],
+  about: {
+    eyebrow: "About Us",
+    title: "Unchanging flavour, unchanging care",
+    paragraphs: [
+      "Küçük Mustafa Köftecisi aims to give its guests the very best experience, with an unchanging understanding of flavour and a high standard of quality. Every detail is considered with the same care, from the first moment to the last bite.",
+      "Every product we use in our kitchen is chosen with care. We cook only with natural extra-virgin olive oil and sunflower oil; palm oil and similar processed fats are never used. Because we make it a principle to serve the healthiest, most trustworthy ingredients to every guest at our table.",
+      "For flavour to last, trust is essential. That is why cleanliness and hygiene are held to the highest standard in our kitchen, and every step of preparation and service is carried out with great care.",
+      "At Küçük Mustafa Köftecisi the goal is not merely to serve food; it is to offer a quality, trustworthy and enjoyable experience.",
+    ],
+    cards: [
+      { id: "icerik", title: "Natural, Select Ingredients", text: "Additive-free, carefully chosen products." },
+      { id: "hijyen", title: "High Hygiene Standards", text: "Care and control at every step." },
+      { id: "memnuniyet", title: "Guest Satisfaction", text: "The same quality, the same care, always." },
+    ],
+  },
+  whyUs: {
+    eyebrow: "Why Us",
+    items: [
+      { id: "yag", text: "Only natural extra-virgin olive oil and sunflower oil" },
+      { id: "palm", text: "No palm oil or processed fats" },
+      { id: "hijyen", text: "Top-level hygiene standards" },
+      { id: "secki", text: "Carefully selected, additive-free products" },
+    ],
+  },
   /* Real reviews from TripAdvisor; punctuation tidied and lightly shortened. */
   tripadvisorReviews: {
     "kucuk-sehir": {

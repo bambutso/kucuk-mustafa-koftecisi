@@ -100,22 +100,8 @@ export const galleryItems: GalleryItem[] = [
     category: "mekan",
     authentic: true,
   },
-  {
-    id: "cephe",
-    src: images.storefront,
-    alt: "Küçük Mustafa Köftecisi'nin 1939 tabelalı dükkân cephesi",
-    caption: "Kasaplar Arası'ndaki dükkân — tabelada: 1939'dan günümüze yaşayan efsane",
-    category: "mekan",
-    authentic: true,
-  },
-  {
-    id: "usta",
-    src: images.ustaGrill,
-    alt: "Usta, meşe kömürünün korunda köfteleri çevirirken",
-    caption: "Köz başında usta — maşa hiç boş durmaz",
-    category: "koz",
-    authentic: true,
-  },
+  /* Eski "cephe" ve "usta" Wix kareleri (cc20b1b… ve d55687d…) galeriden
+     kaldırıldı — işletme isteğiyle bu iki görsel artık hiç kullanılmıyor. */
   {
     id: "porsiyon",
     src: images.koftePlate,

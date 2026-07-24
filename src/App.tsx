@@ -14,6 +14,7 @@ const GalleryPage = lazy(() => import("./pages/GalleryPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const ReservationPage = lazy(() => import("./pages/ReservationPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
+const ThemePreviewPage = lazy(() => import("./pages/ThemePreviewPage"));
 
 function PageFallback() {
   return (
@@ -33,6 +34,10 @@ function lazyRoute(element: ReactNode) {
 }
 
 const router = createBrowserRouter([
+  // Renk paleti iç önizlemesi — Layout'suz bağımsız tam sayfa.
+  // Bilerek sitemap/prerender DIŞINDA (scripts/site.mjs ROUTES'a eklenmedi):
+  // herkese açık bir sayfa değil, yalnızca palet kararı için karşılaştırma aracı.
+  { path: "/tema-onizleme", element: lazyRoute(<ThemePreviewPage />) },
   {
     element: <Layout />,
     children: [

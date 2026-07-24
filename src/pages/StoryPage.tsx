@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { images } from "../data/restaurant";
+import { storyPhotos } from "../data/storyImages";
 import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
@@ -17,21 +18,15 @@ export default function StoryPage() {
   const { storyPage, story } = content;
   usePageMeta(ui.docTitle, ui.docDesc);
 
-  /** Bölüm aralarına serpiştirilen gerçek kareler */
+  /* Eski usta/cephe fotoğrafları kaldırıldı — yeni fotoğraflar gelene kadar
+     nötr yer tutucu gösterilir. Yollar src/data/storyImages.ts'te; foto gelince
+     yalnızca orayı güncellemek (ve istenirse caption'ı geri eklemek) yeterli. */
   const chapterFigures: Record<
     string,
     { src: string; alt: string; caption: string } | undefined
   > = {
-    "1939": {
-      src: images.storefront,
-      alt: ui.captionShop,
-      caption: ui.captionShop,
-    },
-    bugun: {
-      src: images.ustaGrill,
-      alt: ui.captionUsta,
-      caption: ui.captionUsta,
-    },
+    "1939": { src: storyPhotos.storefront, alt: "", caption: "" },
+    bugun: { src: storyPhotos.ustaGrill, alt: "", caption: "" },
   };
 
   return (
@@ -83,15 +78,17 @@ export default function StoryPage() {
                       <ImageWithFallback
                         src={figure.src}
                         alt={figure.alt}
-                        fallbackLabel={figure.caption}
+                        fallbackLabel="Fotoğraf yakında"
                         loading="lazy"
                         /* Anlatı içindeki arşiv karesi: max-w-md (448px) */
                         sizes="(min-width: 640px) 448px, calc(100vw - 2.5rem)"
                         className="aspect-[3/2] w-full object-cover"
                       />
-                      <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
-                        {figure.caption}
-                      </figcaption>
+                      {figure.caption && (
+                        <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
+                          {figure.caption}
+                        </figcaption>
+                      )}
                     </figure>
                   </Reveal>
                 )}

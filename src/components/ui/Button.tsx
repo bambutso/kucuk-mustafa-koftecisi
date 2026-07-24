@@ -12,7 +12,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-ember text-coal hover:bg-copper hover:shadow-[0_0_28px_rgba(217,119,47,0.45)] active:translate-y-px",
+          "bg-ember text-cream hover:bg-copper hover:shadow-[0_0_28px_rgba(158,43,48,0.5)] active:translate-y-px",
         outline:
           "border border-cream/25 bg-transparent text-cream hover:border-copper hover:text-copper active:translate-y-px",
         ghost: "text-cream/80 hover:text-ember",

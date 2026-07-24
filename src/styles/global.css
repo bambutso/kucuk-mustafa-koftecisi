@@ -6,13 +6,21 @@
   Parlak kırmızı ve sarı bilinçli olarak paletin dışındadır.
 */
 @theme {
-  --color-charcoal: #1b1b1b; /* ana zemin — kömür siyahı */
-  --color-coal: #141110; /* daha derin katman (hero, footer) */
-  --color-coffee: #2c1e18; /* kart / yüzey — koyu kahve */
-  --color-earth: #5b4033; /* çizgi, ikincil yüzey — toprak */
-  --color-copper: #b87333; /* vurgu — bakır */
-  --color-cream: #f7f2ea; /* metin — krem */
-  --color-ember: #d9772f; /* eylem, aktif durum — köz turuncusu */
+  /* ─── BORDO DENEME (yerel önizleme) ───────────────────────────────────
+     Koyu tema içinde bordo: şarap-siyahı zeminler + ALTIN vurgu + bordo
+     aksiyon/köz + krem metin. Geri dönüş (turuncu): bu bloğu ve .kor-line'ı
+     aşağıdaki orijinal değerlere döndür — ya da `git checkout -- src/styles/global.css`.
+       ORİJİNAL (KÖZ TURUNCUSU):
+         charcoal #1b1b1b · coal #141110 · coffee #2c1e18 · earth #5b4033
+         copper #b87333 · cream #f7f2ea · ember #d9772f
+     ──────────────────────────────────────────────────────────────────── */
+  --color-charcoal: #1f0c10; /* ana zemin — koyu şarap-siyahı */
+  --color-coal: #150609; /* daha derin katman (hero, footer) */
+  --color-coffee: #331519; /* kart / yüzey — bordo tonlu koyu */
+  --color-earth: #6d343c; /* çizgi, ikincil yüzey — mat bordo */
+  --color-copper: #cfa269; /* vurgu — altın (bordo ile klasik eşleşme) */
+  --color-cream: #f5ece1; /* metin — krem */
+  --color-ember: #b23640; /* eylem, aktif durum — canlı bordo (köz) */
 
   --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-sans: "Inter Variable", Inter, system-ui, -apple-system, sans-serif;
@@ -102,19 +110,20 @@
   .kor-line {
     height: 2px;
     border: 0;
+    /* BORDO DENEME — orijinal turuncu değerler için git geçmişine bakın */
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(217, 119, 47, 0.25) 15%,
+      rgba(178, 54, 64, 0.25) 15%,
       var(--color-ember) 38%,
-      #eda05e 50%,
+      #dd9a95 50%,
       var(--color-ember) 62%,
-      rgba(217, 119, 47, 0.25) 85%,
+      rgba(178, 54, 64, 0.25) 85%,
       transparent 100%
     );
     box-shadow:
-      0 0 12px rgba(217, 119, 47, 0.55),
-      0 0 42px rgba(217, 119, 47, 0.2);
+      0 0 12px rgba(178, 54, 64, 0.55),
+      0 0 42px rgba(178, 54, 64, 0.2);
   }
 
   .kor-line--live {

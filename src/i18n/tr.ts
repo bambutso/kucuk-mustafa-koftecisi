@@ -9,6 +9,8 @@ import {
   storyPage,
   placePage,
   features,
+  about,
+  whyUs,
   restaurant,
 } from "../data/restaurant";
 import { MENU_NOTE } from "../data/menu";
@@ -267,6 +269,8 @@ export const tr: SiteContent = {
   storyPage,
   placePage,
   features,
+  about,
+  whyUs,
   /* TripAdvisor'daki gerçek yorumlar; noktalama düzeltilip kısaltıldı. */
   tripadvisorReviews: {
     "kucuk-sehir": {
