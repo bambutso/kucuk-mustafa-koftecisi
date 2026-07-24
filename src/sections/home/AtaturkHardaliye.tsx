@@ -10,7 +10,7 @@ import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
  * söz + portre (NÖTR yer tutucu). Gerçek portre işletme tarafından eklenecek:
  * public/gallery/ataturk-placeholder.svg yerine gerçek görseli koyun.
  */
-const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk-placeholder.svg`;
+const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk.webp`;
 
 export function AtaturkHardaliye() {
   return (
@@ -35,6 +35,9 @@ export function AtaturkHardaliye() {
           </blockquote>
           <p className="mt-3 text-xs uppercase tracking-[0.3em] text-copper">
             Mustafa Kemal Atatürk
+          </p>
+          <p className="mt-1.5 font-display text-sm tracking-[0.25em] text-cream/50">
+            1881 – 193<span aria-label="sonsuz" className="text-copper">∞</span>
           </p>
           <p className="mt-6 text-sm leading-relaxed text-cream/60">
             Trakya'nın asırlık üzüm içeceği hardaliye, soframızın yöresel

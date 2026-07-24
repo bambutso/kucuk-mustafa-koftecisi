@@ -22,18 +22,20 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Kırklareli — Atatürk sözü (giriş).
-         YER TUTUCU: doğrulanmış tam söz işletme tarafından eklenecek;
-         sahte bir söz YAZILMADI. Metni değiştirmek yeterli. */}
+      {/* Kırklareli — Atatürk sözü (giriş): Kırklareli Türk Ocağı ziyaretinden. */}
       <section className="bg-coal py-12 text-center" aria-label="Atatürk sözü">
         <Container>
           <Reveal>
             <div className="kor-line mx-auto mb-6 w-16" />
             <blockquote className="mx-auto max-w-2xl font-display text-xl italic leading-snug text-cream/90 sm:text-2xl">
-              “Kırklareli ile ilgili Atatürk sözü buraya eklenecek.”
+              “Kırklareli Türk Ocağında çok kıymetli arkadaşlarla geçirdiğim
+              zamanın hatırasını ölmez hislerle saklayacağım.”
             </blockquote>
-            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-copper">
+            <p className="mt-4 text-xs uppercase tracking-[0.3em] text-copper">
               Mustafa Kemal Atatürk
+            </p>
+            <p className="mt-1.5 font-display text-sm tracking-[0.25em] text-cream/50">
+              1881 – 193<span aria-label="sonsuz" className="text-copper">∞</span>
             </p>
           </Reveal>
         </Container>

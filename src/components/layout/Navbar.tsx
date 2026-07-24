@@ -207,7 +207,7 @@ export function Navbar() {
             {/* Atatürk görseli — NÖTR yer tutucu; gerçek görsel işletme tarafından
                eklenecek (public/gallery/ataturk-placeholder.svg yerine koyun). */}
             <img
-              src={`${import.meta.env.BASE_URL}gallery/ataturk-placeholder.svg`}
+              src={`${import.meta.env.BASE_URL}gallery/ataturk.webp`}
               alt="Mustafa Kemal Atatürk"
               className="h-9 w-auto shrink-0 border border-copper/30 sm:h-11"
             />

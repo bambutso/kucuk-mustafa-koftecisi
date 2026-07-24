@@ -9,7 +9,7 @@ import { ImageWithFallback } from "../components/ui/ImageWithFallback";
  * eklenecek. Değiştirmek için: public/gallery/ataturk-placeholder.svg yerine
  * gerçek portreyi koyun ya da aşağıdaki PORTRE yolunu güncelleyin.
  */
-const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk-placeholder.svg`;
+const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk.webp`;
 
 export function AtaturkTribute() {
   return (
@@ -33,6 +33,9 @@ export function AtaturkTribute() {
           </blockquote>
           <p className="mt-3 text-xs uppercase tracking-[0.3em] text-copper">
             Mustafa Kemal Atatürk
+          </p>
+          <p className="mt-1.5 font-display text-sm tracking-[0.25em] text-cream/50">
+            1881 – 193<span aria-label="sonsuz" className="text-copper">∞</span>
           </p>
         </Reveal>
       </Container>
