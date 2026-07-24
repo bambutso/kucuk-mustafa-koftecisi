@@ -203,16 +203,7 @@ export function Navbar() {
           )}
         />
         <Container className="relative flex h-16 items-center justify-between md:h-20">
-          <div className="flex items-center gap-2.5 sm:gap-3.5">
-            {/* Atatürk görseli — NÖTR yer tutucu; gerçek görsel işletme tarafından
-               eklenecek (public/gallery/ataturk-placeholder.svg yerine koyun). */}
-            <img
-              src={`${import.meta.env.BASE_URL}gallery/ataturk.webp`}
-              alt="Mustafa Kemal Atatürk"
-              className="h-9 w-auto shrink-0 border border-copper/30 sm:h-11"
-            />
-            <Brand />
-          </div>
+          <Brand />
 
           {/* Masaüstü */}
           <nav
