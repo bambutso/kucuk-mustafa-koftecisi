@@ -402,6 +402,15 @@ export const en: SiteContent = {
       { id: "secki", text: "Carefully selected, additive-free products" },
     ],
   },
+  ataturk: {
+    kirklareliQuote:
+      "I will keep the memory of the time I spent with dear friends at the Kırklareli Türk Ocağı, with undying feelings.",
+    hardaliyeEyebrow: "Our National Drink — Hardaliye",
+    hardaliyeQuote: "Make this our national drink.",
+    hardaliyeText:
+      "Hardaliye, Thrace's centuries-old grape drink, is one of the regional treasures of our table — and it has its place on our menu.",
+    seeMenu: "See on the menu",
+  },
   /* Real reviews from TripAdvisor; punctuation tidied and lightly shortened. */
   tripadvisorReviews: {
     "kucuk-sehir": {

@@ -402,6 +402,13 @@ export const ar: SiteContent = {
       { id: "secki", text: "منتجات منتقاة بعناية دون إضافات" },
     ],
   },
+  ataturk: {
+    kirklareliQuote: "سأحتفظ بذكرى الأوقات التي قضيتها مع أصدقاء أعزّاء في Türk Ocağı بمدينة Kırklareli بمشاعر خالدة لا تموت.",
+    hardaliyeEyebrow: "مشروبنا الوطني — Hardaliye",
+    hardaliyeQuote: "اجعلوا منه مشروبنا الوطني.",
+    hardaliyeText: "hardaliye، مشروب العنب العريق في تراقيا منذ قرون، هو أحد الكنوز المحلية على مائدتنا، وله مكانه في قائمتنا أيضًا.",
+    seeMenu: "شاهدها في القائمة",
+  },
   /* تقييمات حقيقية من TripAdvisor؛ رُتّبت علامات الترقيم واختُصرت اختصارًا يسيرًا. */
   tripadvisorReviews: {
     "kucuk-sehir": {

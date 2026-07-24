@@ -1,3 +1,4 @@
+import { useContent } from "../i18n";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { ImageWithFallback } from "../components/ui/ImageWithFallback";
@@ -12,6 +13,7 @@ import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk.webp`;
 
 export function AtaturkTribute() {
+  const { ataturk } = useContent();
   return (
     <section className="bg-coal py-16 md:py-20" aria-label="Atatürk'e saygı">
       <Container className="flex flex-col items-center gap-9 text-center sm:flex-row sm:justify-center sm:gap-14 sm:text-left">
@@ -29,8 +31,7 @@ export function AtaturkTribute() {
         <Reveal delay={0.1}>
           <div className="kor-line mx-auto w-16 sm:mx-0" />
           <blockquote className="mt-5 font-display text-2xl italic leading-snug text-cream sm:text-3xl">
-            “Kırklareli Türk Ocağında çok kıymetli arkadaşlarla geçirdiğim
-            zamanın hatırasını ölmez hislerle saklayacağım.”
+            “{ataturk.kirklareliQuote}”
           </blockquote>
           <p className="mt-3 text-xs uppercase tracking-[0.3em] text-copper">
             Mustafa Kemal Atatürk

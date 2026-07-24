@@ -402,6 +402,13 @@ export const es: SiteContent = {
       { id: "secki", text: "Productos seleccionados con cuidado y sin aditivos" },
     ],
   },
+  ataturk: {
+    kirklareliQuote: "Guardaré con sentimientos imperecederos el recuerdo del tiempo que pasé con queridos amigos en el Türk Ocağı de Kırklareli.",
+    hardaliyeEyebrow: "Nuestra bebida nacional — Hardaliye",
+    hardaliyeQuote: "Convertidla en nuestra bebida nacional.",
+    hardaliyeText: "La hardaliye, la bebida de uva centenaria de Tracia, es uno de los tesoros regionales de nuestra mesa; y también tiene su lugar en nuestra carta.",
+    seeMenu: "Ver en la carta",
+  },
   /* Opiniones reales de TripAdvisor; puntuación ajustada y ligeramente abreviadas. */
   tripadvisorReviews: {
     "kucuk-sehir": {

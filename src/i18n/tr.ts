@@ -11,6 +11,7 @@ import {
   features,
   about,
   whyUs,
+  ataturk,
   restaurant,
 } from "../data/restaurant";
 import { MENU_NOTE } from "../data/menu";
@@ -271,6 +272,7 @@ export const tr: SiteContent = {
   features,
   about,
   whyUs,
+  ataturk,
   /* TripAdvisor'daki gerçek yorumlar; noktalama düzeltilip kısaltıldı. */
   tripadvisorReviews: {
     "kucuk-sehir": {

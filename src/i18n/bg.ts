@@ -402,6 +402,13 @@ export const bg: SiteContent = {
       { id: "secki", text: "Внимателно подбрани продукти без добавки" },
     ],
   },
+  ataturk: {
+    kirklareliQuote: "Ще пазя с безсмъртни чувства спомена за времето, което прекарах със скъпи приятели в Türk Ocağı в Kırklareli.",
+    hardaliyeEyebrow: "Нашата национална напитка — Hardaliye",
+    hardaliyeQuote: "Направете я наша национална напитка.",
+    hardaliyeText: "Hardaliye, вековната гроздова напитка на Тракия, е една от регионалните ценности на нашата трапеза; тя има своето място и в нашето меню.",
+    seeMenu: "Вижте в менюто",
+  },
   tripadvisorReviews: {
     "kucuk-sehir": {
       title: "Голям вкус в малък град",

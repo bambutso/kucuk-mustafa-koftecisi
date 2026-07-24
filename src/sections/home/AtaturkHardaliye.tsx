@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { Reveal } from "../../components/ui/Reveal";
 import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
@@ -13,6 +14,7 @@ import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
 const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk.webp`;
 
 export function AtaturkHardaliye() {
+  const { ataturk } = useContent();
   return (
     <section className="bg-charcoal py-20 md:py-28" aria-label="Atatürk ve hardaliye">
       <Container className="flex flex-col items-center gap-10 text-center md:flex-row md:justify-center md:gap-16 md:text-left">
@@ -29,9 +31,9 @@ export function AtaturkHardaliye() {
         </Reveal>
 
         <Reveal delay={0.1} className="max-w-xl">
-          <p className="eyebrow">Millî İçeceğimiz — Hardaliye</p>
+          <p className="eyebrow">{ataturk.hardaliyeEyebrow}</p>
           <blockquote className="mt-5 font-display text-2xl italic leading-snug text-cream sm:text-3xl">
-            “Bunu millî içeceğimiz hâline getirin.”
+            “{ataturk.hardaliyeQuote}”
           </blockquote>
           <p className="mt-3 text-xs uppercase tracking-[0.3em] text-copper">
             Mustafa Kemal Atatürk
@@ -40,14 +42,13 @@ export function AtaturkHardaliye() {
             1881 – 193<span aria-label="sonsuz" className="text-copper">∞</span>
           </p>
           <p className="mt-6 text-sm leading-relaxed text-cream/60">
-            Trakya'nın asırlık üzüm içeceği hardaliye, soframızın yöresel
-            değerlerinden biridir; menümüzde de yerini alır.
+            {ataturk.hardaliyeText}
           </p>
           <Link
             to="/menu"
             className="mt-4 inline-flex items-center gap-2 font-sans text-sm font-semibold text-ember transition-colors hover:text-copper"
           >
-            Menüde gör →
+            {ataturk.seeMenu} →
           </Link>
         </Reveal>
       </Container>

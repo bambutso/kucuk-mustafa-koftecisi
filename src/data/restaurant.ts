@@ -357,6 +357,17 @@ export const about = {
   ],
 } as const;
 
+/** Atatürk bölümleri — sözler + hardaliye metinleri (özgün Türkçe) */
+export const ataturk = {
+  kirklareliQuote:
+    "Kırklareli Türk Ocağında çok kıymetli arkadaşlarla geçirdiğim zamanın hatırasını ölmez hislerle saklayacağım.",
+  hardaliyeEyebrow: "Millî İçeceğimiz — Hardaliye",
+  hardaliyeQuote: "Bunu millî içeceğimiz hâline getirin.",
+  hardaliyeText:
+    "Trakya'nın asırlık üzüm içeceği hardaliye, soframızın yöresel değerlerinden biridir; menümüzde de yerini alır.",
+  seeMenu: "Menüde gör",
+} as const;
+
 /** Ana sayfa — "Neden Biz" şeridi (kısa rozetler) */
 export const whyUs = {
   eyebrow: "Neden Biz",

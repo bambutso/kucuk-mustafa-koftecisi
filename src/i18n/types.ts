@@ -310,6 +310,19 @@ export interface SiteContent {
   about: AboutContent;
   /** Ana sayfa "Neden Biz" şeridi */
   whyUs: WhyUsContent;
+  /** Atatürk bölümleri (hero sözü, Hikayemiz tribute, ana sayfa hardaliye). */
+  ataturk: {
+    /** Hero altı + Hikayemiz tribute: Kırklareli Türk Ocağı sözü */
+    kirklareliQuote: string;
+    /** Hardaliye bölümü etiketi */
+    hardaliyeEyebrow: string;
+    /** Hardaliye için söz */
+    hardaliyeQuote: string;
+    /** Hardaliye açıklama metni */
+    hardaliyeText: string;
+    /** "Menüde gör" bağlantı metni */
+    seeMenu: string;
+  };
   /**
    * TripAdvisor'daki gerçek yorumlar, `tripadvisorReviews` id'leriyle eşleşir.
    * Özgün dil Türkçedir; diğer diller çeviridir.

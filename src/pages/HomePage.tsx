@@ -15,7 +15,8 @@ import { Reviews } from "../sections/home/Reviews";
 import { LocationPreview } from "../sections/home/LocationPreview";
 
 export default function HomePage() {
-  const ui = useContent().ui.home;
+  const content = useContent();
+  const ui = content.ui.home;
   usePageMeta(ui.docTitle, ui.docDesc);
 
   return (
@@ -28,8 +29,7 @@ export default function HomePage() {
           <Reveal>
             <div className="kor-line mx-auto mb-6 w-16" />
             <blockquote className="mx-auto max-w-2xl font-display text-xl italic leading-snug text-cream/90 sm:text-2xl">
-              “Kırklareli Türk Ocağında çok kıymetli arkadaşlarla geçirdiğim
-              zamanın hatırasını ölmez hislerle saklayacağım.”
+              “{content.ataturk.kirklareliQuote}”
             </blockquote>
             <p className="mt-4 text-xs uppercase tracking-[0.3em] text-copper">
               Mustafa Kemal Atatürk

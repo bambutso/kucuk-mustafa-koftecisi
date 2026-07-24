@@ -402,6 +402,13 @@ export const ja: SiteContent = {
       { id: "secki", text: "丁寧に選んだ無添加の食材" },
     ],
   },
+  ataturk: {
+    kirklareliQuote: "Kırklareli の Türk Ocağı で大切な友人たちと過ごした時間の思い出を、消えることのない想いとともに胸に刻み続けます。",
+    hardaliyeEyebrow: "私たちの国民的飲み物 — Hardaliye",
+    hardaliyeQuote: "これを私たちの国民的飲み物にしてください。",
+    hardaliyeText: "hardaliye は、トラキア地方で何世紀も受け継がれてきたブドウの飲み物で、私たちの食卓を彩る郷土の宝のひとつ。メニューにも名を連ねています。",
+    seeMenu: "メニューで見る",
+  },
   /* TripAdvisor に寄せられた実際のレビュー。句読点を整え、少し短くしています。 */
   tripadvisorReviews: {
     "kucuk-sehir": {
