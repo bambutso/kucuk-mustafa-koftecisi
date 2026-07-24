@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLocalizedMenu } from "../../i18n/useLocalizedMenu";
 import { useContent } from "../../i18n";
-import { images } from "../../data/restaurant";
 import { Container } from "../../components/ui/Container";
 import { SectionHeading } from "../../components/ui/SectionHeading";
 import { Reveal } from "../../components/ui/Reveal";
@@ -40,9 +39,9 @@ export function Signature() {
           {/* Başrolde: gerçek köfte tabağı */}
           <Reveal className="group relative overflow-hidden">
             <ImageWithFallback
-              src={images.koftePlate}
-              alt="Porsiyon köfte: sekiz köfte, közlenmiş biber, domates ve piyazlık soğan"
-              fallbackLabel="Porsiyon köfte"
+              src={`${import.meta.env.BASE_URL}gallery/kofte-imza.webp`}
+              alt="Izgara köfte tabağı; domates, közlenmiş biber ve söğüşle"
+              fallbackLabel="Izgara köfte"
               loading="lazy"
               className="warm-photo h-full min-h-[300px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />

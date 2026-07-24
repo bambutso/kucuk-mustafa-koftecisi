@@ -37,6 +37,14 @@ export const galleryItems: GalleryItem[] = [
     authentic: true,
   },
   {
+    id: "sofra-kullan",
+    src: `${import.meta.env.BASE_URL}gallery/sofra-galeri.webp`,
+    alt: "Logolu bordo runner üzerinde kurulmuş meze ve rakı sofrası",
+    caption: "Meze ve rakı sofrası, logolu runner üzerinde",
+    category: "sofra",
+    authentic: true,
+  },
+  {
     id: "ig-salon-bordo",
     src: igImages.salonBordo,
     alt: "Yenilenen salon: bordo kadife koltuklar, ahşap lambri duvarlar",
