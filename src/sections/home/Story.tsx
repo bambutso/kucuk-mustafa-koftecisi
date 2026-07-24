@@ -1,4 +1,3 @@
-import { storyPhotos } from "../../data/storyImages";
 import { useContent } from "../../i18n";
 import { Container } from "../../components/ui/Container";
 import { SectionHeading } from "../../components/ui/SectionHeading";
@@ -40,16 +39,14 @@ export function Story() {
             ))}
           </ol>
 
-          {/* Eski usta/cephe fotoğrafları kaldırıldı — yeni fotoğraflar gelene
-             kadar nötr yer tutucu gösterilir. Yollar src/data/storyImages.ts'te;
-             foto gelince yalnızca orayı güncellemek yeterli. */}
+          {/* İşletmenin gerçek kareleri (salon + dükkân cephesi). */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
             <Reveal delay={0.1}>
               <figure className="archive-frame rotate-1">
                 <ImageWithFallback
-                  src={storyPhotos.storefront}
-                  alt=""
-                  fallbackLabel="Fotoğraf yakında"
+                  src={`${import.meta.env.BASE_URL}gallery/hikaye-1.webp`}
+                  alt="Küçük Mustafa Köftecisi salonu — bordo koltuklar, kurulu masalar"
+                  fallbackLabel="Salon"
                   loading="lazy"
                   className="aspect-[3/2] w-full object-cover"
                 />
@@ -58,11 +55,11 @@ export function Story() {
             <Reveal delay={0.22}>
               <figure className="archive-frame -mt-6 ml-10 -rotate-1 sm:ml-16">
                 <ImageWithFallback
-                  src={storyPhotos.ustaGrill}
-                  alt=""
-                  fallbackLabel="Fotoğraf yakında"
+                  src={`${import.meta.env.BASE_URL}gallery/hikaye-2.webp`}
+                  alt="Küçük Mustafa Köftecisi dükkân cephesi ve ışıklı tabelası"
+                  fallbackLabel="Dükkân cephesi"
                   loading="lazy"
-                  className="aspect-[3/2] w-full object-cover"
+                  className="aspect-[3/4] w-full object-cover"
                 />
               </figure>
             </Reveal>
