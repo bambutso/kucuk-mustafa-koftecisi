@@ -294,8 +294,8 @@ export const story = {
     },
     {
       year: "Bugün",
-      title: "Ustadan çırağa, dört kuşak",
-      text: "Ocağın başı hiç boş kalmadı: İbrahim Kayacan, Necdet Kayacan, Cüneyt Kayacan… Bugün közün karşısında Ergin Kalınoğlu duruyor. İsimler değişti; köftenin harcı, közün ateşi, kapıdan girene verilen selam değişmedi.",
+      title: "Ustadan çırağa, kuşaktan kuşağa",
+      text: "Ocağın başı hiç boş kalmadı. İşletme 2008'de Ergin Kalınoğlu'na, bugün ise yeğeni Doruk Kalınoğlu'na emanet. İsimler değişti; köftenin harcı, közün ateşi, kapıdan girene verilen selam değişmedi.",
     },
   ],
 } as const;
@@ -421,14 +421,21 @@ export const storyPage = {
     {
       id: "bugun",
       year: "Bugün",
-      title: "Közün başında: Ergin Kalınoğlu",
+      title: "Devir Kalınoğlu ailesinde",
       paragraphs: [
-        "Bugün közün karşısında Ergin Kalınoğlu duruyor. Sabah dokuzda kepenk açılıyor, gece üçte son çay ocaktan iniyor; haftanın yedi günü.",
-        "Deden kalma usul aynı: Dana etine coğrafi işaretli Kıvırcık kuzusu, kuru soğan, bayat ekmek. Meşe kömürü küllenip kor bağlamadan tek köfte ızgaraya konmuyor.",
+        "İşletme, 2008 yılında Ergin Kalınoğlu tarafından devralınmıştır. Günümüzde ise Ergin Kalınoğlu'nun yeğeni Doruk Kalınoğlu tarafından işletilmektedir.",
+        "Devreden değişse de usul aynı: dana etine coğrafi işaretli Kıvırcık kuzusu, kuru soğan, bayat ekmek. Meşe kömürü küllenip kor bağlamadan tek köfte ızgaraya konmuyor.",
         "Ve hâlâ, her gün, kapıdan girip \"Babamla gelirdik buraya\" diyen biri oluyor. Bu cümle, seksen yılı aşkın emeğin tek gerçek ödülü.",
       ],
     },
   ],
+  doruk: {
+    title: "Doruk Kalınoğlu Kimdir?",
+    paragraphs: [
+      "Doruk Kalınoğlu, Küçük Mustafa Köftecisi'ni bugün yürüten isimdir. Ailesinden devraldığı bu köklü lezzet geleneğini aynı özen ve titizlikle sürdürür.",
+      "Amacı, 1939'dan bugüne uzanan mirası geleceğe taşımak; değişmeyen kaliteyi ve misafir memnuniyetini korumaktır.",
+    ],
+  },
 } as const;
 
 /** Mekân sayfası içeriği */

@@ -10,6 +10,7 @@ import { Reveal } from "../components/ui/Reveal";
 import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 import { Stamp } from "../components/ui/Stamp";
 import { buttonVariants } from "../components/ui/Button";
+import { AtaturkTribute } from "../sections/AtaturkTribute";
 import { cn } from "../utils/cn";
 
 export default function StoryPage() {
@@ -95,6 +96,25 @@ export default function StoryPage() {
               </article>
             );
           })}
+
+          {/* "Doruk Kalınoğlu Kimdir?" — bugün bölümünün hemen altında */}
+          <Reveal>
+            <div className="ml-8 border border-earth/30 bg-coffee p-6 sm:ml-12 sm:p-8">
+              <h3 className="font-display text-2xl font-semibold text-cream">
+                {storyPage.doruk.title}
+              </h3>
+              <div className="mt-4 space-y-3">
+                {storyPage.doruk.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 32)}
+                    className="text-base leading-relaxed text-cream/70"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </Container>
       </div>
 
@@ -127,6 +147,9 @@ export default function StoryPage() {
           </Reveal>
         </Container>
       </div>
+
+      {/* Atatürk'e saygı — sayfanın sonunda, sade ve ölçülü */}
+      <AtaturkTribute />
     </>
   );
 }

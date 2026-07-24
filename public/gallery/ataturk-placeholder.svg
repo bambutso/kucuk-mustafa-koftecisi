@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400" role="img" aria-label="Atatürk portresi — yer tutucu">
+  <rect width="300" height="400" fill="#1a1512"/>
+  <rect x="10" y="10" width="280" height="380" fill="none" stroke="#5b4033" stroke-width="1.5"/>
+  <g fill="#b87333" opacity="0.45">
+    <circle cx="150" cy="158" r="48"/>
+    <path d="M66 336 Q66 236 150 236 Q234 236 234 336 Z"/>
+  </g>
+  <text x="150" y="374" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" letter-spacing="3" fill="#f7f2ea" fill-opacity="0.4">PORTRE EKLENECEK</text>
+</svg>

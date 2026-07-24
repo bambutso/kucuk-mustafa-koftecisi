@@ -268,8 +268,8 @@ export const es: SiteContent = {
       },
       {
         year: "Hoy",
-        title: "De maestro a aprendiz, cuatro generaciones",
-        text: "La parrilla nunca quedó desatendida: İbrahim Kayacan, Necdet Kayacan, Cüneyt Kayacan… Hoy es Ergin Kalınoğlu quien está ante las brasas. Los nombres cambiaron; la masa, el fuego y la bienvenida en la puerta, jamás.",
+        title: "De maestro a aprendiz, de generación en generación",
+        text: "La parrilla nunca quedó desatendida. El negocio pasó a Ergin Kalınoğlu en 2008 y hoy está en manos de su sobrino, Doruk Kalınoğlu. Los nombres cambiaron; la masa, el fuego y la bienvenida en la puerta, jamás.",
       },
     ],
   },
@@ -309,14 +309,21 @@ export const es: SiteContent = {
       {
         id: "bugun",
         year: "Hoy",
-        title: "Ante las brasas: Ergin Kalınoğlu",
+        title: "La familia Kalınoğlu toma el relevo",
         paragraphs: [
-          "Hoy es Ergin Kalınoğlu quien está ante las brasas. La persiana se levanta a las nueve de la mañana; el último té sale del fogón a las tres de la madrugada; los siete días de la semana.",
-          "El método heredado de los mayores es el mismo: ternera con cordero Kıvırcık de Indicación Geográfica Protegida, cebolla y pan del día anterior. Ninguna köfte toca la parrilla antes de que el carbón de roble se haya cubierto de ceniza y se haya hecho brasa.",
+          "El negocio pasó a manos de Ergin Kalınoğlu en 2008. Hoy lo lleva su sobrino, Doruk Kalınoğlu.",
+          "Puede cambiar quien lo cuida, pero el método no: ternera con cordero Kıvırcık de Indicación Geográfica Protegida, cebolla y pan del día anterior. Ninguna köfte toca la parrilla antes de que el carbón de roble se haya cubierto de ceniza y se haya hecho brasa.",
           "Y aún hoy, cada día, alguien cruza la puerta diciendo: «Yo venía aquí con mi padre». Esa frase es la única recompensa verdadera para más de ochenta años de trabajo.",
         ],
       },
     ],
+    doruk: {
+      title: "¿Quién es Doruk Kalınoğlu?",
+      paragraphs: [
+        "Doruk Kalınoğlu es el nombre que hoy está al frente de Küçük Mustafa Köftecisi. Continúa con el mismo esmero y dedicación la arraigada tradición de sabor heredada de su familia.",
+        "Su objetivo es llevar hacia el futuro el legado que se extiende desde 1939 hasta hoy, preservando una calidad inalterable y la satisfacción de los huéspedes.",
+      ],
+    },
   },
   placePage: {
     lead: "Frente al parque Şevket Dingiloğlu, en Kasaplar Arası; el local cuya parte delantera fue un día una tienda de comestibles y cuyo fondo fue siempre una parrilla de köfte.",

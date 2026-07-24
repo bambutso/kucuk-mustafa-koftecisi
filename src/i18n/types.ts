@@ -292,7 +292,12 @@ export interface SiteContent {
   };
   manifesto: { eyebrow: string; title: string; text: string };
   story: { pullQuote: string; chapters: ReadonlyArray<Chapter> };
-  storyPage: { lead: string; chapters: ReadonlyArray<StoryPageChapter> };
+  storyPage: {
+    lead: string;
+    chapters: ReadonlyArray<StoryPageChapter>;
+    /** "Doruk Kalınoğlu Kimdir?" alt bölümü (kısa tanıtım). */
+    doruk: { title: string; paragraphs: ReadonlyArray<string> };
+  };
   placePage: {
     lead: string;
     salon: { title: string; text: string };

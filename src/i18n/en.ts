@@ -268,8 +268,8 @@ export const en: SiteContent = {
       },
       {
         year: "Today",
-        title: "From master to apprentice, four generations",
-        text: "The grill was never left unattended: İbrahim Kayacan, Necdet Kayacan, Cüneyt Kayacan… Today Ergin Kalınoğlu stands before the embers. The names changed; the mix, the fire and the welcome at the door never did.",
+        title: "From master to apprentice, generation to generation",
+        text: "The grill was never left unattended. The business passed to Ergin Kalınoğlu in 2008, and today it is entrusted to his nephew, Doruk Kalınoğlu. The names changed; the mix, the fire and the welcome at the door never did.",
       },
     ],
   },
@@ -309,14 +309,21 @@ export const en: SiteContent = {
       {
         id: "bugun",
         year: "Today",
-        title: "At the embers: Ergin Kalınoğlu",
+        title: "The Kalınoğlu family takes over",
         paragraphs: [
-          "Today Ergin Kalınoğlu stands before the embers. The shutters open at nine in the morning; the last tea comes off the stove at three in the night; seven days a week.",
-          "The method inherited from the elders is the same: beef with PGI-certified Kıvırcık lamb, onion, day-old bread. Not a single köfte touches the grill before the oak charcoal has ashed over into embers.",
+          "The business was taken over by Ergin Kalınoğlu in 2008. Today it is run by his nephew, Doruk Kalınoğlu.",
+          "The keeper may change, but the method does not: beef with PGI-certified Kıvırcık lamb, onion, day-old bread. Not a single köfte touches the grill before the oak charcoal has ashed over into embers.",
           "And still, every day, someone walks through the door saying “I used to come here with my father.” That sentence is the only true reward for more than eighty years of labour.",
         ],
       },
     ],
+    doruk: {
+      title: "Who is Doruk Kalınoğlu?",
+      paragraphs: [
+        "Doruk Kalınoğlu is the name running Küçük Mustafa Köftecisi today. He carries on the deep-rooted tradition of flavour inherited from his family with the same care and diligence.",
+        "His aim is to carry the legacy stretching from 1939 to the present into the future, preserving unchanging quality and guest satisfaction.",
+      ],
+    },
   },
   placePage: {
     lead: "Opposite Şevket Dingiloğlu Park, in Kasaplar Arası; the shop whose front was once a grocer's and whose back was always a köfte grill.",
