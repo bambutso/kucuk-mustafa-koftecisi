@@ -35,12 +35,11 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Marka */}
           <div>
-            <p className="font-display text-2xl font-semibold text-cream">
-              Küçük Mustafa
-            </p>
-            <p className="mt-1 font-sans text-[0.6rem] font-semibold uppercase tracking-[0.4em] text-copper">
-              Köftecisi · 1939
-            </p>
+            <img
+              src={`${import.meta.env.BASE_URL}gallery/logo.webp`}
+              alt="Küçük Mustafa Köftecisi — 1939"
+              className="h-28 w-auto md:h-32"
+            />
             <p className="mt-5 max-w-xs font-display text-lg italic leading-snug text-cream/60">
               “{restaurant.slogan}”
             </p>

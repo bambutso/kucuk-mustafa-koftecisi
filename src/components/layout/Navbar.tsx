@@ -51,12 +51,11 @@ function NavItem({ to, children }: { to: string; children: ReactNode }) {
 function Brand() {
   return (
     <Link to="/" className="group shrink-0 leading-none" aria-label="Ana sayfa">
-      <span className="block whitespace-nowrap font-display text-lg font-semibold tracking-wide text-cream transition-colors group-hover:text-copper md:text-2xl">
-        Küçük Mustafa
-      </span>
-      <span className="mt-1 block whitespace-nowrap font-sans text-[0.5rem] font-semibold uppercase tracking-[0.3em] text-copper md:text-[0.55rem] md:tracking-[0.4em]">
-        Köftecisi · 1939
-      </span>
+      <img
+        src={`${import.meta.env.BASE_URL}gallery/logo.webp`}
+        alt="Küçük Mustafa Köftecisi — 1939"
+        className="h-12 w-auto transition-opacity duration-300 group-hover:opacity-90 md:h-16"
+      />
     </Link>
   );
 }

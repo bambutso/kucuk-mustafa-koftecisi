@@ -10,7 +10,7 @@ import { ImageWithFallback } from "../../components/ui/ImageWithFallback";
  * söz + portre (NÖTR yer tutucu). Gerçek portre işletme tarafından eklenecek:
  * public/gallery/ataturk-placeholder.svg yerine gerçek görseli koyun.
  */
-const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk.webp`;
+const PORTRE = `${import.meta.env.BASE_URL}gallery/ataturk-hardaliye.webp`;
 
 export function AtaturkHardaliye() {
   return (
