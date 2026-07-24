@@ -8,8 +8,7 @@ import {
   MapPin,
   Wine,
 } from "lucide-react";
-import { FOUNDING_YEAR, igImages, restaurant } from "../data/restaurant";
-import { storyPhotos } from "../data/storyImages";
+import { FOUNDING_YEAR, gmImages, igImages, restaurant } from "../data/restaurant";
 import { useContent } from "../i18n";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageHeader } from "../components/ui/PageHeader";
@@ -101,15 +100,17 @@ export default function PlacePage() {
       <div className="bg-coal py-20 md:py-28">
         <Container className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal delay={0.12} className="order-2 lg:order-1">
-            {/* Eski usta fotoğrafı kaldırıldı — nötr placeholder (yol: storyImages.ts) */}
             <figure className="archive-frame rotate-1">
               <ImageWithFallback
-                src={storyPhotos.ustaGrill}
-                alt=""
-                fallbackLabel="Fotoğraf yakında"
+                src={gmImages.ocak}
+                alt="Ocağın başı — meşe kömürünün korunda döküm ızgara"
+                fallbackLabel="Ocak"
                 loading="lazy"
                 className="aspect-[3/2] w-full object-cover"
               />
+              <figcaption className="pt-2.5 text-center font-sans text-[0.65rem] uppercase tracking-[0.25em] text-cream/45">
+                {ui.captionOcak}
+              </figcaption>
             </figure>
           </Reveal>
           <Reveal className="order-1 lg:order-2">
